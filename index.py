@@ -1,14 +1,3 @@
-# In this example we are going to create a simple HTML
-# page with 2 input fields (numbers), and a link.
-# Using jQuery we are going to send the content of both
-# fields to a route on our application, which will
-# sum up both numbers and return the result.
-# Again using jQuery we'l show the result on the page
-
-
-# We'll render HTML templates and access data sent by GET
-# using the request object from flask. jsonigy is required
-# to send JSON as a response of a request
 from flask import Flask, render_template, request, jsonify
 import os
 
