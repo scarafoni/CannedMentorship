@@ -26,7 +26,7 @@
             for(var i in d) { 
                 votes += '<tr><td>'+d[i]+'</td></tr>';
             }
-            $('#voteTable').html(votes); 
+            $('#voteTable tbody').html(votes); 
         });
     });
 
@@ -40,37 +40,37 @@
                 console.log(d[i]);
                 votes += '<tr><td>'+d[i]+'</td></tr>';
             }
-            $('#instructTable').html(votes); 
+            $('#instructTable tbody').html(votes); 
         });
     });
   </script>
   </head>
   <body>
-    <div class="jumbotron">
+    <div id="header" class="jumbotron">
       <div class="container">
         <h1>Canned Mentorship</h1>
-        <p>Please wait for instructions</p>
+        <p>Help us make great instruction manuals!</p>
       </div>
     </div>
     <div id="content" class="container">
       <div class="row row-offcanvas row-offcanvas-right">
-        <div class="col-xs-12 col-sm-9">
-          <table id="instructTable" class="table">
+        <div class="col-xs-12 col-md-9">
+          <table id="instructTable" class="table table-bordered">
             <thead>
               <tr><th>Curent Instructions</th></tr>
             </thead>
-            <tbody>
+            <tbody >
             </tbody>
           </table>
           <form>
-            <input id="uInstruct" type="text" size="75" name="input"> 
-            <button id="calculate" type="button" class="btn btn-default">
+            <input id="uInstruct" type="text" name="input" class="form-control"> 
+            <button id="calculate" type="button" class="btn btn-primary">
               Button
             </button
           </form>
         </div>       
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas">
-          <table id="voteTable" class="table">
+          <table id="voteTable" class="table table-striped">
             <thead>
               <tr><th>suggested answers:</th></tr>
             </thead>
@@ -82,15 +82,3 @@
     </div>
 </body>
 </html>
-
-<!--
-        </div>
-      </div>
-      <hr/>
-      <div>
-      <p>
-      </div>
-    </div>
-  </body>
-</html>
--->

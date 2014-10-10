@@ -6,6 +6,10 @@ body {
     height: 90%;
 }
 
+#header {
+    padding: 10px !important;
+}
+
 #instructionText{
     height: 500px;
     width: 75%;
