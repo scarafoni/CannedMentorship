@@ -7,11 +7,12 @@
   <script type=text/javascript>
     //send an instruction
     $(function() {
-      $('a#calculate').bind('click', function() {
+      $('#calculate').bind('click', function() {
         $.getJSON('/instruction_input', {
           u_instruct: $('input[name="input"]').val(),
         }, function(data) {
-          $("#result").text(data.result);
+          alert('recieved: '+data.result);
+          //$("#uInstruct").text(data.result);
         });
         return false;
       });
@@ -28,11 +29,26 @@
     <div id="content" class="container">
       <div class="row row-offcanvas row-offcanvas-right">
         <div class="col-xs-12 col-sm-9">
+          <textarea readonly id="instructionText">
+          </textarea> 
+          <form>
+            <input id="uInstruct" type="text" size="75" name="input"> 
+            <button id="calculate" type="button" class="btn btn-default">
+              Button
+            </button
+          </form>
         </div>       
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas">
-          <div class="list-group-active">
-            <span class="list-group-item">stuff</span>
-          </div>
+          <table class="table">
+            <thead>
+              <tr><th>suggested answers:</th></tr>
+            </thead>
+            <tbody>
+             <tr><td>Spread the peanut butter</td></tr>
+             <tr><td>Spread the peanut butter with a knife</td></tr>
+             <tr><td>Spread the peanut butter gently</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -45,10 +61,6 @@
       <hr/>
       <div>
       <p>
-    <input type="text" size="75" name="input"> 
-    <span id="result">?</span>
-    <p><a href="javascript:void();" id="calculate">calculate server side</a>
-      </form>
       </div>
     </div>
   </body>
