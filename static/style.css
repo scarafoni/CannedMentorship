@@ -2,6 +2,9 @@ body {
     height: 100%;
 }
 
+.info {
+    background-color: #d9edf7;
+}
 #content {
     height: 90%;
 }
@@ -13,6 +16,13 @@ body {
 #instructionText{
     height: 500px;
     width: 75%;
+}
+
+#voteTable {
+}
+
+#instructTable {
+    font-size: 18pt;
 }
 
 #instructionArea {

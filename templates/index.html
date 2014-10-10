@@ -4,10 +4,20 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
-  <script type=text/javascript>
+  <script>
+    var id = getId();
+    function getId() {
+        $.getJSON('/get_id', {hold : 'hold',}, 
+            function(data) {
+                alert(data.result);
+                return data.result;
+            });
+    }
+    alert(id);
+
     //send an instruction
     $(function() {
-      $('#calculate').bind('click', function() {
+      $('#sendProp').bind('click', function() {
         $.getJSON('/instruction_input', {
           u_instruct: $('input[name="input"]').val(),
         }, function(data) {
@@ -18,6 +28,18 @@
       });
     });
     
+    $(function() {
+      $('#proposeInstruct').bind('click', function() {
+        $.getJSON('/propose_instruct', {
+          u_instruct: $('input[name="input"]').val(),
+        }, function(data) {
+          alert('recieved: '+data.result);
+          //$("#uInstruct").text(data.result);
+        });
+        return false;
+      });
+    });
+
     setInterval(function() {
         $.getJSON('/vote_input', {},
         function(data) {
@@ -54,22 +76,27 @@
     </div>
     <div id="content" class="container">
       <div class="row row-offcanvas row-offcanvas-right">
-        <div class="col-xs-12 col-md-9">
+        <div class="col-md-8">
           <table id="instructTable" class="table table-bordered">
             <thead>
-              <tr><th>Curent Instructions</th></tr>
+              <tr class="info"><th>Curent Instructions</th></tr>
             </thead>
             <tbody >
             </tbody>
           </table>
-          <form>
-            <input id="uInstruct" type="text" name="input" class="form-control"> 
-            <button id="calculate" type="button" class="btn btn-primary">
-              Button
-            </button
-          </form>
+          <div class="input-group">
+            <input id="uInstruct" type="text" size="1" name="input" class="form-control"> 
+            <span class="input-group-btn">
+                <button id="sendProp" type="button" class="btn btn-primary">
+                  Send
+                </button>
+            </span>
+          </div>
         </div>       
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas">
+        <div class="col-sm-4 sidebar-offcanvas">
+          <button id="proposeInstruct" type="button" class="btn btn-primary">
+          Propose Next Instruction
+          </button>
           <table id="voteTable" class="table table-striped">
             <thead>
               <tr><th>suggested answers:</th></tr>
