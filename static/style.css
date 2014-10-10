@@ -1,0 +1,16 @@
+body {
+    height: 100%;
+}
+
+#content {
+    height: 90%;
+}
+
+#instructionText{
+    height: 500px;
+    width: 75%;
+}
+
+#instructionArea {
+    height: 500px;
+}

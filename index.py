@@ -17,7 +17,7 @@ def index():
 # result as a proper JSON response (Content-Type, etc.)
 curr_instruct = 1
 @app.route('/instruction_input')
-def add_numbers():
+def get_input():
     u_instruct = request.args.get('u_instruct', 0)
     
     #writ/e the result to the instructions
@@ -27,9 +27,23 @@ def add_numbers():
 
     return jsonify(result="recieve input "+u_instruct+" thank you!")
 
+@app.route('/vote_input')
+def send_choices():
+    with open("choices.txt",'r') as f:
+        x = f.read()
+        return jsonify(result=x.strip())
+
+@app.route('/get_instructions')
+def get_instructions():
+    with open("instructions.txt",'r') as f:
+        x = f.read()
+        return jsonify(result=x.strip())
+
 if __name__ == '__main__':
+    '''
     with open('instructions.txt','w') as f:
-        f.write("current instructions\n")
+        f.write("")
+    '''
     curr_instruct = 1
     app.run()
 

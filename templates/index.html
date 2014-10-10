@@ -17,6 +17,32 @@
         return false;
       });
     });
+    
+    setInterval(function() {
+        $.getJSON('/vote_input', {},
+        function(data) {
+            var d = data.result.split('\n');
+            var votes = '';
+            for(var i in d) { 
+                votes += '<tr><td>'+d[i]+'</td></tr>';
+            }
+            $('#voteTable').html(votes); 
+        });
+    });
+
+    setInterval(function() {
+        $.getJSON('/get_instructions', {},
+        function(data) {
+            console.log(data.result);
+            var d = data.result.split('\n');
+            var votes = '';
+            for(var i in d) { 
+                console.log(d[i]);
+                votes += '<tr><td>'+d[i]+'</td></tr>';
+            }
+            $('#instructTable').html(votes); 
+        });
+    });
   </script>
   </head>
   <body>
@@ -29,8 +55,13 @@
     <div id="content" class="container">
       <div class="row row-offcanvas row-offcanvas-right">
         <div class="col-xs-12 col-sm-9">
-          <textarea readonly id="instructionText">
-          </textarea> 
+          <table id="instructTable" class="table">
+            <thead>
+              <tr><th>Curent Instructions</th></tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
           <form>
             <input id="uInstruct" type="text" size="75" name="input"> 
             <button id="calculate" type="button" class="btn btn-default">
@@ -39,14 +70,11 @@
           </form>
         </div>       
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas">
-          <table class="table">
+          <table id="voteTable" class="table">
             <thead>
               <tr><th>suggested answers:</th></tr>
             </thead>
             <tbody>
-             <tr><td>Spread the peanut butter</td></tr>
-             <tr><td>Spread the peanut butter with a knife</td></tr>
-             <tr><td>Spread the peanut butter gently</td></tr>
             </tbody>
           </table>
         </div>
