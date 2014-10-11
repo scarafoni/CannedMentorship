@@ -32,20 +32,24 @@
       });
     });
     
+    //leader can instantiate the next function    
     $(function() {
       $('#proposeInstruct').bind('click', function() {
-        $.getJSON('/propose_instruct', {
-          u_instruct: $('input[name="input"]').val(),
-        }, function(data) {
-          alert('recieved: '+data.result);
-          //$("#uInstruct").text(data.result);
-        });
-        return false;
+        if(leader && state == "find") {
+            $.getJSON('/propose_instruct', {
+              u_instruct: $('input[name="input"]').val(),
+            }, function(data) {
+              alert('recieved: '+data.result);
+              //$("#uInstruct").text(data.result);
+            });
+            return false;
+        } else{alert("you cannot to that you are not the leader");}
       });
     });
 
     //get updates
     setInterval(function() {
+        console.log('updates');
         $.getJSON('/updates', {},
         function(data) {
             //console.log(data);
@@ -96,7 +100,7 @@
             }
             $('#instructTable tbody').html(instructions); 
         });
-    });
+    },100);
 
   </script>
   </head>

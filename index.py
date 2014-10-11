@@ -35,19 +35,14 @@ def get_input():
 
 @app.route('/propose_instruct')
 def propose_instruct():
-    state = ''
-    with open('data/state.txt','r') as f:
-        state = f.read()
-    if state != 'find':
-        return jsonify(result="n")
-    else:
-        with open('data/state.txt','w') as f:
-            f.write('getprops')
-            return jsonify(result="y")
+    with open('data/state.txt','w') as f:
+        f.write('write')
+        return jsonify(result="true")
+
 
 
 @app.route('/updates')
-def send_choices():
+def send_updates():
     with open("data/choices.txt", 'r') as f_choice,\
          open('data/leader.txt','r') as f_lead,\
          open('data/state.txt','r') as f_state,\
