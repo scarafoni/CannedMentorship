@@ -6,15 +6,15 @@
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
   </head>
   <script>
-    var id = getId();
-    function getId() {
-        return $.getJSON('/get_id', {hold : 'hold',}, 
-            function(data) {
-                alert(data.result);
+    var id = -1;
+    $.ajax({
+        url: '/get_id', 
+        async: false,
+        success: function(data) {
                 id = data.result;
-            });
-    }
-    alert(id);
+        }
+    });
+    console.log(id);
 
     //send an instruction
     $(function() {
