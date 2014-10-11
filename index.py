@@ -17,7 +17,7 @@ def get_id():
     x += 1
     print(x)
     f.close()
-    f = open('/datatotal_players.txt', 'w')
+    f = open('data/total_players.txt', 'w')
     f.write(str(x))
     f.close()
     return jsonify(result=x)
@@ -35,35 +35,44 @@ def get_input():
 
 @app.route('/propose_instruct')
 def propose_instruct():
-    return jsonify(result="test")
+    state = ''
+    with open('data/state.txt','r') as f:
+        state = f.read()
+    if state != 'find':
+        return jsonify(result="n")
+    else:
+        with open('data/state.txt','w') as f:
+            f.write('getprops')
+            return jsonify(result="y")
 
 
-@app.route('/vote_input')
+@app.route('/updates')
 def send_choices():
-    with open("data/choices.txt", 'r') as f:
-        x = f.read()
-        return jsonify(result=x.strip())
-
-
-@app.route('/get_instructions')
-def get_instructions():
-    with open("data/instructions.txt", 'r') as f:
-        x = f.read()
-        return jsonify(result=x)
+    with open("data/choices.txt", 'r') as f_choice,\
+         open('data/leader.txt','r') as f_lead,\
+         open('data/state.txt','r') as f_state,\
+         open('data/instructions.txt','r') as f_inst:
+        choices = f_choice.read().strip()
+        inst = f_inst.read().strip()
+        leader = f_lead.read().rstrip()
+        state = f_state.read().rstrip()
+        return jsonify(choices=choices,instructions=inst,leader=leader,state=state)
 
 
 if __name__ == '__main__':
     # initialize everything
-    with open('instructions.txt', 'w') as instructions,\
-         open('total_players.txt', 'w') as total_players,\
-         open('choices.txt', 'w') as choices,\
-         open('propositions.txt', 'w') as propositions\
-         open('leader.txt', 'w') as leader:
+    with open('data/instructions.txt', 'w') as instructions,\
+         open('data/total_players.txt', 'w') as total_players,\
+         open('data/choices.txt', 'w') as choices,\
+         open('data/propositions.txt', 'w') as propositions,\
+         open('data/state.txt','w') as state,\
+         open('data/leader.txt', 'w') as leader:
             total_players.write('0')
             propositions.write('')
-            instructions.write('')
-            leader.write('0')
-            choices.write('')
+            instructions.write('get a girlfriend\nkiss her\n rule the world')
+            leader.write('1')
+            state.write('find')
+            choices.write('talk about video games \n eat stuff')
 
     app.debug = True
     app.run()

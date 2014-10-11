@@ -6,7 +6,10 @@
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
   </head>
   <script>
+    //get my id
     var id = -1;
+    var leader = false;
+    var state = 'wait';
     $.ajax({
         url: '/get_id', 
         async: false,
@@ -41,31 +44,60 @@
       });
     });
 
+    //get updates
     setInterval(function() {
-        $.getJSON('/vote_input', {},
+        $.getJSON('/updates', {},
         function(data) {
-            var d = data.result.split('\n');
+            //console.log(data);
+            //leader
+            if(data.leader == id) {
+                leader = true;
+                $('#amILead').html('You are leader'); 
+            }
+            else {
+                leader = false;
+                $('#amILead').html('You are not leader'); 
+            }
+    
+            state = data.state
+            curr_inst = '';
+            console.log(state);
+            switch(state) {
+                case 'find':
+                    if(leader)
+                        curr_inst = 'propose a new instruction!';
+                    else
+                        curr_inst = 'wait for the leader to propose a new instruction!';
+                    break;
+                case 'write':
+                    curr_inst = 'write the instruction for this step';
+                    break;
+                case 'vote':
+                    curr_inst = 'vote on which step you think is best';
+                    break;
+                default:
+                    curr_inst = 'error';
+                    break;
+            }
+            $("#currStep").html(curr_inst);
+            //the voting area
+            var d = data.choices.split('\n');
             var votes = '';
             for(var i in d) { 
                 votes += '<tr><td>'+d[i]+'</td></tr>';
             }
             $('#voteTable tbody').html(votes); 
+            
+            //the current instructions
+            d = data.instructions.split('\n');
+            var instructions = '';
+            for(var i in d) { 
+                instructions += '<tr><td>'+d[i]+'</td></tr>';
+            }
+            $('#instructTable tbody').html(instructions); 
         });
     });
 
-    setInterval(function() {
-        $.getJSON('/get_instructions', {},
-        function(data) {
-            console.log(data.result);
-            var d = data.result.split('\n');
-            var votes = '';
-            for(var i in d) { 
-                console.log(d[i]);
-                votes += '<tr><td>'+d[i]+'</td></tr>';
-            }
-            $('#instructTable tbody').html(votes); 
-        });
-    });
   </script>
   </head>
   <body>
@@ -95,6 +127,8 @@
           </div>
         </div>       
         <div class="col-sm-4 sidebar-offcanvas">
+          <h3 id="amILead">stuff</h3>
+          <h4 id="currStep">stuff</h4>
           <button id="proposeInstruct" type="button" class="btn btn-primary">
           Propose Next Instruction
           </button>
