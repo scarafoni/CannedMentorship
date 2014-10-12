@@ -1,10 +1,17 @@
 from flask import Flask, render_template, request, jsonify
 from redis import Redis
 
+
 # Initialize the Flask application
 def get_total_players():
     with open('data/total_players.txt', 'r') as f:
         return int(''.join(f.read().split()))
+
+def add_player():
+    x = get_total_players()
+    x += 1
+    with open('data/total_players.txt', 'w') as f:
+        f.write(str(x))
 
 def set_state(state):
     with open('data/state.txt', 'w') as f:
@@ -13,6 +20,19 @@ def set_state(state):
 def get_state(state):
     with open('data/state.txt', 'r') as f:
         return f.read()
+
+#returns a list
+def get_people_so_far():
+    with open('data/people_so_far.txt', 'r') as f:
+        x = f.read()
+        return x.split('\n')
+    
+
+def add_client_input(id, input):
+    with open('data/people_so_far', 'a') as f,\
+         open('data/propositions.txt', 'a') as f1:
+        f.write(id) 
+        f1.write(input)
 
 #takes a list as input
 def count_votes(votes):
@@ -42,10 +62,8 @@ def index():
 
 @app.route('/get_id')
 def get_id():
+    add_player()
     x = get_total_players()
-    x += 1
-    with open('data/total_players.txt', 'w') as f:
-        f.write(str(x))
     return jsonify(result=x)
 
 
@@ -55,19 +73,13 @@ def get_input():
     u_id = request.args.get('u_id', 1)
     # print(u_instruct,u_id) 
     # the the current instruction to far
-    people_so_far = []
-    with open('data/people_so_far.txt', 'r') as f:
-        x = f.read()
-        # print(x)
-        people_so_far = x.split('\n')
+    people_so_far = get_people_so_far()
 
     # writ/e the result to the list of proposals
     if not u_id in people_so_far:
-        with open('data/people_so_far', 'a') as f,\
-             open('data/propositions.txt', 'a') as f1:
-            f.write(u_id) 
-            f1.write(u_instruct)
-            return jsonify(result="recieve input "+u_instruct+" thank you!")
+        add_client_input(u_id, u_instuct)
+        return jsonify(result="recieve input "+u_instruct+" thank you!")
+
     else:
         return jsonify(result="you have already submitted an instruction")
 
@@ -154,6 +166,7 @@ def send_updates():
 
 if __name__ == '__main__':
     # initialize everything
+         # the instruction list being made
     with open('data/instructions.txt', 'w') as instructions,\
          open('data/total_players.txt', 'w') as total_players,\
          open('data/choices.txt', 'w') as choices,\
