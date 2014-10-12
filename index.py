@@ -40,6 +40,10 @@ def get_people_so_far():
 def reset_people_so_far():
     with open('data/people_so_far.txt', 'w') as f:
         f.write('')
+
+def reset_user_inputs():
+    with open('data/user_inputs.txt','w') as f:
+        f.write('')
     
 def add_client_input(id, input):
     with open('data/people_so_far.txt', 'a') as f,\
@@ -48,13 +52,12 @@ def add_client_input(id, input):
         f1.write(input+'\n')
 
 #takes a list as input
-def count_votes(votes):
+def count_votes(votes, vote_list):
     i = votes.index(max(votes))
-    user_inputs = get_suggestions()
-    most_popular = user_inputs[i] 
+    most_popular = vote_list[i] 
     write_instruction(most_popular)
 
-def get_suggestions():
+def get_user_inputs():
     with open('data/user_inputs.txt','r') as f:
         x = f.read().split('\n')
         return trim_null(x)
@@ -67,11 +70,21 @@ def write_instruction(new_inst):
     with  open('data/instructions.txt','a') as f:
         f.write(new_inst+'\n')
 
+def get_choices():
+    with open('data/choices.txt', 'r') as f:
+        x = f.read().split('\n')
+        return trim_null(x)
+
+def reset_choices():
+    with open('data/choices.txt', 'w') as f:
+        f.write('')
+
 # placeholder for the ai program
 # takes in a list of strings
 def do_ai(props):
     with open('data/choices.txt', 'w') as f:
-        f.write(props[0])
+        for prop in props:
+            f.write(prop+'\n')
 
 app = Flask(__name__)
 
@@ -87,60 +100,61 @@ def get_id():
     return jsonify(result=x)
 
 
+@app.route('/propose_instruct')
+def propose_instruct():
+    if get_state() == 'find':
+        with open('data/state.txt','w') as f:
+            f.write('write')
+            return jsonify(result="ok lets write an instruction!")
+    else:
+        return jsonify(result="you cannot propose a new instruction now")
+
 @app.route('/send_my_inst')
 def get_input():
     u_instruct = request.args.get('u_instruct', 0)
     u_id = request.args.get('u_id', 1)
-    # print(u_instruct,u_id) 
-    # the the current instruction to far
-    people_so_far = get_people_so_far()
+    if get_state() == 'write': 
+        # the the current instruction to far
+        people_so_far = get_people_so_far()
+        # writ/e the result to the list of proposals
+        print('people so far-',people_so_far)
+        if not u_id in people_so_far:
+            add_client_input(u_id, u_instruct)
+            return jsonify(result="recieve input "+u_instruct+" thank you!")
 
-    # writ/e the result to the list of proposals
-    print('people so far-',people_so_far)
-    if not u_id in people_so_far:
-        add_client_input(u_id, u_instruct)
-        return jsonify(result="recieve input "+u_instruct+" thank you!")
-
+        else:
+            return jsonify(result="you have already submitted an instruction")
     else:
-        return jsonify(result="you have already submitted an instruction")
+        return jsonify(result="you cannot submit instructions yet")
 
-
-@app.route('/propose_instruct')
-def propose_instruct():
-    with open('data/state.txt','w') as f:
-        f.write('write')
-        return jsonify(result="ok lets write an instruction!")
 
 @app.route('/send_my_vote')
 def send_my_vote():
     u_choice = request.args.get('u_choice', 0)
     u_id = request.args.get('u_id', 1)
     
-    # add the vote if it's not in already
-    proposers = get_people_so_far()
-    if not u_id in proposers:
-        add_client_input(u_id, u_choice)
-        return jsonify(result="your vote for "+u_choice+" has been logged")
+    if get_state() == 'vote':
+        # add the vote if it's not in already
+        proposers = get_people_so_far()
+        if not u_id in proposers:
+            add_client_input(u_id, u_choice)
+            return jsonify(result="your vote for "+u_choice+" has been logged")
+        else:
+            return jsonify(result="you cannot vote twice")
     else:
-        return jsonify(result="you cannot vote twice")
+        return jsonify(result="you cannot vote yet!")
             
 
 @app.route('/updates')
 def send_updates():
-    #obligated to send  
-        # vote choices
-        # instructions
-        # state
-        # leader
-
     instructions = get_instructions()
     leader = get_leader()
     state = get_state()
     # print the current info
-    print('updates- \n\tstate- '+state+'\n\ttotalp- '+str(get_total_players()))
     
     #if we're in find, we need to send the instructions
     if state == 'find':
+        print('updates- \n\tstate- '+state+'\n\ttotalp- '+str(get_total_players()))
         return jsonify(instructions=instructions,\
                    leader=leader,\
                    state=state)
@@ -149,14 +163,17 @@ def send_updates():
     #check if all the writings are in
         # if yes run the collate algorithm and switch to voting
     elif state == "write":
+        print('updates- \n\tstate- '+state+'\n\ttotalp- '+str(get_total_players()))
+        print('inputs so far- ',get_user_inputs())
         tp = get_total_players()
         suggesters_so_far = get_people_so_far()
-        suggestions_so_far = get_suggestions()
+        suggestions_so_far = get_user_inputs()
         if len(suggesters_so_far) == tp:
             # voting algorithm result is done here
             do_ai(suggestions_so_far)
             # wipe the people who have proposed
             reset_people_so_far()
+            reset_user_inputs()
             set_state('vote')
         return jsonify(choices='',\
                    instructions=instructions,\
@@ -166,14 +183,17 @@ def send_updates():
     #check of all the votes are in
         #if yes run the counting algorithm
     elif state == "vote":
-        vote_list = get_suggestions()
+        vote_list = get_choices()
+        votes = get_user_inputs()
         print('vote list',vote_list)
         tp = get_total_players()
         voters_so_far = get_people_so_far()
         # if everyone's checked in then tally the votes
         if len(voters_so_far) == tp:
-            count_votes(vote_list)
+            count_votes(votes,vote_list)
             reset_people_so_far()
+            reset_choices()
+            reset_user_inputs()
             set_state('find')
         return jsonify(instructions=instructions,\
                        choices=vote_list,\
