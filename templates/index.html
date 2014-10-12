@@ -113,13 +113,16 @@
             }
 
             //the current instructions
-            d = data.instructions.split('\n');
-            console.log(data.instructions);
-            var instructions = '';
-            for(var i in d) { 
-                instructions += '<tr><td>'+d[i]+'</td></tr>';
+            if(data.instructions) {
+                d = data.instructions.split('\n');
+                console.log(data.instructions);
+                var instructions = '';
+                for(var i in d) { 
+                    x = parseInt(i) + 1
+                    instructions += '<tr><td>'+x+'. '+d[i]+'</td></tr>';
+                }
+                $('#instructTable tbody').html(instructions); 
             }
-            $('#instructTable tbody').html(instructions); 
         });
     },1000);
 
