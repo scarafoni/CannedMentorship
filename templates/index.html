@@ -91,8 +91,7 @@
             $("#currStep").html(curr_inst);
             //the voting area
             if(data.choices) {
-                var d = data.choices.split('\n');
-                console.log(d);
+                var d = data.choices;
                 var votes = '';
                 for(var i in d) { 
                     votes += '<tr ><td id='+i+'>'+d[i]+'</td></tr>';

@@ -25,36 +25,39 @@ def get_state():
     with open('data/state.txt', 'r') as f:
         return f.read()
 
+def trim_null(x):
+    if '' in x:
+        x.remove('')
+    return x
+
 #returns a list
 def get_people_so_far():
     with open('data/people_so_far.txt', 'r') as f:
         x = f.read()
         x = x.split('\n')
-        if '' in x:
-            x.remove('')
-        return x
+        return trim_null(x)
 
 def reset_people_so_far():
     with open('data/people_so_far.txt', 'w') as f:
         f.write('')
     
 def add_client_input(id, input):
-    with open('data/people_so_far', 'a') as f,\
-         open('data/propositions.txt', 'a') as f1:
-        f.write(id) 
-        f1.write(input)
+    with open('data/people_so_far.txt', 'a') as f,\
+         open('data/user_inputs.txt', 'a') as f1:
+        f.write(id+'\n') 
+        f1.write(input+'\n')
 
 #takes a list as input
 def count_votes(votes):
     i = votes.index(max(votes))
-    choice = ''
-    with open('data.choices.txt','r') as f:
-       choice = f.read().split('\n')[i] 
-    write_instruction(choice)
+    user_inputs = get_suggestions()
+    most_popular = user_inputs[i] 
+    write_instruction(most_popular)
 
-def _get_choices():
-    with open('data/choices.txt','r') as f:
-        return f.read().split('\n')
+def get_suggestions():
+    with open('data/user_inputs.txt','r') as f:
+        x = f.read().split('\n')
+        return trim_null(x)
 
 def get_instructions():
     with open('data/instructions.txt') as f:
@@ -93,6 +96,7 @@ def get_input():
     people_so_far = get_people_so_far()
 
     # writ/e the result to the list of proposals
+    print('people so far-',people_so_far)
     if not u_id in people_so_far:
         add_client_input(u_id, u_instruct)
         return jsonify(result="recieve input "+u_instruct+" thank you!")
@@ -147,9 +151,10 @@ def send_updates():
     elif state == "write":
         tp = get_total_players()
         suggesters_so_far = get_people_so_far()
+        suggestions_so_far = get_suggestions()
         if len(suggesters_so_far) == tp:
             # voting algorithm result is done here
-            do_ai(checkins)
+            do_ai(suggestions_so_far)
             # wipe the people who have proposed
             reset_people_so_far()
             set_state('vote')
@@ -161,7 +166,8 @@ def send_updates():
     #check of all the votes are in
         #if yes run the counting algorithm
     elif state == "vote":
-        vote_list = get_choices()
+        vote_list = get_suggestions()
+        print('vote list',vote_list)
         tp = get_total_players()
         voters_so_far = get_people_so_far()
         # if everyone's checked in then tally the votes
@@ -186,12 +192,12 @@ if __name__ == '__main__':
     with open('data/instructions.txt', 'w') as instructions,\
          open('data/total_players.txt', 'w') as total_players,\
          open('data/choices.txt', 'w') as choices,\
-         open('data/propositions.txt', 'w') as propositions,\
+         open('data/user_inputs.txt', 'w') as user_inputs,\
          open('data/state.txt','w') as state,\
          open('data/people_so_far.txt','w') as people_so_far,\
          open('data/leader.txt', 'w') as leader:
             total_players.write('0')
-            propositions.write('')
+            user_inputs.write('')
             # instructions.write('get a girlfriend\nkiss her\n rule the world')
             instructions.write('')
             leader.write('1')

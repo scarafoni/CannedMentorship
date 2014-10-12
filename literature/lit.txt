@@ -1,0 +1,5 @@
+http://books.google.com/books?hl=en&lr=&id=xUWRy8OUGZsC&oi=fnd&pg=PA227&dq=short+string+similarity&ots=46jjwmXfU_&sig=9kbDCLF1tJSQVNhuJzzC9m2F85g#v=onepage&q=short%20string%20similarity&f=false
+    -sentence similarity by string similarity and semantic similarity
+    -string sim- longest common subsequence
+    -
+http://research.microsoft.com/en-us/um/people/sdumais/ecir07-metzlerdumaismeek-final.pdf
