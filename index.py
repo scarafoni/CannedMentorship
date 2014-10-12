@@ -7,6 +7,10 @@ def get_total_players():
     with open('data/total_players.txt', 'r') as f:
         return int(''.join(f.read().split()))
 
+def get_leader():
+    with open('data/leader.txt','r') as f:
+        return f.read().rstrip()
+
 def add_player():
     x = get_total_players()
     x += 1
@@ -17,7 +21,7 @@ def set_state(state):
     with open('data/state.txt', 'w') as f:
         f.write(state)
 
-def get_state(state):
+def get_state():
     with open('data/state.txt', 'r') as f:
         return f.read()
 
@@ -25,9 +29,15 @@ def get_state(state):
 def get_people_so_far():
     with open('data/people_so_far.txt', 'r') as f:
         x = f.read()
-        return x.split('\n')
-    
+        x = x.split('\n')
+        if '' in x:
+            x.remove('')
+        return x
 
+def reset_people_so_far():
+    with open('data/people_so_far.txt', 'w') as f:
+        f.write('')
+    
 def add_client_input(id, input):
     with open('data/people_so_far', 'a') as f,\
          open('data/propositions.txt', 'a') as f1:
@@ -42,8 +52,15 @@ def count_votes(votes):
        choice = f.read().split('\n')[i] 
     write_instruction(choice)
 
+def _get_choices():
+    with open('data/choices.txt','r') as f:
+        return f.read().split('\n')
+
+def get_instructions():
+    with open('data/instructions.txt') as f:
+        return f.read().strip()
+
 def write_instruction(new_inst):
-    print('write instruction')
     with  open('data/instructions.txt','a') as f:
         f.write(new_inst+'\n')
 
@@ -77,7 +94,7 @@ def get_input():
 
     # writ/e the result to the list of proposals
     if not u_id in people_so_far:
-        add_client_input(u_id, u_instuct)
+        add_client_input(u_id, u_instruct)
         return jsonify(result="recieve input "+u_instruct+" thank you!")
 
     else:
@@ -95,13 +112,10 @@ def send_my_vote():
     u_choice = request.args.get('u_choice', 0)
     u_id = request.args.get('u_id', 1)
     
-    proposers = []
-    with open('data/people_so_far.txt', 'r') as f:
-        proposers = f.read().split('\n')
-
-    if u_id not in proposers:
-        with open('data/people_so_far.txt', 'a') as f:
-            f.write(u_id+'\n')
+    # add the vote if it's not in already
+    proposers = get_people_so_far()
+    if not u_id in proposers:
+        add_client_input(u_id, u_choice)
         return jsonify(result="your vote for "+u_choice+" has been logged")
     else:
         return jsonify(result="you cannot vote twice")
@@ -109,59 +123,61 @@ def send_my_vote():
 
 @app.route('/updates')
 def send_updates():
-    choices = ''
-    inst = ''
-    leader = ''
-    state = ''
-    with open("data/propositions.txt", 'r') as f_props,\
-         open('data/leader.txt','r') as f_lead,\
-         open('data/state.txt','r') as f_state,\
-         open('data/instructions.txt','r') as f_inst:
-        props = f_props.read().strip()
-        inst = f_inst.read().strip()
-        leader = f_lead.read().rstrip()
-        state = f_state.read().rstrip()
+    #obligated to send  
+        # vote choices
+        # instructions
+        # state
+        # leader
 
-    # if we're in the writing stage and everyone's written a suggestion, change states
-    print('state-',state,'totalp-',get_total_players(),'props-',props)
-    if state == "write":
+    instructions = get_instructions()
+    leader = get_leader()
+    state = get_state()
+    # print the current info
+    print('updates- \n\tstate- '+state+'\n\ttotalp- '+str(get_total_players()))
+    
+    #if we're in find, we need to send the instructions
+    if state == 'find':
+        return jsonify(instructions=instructions,\
+                   leader=leader,\
+                   state=state)
+        
+
+    #check if all the writings are in
+        # if yes run the collate algorithm and switch to voting
+    elif state == "write":
         tp = get_total_players()
-        prop_list = props.split("\n")
-        if not prop_list == [''] and len(prop_list) == tp:
+        suggesters_so_far = get_people_so_far()
+        if len(suggesters_so_far) == tp:
             # voting algorithm result is done here
-            do_ai(prop_list)
+            do_ai(checkins)
             # wipe the people who have proposed
-            with open('data/people_so_far.txt', 'w') as f:
-                f.write('')
+            reset_people_so_far()
             set_state('vote')
+        return jsonify(choices='',\
+                   instructions=instructions,\
+                   leader=leader,\
+                   state=state)
 
-    # keep pushing the results if we're voting
-    if state == "vote":
-        with open('data/choices.txt','r') as f:
-            x = f.read()
-            # print('choices',x)
-            # if we have all the votes, move to the first stage
-            vote_list = []
-            with open('data/people_so_far.txt', 'r') as f2:
-                vote_list = f2.read().split('\n') 
-            print(vote_list,get_total_players())
-            if not vote_list == [''] and len(vote_list)-1 == get_total_players():
-                count_votes(vote_list)
-                with open('data/people_so_far.txt', 'w') as f3:
-                    f3.write('')
-                set_state('find')
-                return jsonify(instructions=inst,\
-                               leader=leader,\
-                               state=state)
-
-            return jsonify(choices=x,\
-                       instructions=inst,\
+    #check of all the votes are in
+        #if yes run the counting algorithm
+    elif state == "vote":
+        vote_list = get_choices()
+        tp = get_total_players()
+        voters_so_far = get_people_so_far()
+        # if everyone's checked in then tally the votes
+        if len(voters_so_far) == tp:
+            count_votes(vote_list)
+            reset_people_so_far()
+            set_state('find')
+        return jsonify(instructions=instructions,\
+                       choices=vote_list,\
                        leader=leader,\
                        state=state)
 
-    return jsonify(instructions=inst,\
-                   leader=leader,\
-                   state=state)
+    else:
+        print('ERROR')
+        return jsonify(state="err")
+
 
 
 if __name__ == '__main__':
