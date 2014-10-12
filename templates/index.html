@@ -22,13 +22,16 @@
     //send an instruction
     $(function() {
       $('#sendProp').bind('click', function() {
-        $.getJSON('/instruction_input', {
-          u_instruct: $('input[name="input"]').val(),
-        }, function(data) {
-          alert('recieved: '+data.result);
-          //$("#uInstruct").text(data.result);
-        });
-        return false;
+        if(state == "write") {
+            $.getJSON('/send_my_inst', {
+              u_instruct: $('input[name="input"]').val(),
+              u_id: String(id),
+            }, function(data) {
+              alert(data.result);
+              //$("#uInstruct").text(data.result);
+            });
+            return false;
+        } else { alert("you cannot send your instruction draft yet");}
       });
     });
     
@@ -46,10 +49,12 @@
         } else{alert("you cannot to that you are not the leader");}
       });
     });
+    
+
 
     //get updates
     setInterval(function() {
-        console.log('updates');
+        //console.log('updates');
         $.getJSON('/updates', {},
         function(data) {
             //console.log(data);
@@ -65,7 +70,7 @@
     
             state = data.state
             curr_inst = '';
-            console.log(state);
+            //console.log(state);
             switch(state) {
                 case 'find':
                     if(leader)
@@ -85,22 +90,38 @@
             }
             $("#currStep").html(curr_inst);
             //the voting area
-            var d = data.choices.split('\n');
-            var votes = '';
-            for(var i in d) { 
-                votes += '<tr><td>'+d[i]+'</td></tr>';
+            if(data.choices) {
+                var d = data.choices.split('\n');
+                console.log(d);
+                var votes = '';
+                for(var i in d) { 
+                    votes += '<tr ><td id='+i+'>'+d[i]+'</td></tr>';
+                }
+                $('#voteTable tbody').html(votes); 
+
+                //send vote 
+                $(function() { 
+                    $('#voteTable td').bind('click', function() {
+                    $.getJSON('/send_my_vote', {
+                        u_choice: $(this).attr('id'),
+                        u_id: String(id)
+                        }, function(data) {
+                            alert(data.result);
+                        });
+                    });
+                });
             }
-            $('#voteTable tbody').html(votes); 
-            
+
             //the current instructions
             d = data.instructions.split('\n');
+            console.log(data.instructions);
             var instructions = '';
             for(var i in d) { 
                 instructions += '<tr><td>'+d[i]+'</td></tr>';
             }
             $('#instructTable tbody').html(instructions); 
         });
-    },100);
+    },1000);
 
   </script>
   </head>
