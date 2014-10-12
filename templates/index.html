@@ -22,31 +22,27 @@
     //send an instruction
     $(function() {
       $('#sendProp').bind('click', function() {
-        if(state == "write") {
-            $.getJSON('/send_my_inst', {
-              u_instruct: $('input[name="input"]').val(),
-              u_id: String(id),
-            }, function(data) {
-              alert(data.result);
-              //$("#uInstruct").text(data.result);
-            });
-            return false;
-        } else { alert("you cannot send your instruction draft yet");}
+        $.getJSON('/send_my_inst', {
+          u_instruct: $('input[name="input"]').val(),
+          u_id: String(id),
+        }, function(data) {
+          alert(data.result);
+          //$("#uInstruct").text(data.result);
+        });
+        return false;
       });
     });
     
     //leader can instantiate the next function    
     $(function() {
       $('#proposeInstruct').bind('click', function() {
-        if(leader && state == "find") {
-            $.getJSON('/propose_instruct', {
-              u_instruct: $('input[name="input"]').val(),
-            }, function(data) {
-              alert('recieved: '+data.result);
-              //$("#uInstruct").text(data.result);
-            });
-            return false;
-        } else{alert("you cannot to that you are not the leader");}
+        $.getJSON('/propose_instruct', {
+          u_instruct: $('input[name="input"]').val(),
+        }, function(data) {
+          alert('recieved: '+data.result);
+          //$("#uInstruct").text(data.result);
+        });
+        return false;
       });
     });
     
