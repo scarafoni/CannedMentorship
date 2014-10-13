@@ -49,12 +49,14 @@
    
     //finish the session
     $(function() {
-        $('#proposeInstruct').'click', functino() {
+        $('#finishButton').'click', function() {
             $.getJSON('/finish', {
                 u_id : String(id),
             }, function(data) {
-                finished = data.result;
-                alert(data.result)
+                finished = Boolean(data.result);
+                if(data.msg) {
+                    alert(data.msg);
+                }
             });
             return false;
         });

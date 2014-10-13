@@ -109,6 +109,15 @@ def propose_instruct():
     else:
         return jsonify(result="you cannot propose a new instruction now")
 
+@app.route('/finish')
+def receive_finish():
+    u_id = request.args.get('u_id',0)
+    #we can only finish if we're in the find stage
+    if get_state() == 'find':
+
+    else:
+        return jsonify(result='false',msg="you cannot finish while making an instruction")
+
 @app.route('/send_my_inst')
 def get_input():
     u_instruct = request.args.get('u_instruct', 0)
