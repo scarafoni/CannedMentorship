@@ -94,11 +94,20 @@
                 case 'vote':
                     curr_inst = 'vote on which step you think is best';
                     break;
+                case 'vote_finish':
+                    curr_inst = 'someone believes the instructions are finished, do you agree?'
                 default:
                     curr_inst = 'error';
                     break;
             }
             $("#currStep").html(curr_inst);
+
+            //the area for voting on whethe we're finished
+            if(state == 'vote_finish') {
+              $('#voteFinish').html('<button id="yesfinish" type="button" class="btn btn-primary">finish</button><button id="nofinish" type="button" class="btn btn-primary">don't finish</button>');
+                
+
+            }
             //the voting area
             if(!finished) { 
                 if(data.choices) {
@@ -182,8 +191,10 @@
         </div>
         </div>       
         <div class="col-sm-4 sidebar-offcanvas">
-          <h3 id="amILead">stuff</h3>
-          <h4 id="currStep">stuff</h4>
+          <div id="amILead" class="alert alert-info">stuff</div>
+          <div id="currStep" class="alert alert-info">stuff</div>
+          <div id="voteFinish" class="input-group">
+          </div>
           <div class="input-group">
           <table id="voteTable" class="table table-striped">
             <thead>

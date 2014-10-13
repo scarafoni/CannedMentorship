@@ -114,6 +114,7 @@ def receive_finish():
     u_id = request.args.get('u_id',0)
     #we can only finish if we're in the find stage
     if get_state() == 'find':
+        return jsonify(result='stuff')
 
     else:
         return jsonify(result='false',msg="you cannot finish while making an instruction")
@@ -209,6 +210,13 @@ def send_updates():
                        leader=leader,\
                        state=state)
 
+    elif state == 'vote_finish':
+        return jsonify(instructions=instructions,\
+                       choices=vote_list,\
+                       leader=leader,\
+                       state=state)
+        
+
     else:
         print('ERROR')
         return jsonify(state="err")
@@ -224,6 +232,7 @@ if __name__ == '__main__':
          open('data/user_inputs.txt', 'w') as user_inputs,\
          open('data/state.txt','w') as state,\
          open('data/people_so_far.txt','w') as people_so_far,\
+         open('data/finish_voters.txt','w') as finish_voters,\
          open('data/leader.txt', 'w') as leader:
             total_players.write('0')
             user_inputs.write('')
@@ -232,6 +241,7 @@ if __name__ == '__main__':
             leader.write('1')
             state.write('find')
             people_so_far.write('')
+            finish_voters.write('0')
             # choices.write('talk about video games \n eat stuff')
             choices.write('')
 
