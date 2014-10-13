@@ -3,3 +3,5 @@ http://books.google.com/books?hl=en&lr=&id=xUWRy8OUGZsC&oi=fnd&pg=PA227&dq=short
     -string sim- longest common subsequence
     -
 http://research.microsoft.com/en-us/um/people/sdumais/ecir07-metzlerdumaismeek-final.pdf
+
+http://cci.drexel.edu/faculty/thu/research-papers/dawak-547.pdf
