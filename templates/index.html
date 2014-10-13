@@ -10,6 +10,7 @@
     var id = -1;
     var leader = false;
     var state = 'wait';
+    var finished = false;
     $.ajax({
         url: '/get_id', 
         async: false,
@@ -33,7 +34,7 @@
       });
     });
     
-    //leader can instantiate the next function    
+    //propose new instruction
     $(function() {
       $('#proposeInstruct').bind('click', function() {
         $.getJSON('/propose_instruct', {
@@ -45,15 +46,26 @@
         return false;
       });
     });
-    
+   
+    //finish the session
+    $(function() {
+        $('#proposeInstruct').'click', functino() {
+            $.getJSON('/finish', {
+                u_id : String(id),
+            }, function(data) {
+                finished = data.result;
+                alert(data.result)
+            });
+            return false;
+        });
+    });
+
 
 
     //get updates
     setInterval(function() {
-        //console.log('updates');
         $.getJSON('/updates', {},
         function(data) {
-            //console.log(data);
             //leader
             if(data.leader == id) {
                 leader = true;
@@ -86,41 +98,49 @@
             }
             $("#currStep").html(curr_inst);
             //the voting area
-            if(data.choices) {
-                var d = data.choices;
-                var votes = '';
-                for(var i in d) { 
-                    votes += '<tr ><td id='+i+'>'+d[i]+'</td></tr>';
-                }
-                $('#voteTable tbody').html(votes); 
+            if(!finished) { 
+                if(data.choices) {
+                    var d = data.choices;
+                    var votes = '';
+                    for(var i in d) { 
+                        votes += '<tr ><td id='+i+'>'+d[i]+'</td></tr>';
+                    }
+                    $('#voteTable tbody').html(votes); 
 
-                //send vote 
-                $(function() { 
-                    $('#voteTable td').bind('click', function() {
-                    $.getJSON('/send_my_vote', {
-                        u_choice: $(this).attr('id'),
-                        u_id: String(id)
-                        }, function(data) {
-                            alert(data.result);
+                    //send vote 
+                    $(function() { 
+                        $('#voteTable td').bind('click', function() {
+                        $.getJSON('/send_my_vote', {
+                            u_choice: $(this).attr('id'),
+                            u_id: String(id)
+                            }, function(data) {
+                                alert(data.result);
+                            });
                         });
                     });
-                });
+                }
+            } else {
+                $('#voteTable tbody').html('<tr><td>Instructions complete, thank you for helping!</td></tr>); 
             }
 
             //the current instructions
-            if(data.instructions) {
-                d = data.instructions.split('\n');
-                console.log(data.instructions);
-                var instructions = '';
-                for(var i in d) { 
-                    x = parseInt(i) + 1
-                    instructions += '<tr><td>'+x+'. '+d[i]+'</td></tr>';
+            if(!finished) {
+                if(data.instructions) {
+                    d = data.instructions.split('\n');
+                    console.log(data.instructions);
+                    var instructions = '';
+                    for(var i in d) { 
+                        x = parseInt(i) + 1
+                        instructions += '<tr><td>'+x+'. '+d[i]+'</td></tr>';
+                    }
+                    $('#instructTable tbody').html(instructions); 
                 }
-                $('#instructTable tbody').html(instructions); 
+            } else {
+                $('#instructTable tbody').html(<tr><td>'Instructions complete, thank you for helping!</td></tr>'); 
+                
             }
         });
     },1000);
-
   </script>
   </head>
   <body>
@@ -135,26 +155,34 @@
         <div class="col-md-8">
           <table id="instructTable" class="table table-bordered">
             <thead>
-              <tr class="info"><th>Curent Instructions</th></tr>
+              <tr class="info">
+                <th>Current Instructions</th>
+              </tr>
             </thead>
             <tbody >
             </tbody>
           </table>
           <div class="input-group">
-            <input id="uInstruct" type="text" size="1" name="input" class="form-control"> 
+            <input id="uInstruct" type="text" name="input" class="form-control"> 
             <span class="input-group-btn">
                 <button id="sendProp" type="button" class="btn btn-primary">
                   Send
                 </button>
             </span>
           </div>
+          <button id="proposeInstruct" type="button" class="btn btn-primary">
+          Propose Next Instruction
+          </button>
+          <div id="finishDiv">
+              <button id="finishButton" type="button" class="btn btn-primary">
+                Think the Instructions are complete? Click here to finish
+              </button>
+          </div>
         </div>       
         <div class="col-sm-4 sidebar-offcanvas">
           <h3 id="amILead">stuff</h3>
           <h4 id="currStep">stuff</h4>
-          <button id="proposeInstruct" type="button" class="btn btn-primary">
-          Propose Next Instruction
-          </button>
+          <div class="input-group">
           <table id="voteTable" class="table table-striped">
             <thead>
               <tr><th>suggested answers:</th></tr>

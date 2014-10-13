@@ -28,3 +28,8 @@ body {
 #instructionArea {
     height: 500px;
 }
+
+#finishDiv {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
