@@ -52,7 +52,6 @@
     //finish the session
     $(function() {
         $('#finishButton').bind('click', function() {
-            alert('hi')
             $.getJSON('/finish', {
                 u_id : String(id),
             }, function(data) {
@@ -115,7 +114,7 @@
                 //vote yes or no to finish
                 $(function() {
                     $('#yesfinish').bind('click', function() {
-                        $.getJSON('/yes_finish', {
+                        $.getJSON('/vote_finish', {
                             u_id: String(id),
                             u_vote: 'yes'
                     }, function(data) {
@@ -126,8 +125,8 @@
                 });
 
                 $(function() {
-                    $('#no_finish').bind('click', function() {
-                        $.getJSON('/no_finish', {
+                    $('#nofinish').bind('click', function() {
+                        $.getJSON('/vote_finish', {
                             u_id: String(id),
                             u_vote: 'no'
                     }, function(data) {
@@ -138,6 +137,9 @@
                 });
                 
 
+            } else {
+
+                $('#voteFinish').html('');
             }
             //the voting area
             if(data.choices) {
@@ -159,6 +161,8 @@
                         });
                     });
                 });
+            } else {
+                $('#voteTable tbody').html(''); 
             }
 
             //the current instructions

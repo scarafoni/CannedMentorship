@@ -117,17 +117,19 @@ def propose_instruct():
 
 @app.route('/finish')
 def receive_finish():
+    print('finish- ',get_state())
     u_id = request.args.get('u_id',0)
     #we can only finish if we're in the find stage
     if get_state() == 'find':
+        print('finish- ',get_state())
         set_state('vote_finish')
         return jsonify(result='stuff')
 
     else:
         return jsonify(result='false',msg="you cannot finish while making an instruction")
 
-@app.route('/yes_finish')
-def yes_finish():
+@app.route('/vote_finish')
+def vote_finish():
     u_id = request.args.get('u_id',0)
     u_vote = request.args.get('u_vote',1)
     add_client_input(u_id, u_vote)
@@ -162,7 +164,7 @@ def send_my_vote():
         proposers = get_people_so_far()
         if not u_id in proposers:
             add_client_input(u_id, u_choice)
-            return jsonify(result="your vote for "+u_choice+" has been logged")
+            return jsonify(result="your vote for choice "+str(int(u_choice)+1)+" has been logged")
         else:
             return jsonify(result="you cannot vote twice")
     else:
@@ -178,8 +180,10 @@ def send_updates():
     
     #if we're in find, we need to send the instructions
     if state == 'find':
+        reset_choices()
         print('updates- \n\tstate- '+state+'\n\ttotalp- '+str(get_total_players()))
         return jsonify(instructions=instructions,\
+                   choices='',\
                    leader=leader,\
                    state=state)
         
@@ -192,6 +196,7 @@ def send_updates():
         tp = get_total_players()
         suggesters_so_far = get_people_so_far()
         suggestions_so_far = get_user_inputs()
+        print('user inputs',suggestions_so_far)
         if len(suggesters_so_far) == tp:
             # voting algorithm result is done here
             do_ai(suggestions_so_far)
@@ -232,9 +237,13 @@ def send_updates():
         
 
     elif state == 'vote_finish':
+        print('vote finish main',len(get_user_inputs()), get_total_players())
         tp = get_total_players()
         votes_so_far = get_user_inputs()
         if len(votes_so_far) == tp:
+            reset_choices()
+            reset_user_inputs()
+            reset_people_so_far()
             if max(set(votes_so_far), key=votes_so_far.count) == 'yes':
                 set_state('finish')
                 return jsonify(instructions=instructions,\
