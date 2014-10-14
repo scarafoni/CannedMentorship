@@ -52,6 +52,7 @@
     //finish the session
     $(function() {
         $('#finishButton').bind('click', function() {
+            alert('hi')
             $.getJSON('/finish', {
                 u_id : String(id),
             }, function(data) {
@@ -97,8 +98,10 @@
                     curr_inst = 'vote on which step you think is best';
                     break;
                 case 'vote_finish':
-                    alert('someone believes the instructions are finished, please vote to your right if you agree or disagree');
                     curr_inst = 'someone believes the instructions are finished, do you agree?';
+                    break;
+                case 'finish':
+                    curr_inst = 'the instructions are finished, thank you for your input!';
                     break;
                 default:
                     curr_inst = 'error';
@@ -111,10 +114,10 @@
               $('#voteFinish').html('<button id="yesfinish" type="button" class="btn btn-primary">finish</button><button id="nofinish" type="button" class="btn btn-primary">don\'t finish</button>');
                 //vote yes or no to finish
                 $(function() {
-                    $('#yesfinish').bing('click', function() {
+                    $('#yesfinish').bind('click', function() {
                         $.getJSON('/yes_finish', {
-                            u_id: String(id)
-                            u_vote : 'yes',
+                            u_id: String(id),
+                            u_vote: 'yes'
                     }, function(data) {
                         alert('thank you, vote received');
                        });
@@ -123,10 +126,10 @@
                 });
 
                 $(function() {
-                    $('#no_finish').bing('click', function() {
+                    $('#no_finish').bind('click', function() {
                         $.getJSON('/no_finish', {
-                            u_id: String(id)
-                            u_vote : 'no',
+                            u_id: String(id),
+                            u_vote: 'no'
                     }, function(data) {
                         alert('thank you, vote received');
                        });

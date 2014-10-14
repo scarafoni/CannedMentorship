@@ -120,6 +120,7 @@ def receive_finish():
     u_id = request.args.get('u_id',0)
     #we can only finish if we're in the find stage
     if get_state() == 'find':
+        set_state('vote_finish')
         return jsonify(result='stuff')
 
     else:
@@ -129,7 +130,8 @@ def receive_finish():
 def yes_finish():
     u_id = request.args.get('u_id',0)
     u_vote = request.args.get('u_vote',1)
-    add_user_input(u_vote)
+    add_client_input(u_id, u_vote)
+    return jsonify(result='finish vote received, thank you')
 
 @app.route('/send_my_inst')
 def get_input():
@@ -233,22 +235,19 @@ def send_updates():
         tp = get_total_players()
         votes_so_far = get_user_inputs()
         if len(votes_so_far) == tp:
-            if max(set(vote_so_far), key=votes_so_far.count) == 'yes':
-                state = 'finish'
+            if max(set(votes_so_far), key=votes_so_far.count) == 'yes':
+                set_state('finish')
                 return jsonify(instructions=instructions,\
-                               choices=vote_list,\
                                leader=leader,\
                                state=state)
             else:
-                state = 'find'
+                set_state('find')
                 return jsonify(instructions=instructions,\
-                               choices=vote_list,\
                                leader=leader,\
                                state=state)
         
         else:
             return jsonify(instructions=instructions,\
-                           choices=vote_list,\
                            leader=leader,\
                            state=state)
 
