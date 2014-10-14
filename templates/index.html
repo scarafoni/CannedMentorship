@@ -9,7 +9,7 @@
     //get my id
     var id = -1;
     var leader = false;
-    var state = 'wait';
+    var state = 'vote_finish';
     var finished = false;
     $.ajax({
         url: '/get_id', 
@@ -47,9 +47,11 @@
       });
     });
    
+
+
     //finish the session
     $(function() {
-        $('#finishButton').'click', function() {
+        $('#finishButton').bind('click', function() {
             $.getJSON('/finish', {
                 u_id : String(id),
             }, function(data) {
@@ -80,7 +82,7 @@
     
             state = data.state
             curr_inst = '';
-            //console.log(state);
+            console.log(state);
             switch(state) {
                 case 'find':
                     if(leader)
@@ -95,7 +97,9 @@
                     curr_inst = 'vote on which step you think is best';
                     break;
                 case 'vote_finish':
-                    curr_inst = 'someone believes the instructions are finished, do you agree?'
+                    alert('someone believes the instructions are finished, please vote to your right if you agree or disagree');
+                    curr_inst = 'someone believes the instructions are finished, do you agree?';
+                    break;
                 default:
                     curr_inst = 'error';
                     break;
@@ -104,51 +108,66 @@
 
             //the area for voting on whethe we're finished
             if(state == 'vote_finish') {
-              $('#voteFinish').html('<button id="yesfinish" type="button" class="btn btn-primary">finish</button><button id="nofinish" type="button" class="btn btn-primary">don't finish</button>');
+              $('#voteFinish').html('<button id="yesfinish" type="button" class="btn btn-primary">finish</button><button id="nofinish" type="button" class="btn btn-primary">don\'t finish</button>');
+                //vote yes or no to finish
+                $(function() {
+                    $('#yesfinish').bing('click', function() {
+                        $.getJSON('/yes_finish', {
+                            u_id: String(id)
+                            u_vote : 'yes',
+                    }, function(data) {
+                        alert('thank you, vote received');
+                       });
+                    return false;
+                    });
+                });
+
+                $(function() {
+                    $('#no_finish').bing('click', function() {
+                        $.getJSON('/no_finish', {
+                            u_id: String(id)
+                            u_vote : 'no',
+                    }, function(data) {
+                        alert('thank you, vote received');
+                       });
+                    return false;
+                    });
+                });
                 
 
             }
             //the voting area
-            if(!finished) { 
-                if(data.choices) {
-                    var d = data.choices;
-                    var votes = '';
-                    for(var i in d) { 
-                        votes += '<tr ><td id='+i+'>'+d[i]+'</td></tr>';
-                    }
-                    $('#voteTable tbody').html(votes); 
+            if(data.choices) {
+                var d = data.choices;
+                var votes = '';
+                for(var i in d) { 
+                    votes += '<tr ><td id='+i+'>'+d[i]+'</td></tr>';
+                }
+                $('#voteTable tbody').html(votes); 
 
-                    //send vote 
-                    $(function() { 
-                        $('#voteTable td').bind('click', function() {
-                        $.getJSON('/send_my_vote', {
-                            u_choice: $(this).attr('id'),
-                            u_id: String(id)
-                            }, function(data) {
-                                alert(data.result);
-                            });
+                //send vote 
+                $(function() { 
+                    $('#voteTable td').bind('click', function() {
+                    $.getJSON('/send_my_vote', {
+                        u_choice: $(this).attr('id'),
+                        u_id: String(id)
+                        }, function(data) {
+                            alert(data.result);
                         });
                     });
-                }
-            } else {
-                $('#voteTable tbody').html('<tr><td>Instructions complete, thank you for helping!</td></tr>); 
+                });
             }
 
             //the current instructions
-            if(!finished) {
-                if(data.instructions) {
-                    d = data.instructions.split('\n');
-                    console.log(data.instructions);
-                    var instructions = '';
-                    for(var i in d) { 
-                        x = parseInt(i) + 1
-                        instructions += '<tr><td>'+x+'. '+d[i]+'</td></tr>';
-                    }
-                    $('#instructTable tbody').html(instructions); 
+            if(data.instructions) {
+                d = data.instructions.split('\n');
+                console.log(data.instructions);
+                var instructions = '';
+                for(var i in d) { 
+                    x = parseInt(i) + 1
+                    instructions += '<tr><td>'+x+'. '+d[i]+'</td></tr>';
                 }
-            } else {
-                $('#instructTable tbody').html(<tr><td>'Instructions complete, thank you for helping!</td></tr>'); 
-                
+                $('#instructTable tbody').html(instructions); 
             }
         });
     },1000);
@@ -191,8 +210,8 @@
         </div>
         </div>       
         <div class="col-sm-4 sidebar-offcanvas">
-          <div id="amILead" class="alert alert-info">stuff</div>
-          <div id="currStep" class="alert alert-info">stuff</div>
+          <h3 id="amILead">stuff</h3>
+          <h4 id="currStep">stuff</h4>
           <div id="voteFinish" class="input-group">
           </div>
           <div class="input-group">

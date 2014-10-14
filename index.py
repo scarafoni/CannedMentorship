@@ -79,6 +79,12 @@ def reset_choices():
     with open('data/choices.txt', 'w') as f:
         f.write('')
 
+def add_finish_vote(u_vote):
+    with open('data/finish_votes.txt','a') as f:
+       f.write(u_vote+'\n') 
+        
+        
+
 # placeholder for the ai program
 # takes in a list of strings
 def do_ai(props):
@@ -118,6 +124,12 @@ def receive_finish():
 
     else:
         return jsonify(result='false',msg="you cannot finish while making an instruction")
+
+@app.route('/yes_finish')
+def yes_finish():
+    u_id = request.args.get('u_id',0)
+    u_vote = request.args.get('u_vote',1)
+    add_user_input(u_vote)
 
 @app.route('/send_my_inst')
 def get_input():
@@ -210,12 +222,35 @@ def send_updates():
                        leader=leader,\
                        state=state)
 
-    elif state == 'vote_finish':
+    elif state == 'finish':
         return jsonify(instructions=instructions,\
-                       choices=vote_list,\
+                       choices=['Instructions complete, thank you for helping!'],\
                        leader=leader,\
                        state=state)
         
+
+    elif state == 'vote_finish':
+        tp = get_total_players()
+        votes_so_far = get_user_inputs()
+        if len(votes_so_far) == tp:
+            if max(set(vote_so_far), key=votes_so_far.count) == 'yes':
+                state = 'finish'
+                return jsonify(instructions=instructions,\
+                               choices=vote_list,\
+                               leader=leader,\
+                               state=state)
+            else:
+                state = 'find'
+                return jsonify(instructions=instructions,\
+                               choices=vote_list,\
+                               leader=leader,\
+                               state=state)
+        
+        else:
+            return jsonify(instructions=instructions,\
+                           choices=vote_list,\
+                           leader=leader,\
+                           state=state)
 
     else:
         print('ERROR')
