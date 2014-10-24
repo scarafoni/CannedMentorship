@@ -173,7 +173,7 @@ def get_input():
     u_id = request.args.get('u_id', 1)
     if redis.get('state') == 'write': 
         # the the current instruction to far
-        people_so_far = redis.lrange('input_ids', 0, -1))
+        people_so_far = redis.lrange('input_ids', 0, -1)
         # writ/e the result to the list of proposals
         print('people so far-',people_so_far)
         if not u_id in people_so_far:
@@ -209,7 +209,7 @@ def send_my_vote():
 def send_updates():
     #all updates require these
     state = redis.get('state')
-    instructions = redis.lrange('instructions').split('\n')
+    instructions = '\n'.join(redis.lrange('instructions',0,-1))
     leader = redis.get('leader')
     print('updates- \n\tstate- '+state)
 
