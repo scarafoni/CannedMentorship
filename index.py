@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+import os
 # from redis import Redis
 import redis
 from collections import Counter
