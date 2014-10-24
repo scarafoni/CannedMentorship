@@ -1,0 +1,99 @@
+9/8
+    what needs to be done:
+        -theory
+            -email phillip about survey results
+                   -people do lists
+                   -not a lot of control flow
+                   -ordering is an issue (when to get google maps ready)
+            -do a survey with iterative edits (already sent to fan)
+            -finalize list of what exactly I'm testing
+            -finalize framework for the information flow
+        -server
+            -find ml framework that'll suite that (including work flow algorithm
+            -research flow chart designs
+        client
+            -bank on using web/javascript
+            -find good interface system for drawing diagrams
+            -can probably use lists to start
+                 -simple html tables for parts of instructions
+        -find test group
+        -test and write up results
+
+    Best case
+         -get whole framework working by the end of the week and start coding
+         -finish coding in 2 weeks and start testing
+         -can do adversarial concerns
+     
+    Worst Case
+        -can't get good framework
+        -slack off so I don't get it done/can't publish
+        -can't get good tests in and we can use a crappy framework with bad ML
+               -coding the client will be very easy
+
+9/15
+    what needs to be done
+        -organize different tactics
+        -survey spam with different tactics
+        -finalize list of what exactly I'm testing
+        -finalize framework for the information flow
+        -server
+            -find ml framework that'll suite that (including work flow algorithm
+            -research flow chart designs
+        client
+            -bank on using web/javascript
+            -find good interface system for drawing diagrams
+            -can probably use lists to start
+                 -simple html tables for parts of instructions
+        -find test group
+        -test and write up results
+
+    Best case
+         -get whole framework working by the end of the week and start coding
+         -finish coding in 2 weeks and start testing
+         -can do adversarial concerns
+     
+    Worst Case
+        -can't get good framework
+        -slack off so I don't get it done/can't publish
+        -can't get good tests in and we can use a crappy framework with bad ML
+               -coding the client will be very easy
+
+9/23
+    what needs to be done
+        -finalize framework for the information flow
+        -server
+            -find ml framework that'll suite that (including work flow algorithm
+            -research flow chart designs
+        client
+            -bank on using web/javascript
+            -find good interface system for drawing diagrams
+            -can probably use lists to start
+                 -simple html tables for parts of instructions
+        -find test group
+        -test and write up results
+
+    Best case
+        -start coding after wednesday
+         -finish coding in 2 weeks and start testing
+         -can do adversarial concerns
+     
+    Worst Case
+        -slack off so I don't start coding for a while
+        -slack off so I don't get it done/can't publish
+        -can't get good tests in and we can use a crappy framework with bad ML
+               -coding the client will be very easy
+
+10/15
+    what needs to be done
+        -feature extraction/distance algorithm
+        -finish little plug in bits for website
+        -user test web site/moar debugging
+        -start testing, collect data, begin writing
+    best case
+        -finish ml stuff by the end of the week, get user testing done in 2
+        -start testing
+    worst case
+        -can't finish program in due time
+        -too many bugs
+        -have to have some crappy, incomplete testing
+        -do testing over winter break/spring semester
