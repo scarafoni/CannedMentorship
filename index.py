@@ -1,98 +1,33 @@
 from flask import Flask, render_template, request, jsonify
 from redis import Redis
+from collections import Counter
 
 
-# Initialize the Flask application
-def get_total_players():
-    with open('data/total_players.txt', 'r') as f:
-        return int(''.join(f.read().split()))
-
-def get_leader():
-    with open('data/leader.txt','r') as f:
-        return f.read().rstrip()
-
-def add_player():
-    x = get_total_players()
-    x += 1
-    with open('data/total_players.txt', 'w') as f:
-        f.write(str(x))
-
-def set_state(state):
-    with open('data/state.txt', 'w') as f:
-        f.write(state)
-
-def get_state():
-    with open('data/state.txt', 'r') as f:
-        return f.read()
-
-def trim_null(x):
-    if '' in x:
-        x.remove('')
-    return x
-
-#returns a list
-def get_people_so_far():
-    with open('data/people_so_far.txt', 'r') as f:
-        x = f.read()
-        x = x.split('\n')
-        return trim_null(x)
-
-def reset_people_so_far():
-    with open('data/people_so_far.txt', 'w') as f:
-        f.write('')
-
-def reset_user_inputs():
-    with open('data/user_inputs.txt','w') as f:
-        f.write('')
-    
-def add_client_input(id, input):
-    with open('data/people_so_far.txt', 'a') as f,\
-         open('data/user_inputs.txt', 'a') as f1:
-        f.write(id+'\n') 
-        f1.write(input+'\n')
-
-#takes a list as input
 def count_votes(votes, vote_list):
+    # print('$$$$$$$$votes$$$$$',votes)
+    # print('$$$$$$$$vote_list$$$$$',vote_list)
     i = votes.index(max(votes))
+    # print('$$$$$$$$i$$$$$',i)
     most_popular = vote_list[i] 
-    write_instruction(most_popular)
-
-def get_user_inputs():
-    with open('data/user_inputs.txt','r') as f:
-        x = f.read().split('\n')
-        return trim_null(x)
-
-def get_instructions():
-    with open('data/instructions.txt') as f:
-        return f.read().strip()
-
-def write_instruction(new_inst):
-    with  open('data/instructions.txt','a') as f:
-        f.write(new_inst+'\n')
-
-def get_choices():
-    with open('data/choices.txt', 'r') as f:
-        x = f.read().split('\n')
-        return trim_null(x)
-
-def reset_choices():
-    with open('data/choices.txt', 'w') as f:
-        f.write('')
-
-def add_finish_vote(u_vote):
-    with open('data/finish_votes.txt','a') as f:
-       f.write(u_vote+'\n') 
-        
-        
+    # print('$$$$$$$$most popullat$$$$$',most_popular)
+    return most_popular
 
 # placeholder for the ai program
-# takes in a list of strings
-def do_ai(props):
-    with open('data/choices.txt', 'w') as f:
-        for prop in props:
-            f.write(prop+'\n')
+def run_ai(props):
+    return props
 
 app = Flask(__name__)
+
+redis = Redis()
+
+
+@app.before_first_request
+def startup():
+    redis.flushdb()
+    redis.set('total_players', '0')
+    redis.set('leader', '1')
+    redis.set('state', 'find')
+
 
 @app.route('/')
 def index():
@@ -101,51 +36,43 @@ def index():
 
 @app.route('/get_id')
 def get_id():
-    add_player()
-    x = get_total_players()
-    return jsonify(result=x)
+    redis.incr('total_players')
+    return jsonify(result=redis.get('total_players'))
 
 
 @app.route('/propose_instruct')
 def propose_instruct():
-    if get_state() == 'find':
-        with open('data/state.txt','w') as f:
-            f.write('write')
-            return jsonify(result="ok lets write an instruction!")
+    u_id = request.args.get('u_id', 0)
+    if redis.get('state') == 'find' and u_id == redis.get('leader'):
+        redis.set('state', 'write')
+        return jsonify(result="ok lets write an instruction!")
     else:
         return jsonify(result="you cannot propose a new instruction now")
 
-@app.route('/finish')
-def receive_finish():
-    print('finish- ',get_state())
-    u_id = request.args.get('u_id',0)
-    #we can only finish if we're in the find stage
-    if get_state() == 'find':
-        print('finish- ',get_state())
-        set_state('vote_finish')
-        return jsonify(result='stuff')
 
-    else:
-        return jsonify(result='false',msg="you cannot finish while making an instruction")
-
-@app.route('/vote_finish')
-def vote_finish():
-    u_id = request.args.get('u_id',0)
-    u_vote = request.args.get('u_vote',1)
-    add_client_input(u_id, u_vote)
-    return jsonify(result='finish vote received, thank you')
-
+# receives the users instruction text
 @app.route('/send_my_inst')
-def get_input():
+def send_my_inst():
     u_instruct = request.args.get('u_instruct', 0)
     u_id = request.args.get('u_id', 1)
-    if get_state() == 'write': 
+    if redis.get('state') == 'write': 
         # the the current instruction to far
-        people_so_far = get_people_so_far()
-        # writ/e the result to the list of proposals
-        print('people so far-',people_so_far)
-        if not u_id in people_so_far:
-            add_client_input(u_id, u_instruct)
+        people_so_far = redis.lrange('input_ids', 0, -1)
+        if u_id not in people_so_far:
+            redis.lpush('inputs', u_instruct)
+            redis.lpush('input_ids', u_id)
+
+            # change the state to vote if all the votes are in
+            if int(redis.llen('inputs')) == int(redis.get('total_players')):
+                # run the ai, make the list of choices
+                choices  = run_ai(redis.lrange('inputs',0,-1))
+                for choice in choices:
+                    redis.lpush('choices',choice)
+                # reset the inputs and input_ids
+                redis.delete('inputs')
+                redis.delete('input_ids')
+                redis.set('state', 'vote')
+
             return jsonify(result="recieve input "+u_instruct+" thank you!")
 
         else:
@@ -154,76 +81,109 @@ def get_input():
         return jsonify(result="you cannot submit instructions yet")
 
 
+# track a vote
 @app.route('/send_my_vote')
 def send_my_vote():
     u_choice = request.args.get('u_choice', 0)
     u_id = request.args.get('u_id', 1)
-    
-    if get_state() == 'vote':
+    print('########u_choice',u_choice)
+    if redis.get('state') == 'vote':
         # add the vote if it's not in already
-        proposers = get_people_so_far()
-        if not u_id in proposers:
-            add_client_input(u_id, u_choice)
-            return jsonify(result="your vote for choice "+str(int(u_choice)+1)+" has been logged")
+        proposers = redis.lrange('input_ids',0,-1)
+        if u_id not in proposers:
+            redis.rpush('inputs', u_choice)
+            redis.rpush('input_ids', u_id)
+            print('########u_choice',u_choice)
+
+            # change state to find if all the votes are in
+            if int(redis.llen('inputs')) == int(redis.get('total_players')):
+                # append the most populat instruction to the list
+                new_inst = count_votes(redis.lrange('inputs',0,-1),\
+                                       redis.lrange('choices',0,-1))
+                redis.rpush('instructions',new_inst)
+                print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4')
+                redis.delete('inputs')
+                redis.delete('input_ids')
+                redis.delete('choices')
+                redis.set('state','find')
+                
+            return jsonify(result = "your vote for choice " + \
+                           str(int(u_choice)+1)+" has been logged")
         else:
             return jsonify(result="you cannot vote twice")
     else:
         return jsonify(result="you cannot vote yet!")
-            
+
+
+# 
+@app.route('/finish')
+def receive_finish():
+    # we can only finish if we're in the find stage
+    if redis.get('state') == 'find':
+        redis.set('state', 'vote_finish')
+        
+        #change state to vote_finish
+        redis.set('state','vote_finish') 
+
+        return jsonify(result='stuff')
+    else:
+        return jsonify(result='false', msg="you cannot finish now")
+
+
+# collect votes to see if we're finished
+@app.route('/vote_finish')
+def vote_finish():
+    u_id = request.args.get('u_id', 0)
+    u_vote = request.args.get('u_vote', 1)
+    if redis.get('state') == 'vote_finish' and u_id not in redis.lrange('input_ids',0,-1):
+        redis.rpush('inputs', u_vote)
+        redis.rpush('input_ids', u_id)
+        
+        # if all the votes are in, tally the votes
+        if redis.llen('input_ids') == int(redis.get('total_players')):
+            # tally the votes
+            votes = redis.lrange('inputs',0,-1)
+            print('$$$$$$$$$$$$$$$$$votes$$$$$$44',votes)
+            counter = Counter(votes)
+            winner = counter.most_common()[0][0]
+            print('$$$$$$$$$$$$$$$$$winner$$$$$$44',winner,winner == 'no')
+            redis.set('state','find' if winner == 'no' else 'finish')
+            redis.delete('inputs')
+            redis.delete('input_ids')
+
+        return jsonify(result='finish vote received, thank you')
+    else:
+        return jsonify(result='this shouldnt be here')
 
 @app.route('/updates')
 def send_updates():
-    instructions = get_instructions()
-    leader = get_leader()
-    state = get_state()
-    # print the current info
-    
-    #if we're in find, we need to send the instructions
+    #all updates require these
+    state = redis.get('state')
+    instructions = redis.lrange('instructions',0,-1)
+    leader  = redis.get('leader')
+    print("##### updates #####")
+    print('state',state)
+    print('instructions',instructions)
+    print('total players',redis.get('total_players'))
+    print('inputs', redis.lrange('inputs',0,-1))
+    print('input_ids,',redis.lrange('input_ids',0,-1))
+
     if state == 'find':
-        reset_choices()
-        print('updates- \n\tstate- '+state+'\n\ttotalp- '+str(get_total_players()))
         return jsonify(instructions=instructions,\
-                   choices='',\
                    leader=leader,\
-                   state=state)
-        
+                    state=state)
 
-    #check if all the writings are in
-        # if yes run the collate algorithm and switch to voting
+    #write state
     elif state == "write":
-        print('updates- \n\tstate- '+state+'\n\ttotalp- '+str(get_total_players()))
-        print('inputs so far- ',get_user_inputs())
-        tp = get_total_players()
-        suggesters_so_far = get_people_so_far()
-        suggestions_so_far = get_user_inputs()
-        print('user inputs',suggestions_so_far)
-        if len(suggesters_so_far) == tp:
-            # voting algorithm result is done here
-            do_ai(suggestions_so_far)
-            # wipe the people who have proposed
-            reset_people_so_far()
-            reset_user_inputs()
-            set_state('vote')
-        return jsonify(choices='',\
-                   instructions=instructions,\
+        return jsonify(instructions=instructions,\
                    leader=leader,\
                    state=state)
 
-    #check of all the votes are in
-        #if yes run the counting algorithm
+    # vote state
     elif state == "vote":
-        vote_list = get_choices()
-        votes = get_user_inputs()
+        # vote_list = '\n'.join(redis.lrange('choices',0,-1))
+        vote_list = (redis.lrange('choices',0,-1))
         print('vote list',vote_list)
-        tp = get_total_players()
-        voters_so_far = get_people_so_far()
-        # if everyone's checked in then tally the votes
-        if len(voters_so_far) == tp:
-            count_votes(votes,vote_list)
-            reset_people_so_far()
-            reset_choices()
-            reset_user_inputs()
-            set_state('find')
         return jsonify(instructions=instructions,\
                        choices=vote_list,\
                        leader=leader,\
@@ -237,57 +197,14 @@ def send_updates():
         
 
     elif state == 'vote_finish':
-        print('vote finish main',len(get_user_inputs()), get_total_players())
-        tp = get_total_players()
-        votes_so_far = get_user_inputs()
-        if len(votes_so_far) == tp:
-            reset_choices()
-            reset_user_inputs()
-            reset_people_so_far()
-            if max(set(votes_so_far), key=votes_so_far.count) == 'yes':
-                set_state('finish')
-                return jsonify(instructions=instructions,\
-                               leader=leader,\
-                               state=state)
-            else:
-                set_state('find')
-                return jsonify(instructions=instructions,\
-                               leader=leader,\
-                               state=state)
-        
-        else:
-            return jsonify(instructions=instructions,\
+        return jsonify(instructions=instructions,\
                            leader=leader,\
                            state=state)
-
     else:
         print('ERROR')
         return jsonify(state="err")
 
-
-
 if __name__ == '__main__':
-    # initialize everything
-         # the instruction list being made
-    with open('data/instructions.txt', 'w') as instructions,\
-         open('data/total_players.txt', 'w') as total_players,\
-         open('data/choices.txt', 'w') as choices,\
-         open('data/user_inputs.txt', 'w') as user_inputs,\
-         open('data/state.txt','w') as state,\
-         open('data/people_so_far.txt','w') as people_so_far,\
-         open('data/finish_voters.txt','w') as finish_voters,\
-         open('data/leader.txt', 'w') as leader:
-            total_players.write('0')
-            user_inputs.write('')
-            # instructions.write('get a girlfriend\nkiss her\n rule the world')
-            instructions.write('')
-            leader.write('1')
-            state.write('find')
-            people_so_far.write('')
-            finish_voters.write('0')
-            # choices.write('talk about video games \n eat stuff')
-            choices.write('')
-
     app.debug = True
     app.run()
 
