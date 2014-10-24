@@ -207,13 +207,16 @@ def send_my_vote():
 
 @app.route('/updates')
 def send_updates():
+    #all updates require these
+    state = redis.get('state')
+    instructions = redis.lrange('instructions').split('\n')
+    leader = redis.get('leader')
+    print('updates- \n\tstate- '+state)
+
     if state == 'find':
-        reset_choices()
-        print('updates- \n\tstate- '+state+'\n\ttotalp- '+str(get_total_players()))
         return jsonify(instructions=instructions,\
-                   choices='',\
                    leader=leader,\
-                   state=state)
+                    state=state)
 
     #check if all the writings are in
         # if yes run the collate algorithm and switch to voting

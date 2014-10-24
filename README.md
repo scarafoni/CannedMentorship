@@ -13,23 +13,23 @@ flow
         -find
                -starting state
                -leader can propose instruct, then goes to write
-               -sent- instructions, state
+               -sent- instructions, state, leader
         -write
                 -users can write then send instructions
                 -changes to vote when all user's input received
-                -sent: instructions, state
+                -sent: instructions, state, leader
         -vote  
                -users vote on instructions
                -goes to find when all votes are in
-               -sent- instructions, state, vote options
+               -sent- instructions, state, leader vote options
         -vote_finish
                 -accessed from find
                 -ends when all users input is in
                 -goes to find on fail, on suceed finish
-                sent- instructions, state
+                sent- instructions, state, leader
         -finish
                 -stuck once in this state
-                -sent- instructions, state
+                -sent- instructions, state, leader
 switches
     find -> write
         -nothing
