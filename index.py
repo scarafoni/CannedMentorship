@@ -88,14 +88,12 @@ def send_my_inst():
 def send_my_vote():
     u_choice = request.args.get('u_choice', 0)
     u_id = request.args.get('u_id', 1)
-    print('########u_choice',u_choice)
     if redis.get('state') == 'vote':
         # add the vote if it's not in already
         proposers = redis.lrange('input_ids',0,-1)
         if u_id not in proposers:
             redis.rpush('inputs', u_choice)
             redis.rpush('input_ids', u_id)
-            print('########u_choice',u_choice)
 
             # change state to find if all the votes are in
             if int(redis.llen('inputs')) == int(redis.get('total_players')):
@@ -103,7 +101,6 @@ def send_my_vote():
                 new_inst = count_votes(redis.lrange('inputs',0,-1),\
                                        redis.lrange('choices',0,-1))
                 redis.rpush('instructions',new_inst)
-                print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4')
                 redis.delete('inputs')
                 redis.delete('input_ids')
                 redis.delete('choices')
@@ -145,10 +142,8 @@ def vote_finish():
         if redis.llen('input_ids') == int(redis.get('total_players')):
             # tally the votes
             votes = redis.lrange('inputs',0,-1)
-            print('$$$$$$$$$$$$$$$$$votes$$$$$$44',votes)
             counter = Counter(votes)
             winner = counter.most_common()[0][0]
-            print('$$$$$$$$$$$$$$$$$winner$$$$$$44',winner,winner == 'no')
             redis.set('state','find' if winner == 'no' else 'finish')
             redis.delete('inputs')
             redis.delete('input_ids')
@@ -163,12 +158,14 @@ def send_updates():
     state = redis.get('state')
     instructions = redis.lrange('instructions',0,-1)
     leader  = redis.get('leader')
+    '''
     print("##### updates #####")
     print('state',state)
     print('instructions',instructions)
     print('total players',redis.get('total_players'))
     print('inputs', redis.lrange('inputs',0,-1))
     print('input_ids,',redis.lrange('input_ids',0,-1))
+    '''
 
     if state == 'find':
         return jsonify(instructions=instructions,\
@@ -185,7 +182,6 @@ def send_updates():
     elif state == "vote":
         # vote_list = '\n'.join(redis.lrange('choices',0,-1))
         vote_list = (redis.lrange('choices',0,-1))
-        print('vote list',vote_list)
         return jsonify(instructions=instructions,\
                        choices=vote_list,\
                        leader=leader,\
