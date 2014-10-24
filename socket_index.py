@@ -3,66 +3,6 @@ from redis import Redis
 from collections import Counter
 
 
-# Initialize the Flask application
-def get_total_players():
-    with open('data/total_players.txt', 'r') as f:
-        return int(''.join(f.read().split()))
-
-
-def get_leader():
-    with open('data/leader.txt','r') as f:
-
-        return f.read().rstrip()
-
-
-def add_player():
-    x = get_total_players()
-    x += 1
-    with open('data/total_players.txt', 'w') as f:
-        f.write(str(x))
-
-
-def set_state(state):
-    with open('data/state.txt', 'w') as f:
-        f.write(state)
-
-
-def get_state():
-    with open('data/state.txt', 'r') as f:
-        return f.read()
-
-
-def trim_null(x):
-    if '' in x:
-        x.remove('')
-    return x
-
-
-# returns a list
-def get_people_so_far():
-    with open('data/people_so_far.txt', 'r') as f:
-        x = f.read()
-        x = x.split('\n')
-        return trim_null(x)
-
-
-def reset_people_so_far():
-    with open('data/people_so_far.txt', 'w') as f:
-        f.write('')
-
-def reset_user_inputs():
-    with open('data/user_inputs.txt','w') as f:
-        f.write('')
-
-
-def add_client_input(id, input):
-    with open('data/people_so_far.txt', 'a') as f,\
-         open('data/user_inputs.txt', 'a') as f1:
-        f.write(id+'\n') 
-        f1.write(input+'\n')
-
-
-# takes a list as input
 def count_votes(votes, vote_list):
     # print('$$$$$$$$votes$$$$$',votes)
     # print('$$$$$$$$vote_list$$$$$',vote_list)
@@ -72,40 +12,7 @@ def count_votes(votes, vote_list):
     # print('$$$$$$$$most popullat$$$$$',most_popular)
     return most_popular
 
-
-def get_user_inputs():
-    with open('data/user_inputs.txt','r') as f:
-        x = f.read().split('\n')
-        return trim_null(x)
-
-
-def get_instructions():
-    with open('data/instructions.txt') as f:
-        return f.read().strip()
-
-
-def write_instruction(new_inst):
-    with  open('data/instructions.txt','a') as f:
-        f.write(new_inst+'\n')
-
-
-def get_choices():
-    with open('data/choices.txt', 'r') as f:
-        x = f.read().split('\n')
-        return trim_null(x)
-
-
-def reset_choices():
-    with open('data/choices.txt', 'w') as f:
-        f.write('')
-
-
-def add_finish_vote(u_vote):
-    with open('data/finish_votes.txt','a') as f:
-       f.write(u_vote+'\n') 
-
 # placeholder for the ai program
-# takes in a list of strings
 def run_ai(props):
     return props
 
