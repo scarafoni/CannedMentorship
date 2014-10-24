@@ -246,6 +246,7 @@ def send_updates():
     leader  = redis.get('leader')
     print("##### updates #####")
     print('state',state)
+    print('total players',redis.get('total_players'))
     print('inputs', redis.lrange('inputs',0,-1))
     print('input_ids,',redis.lrange('input_ids',0,-1))
 
