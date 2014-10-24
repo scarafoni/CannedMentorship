@@ -33,17 +33,22 @@ flow
 switches
     find -> write
         -nothing
+        -func: propose_instruct()
     write -> vote
         -run ai on inputs, send to choices
         -wipe inputs, input_ids
+        -func- get_inst_text()
     vote -> find
         -run vote, push to instructions
         -wipe inputs, input_ids
         -wipe choices
+        -func- send_my_vote()
     find -> vote_finish
         -nothig todo
+        -func: receive_finish()
     vote_finish -> finish
         -nothing todo
+        -func- vote_finish()
         
 vars
     -choices- choices to vote for

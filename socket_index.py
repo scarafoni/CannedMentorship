@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify
 from redis import Redis
-import datetime
 
 
 # Initialize the Flask application
@@ -128,8 +127,11 @@ def index():
 def get_id():
     x = int(redis.get('total_players'))
     # increment by one
+    '''
     x += 1
     redis.set('total_players', str(x))
+    '''
+    redis.incr('total_players')
     return jsonify(result=x)
 
 
@@ -143,42 +145,20 @@ def propose_instruct():
         return jsonify(result="you cannot propose a new instruction now")
 
 
-@app.route('/finish')
-def receive_finish():
-    # we can only finish if we're in the find stage
-    if redis.get('state') == 'find':
-        redis.set('state', 'vote_finish')
-        return jsonify(result='stuff')
-
-    else:
-        return jsonify(result='false', msg="you cannot finish now")
-
-
-@app.route('/vote_finish')
-def vote_finish():
-    u_id = request.args.get('u_id', 0)
-    u_vote = request.args.get('u_vote', 1)
-    if redis.get('state') == 'vote_finish' and u_id not in redis.lrange('input_ids',0,-1):
-        redis.rpush('inputs', u_vote)
-        redis.rpush('input_ids', u_id)
-        return jsonify(result='finish vote received, thank you')
-    else:
-        return jsonify(result='this shouldnt be here')
-
-
 # receives the users instruction text
 @app.route('/send_my_inst')
-def get_input():
+def get_inst_text():
     u_instruct = request.args.get('u_instruct', 0)
     u_id = request.args.get('u_id', 1)
     if redis.get('state') == 'write': 
         # the the current instruction to far
         people_so_far = redis.lrange('input_ids', 0, -1)
-        # writ/e the result to the list of proposals
-        print('people so far-',people_so_far)
         if not u_id in people_so_far:
             redis.rpush('inputs', u_instruct)
             redis.rpush('input_ids', u_id)
+            
+            # change the state if needed
+            if len(people_so_far) == int(redis.get('total_players'))
             return jsonify(result="recieve input "+u_instruct+" thank you!")
 
         else:
@@ -187,6 +167,7 @@ def get_input():
         return jsonify(result="you cannot submit instructions yet")
 
 
+# track a vote
 @app.route('/send_my_vote')
 def send_my_vote():
     u_choice = request.args.get('u_choice', 0)
@@ -204,6 +185,28 @@ def send_my_vote():
     else:
         return jsonify(result="you cannot vote yet!")
 
+@app.route('/finish')
+def receive_finish():
+    # we can only finish if we're in the find stage
+    if redis.get('state') == 'find':
+        redis.set('state', 'vote_finish')
+        return jsonify(result='stuff')
+
+    else:
+        return jsonify(result='false', msg="you cannot finish now")
+
+
+# collect votes to see if we're finished
+@app.route('/vote_finish')
+def vote_finish():
+    u_id = request.args.get('u_id', 0)
+    u_vote = request.args.get('u_vote', 1)
+    if redis.get('state') == 'vote_finish' and u_id not in redis.lrange('input_ids',0,-1):
+        redis.rpush('inputs', u_vote)
+        redis.rpush('input_ids', u_id)
+        return jsonify(result='finish vote received, thank you')
+    else:
+        return jsonify(result='this shouldnt be here')
 
 @app.route('/updates')
 def send_updates():
@@ -248,27 +251,6 @@ def send_updates():
 
 
 if __name__ == '__main__':
-    # initialize everything
-         # the instruction list being made
-    with open('data/instructions.txt', 'w') as instructions,\
-         open('data/total_players.txt', 'w') as total_players,\
-         open('data/choices.txt', 'w') as choices,\
-         open('data/user_inputs.txt', 'w') as user_inputs,\
-         open('data/state.txt','w') as state,\
-         open('data/people_so_far.txt','w') as people_so_far,\
-         open('data/finish_voters.txt','w') as finish_voters,\
-         open('data/leader.txt', 'w') as leader:
-            total_players.write('0')
-            user_inputs.write('')
-            # instructions.write('get a girlfriend\nkiss her\n rule the world')
-            instructions.write('')
-            leader.write('1')
-            state.write('find')
-            people_so_far.write('')
-            finish_voters.write('0')
-            # choices.write('talk about video games \n eat stuff')
-            choices.write('')
-
     app.debug = True
     app.run()
 
