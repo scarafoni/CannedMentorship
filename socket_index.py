@@ -121,19 +121,17 @@ def startup():
 
 @app.route('/')
 def index():
-    return render_template('socketIndex.html')
+    return render_template('index.html')
 
 
 @app.route('/get_id')
 def get_id():
-    x = int(redis.get('total_players'))
-    # increment by one
     '''
     x += 1
     redis.set('total_players', str(x))
     '''
     redis.incr('total_players')
-    return jsonify(result=x)
+    return jsonify(result=redis.get('total_players'))
 
 
 @app.route('/propose_instruct')
@@ -155,6 +153,7 @@ def get_inst_text():
         # the the current instruction to far
         people_so_far = redis.lrange('input_ids', 0, -1)
         if u_id not in people_so_far:
+            print('people so far',people_so_far)
             redis.rpush('inputs', u_instruct)
             redis.rpush('input_ids', u_id)
 
@@ -244,8 +243,11 @@ def send_updates():
     #all updates require these
     state = redis.get('state')
     instructions = '\n'.join(redis.lrange('instructions',0,-1))
-    leader = redis.get('leader')
-    print('updates- \n\tstate- '+state)
+    leader  = redis.get('leader')
+    print("##### updates #####")
+    print('state',state)
+    print('inputs', redis.lrange('inputs',0,-1))
+    print('input_ids,',redis.lrange('input_ids',0,-1))
 
     if state == 'find':
         return jsonify(instructions=instructions,\
