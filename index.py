@@ -100,6 +100,9 @@ def send_my_vote():
                 # append the most populat instruction to the list
                 new_inst = count_votes(redis.lrange('inputs',0,-1),\
                                        redis.lrange('choices',0,-1))
+
+                # print the instructions for the log
+                print('choices',redis.lrange('choices',0,-1))
                 redis.rpush('instructions',new_inst)
                 redis.delete('inputs')
                 redis.delete('input_ids')
