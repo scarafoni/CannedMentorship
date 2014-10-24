@@ -129,10 +129,6 @@ def index():
 
 @app.route('/get_id')
 def get_id():
-    '''
-    x += 1
-    redis.set('total_players', str(x))
-    '''
     redis.incr('total_players')
     return jsonify(result=redis.get('total_players'))
 
@@ -240,9 +236,13 @@ def vote_finish():
         if redis.llen('input_ids') == int(redis.get('total_players')):
             # tally the votes
             votes = redis.lrange('inputs',0,-1)
+            print('$$$$$$$$$$$$$$$$$votes$$$$$$44',votes)
             counter = Counter(votes)
-            winner = counter.most_common()[0]
+            winner = counter.most_common()[0][0]
+            print('$$$$$$$$$$$$$$$$$winner$$$$$$44',winner,winner == 'no')
             redis.set('state','find' if winner == 'no' else 'finish')
+            redis.delete('inputs')
+            redis.delete('input_ids')
 
         return jsonify(result='finish vote received, thank you')
     else:

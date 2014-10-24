@@ -47,8 +47,11 @@ switches
         -nothig todo
         -func: receive_finish()
     vote_finish -> finish
+        -delete input, input ids
         -nothing todo
         -func- vote_finish()
+    vote_finish -> find
+        -delete input, input_ids
         
 vars
     -choices- choices to vote for
