@@ -161,12 +161,14 @@ def send_updates():
     state = redis.get('state')
     instructions = redis.lrange('instructions',0,-1)
     leader  = redis.get('leader')
+    '''
     print("##### updates #####")
     print('state',state)
     print('instructions',instructions)
     print('total players',redis.get('total_players'))
     print('inputs', redis.lrange('inputs',0,-1))
     print('input_ids,',redis.lrange('input_ids',0,-1))
+    '''
 
     if state == 'find':
         return jsonify(instructions=instructions,\
