@@ -38,7 +38,7 @@
     $(function() {
       $('#proposeInstruct').bind('click', function() {
         $.getJSON('/propose_instruct', {
-          u_instruct: $('input[name="input"]').val(),
+          u_id: String(id),
         }, function(data) {
           alert('recieved: '+data.result);
           //$("#uInstruct").text(data.result);

@@ -20,7 +20,7 @@
     });
     console.log(id);
 
-    //send an instruction
+    //send instruction text
     $(function() {
       $('#sendProp').bind('click', function() {
         $.getJSON('/send_my_inst', {
@@ -38,7 +38,7 @@
     $(function() {
       $('#proposeInstruct').bind('click', function() {
         $.getJSON('/propose_instruct', {
-          u_instruct: $('input[name="input"]').val(),
+          u_id: String(id),
         }, function(data) {
           alert('recieved: '+data.result);
           //$("#uInstruct").text(data.result);
