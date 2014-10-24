@@ -153,12 +153,21 @@ def get_inst_text():
     if redis.get('state') == 'write': 
         # the the current instruction to far
         people_so_far = redis.lrange('input_ids', 0, -1)
-        if not u_id in people_so_far:
+        if u_id not in people_so_far:
             redis.rpush('inputs', u_instruct)
             redis.rpush('input_ids', u_id)
-            
-            # change the state if needed
-            if len(people_so_far) == int(redis.get('total_players'))
+
+            # change the state to vote if all the votes are in
+            if len(people_so_far) == int(redis.get('total_players')):
+                # run the ai, make the list of choices
+                choices  = run_ai(redis.lrange('inputs',0,-1))
+                for choice in choices:
+                    redis.lpush('choices',choice)
+                # reset the inputs and input_ids
+                redis.delete('inputs')
+                redis.delete('input_ids')
+                redis.set('state', 'vote')
+
             return jsonify(result="recieve input "+u_instruct+" thank you!")
 
         else:
@@ -185,6 +194,8 @@ def send_my_vote():
     else:
         return jsonify(result="you cannot vote yet!")
 
+
+# 
 @app.route('/finish')
 def receive_finish():
     # we can only finish if we're in the find stage
