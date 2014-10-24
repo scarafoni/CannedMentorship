@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
-from redis import Redis
+import redis
 from collections import Counter
+import os
 
 
 def count_votes(votes, vote_list):
