@@ -11,6 +11,7 @@ def get_total_players():
 
 def get_leader():
     with open('data/leader.txt','r') as f:
+
         return f.read().rstrip()
 
 
@@ -63,9 +64,13 @@ def add_client_input(id, input):
 
 # takes a list as input
 def count_votes(votes, vote_list):
+    # print('$$$$$$$$votes$$$$$',votes)
+    # print('$$$$$$$$vote_list$$$$$',vote_list)
     i = votes.index(max(votes))
+    # print('$$$$$$$$i$$$$$',i)
     most_popular = vote_list[i] 
-    write_instruction(most_popular)
+    # print('$$$$$$$$most popullat$$$$$',most_popular)
+    return most_popular
 
 
 def get_user_inputs():
@@ -144,16 +149,15 @@ def propose_instruct():
 
 # receives the users instruction text
 @app.route('/send_my_inst')
-def get_inst_text():
+def send_my_inst():
     u_instruct = request.args.get('u_instruct', 0)
     u_id = request.args.get('u_id', 1)
     if redis.get('state') == 'write': 
         # the the current instruction to far
         people_so_far = redis.lrange('input_ids', 0, -1)
         if u_id not in people_so_far:
-            print('people so far',people_so_far)
-            redis.rpush('inputs', u_instruct)
-            redis.rpush('input_ids', u_id)
+            redis.lpush('inputs', u_instruct)
+            redis.lpush('input_ids', u_id)
 
             # change the state to vote if all the votes are in
             if int(redis.llen('inputs')) == int(redis.get('total_players')):
@@ -179,17 +183,25 @@ def get_inst_text():
 def send_my_vote():
     u_choice = request.args.get('u_choice', 0)
     u_id = request.args.get('u_id', 1)
+    print('########u_choice',u_choice)
     if redis.get('state') == 'vote':
         # add the vote if it's not in already
         proposers = redis.lrange('input_ids',0,-1)
         if u_id not in proposers:
             redis.rpush('inputs', u_choice)
             redis.rpush('input_ids', u_id)
+            print('########u_choice',u_choice)
 
             # change state to find if all the votes are in
-            if len(proposers) == redis.get('total_players'):
+            if int(redis.llen('inputs')) == int(redis.get('total_players')):
+                # append the most populat instruction to the list
+                new_inst = count_votes(redis.lrange('inputs',0,-1),\
+                                       redis.lrange('choices',0,-1))
+                redis.rpush('instructions',new_inst)
+                print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4')
                 redis.delete('inputs')
                 redis.delete('input_ids')
+                redis.delete('choices')
                 redis.set('state','find')
                 
             return jsonify(result = "your vote for choice " + \
@@ -240,10 +252,11 @@ def vote_finish():
 def send_updates():
     #all updates require these
     state = redis.get('state')
-    instructions = '\n'.join(redis.lrange('instructions',0,-1))
+    instructions = redis.lrange('instructions',0,-1)
     leader  = redis.get('leader')
     print("##### updates #####")
     print('state',state)
+    print('instructions',instructions)
     print('total players',redis.get('total_players'))
     print('inputs', redis.lrange('inputs',0,-1))
     print('input_ids,',redis.lrange('input_ids',0,-1))
@@ -261,7 +274,9 @@ def send_updates():
 
     # vote state
     elif state == "vote":
-        vote_list = '\n'.join(redis.lrange('choices',0,-1))
+        # vote_list = '\n'.join(redis.lrange('choices',0,-1))
+        vote_list = (redis.lrange('choices',0,-1))
+        print('vote list',vote_list)
         return jsonify(instructions=instructions,\
                        choices=vote_list,\
                        leader=leader,\
