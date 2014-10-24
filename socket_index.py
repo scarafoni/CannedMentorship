@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from redis import Redis
+from collections import Counter
 
 
 # Initialize the Flask application
@@ -187,6 +188,13 @@ def send_my_vote():
         if u_id not in proposers:
             redis.rpush('inputs', u_choice)
             redis.rpush('input_ids', u_id)
+
+            # change state to find if all the votes are in
+            if len(proposers) == redis.get('total_players'):
+                redis.delete('inputs')
+                redis.delete('input_ids')
+                redis.set('state','find')
+                
             return jsonify(result = "your vote for choice " + \
                            str(int(u_choice)+1)+" has been logged")
         else:
@@ -201,8 +209,11 @@ def receive_finish():
     # we can only finish if we're in the find stage
     if redis.get('state') == 'find':
         redis.set('state', 'vote_finish')
-        return jsonify(result='stuff')
+        
+        #change state to vote_finish
+        redis.set('state','vote_finish') 
 
+        return jsonify(result='stuff')
     else:
         return jsonify(result='false', msg="you cannot finish now")
 
@@ -215,6 +226,15 @@ def vote_finish():
     if redis.get('state') == 'vote_finish' and u_id not in redis.lrange('input_ids',0,-1):
         redis.rpush('inputs', u_vote)
         redis.rpush('input_ids', u_id)
+        
+        # if all the votes are in, tally the votes
+        if redis.llen('input_ids') == int(redis.get('total_players')):
+            # tally the votes
+            votes = redis.lrange('inputs',0,-1)
+            counter = Counter(votes)
+            winner = counter.most_common()[0]
+            redis.set('state','find' if winner == 'no' else 'finish')
+
         return jsonify(result='finish vote received, thank you')
     else:
         return jsonify(result='this shouldnt be here')
