@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
-from redis import Redis
+# from redis import Redis
+import redis
 from collections import Counter
 
 
@@ -17,8 +18,9 @@ def run_ai(props):
     return props
 
 app = Flask(__name__)
-
-redis = Redis()
+redis_url = os.getenv('REDISTOGO_URL','redis://redistogo:5e00cfed335a73ab9a5a515cef203d3d@greeneye.redistogo.com:10505/' )
+redis = redis.from_url(redis_url)
+# redis = Redis()
 
 
 @app.before_first_request
