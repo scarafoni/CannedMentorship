@@ -190,9 +190,9 @@ def get_input():
 def send_my_vote():
     u_choice = request.args.get('u_choice', 0)
     u_id = request.args.get('u_id', 1)
-    if get_state() == 'vote':
+    if redis.get('state') == 'vote':
         # add the vote if it's not in already
-        proposers = get_people_so_far()
+        proposers = redis.lrange('input_ids',0,-1)
         if u_id not in proposers:
             add_client_input(u_id, u_choice)
             return jsonify(result = "your vote for choice " + \
