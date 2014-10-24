@@ -177,7 +177,8 @@ def get_input():
         # writ/e the result to the list of proposals
         print('people so far-',people_so_far)
         if not u_id in people_so_far:
-            add_client_input(u_id, u_instruct)
+            redis.rpush('inputs', u_instruct)
+            redis.rpush('input_ids', u_id)
             return jsonify(result="recieve input "+u_instruct+" thank you!")
 
         else:
@@ -194,7 +195,8 @@ def send_my_vote():
         # add the vote if it's not in already
         proposers = redis.lrange('input_ids',0,-1)
         if u_id not in proposers:
-            add_client_input(u_id, u_choice)
+            redis.rpush('inputs', u_choice)
+            redis.rpush('input_ids', u_id)
             return jsonify(result = "your vote for choice " + \
                            str(int(u_choice)+1)+" has been logged")
         else:
@@ -205,12 +207,6 @@ def send_my_vote():
 
 @app.route('/updates')
 def send_updates():
-    instructions = get_instructions()
-    leader = get_leader()
-    state = get_state()
-    # print the current info
-
-    # if we're in find, we need to send the instructions
     if state == 'find':
         reset_choices()
         print('updates- \n\tstate- '+state+'\n\ttotalp- '+str(get_total_players()))

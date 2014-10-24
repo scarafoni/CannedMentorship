@@ -26,8 +26,10 @@ flow
                 -accessed from find
                 -ends when all users input is in
                 -goes to find on fail, on suceed finish
+                sent- instructions, state
         -finish
                 -stuck once in this state
+                -sent- instructions, state
 switches
     find -> write
         -nothing
@@ -35,6 +37,7 @@ switches
         -run ai on inputs, send to choices
         -wipe inputs, input_ids
     vote -> find
+        -run vote, push to instructions
         -wipe inputs, input_ids
         -wipe choices
     find -> vote_finish
@@ -49,6 +52,7 @@ vars
     -input_ids- ids of the above
     -total_players
     -leader
+    -instructions- list of instructions
 
 
         
