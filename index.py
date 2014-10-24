@@ -3,17 +3,19 @@ import redis
 from collections import Counter
 import os
 import logging
+# import sys
+
 log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
+# log.setLevel(logging.ERROR)
 
 
 def count_votes(votes, vote_list):
-    # print('$$$$$$$$votes$$$$$',votes)
-    # print('$$$$$$$$vote_list$$$$$',vote_list)
-    i = votes.index(max(votes))
-    # print('$$$$$$$$i$$$$$',i)
+    print('count_votes',votes,vote_list)
+    counts = [0] * len(votes)
+    for choice in votes:
+        counts[int(choice)] += 1
+    i = counts.index(max(counts))
     most_popular = vote_list[i] 
-    # print('$$$$$$$$most popullat$$$$$',most_popular)
     return most_popular
 
 # placeholder for the ai program
@@ -101,6 +103,8 @@ def send_my_vote():
             # change state to find if all the votes are in
             if int(redis.llen('inputs')) == int(redis.get('total_players')):
                 # append the most populat instruction to the list
+                print('count votes',redis.lrange('inputs',0,-1),\
+                                    redis.lrange('choices',0,-1))
                 new_inst = count_votes(redis.lrange('inputs',0,-1),\
                                        redis.lrange('choices',0,-1))
 
