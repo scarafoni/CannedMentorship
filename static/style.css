@@ -1,0 +1,35 @@
+body {
+    height: 100%;
+}
+
+.info {
+    background-color: #d9edf7;
+}
+#content {
+    height: 90%;
+}
+
+#header {
+    padding: 10px !important;
+}
+
+#instructionText{
+    height: 500px;
+    width: 75%;
+}
+
+#voteTable {
+}
+
+#instructTable {
+    font-size: 18pt;
+}
+
+#instructionArea {
+    height: 500px;
+}
+
+#propFinishDiv {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
