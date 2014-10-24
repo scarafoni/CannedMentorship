@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, jsonify
 import redis
 from collections import Counter
 import os
+import logging
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 
 def count_votes(votes, vote_list):
