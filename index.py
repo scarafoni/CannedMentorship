@@ -135,8 +135,7 @@ def receive_finish():
 # collect votes to see if we're finished
 @app.route('/vote_finish')
 def vote_finish():
-    u_id = request.args.get('u_id', 0)
-    u_vote = request.args.get('u_vote', 1)
+    u_id = request.args.get('u_id', 0) u_vote = request.args.get('u_vote', 1)
     if redis.get('state') == 'vote_finish' and u_id not in redis.lrange('input_ids',0,-1):
         redis.rpush('inputs', u_vote)
         redis.rpush('input_ids', u_id)
@@ -206,6 +205,6 @@ def send_updates():
         return jsonify(state="err")
 
 if __name__ == '__main__':
-    app.debug = True
+    app.debug = False
     app.run()
 
