@@ -218,42 +218,14 @@ def send_updates():
                    leader=leader,\
                     state=state)
 
-    #check if all the writings are in
-        # if yes run the collate algorithm and switch to voting
+    #write state
     elif state == "write":
-        print('updates- \n\tstate- '+state+'\n\ttotalp- '+str(get_total_players()))
-        print('inputs so far- ',get_user_inputs())
-        tp = get_total_players()
-        suggesters_so_far = get_people_so_far()
-        suggestions_so_far = get_user_inputs()
-        print('user inputs',suggestions_so_far)
-        if len(suggesters_so_far) == tp:
-            # voting algorithm result is done here
-            do_ai(suggestions_so_far)
-            # wipe the people who have proposed
-            reset_people_so_far()
-            reset_user_inputs()
-            set_state('vote')
-        return jsonify(choices='',\
-                   instructions=instructions,\
+        return jsonify(instructions=instructions,\
                    leader=leader,\
                    state=state)
 
-    #check of all the votes are in
-        #if yes run the counting algorithm
+    # vote state
     elif state == "vote":
-        vote_list = get_choices()
-        votes = get_user_inputs()
-        print('vote list',vote_list)
-        tp = get_total_players()
-        voters_so_far = get_people_so_far()
-        # if everyone's checked in then tally the votes
-        if len(voters_so_far) == tp:
-            count_votes(votes,vote_list)
-            reset_people_so_far()
-            reset_choices()
-            reset_user_inputs()
-            set_state('find')
         return jsonify(instructions=instructions,\
                        choices=vote_list,\
                        leader=leader,\
@@ -267,29 +239,9 @@ def send_updates():
         
 
     elif state == 'vote_finish':
-        print('vote finish main',len(get_user_inputs()), get_total_players())
-        tp = get_total_players()
-        votes_so_far = get_user_inputs()
-        if len(votes_so_far) == tp:
-            reset_choices()
-            reset_user_inputs()
-            reset_people_so_far()
-            if max(set(votes_so_far), key=votes_so_far.count) == 'yes':
-                set_state('finish')
-                return jsonify(instructions=instructions,\
-                               leader=leader,\
-                               state=state)
-            else:
-                set_state('find')
-                return jsonify(instructions=instructions,\
-                               leader=leader,\
-                               state=state)
-        
-        else:
-            return jsonify(instructions=instructions,\
+        return jsonify(instructions=instructions,\
                            leader=leader,\
                            state=state)
-
     else:
         print('ERROR')
         return jsonify(state="err")
