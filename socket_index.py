@@ -101,10 +101,8 @@ def add_finish_vote(u_vote):
 
 # placeholder for the ai program
 # takes in a list of strings
-def do_ai(props):
-    with open('data/choices.txt', 'w') as f:
-        for prop in props:
-            f.write(prop+'\n')
+def run_ai(props):
+    return props
 
 app = Flask(__name__)
 
@@ -158,7 +156,7 @@ def get_inst_text():
             redis.rpush('input_ids', u_id)
 
             # change the state to vote if all the votes are in
-            if len(people_so_far) == int(redis.get('total_players')):
+            if int(redis.llen('inputs')) == int(redis.get('total_players')):
                 # run the ai, make the list of choices
                 choices  = run_ai(redis.lrange('inputs',0,-1))
                 for choice in choices:
@@ -263,6 +261,7 @@ def send_updates():
 
     # vote state
     elif state == "vote":
+        vote_list = '\n'.join(redis.lrange('choices',0,-1))
         return jsonify(instructions=instructions,\
                        choices=vote_list,\
                        leader=leader,\
