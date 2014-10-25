@@ -70,7 +70,7 @@ def logout():
         if int(redis.llen('inputs')) == int(redis.get('total_players')):
             # append the most populat instruction to the list
             # print('count votes',redis.lrange('inputs',0,-1),\
-                                redis.lrange('choices',0,-1))
+            #                    redis.lrange('choices',0,-1))
             new_inst = count_votes(redis.lrange('inputs',0,-1),\
                                    redis.lrange('choices',0,-1))
 

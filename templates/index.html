@@ -73,7 +73,14 @@
         });
     });
 
-
+    function activateBtn(btn) {
+        $('#'+btn).removeClass('btn-default');
+        $('#'+btn).addClass('btn-primary');
+    }
+    function deactivateBtn(btn) {
+        $('#'+btn).addClass('btn-default');
+        $('#'+btn).removeClass('btn-primary');
+    }
 
     //get updates
     setInterval(function() {
@@ -88,19 +95,29 @@
                 leader = false;
                 $('#amILead').html('You are not leader'); 
             }
-    
+            
+            //buttons only needs to be active in certain states
+            deactivateBtn('proposeInstruct');
+            deactivateBtn('finishButton');
+            deactivateBtn('sendProp');
+
             state = data.state
             curr_inst = '';
             console.log(state);
             switch(state) {
                 case 'find':
-                    if(leader)
+                    activateBtn('finishButton');
+                    if(leader) {
                         curr_inst = 'propose a new instruction!';
-                    else
+                        activateBtn('proposeInstruct');
+                    }
+                    else {
                         curr_inst = 'wait for the leader to propose a new instruction!';
+                    }
                     break;
                 case 'write':
                     curr_inst = 'write the instruction for this step';
+                    activateBtn('sendProp');
                     break;
                 case 'vote':
                     curr_inst = 'vote on which step you think is best';
