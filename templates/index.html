@@ -93,7 +93,7 @@
             }
             else {
                 leader = false;
-                $('#amILead').html('You are not leader'); 
+                $('#amILead').html('You are not leader (don\'t worry about what this means, it\'s not important'); 
             }
             
             //buttons only needs to be active in certain states
@@ -210,7 +210,7 @@
     <div id="header" class="jumbotron">
       <div class="container">
         <h1>Canned Mentorship</h1>
-        <p>Write a how to for the following: how to write a paper in microsoft word</p>
+        <p>Work with others to write a how-to instruction list for:</br> <strong> how to write a paper in microsoft word</strong></p>
       </div>
     </div>
     <div id="content" class="container">
@@ -219,7 +219,7 @@
           <table id="instructTable" class="table table-bordered">
             <thead>
               <tr class="info">
-                <th>Current Instructions</th>
+                <th>How-to list so far</th>
               </tr>
             </thead>
             <tbody >
@@ -235,16 +235,19 @@
           </div>
           <div id="propFinishDiv">
               <button id="proposeInstruct" type="button" class="btn btn-primary">
-              Propose Next Instruction
+              Propose Next Step
               </button>
               <button id="finishButton" type="button" class="btn btn-primary">
-                Think the Instructions are complete? Click here to finish
+                Think the how-to is complete? Click here to finish
               </button>
         </div>
         </div>       
         <div class="col-sm-4 sidebar-offcanvas">
-          <h3 id="amILead">stuff</h3>
-          <h4 id="currStep">stuff</h4>
+          <h5 id="amILead">stuff</h5>
+          <div class="alert alert-info" role="alert">
+            <h4><strong>What to do:</strong></h4>
+            <h4 id="currStep">stuff</h4>
+          </div>
           <div id="voteFinish" class="input-group">
           </div>
           <div class="input-group">
