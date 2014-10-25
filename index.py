@@ -10,7 +10,7 @@ log.setLevel(logging.ERROR)
 
 
 def count_votes(votes, vote_list):
-    print('count_votes',votes,vote_list)
+    # print('count_votes',votes,vote_list)
     counts = [0] * len(votes)
     for choice in votes:
         counts[int(choice)] += 1
@@ -69,7 +69,7 @@ def logout():
     elif redis.get('state') == 'vote':
         if int(redis.llen('inputs')) == int(redis.get('total_players')):
             # append the most populat instruction to the list
-            print('count votes',redis.lrange('inputs',0,-1),\
+            # print('count votes',redis.lrange('inputs',0,-1),\
                                 redis.lrange('choices',0,-1))
             new_inst = count_votes(redis.lrange('inputs',0,-1),\
                                    redis.lrange('choices',0,-1))
@@ -118,7 +118,7 @@ def get_id():
 def propose_instruct():
     u_id = request.args.get('u_id', 0)
     u_id = request.args.get('u_id', 0)
-    print('args',request.args)
+    # print('args',request.args)
     if redis.get('state') == 'find' and u_id == redis.get('leader'):
         redis.set('state', 'write')
         return jsonify(result="ok lets write an instruction!")
@@ -178,7 +178,7 @@ def send_my_vote():
                                        redis.lrange('choices',0,-1))
 
                 # print the instructions for the log
-                print('choices',redis.lrange('choices',0,-1))
+                # print('choices',redis.lrange('choices',0,-1))
                 redis.rpush('instructions',new_inst)
                 redis.delete('inputs')
                 redis.delete('input_ids')
