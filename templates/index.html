@@ -20,13 +20,13 @@
     });
     console.log(id);
 
-    $(window).unload(
-        function() {
+    $(window).on('beforeunload',function() {
             $.ajax({
                 url: '/leave', 
                 async: false,
                 u_id: String(id),
             })
+            return "things";
         });
 
     //send an instruction

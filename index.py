@@ -47,6 +47,7 @@ def logout():
     redis.decr('total_players')
     # remove the id from registered
     redis.lrem('registered_ids',u_id)
+    print('after removal ids',redis.lrange('registered_ids',0,-1))
     return jsonify(result='goodbye')
        
 
