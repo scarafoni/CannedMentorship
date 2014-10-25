@@ -33,7 +33,7 @@ def startup():
     redis.flushdb()
     redis.set('total_players', '0')
     redis.set('leader', '1')
-    resit.set('next_id',1)
+    redis.set('next_id',0)
     redis.set('state', 'find')
 
 
@@ -52,6 +52,46 @@ def logout():
     redis.lrem('registered_ids',u_id)
     print('after removal ids',redis.lrange('registered_ids',0,-1))
     '''
+
+    # change states as needed
+    if redis.get('state') == 'write':
+        # change the state to vote if all the votes are in
+        if int(redis.llen('inputs')) == int(redis.get('total_players')):
+            # run the ai, make the list of choices
+            choices  = run_ai(redis.lrange('inputs',0,-1))
+            for choice in choices:
+                redis.lpush('choices',choice)
+            # reset the inputs and input_ids
+            redis.delete('inputs')
+            redis.delete('input_ids')
+            redis.set('state', 'vote')
+
+    elif redis.get('state') == 'vote':
+        if int(redis.llen('inputs')) == int(redis.get('total_players')):
+            # append the most populat instruction to the list
+            print('count votes',redis.lrange('inputs',0,-1),\
+                                redis.lrange('choices',0,-1))
+            new_inst = count_votes(redis.lrange('inputs',0,-1),\
+                                   redis.lrange('choices',0,-1))
+
+            # print the instructions for the log
+            print('choices',redis.lrange('choices',0,-1))
+            redis.rpush('instructions',new_inst)
+            redis.delete('inputs')
+            redis.delete('input_ids')
+            redis.delete('choices')
+            redis.set('state','find')
+
+    elif redis.get('state') == 'vote_finish':
+        if redis.llen('input_ids') == int(redis.get('total_players')):
+            # tally the votes
+            votes = redis.lrange('inputs',0,-1)
+            counter = Counter(votes)
+            winner = counter.most_common()[0][0]
+            redis.set('state','find' if winner == 'no' else 'finish')
+            redis.delete('inputs')
+            redis.delete('input_ids')
+        
     return jsonify(result='goodbye')
        
 
@@ -243,6 +283,6 @@ def send_updates():
         return jsonify(state="err")
 
 if __name__ == '__main__':
-    app.debug = False
+    app.debug = True
     app.run()
 
