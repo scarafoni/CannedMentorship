@@ -6,7 +6,7 @@ import logging
 # import sys
 
 log = logging.getLogger('werkzeug')
-# log.setLevel(logging.ERROR)
+log.setLevel(logging.ERROR)
 
 
 def count_votes(votes, vote_list):
@@ -42,12 +42,26 @@ def index():
 
 @app.route('/leave')
 def logout():
-    print('$$$$$$$$$$$$$$$$ it works $$$$$$$$$$$$$$$')
+    u_id = request.args.get('u_id',0)
+    print('id to remove',u_id)
+    redis.decr('total_players')
+    # remove the id from registered
+    redis.lrem('registered_ids',u_id)
+    return jsonify(result='goodbye')
+       
 
 @app.route('/get_id')
 def get_id():
     redis.incr('total_players')
-    return jsonify(result=redis.get('total_players'))
+    ids = redis.lrange('registered_ids',0,-1)
+    print('$$$$$$$$',ids)
+    for i in range(0,int(redis.get('total_players'))+1):
+       if str(i) not in ids:
+           print('registering at- ',i)
+           redis.rpush('registered_ids',i) 
+           print('new registered- ',redis.lrange('registered_ids',0,-1))
+           return jsonify(result=str(i))
+    return jsonify(result="id make error")
 
 
 @app.route('/propose_instruct')
@@ -178,6 +192,7 @@ def send_updates():
     print('total players',redis.get('total_players'))
     print('inputs', redis.lrange('inputs',0,-1))
     print('input_ids,',redis.lrange('input_ids',0,-1))
+    print('registered ids',redis.lrange('registered_ids',0,-1))
     '''
 
     if state == 'find':

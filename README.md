@@ -10,6 +10,15 @@ Dependencies
 
 flow
 ========
+  -login
+    -increment totaly players
+    -for i form 0 to tp
+        assign if i not in ids
+    -register in id list
+  
+  -logout
+    decrement tp
+    remove id from list
         -find
                -starting state
                -leader can propose instruct, then goes to write
@@ -54,6 +63,8 @@ switches
         -delete input, input_ids
         
 vars
+    -registered_ids
+        -ids in use
     -choices- choices to vote for
     -state
     -inputs- input so far
