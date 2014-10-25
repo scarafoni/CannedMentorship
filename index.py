@@ -33,6 +33,7 @@ def startup():
     redis.flushdb()
     redis.set('total_players', '0')
     redis.set('leader', '1')
+    resit.set('next_id',1)
     redis.set('state', 'find')
 
 
@@ -42,11 +43,11 @@ def index():
 
 @app.route('/leave')
 def logout():
-    print('args',request.args)
+    redis.decr('total_players')
+
+    '''
     u_id = request.args.get('u_id',0)
     print('id to remove',u_id)
-    redis.decr('total_players')
-    '''
     # remove the id from registered
     redis.lrem('registered_ids',u_id)
     print('after removal ids',redis.lrange('registered_ids',0,-1))
@@ -57,6 +58,8 @@ def logout():
 @app.route('/get_id')
 def get_id():
     redis.incr('total_players')
+    redis.incr('next_id')
+    '''
     ids = redis.lrange('registered_ids',0,-1)
     print('$$$$$$$$',ids)
     for i in range(1,int(redis.get('total_players'))+1):
@@ -65,6 +68,9 @@ def get_id():
            redis.rpush('registered_ids',i) 
            print('new registered- ',redis.lrange('registered_ids',0,-1))
            return jsonify(result=str(i))
+    '''
+    i = redis.get('next_id')
+    return jsonify(result=i)
     return jsonify(result="id make error")
 
 
