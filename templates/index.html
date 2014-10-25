@@ -24,6 +24,7 @@
         function() {
             $.ajax({
                 url: '/leave', 
+                async: false,
                 u_id: String(id),
             })
         });
