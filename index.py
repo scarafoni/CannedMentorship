@@ -42,12 +42,15 @@ def index():
 
 @app.route('/leave')
 def logout():
+    print('args',request.args)
     u_id = request.args.get('u_id',0)
     print('id to remove',u_id)
     redis.decr('total_players')
+    '''
     # remove the id from registered
     redis.lrem('registered_ids',u_id)
     print('after removal ids',redis.lrange('registered_ids',0,-1))
+    '''
     return jsonify(result='goodbye')
        
 
@@ -56,7 +59,7 @@ def get_id():
     redis.incr('total_players')
     ids = redis.lrange('registered_ids',0,-1)
     print('$$$$$$$$',ids)
-    for i in range(0,int(redis.get('total_players'))+1):
+    for i in range(1,int(redis.get('total_players'))+1):
        if str(i) not in ids:
            print('registering at- ',i)
            redis.rpush('registered_ids',i) 
@@ -68,6 +71,8 @@ def get_id():
 @app.route('/propose_instruct')
 def propose_instruct():
     u_id = request.args.get('u_id', 0)
+    u_id = request.args.get('u_id', 0)
+    print('args',request.args)
     if redis.get('state') == 'find' and u_id == redis.get('leader'):
         redis.set('state', 'write')
         return jsonify(result="ok lets write an instruction!")

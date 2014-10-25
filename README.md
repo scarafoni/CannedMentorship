@@ -63,6 +63,7 @@ switches
         -delete input, input_ids
         
 vars
+    -next-id: the next available id
     -registered_ids
         -ids in use
     -choices- choices to vote for
