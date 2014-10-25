@@ -40,6 +40,9 @@ def startup():
 def index():
     return render_template('index.html')
 
+@app.route('/leave')
+def logout():
+    print('$$$$$$$$$$$$$$$$ it works $$$$$$$$$$$$$$$')
 
 @app.route('/get_id')
 def get_id():
@@ -213,6 +216,6 @@ def send_updates():
         return jsonify(state="err")
 
 if __name__ == '__main__':
+    app.debug = False
     app.run()
-    # app.debug = False
 

@@ -20,6 +20,15 @@
     });
     console.log(id);
 
+    $(window).unload(
+        function() {
+            $.ajax({
+                url: '/leave', 
+                //type: 'POST',
+                async: false,
+            })
+        });
+
     //send an instruction
     $(function() {
       $('#sendProp').bind('click', function() {
