@@ -1,0 +1,58 @@
+concern over instructions, clutter with "you are not leader"
+when one person wants to finish, not sure what to say
+
+text
+
+test1 peanut butter
+vote1:
+    grow wheat
+    get peanut butter, bread, and a knife
+
+vote2
+   lather bread with butter of peanut
+   spread the peanut butter on the knife 
+vote3
+   put the next slice of bread on top
+   discard of unwanted pieces
+
+test2: microsof word document
+obs- 3 not enough
+
+vote1:
+    format text
+    open microsoft word
+    open application
+
+vote2
+    write your essay
+    write name
+    ensure proper keyboard functionality
+
+bug- corresponding to which to vote
+vote3
+    format text
+    make sure to save your work
+    write conclusion
+
+test3
+task- msword document
+vote1
+    open microsoft word
+    open microsoft word page
+vote2
+    write the title in bold
+    type in the content that you want
+vote3
+    write the rest of the essaya
+    write the first paragraph
+vote4
+    write first paragraph
+    write rest of paragraphs as needed
+vote5
+    write the rest of the paper with a conclusion
+    save teh paper
+vote6
+    close the document
+    make sure to save work
+vote7
+    
