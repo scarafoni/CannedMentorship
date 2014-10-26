@@ -1,5 +1,7 @@
 concern over instructions, clutter with "you are not leader"
 when one person wants to finish, not sure what to say
+longer instruction typically chosen
+don't have issues with instruction points, people generally just adjust to document
 
 text
 
@@ -54,5 +56,26 @@ vote5
 vote6
     close the document
     make sure to save work
-vote7
     
+test4
+    msword
+vote1
+    open up microsoft word
+    open up microsoft word document
+    by enterint into microsofty word and begin to write a paper
+vote2
+    set the font, etc to your desired configuration
+    name the document
+    open a blank document
+vote3
+    set the font, etc to your desired configuration
+    set the font, spacing etc.. of the document
+    begin writign the document
+vote4
+    write the document (the actual content varies based on the nature of the paper)
+    write the document and save
+    write down teh appropriate content taht you want to input, including beginning and conclusion
+vote5
+   save the document so you don't lose work
+   save document
+   save the document in your local folder
