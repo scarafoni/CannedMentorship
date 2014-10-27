@@ -1,3 +1,4 @@
 Flask==0.10.1
 redis==2.10.3
 gunicorn==0.17.2
+scipy==0.13.3

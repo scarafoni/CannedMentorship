@@ -3,6 +3,7 @@ import redis
 from collections import Counter
 import os
 import logging
+import sort_answers
 # import sys
 
 log = logging.getLogger('werkzeug')
@@ -20,7 +21,7 @@ def count_votes(votes, vote_list):
 
 # placeholder for the ai program
 def run_ai(props):
-    return props
+    return sort_answers.filter_inputs(props)
 
 app = Flask(__name__)
 # redis = Redis()
