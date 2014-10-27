@@ -81,3 +81,24 @@ vars
         
                 
         
+AI part
+    -helper functions
+        -preprocess
+            -lower case
+            -punctuation
+            -to dict
+        -return tokendict
+        
+    -feature extraction
+      -tfidf   
+        -uses tokenize
+        *idea*
+        -use another corpus to augment and remove after 
+        
+        
+    -clustering
+        -hac
+            -default clustering: takes data, uses hac w/ dist = eucledian
+            *below not implemented*
+            -distance=something with semantic distance
+            -hybrid bow/ngrams 

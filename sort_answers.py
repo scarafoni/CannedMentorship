@@ -23,7 +23,7 @@ def tokenize(text):
 
 
 # lower case, tokenize, stem, put into a feature matrix
-def preprocess(inputs, extraction_method='tfidf'):
+def preprocess(inputs):
     token_dict = {}
     # lower case sentences, remove punctuation
     i = 1
@@ -33,8 +33,13 @@ def preprocess(inputs, extraction_method='tfidf'):
         token_dict['input '+str(i)] = no_punctuation
         i += 1
 
+    return token_dict
 
-    #create the feature matrix (tf-idf
+def feature_extraction(inputs,extraction_method="tfidf"):
+    # preprocess- no punctuation, all lowercase
+    token_dict = preprocess(inputs=inputs)
+    print('td',token_dict)
+    #create the feature matrix
     if extraction_method == 'tfidf':
         # tokenize
         tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
@@ -44,9 +49,9 @@ def preprocess(inputs, extraction_method='tfidf'):
 
 
 # hierarchical agglomerative classification algorithm
-def hac(f_mat, dist_func='custom', thresh=0.5):
+def hac(f_mat, dist_func='default', thresh=0.5):
     distances = []
-    if dist_func == 'custom':
+    if dist_func == 'default':
         return fclusterdata(X=f_mat.toarray(),t=thresh)
     else:
         distances = dist_func(f_mat)
@@ -60,9 +65,9 @@ if __name__== '__main__':
                'get two Slices. of bread.',\
                'get a knife.'\
                ]
-    f_mat1 = preprocess(inputs1)
-    print(f_mat1.toarray())
-    groups = hac(f_mat=f_mat1)
+    fmat1 = feature_extraction(inputs=inputs1)
+    print(fmat1.toarray())
+    groups = hac(f_mat=fmat1)
     print(groups)
     
               
