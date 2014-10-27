@@ -3,3 +3,4 @@ redis==2.10.3
 gunicorn==0.17.2
 numpy==1.7.0
 scipy==0.11.0
+scklearn==0.13.1
