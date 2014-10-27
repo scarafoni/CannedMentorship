@@ -1,30 +1,43 @@
 from numpy import ndarray
 from scipy.cluster.hierarchy import fclusterdata, fcluster, linkage
 from sklearn.feature_extraction.text import TfidfVectorizer
-from nltk import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem.porter import *
+import nltk
+from nltk.stem.porter import PorterStemmer
 import string
 
-# tokenize the text for processing
-# this preprocessing inspired by duke university
-def preprocess(input):
-    # tokenize
-    lowers = text.lower()
-    no_punc = lowers.translate(None, string.punctuation)
-    tokens = word_tokenize(no_punc)
-    # remove stop words
-    filtered = [x for x in tokens if x not in stopwords.words('english')]
-    # stem word
+
+# tokenization method from duke university
+def stem_tokens(tokens, stemmer):
+    stemmer = PorterStemmer()
     stemmed = []
-    for x in filtered:
-        stemmed.append(PorterStemmer.stem(x))
+    for item in tokens:
+        stemmed.append(stemmer.stem(item))
     return stemmed
 
-#tfidf in sklearn
-def sk_tfidf(tokens):
+def tokenize(text):
+    tokens = nltk.word_tokenize(text)
+    stems = stem_tokens(tokens, stemmer)
+    return stems
+
+
+
+# lower case, tokenize, stem, put into a feature matrix
+def preprocess(inputs, extraction_method='tfidf'):
+    token_dict = {}
+    # lower case sentences, remove punctuation
+    for sentence in sentences:
+        lowers = sentence.lower()
+        no_punctuation = lowers.translate(None, string.punctuation)
+        token_dict[file] = no_punctuation
+
+    # tokenize
     tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
 
+    #create the feature matrix (tf-idf
+    if extraction_method == 'tfidf':
+        return tfidf.fit_transform(token_dict.values())
+
+    return "error"
 
 
 # hierarchical agglomerative classification algorithm
