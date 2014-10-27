@@ -7,6 +7,9 @@ Dependencies
 ============
     -flask 0.10.0
     -redis, redis server
+    -nltk
+    -scipy
+    scikit-learn
 
 flow
 ========
