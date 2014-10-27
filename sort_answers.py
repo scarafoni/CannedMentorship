@@ -1,7 +1,6 @@
 from numpy import ndarray
 from scipy.cluster.hierarchy import fclusterdata, fcluster, linkage
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.cluster import AgglomerativeClustering
 import nltk
 from nltk.stem.porter import PorterStemmer
 import string
