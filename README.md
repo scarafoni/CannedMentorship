@@ -94,6 +94,7 @@ AI part
         -uses tokenize
         *idea*
         -use another corpus to augment and remove after 
+        -hybrid bow/ngrams 
         
         
     -clustering
@@ -101,4 +102,5 @@ AI part
             -default clustering: takes data, uses hac w/ dist = eucledian
             *below not implemented*
             -distance=something with semantic distance
-            -hybrid bow/ngrams 
+        -affinity propagation
+            -scikitlearn

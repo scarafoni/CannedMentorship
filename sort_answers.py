@@ -1,6 +1,7 @@
 from numpy import ndarray
 from scipy.cluster.hierarchy import fclusterdata, fcluster, linkage
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.cluster import AgglomerativeClustering
 import nltk
 from nltk.stem.porter import PorterStemmer
 import string
@@ -57,6 +58,24 @@ def hac(f_mat, dist_func='default', thresh=0.5):
         distances = dist_func(f_mat)
     return fcluster(linkage(distances,thresh)) 
 
+def filter_inputs(inputs):
+    feature_mat = feature_extraction(inputs=inputs1)
+    groupings = hac(f_mat=feature_mat)
+    print('groupings',groupings)
+
+    final = []
+    # run through the sentence groups
+    no_redundant = list(set(groupings))
+    for group in no_redundant:
+        maxlen = 0
+        max_in_group = ''
+        for group2,input in zip(groupings, inputs):
+            if group == group2 and len(input) > maxlen:
+                max_in_group = input
+        final.append(max_in_group)
+    return final
+                
+
 if __name__== '__main__':
     inputs1 = [\
                'Spread the peanut butter.',\
@@ -65,9 +84,12 @@ if __name__== '__main__':
                'get two Slices. of bread.',\
                'get a knife.'\
                ]
+    '''
     fmat1 = feature_extraction(inputs=inputs1)
     print(fmat1.toarray())
     groups = hac(f_mat=fmat1)
     print(groups)
+    '''
+    print(filter_inputs(inputs1))
     
               
