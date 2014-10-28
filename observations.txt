@@ -120,3 +120,50 @@ vote6
     save the file by pressing ctrl+s (or command+s if you're on a mac)
     save your work
      
+task- how to hashtable java
+
+vote1
+    turn on computer
+    install java
+    open java
+    open terminal
+    make new class
+
+vote2
+    add a main method
+    make an array instance variable to hold table data
+    get your list of data ready in a file
+    create a constructor
+    give it an array to store values
+vote3
+    give it an array to store values
+    make a class for the hashtable
+    make sure the code compiles
+    chose a modulo number
+vote4
+    give it an array to store values
+    add a method for converting some data into some value
+    give it an array instance variable to hold data
+    import java.util.hashtable
+    add an array instance variable
+vote5
+    create a hashing function to store data
+    write a constructor
+    create a hashtag function to store data
+    add hashvalue method
+    make a constructor
+    create another array for keys
+obs- last one is not right, and the crowd realized it!
+vote6
+    create a retrieval method using the hashing function
+    make a method that uses the hashing function to determine where to place teh value into the array variable
+    add methods for looking up and inserting data into the array
+    do everything else
+    implement the standard hashtable methods
+
+
+observations from users:
+    submit answer should be erased
+    alert method annoying, hard to read
+    capitalization inconsistent
+    alert slide down bootstrap
