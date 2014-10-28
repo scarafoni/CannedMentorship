@@ -156,7 +156,7 @@ def send_my_inst():
                 redis.delete('input_ids')
                 redis.set('state', 'vote')
 
-            return jsonify(result="recieve input "+u_instruct+" thank you!")
+            return jsonify(result="recieve input, \""+u_instruct+"\" thank you!")
 
         else:
             return jsonify(result="you have already submitted an instruction")
@@ -168,6 +168,8 @@ def send_my_inst():
 @app.route('/send_my_vote')
 def send_my_vote():
     u_choice = request.args.get('u_choice', 0)
+    choice_text = redis.lindex('choices',int(u_choice))
+    print('chocie text',choice_text)
     u_id = request.args.get('u_id', 1)
     if redis.get('state') == 'vote':
         # add the vote if it's not in already
@@ -192,8 +194,8 @@ def send_my_vote():
                 redis.delete('choices')
                 redis.set('state','find')
                 
-            return jsonify(result = "your vote for choice " + \
-                           str(int(u_choice)+1)+" has been logged")
+            return jsonify(result = "your vote for choice \"" + choice_text
+                           +"\" has been logged")
         else:
             return jsonify(result="you cannot vote twice")
     else:
