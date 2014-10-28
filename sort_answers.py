@@ -58,7 +58,7 @@ def hac(f_mat, dist_func='default', thresh=0.5):
     return fcluster(linkage(distances,thresh)) 
 
 def filter_inputs(inputs):
-    feature_mat = feature_extraction(inputs=inputs1)
+    feature_mat = feature_extraction(inputs=inputs)
     groupings = hac(f_mat=feature_mat)
     print('groupings',groupings)
 
@@ -83,12 +83,17 @@ if __name__== '__main__':
                'get two Slices. of bread.',\
                'get a knife.'\
                ]
+    inputs2 = [\
+                'spread the peanut butter',\
+                'spread the peanut butter',\
+                'get a knife.'\
+              ]
     '''
     fmat1 = feature_extraction(inputs=inputs1)
     print(fmat1.toarray())
     groups = hac(f_mat=fmat1)
     print(groups)
     '''
-    print(filter_inputs(inputs1))
+    print(filter_inputs(inputs2))
     
               

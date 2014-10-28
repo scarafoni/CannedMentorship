@@ -21,6 +21,8 @@ def count_votes(votes, vote_list):
 
 # placeholder for the ai program
 def run_ai(props):
+    x = sort_answers.filter_inputs(props)
+    print('after ai',x)
     return sort_answers.filter_inputs(props)
 
 app = Flask(__name__)
@@ -61,7 +63,7 @@ def logout():
             # run the ai, make the list of choices
             choices  = run_ai(redis.lrange('inputs',0,-1))
             for choice in choices:
-                redis.lpush('choices',choice)
+                redis.rpush('choices',choice)
             # reset the inputs and input_ids
             redis.delete('inputs')
             redis.delete('input_ids')
@@ -136,15 +138,16 @@ def send_my_inst():
         # the the current instruction to far
         people_so_far = redis.lrange('input_ids', 0, -1)
         if u_id not in people_so_far:
-            redis.lpush('inputs', u_instruct)
-            redis.lpush('input_ids', u_id)
+            redis.rpush('inputs', u_instruct)
+            redis.rpush('input_ids', u_id)
 
             # change the state to vote if all the votes are in
             if int(redis.llen('inputs')) == int(redis.get('total_players')):
                 # run the ai, make the list of choices
                 choices  = run_ai(redis.lrange('inputs',0,-1))
                 for choice in choices:
-                    redis.lpush('choices',choice)
+                    redis.rpush('choices',choice)
+                print('choices',redis.lrange('choices',0,-1))
                 # reset the inputs and input_ids
                 redis.delete('inputs')
                 redis.delete('input_ids')
