@@ -1,3 +1,5 @@
+import pkg_resources
+# pkg_resources.require("numpy==1.7.0")
 from numpy import ndarray
 from scipy.cluster.hierarchy import fclusterdata, fcluster, linkage
 from sklearn.feature_extraction.text import TfidfVectorizer
