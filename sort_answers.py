@@ -32,7 +32,6 @@ def preprocess(inputs):
         no_punctuation = lowers.translate(None, string.punctuation)
         token_dict['input '+str(i)] = no_punctuation
         i += 1
-
     return token_dict
 
 def feature_extraction(inputs,extraction_method="tfidf"):
@@ -42,9 +41,12 @@ def feature_extraction(inputs,extraction_method="tfidf"):
     #create the feature matrix
     if extraction_method == 'tfidf':
         # tokenize
+        print('em')
         tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
-        return tfidf.fit_transform(token_dict.values())
-
+        print('after tfidf')
+        x = tfidf.fit_transform(token_dict.values())
+        print('after tfidf fit')
+        return x
     return "error"
 
 
