@@ -79,3 +79,44 @@ vote5
    save the document so you don't lose work
    save document
    save the document in your local folder
+
+
+
+test- ms word
+-list group for button list
+vote1
+    turn on your computer
+    open word
+    open word
+    open ms word
+    turn on computer
+vote2
+    open ms word
+    open word
+    open word
+    delete system32
+    wait for windows to boot
+vote3
+    open ms word
+    delete system32
+    start microsoft.exe
+    open ms word
+    log in
+vote4
+    double click ms word icon
+    open microsoft word
+    open word
+    open a new document
+vote5
+    click new document
+    write paper
+    type!
+    adjust formatting for your paper (font, paragraph, etc...)
+    use shift and type first word
+vote6
+   make sure to save your work by clicking the save button
+    error check
+    click on the file and save when you're done typing
+    save the file by pressing ctrl+s (or command+s if you're on a mac)
+    save your work
+     
