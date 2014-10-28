@@ -18,9 +18,13 @@ def stem_tokens(tokens, stemmer):
 
 #tokenize and stem the text
 def tokenize(text):
+    print('tokenize')
     tokens = nltk.word_tokenize(text)
+    print('after word tokenize')
     stemmer = PorterStemmer()
+    print('new stemmer')
     stems = stem_tokens(tokens, stemmer)
+    print('after stemmer')
     return stems
 
 
