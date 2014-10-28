@@ -5,6 +5,7 @@ from scipy.cluster.hierarchy import fclusterdata, fcluster, linkage
 from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
 from nltk.stem.porter import PorterStemmer
+nltk.data.path.append('nltk_data/')
 import string
 
 
