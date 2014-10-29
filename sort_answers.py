@@ -3,6 +3,7 @@ import pkg_resources
 from numpy import ndarray
 from scipy.cluster.hierarchy import fclusterdata, fcluster, linkage
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.cluster import DBSCAN, AffinityPropagation
 import nltk
 nltk.data.path.append('nltk_data/')
 from nltk.stem.porter import PorterStemmer
@@ -61,6 +62,14 @@ def hac(f_mat, dist_func='default', thresh=0.5):
         # print('distances',distances)
     return fcluster(linkage(distances,thresh)) 
 
+def dbscan(f_mat,thresh=0.7):
+    groups = DBSCAN(eps=thresh,min_samples=1).fit_predict(fmat1.toarray())
+    return groups
+
+def ap(fmat):
+    groups = AffinityPropagation().fit_predict(fmat1.toarray())
+    return groups
+
 def filter_inputs(inputs):
     feature_mat = feature_extraction(inputs=inputs)
     # print('feature matrix',feature_mat)
@@ -94,12 +103,12 @@ if __name__== '__main__':
                 'spread the peanut butter',\
                 'get a knife.'\
               ]
-    '''
     fmat1 = feature_extraction(inputs=inputs1)
     print(fmat1.toarray())
-    groups = hac(f_mat=fmat1)
-    print(groups)
-    '''
-    print(filter_inputs(inputs2))
+    # groups = hac(f_mat=fmat1)
+    # groups = DBSCAN(eps=0.7,min_samples=1).fit_predict(fmat1.toarray())
+    groups = AffinityPropagation().fit_predict(fmat1.toarray())
+    print('groups',groups)
+    # print(filter_inputs(inputs2))
     
               
