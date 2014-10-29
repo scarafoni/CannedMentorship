@@ -21,7 +21,7 @@ def count_votes(votes, vote_list):
 
 # placeholder for the ai program
 def run_ai(props):
-    print('choices raw',props)
+    print('raw votes',props)
     return sort_answers.filter_inputs(props)
 
 app = Flask(__name__)
@@ -90,6 +90,9 @@ def logout():
             counter = Counter(votes)
             winner = counter.most_common()[0][0]
             redis.set('state','find' if winner == 'no' else 'finish')
+            # print out the final instructions
+            if redis.get('state') == 'finish':
+                print('final instructions',redis.lrange('instructions',0,-1))
             redis.delete('inputs')
             redis.delete('input_ids')
         
@@ -174,7 +177,6 @@ def send_my_vote():
 
             # change state to find if all the votes are in
             if int(redis.llen('inputs')) == int(redis.get('total_players')):
-                # append the most populat instruction to the list
                 # print('count votes',redis.lrange('inputs',0,-1),\
                                     #redis.lrange('choices',0,-1))
                 new_inst = count_votes(redis.lrange('inputs',0,-1),\

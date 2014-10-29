@@ -4,8 +4,8 @@ from numpy import ndarray
 from scipy.cluster.hierarchy import fclusterdata, fcluster, linkage
 from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
-from nltk.stem.porter import PorterStemmer
 nltk.data.path.append('nltk_data/')
+from nltk.stem.porter import PorterStemmer
 import string
 
 
@@ -76,6 +76,7 @@ def filter_inputs(inputs):
         for group2,input in zip(groupings, inputs):
             if group == group2 and len(input) > maxlen:
                 max_in_group = input
+                maxlen = len(input)
         final.append(max_in_group)
     return final
                 
