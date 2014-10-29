@@ -19,13 +19,9 @@ def stem_tokens(tokens, stemmer):
 
 #tokenize and stem the text
 def tokenize(text):
-    print('tokenize')
     tokens = nltk.word_tokenize(text)
-    print('after word tokenize')
     stemmer = PorterStemmer()
-    print('new stemmer')
     stems = stem_tokens(tokens, stemmer)
-    print('after stemmer')
     return stems
 
 
@@ -49,11 +45,8 @@ def feature_extraction(inputs,extraction_method="tfidf"):
     #create the feature matrix
     if extraction_method == 'tfidf':
         # tokenize
-        print('em')
         tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
-        print('after tfidf')
         x = tfidf.fit_transform(token_dict.values())
-        print('after tfidf fit')
         return x
     return "error"
 

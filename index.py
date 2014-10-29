@@ -21,8 +21,6 @@ def count_votes(votes, vote_list):
 
 # placeholder for the ai program
 def run_ai(props):
-    x = sort_answers.filter_inputs(props)
-    print('after ai',x)
     return sort_answers.filter_inputs(props)
 
 app = Flask(__name__)
@@ -78,7 +76,6 @@ def logout():
                                    redis.lrange('choices',0,-1))
 
             # print the instructions for the log
-            print('choices',redis.lrange('choices',0,-1))
             redis.rpush('instructions',new_inst)
             redis.delete('inputs')
             redis.delete('input_ids')
@@ -143,11 +140,12 @@ def send_my_inst():
 
             # change the state to vote if all the votes are in
             if int(redis.llen('inputs')) == int(redis.get('total_players')):
+                # print the inputs for logging
+                print('choices raw',redis.lrange('inputs',0,-1))
                 # run the ai, make the list of choices
                 choices  = run_ai(redis.lrange('inputs',0,-1))
                 for choice in choices:
                     redis.rpush('choices',choice)
-                print('choices',redis.lrange('choices',0,-1))
                 # reset the inputs and input_ids
                 redis.delete('inputs')
                 redis.delete('input_ids')
