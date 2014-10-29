@@ -28,25 +28,25 @@ def tokenize(text):
 
 # lower case, tokenize, stem, put into a feature matrix
 def preprocess(inputs):
-    token_dict = {}
+    tokens = []
     # lower case sentences, remove punctuation
     i = 1
     for input in inputs:
         lowers = input.lower()
         no_punctuation = lowers.translate(None, string.punctuation)
-        token_dict['input '+str(i)] = no_punctuation
+        tokens.append(no_punctuation)
         i += 1
-    return token_dict
+    return tokens
 
 def feature_extraction(inputs,extraction_method="tfidf"):
     # preprocess- no punctuation, all lowercase
-    token_dict = preprocess(inputs=inputs)
-    print('td',token_dict)
+    tokens = preprocess(inputs=inputs)
+    # print('td',tokens)
     #create the feature matrix
     if extraction_method == 'tfidf':
         # tokenize
         tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
-        x = tfidf.fit_transform(token_dict.values())
+        x = tfidf.fit_transform(tokens)
         return x
     return "error"
 
@@ -58,12 +58,14 @@ def hac(f_mat, dist_func='default', thresh=0.5):
         return fclusterdata(X=f_mat.toarray(),t=thresh)
     else:
         distances = dist_func(f_mat)
+        # print('distances',distances)
     return fcluster(linkage(distances,thresh)) 
 
 def filter_inputs(inputs):
     feature_mat = feature_extraction(inputs=inputs)
+    # print('feature matrix',feature_mat)
     groupings = hac(f_mat=feature_mat)
-    print('groupings',groupings)
+    # print('groupings',groupings)
 
     final = []
     # run through the sentence groups

@@ -36,6 +36,7 @@
           u_instruct: $('input[name="input"]').val(),
           u_id: String(id),
         }, function(data) {
+          $('#uInstruct').val('');
           alert(data.result);
           //$("#uInstruct").text(data.result);
         });
