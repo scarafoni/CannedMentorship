@@ -21,6 +21,7 @@ def count_votes(votes, vote_list):
 
 # placeholder for the ai program
 def run_ai(props):
+    print('choices raw',props)
     return sort_answers.filter_inputs(props)
 
 app = Flask(__name__)
@@ -141,7 +142,6 @@ def send_my_inst():
             # change the state to vote if all the votes are in
             if int(redis.llen('inputs')) == int(redis.get('total_players')):
                 # print the inputs for logging
-                print('choices raw',redis.lrange('inputs',0,-1))
                 # run the ai, make the list of choices
                 choices  = run_ai(redis.lrange('inputs',0,-1))
                 for choice in choices:
@@ -164,7 +164,6 @@ def send_my_inst():
 def send_my_vote():
     u_choice = request.args.get('u_choice', 0)
     choice_text = redis.lindex('choices',int(u_choice))
-    print('chocie text',choice_text)
     u_id = request.args.get('u_id', 1)
     if redis.get('state') == 'vote':
         # add the vote if it's not in already
@@ -176,8 +175,8 @@ def send_my_vote():
             # change state to find if all the votes are in
             if int(redis.llen('inputs')) == int(redis.get('total_players')):
                 # append the most populat instruction to the list
-                print('count votes',redis.lrange('inputs',0,-1),\
-                                    redis.lrange('choices',0,-1))
+                # print('count votes',redis.lrange('inputs',0,-1),\
+                                    #redis.lrange('choices',0,-1))
                 new_inst = count_votes(redis.lrange('inputs',0,-1),\
                                        redis.lrange('choices',0,-1))
 
@@ -228,6 +227,8 @@ def vote_finish():
             counter = Counter(votes)
             winner = counter.most_common()[0][0]
             redis.set('state','find' if winner == 'no' else 'finish')
+            if redis.get('state') == 'finish':
+                print('final instructions',redis.lrange('instructions',0,-1))
             redis.delete('inputs')
             redis.delete('input_ids')
 
