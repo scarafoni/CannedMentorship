@@ -195,4 +195,49 @@ vote2
 vote3
 ["take a left into the paint-tunnel (it's hard to miss, it's covered in layers of paint", 'Open the doors to Morey Hall and turn left', 'Proceed to walk in tunnel, turn right to Baush and Lamb tunnel. ', 'walk through morey hall until you reach the intersection between morey and lattimore'])
 
+vote4
+['take a left into the tunnel covered in paint', 'Turn left and go through the paint tunnel', 'go through the painted tunnel until you reach the intersection between B&L and Dewey', 'Continue to walk unitl you have reach Dewey Hall tunnel'])
 
+vote5
+['continue to the basement of hoyt and exit through the front door', 'Go through the doors to Hoyt and make a right', 'proceed to the first floor of hoyt', 'Make a right turn, walk out door. Head to computer lab.'])
+
+vote6
+['make a left and follow the sidewalk to the engineering quad', 'Open the doors to the outside and turn left', 'Walk straight. Walk towards Carlson area until you have reached the computer lab. ', 'pass by the road between engineering buildings'])
+
+vote7
+['walk on the direction to carlson until you reach the door that connects csb and carlson', 'go into the entry chamber between Carlson and the Computer science building', 'keep walking until you reach Carlson Library, then turn left to enter the Computer Studies Building', 'Head towards Carlson library. Walk through front entrance glass doors. '])
+
+vote8
+['ride the elevator to the 6th floor', 'Enter computer lab', 'Take the elevator to Floor 6 and the lab should be straight across from the elevators.', 'turn left and take the elevator in csb'])
+
+final
+['Turn left out of Starbucks to proceed toward the tunnels', 'Proceed to walk toward tunnels. Turn right to Morey Hall direction ', 'walk through morey hall until you reach the intersection between morey and lattimore', 'go through the painted tunnel until you reach the intersection between B&L and Dewey', 'Go through the doors to Hoyt and make a right', 'make a left and follow the sidewalk to the engineering quad', 'keep walking until you reach Carlson Library, then turn left to enter the Computer Studies Building', 'Take the elevator to Floor 6 and the lab should be straight across from the elevators.'])
+
+approval
+5,5,3
+
+task: making friends
+vote1
+['say hi to him/her', 'Tell your friend information about the extracurricular club. ', 'During the extracurricular activity, ask them about their other interests', 'Find out when the club meets.', 'say hello to them and try to start a few conversations about your shared interests (preferrably relating to the club)'])
+
+vote2
+['become parterner with him/her during the activity', 'have these conversations often (without forcing them) so you being to develop a relationship', 'Talk about your hobbies. ', 'learn about why they are in the club', 'Ask them thoughtful questions about some of their other interests that you want to know more about'])
+
+vote3
+['Discuss your likes/dislikes ', 'make small talk whenever you can without it being forced or awkward', 'Ask them about their other interests', 'find out more about them', 'develope conversations on subjects that both of us are familiar with'])
+
+vote4
+['invite him/her to dinner!', 'have regular conversations with them to establish a relationship', 'Discuss about your majors and plans after graduating from the University. ', 'Go to other events that you both want to go to'])
+
+vote5
+["Invite him or her to hang out (with a group is preferrable because then there's not as much pressure)", 'invite him/her to your house to play video games!', 'Event friend to other social events. ', "If you both still enjoy each other's company, invite them over for dinner", 'Invite them to dinner'])
+
+(attempt to finish but failed)
+
+final
+['Maintain the friendship by talking to them often and going to events together that you both like.', 'Continue going to other social events together and hanging out', 'Gentlemen. You are officially friends. Congratulations. ', 'friendship achieve!', 'at this point your friendship should be established, talk and spend time to continue to make it grow!'])
+
+approval
+2,5,4,5
+
+vote7
