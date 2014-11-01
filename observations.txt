@@ -1,4 +1,4 @@
-Ideas for participants
+http://canned-mentorship.herokuapp.com/Ideas for participants
 ======================
     -go to classes and ask
     -majors list
@@ -179,3 +179,20 @@ observations from users:
     alert method annoying, hard to read
     capitalization inconsistent
     alert slide down bootstrap
+
+question- getting to cslab from commons
+vote1
+['follow the tunnel  out of commons', 
+'Turn left out of Starbucks to proceed toward the tunnels', 
+'Go to tunnels. head towards baush and lamb direction '])
+
+vote2
+['take a right as soon as your enter rush rhees (at this intersection the walls are white)', 
+'Turn right before you get to the door to Douglass and proceed down the Wilson Commons-Academic Quad tunnel', 
+'Proceed to walk toward tunnels. Turn right to Morey Hall direction ', 
+'enter the first door and pass by the bridge to doglass'])
+
+vote3
+["take a left into the paint-tunnel (it's hard to miss, it's covered in layers of paint", 'Open the doors to Morey Hall and turn left', 'Proceed to walk in tunnel, turn right to Baush and Lamb tunnel. ', 'walk through morey hall until you reach the intersection between morey and lattimore'])
+
+
