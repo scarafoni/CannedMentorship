@@ -22,7 +22,7 @@ def count_votes(votes, vote_list):
 # placeholder for the ai program
 def run_ai(props):
     print('raw votes',props)
-    return sort_answers.filter_inputs(props)
+    return props # sort_answers.filter_inputs(props)
 
 app = Flask(__name__)
 # redis = Redis()
