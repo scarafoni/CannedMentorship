@@ -60,7 +60,7 @@ def hac(f_mat, dist_func='default', thresh=0.5):
     else:
         distances = dist_func(f_mat)
         # print('distances',distances)
-    return fcluster(linkage(distances,thresh)) 
+    return fcluster(linkage(distances,t=thresh)) 
 
 def dbscan(f_mat,thresh=0.7):
     groups = DBSCAN(eps=thresh,min_samples=1).fit_predict(fmat1.toarray())
