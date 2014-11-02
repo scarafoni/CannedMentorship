@@ -4,10 +4,14 @@ from numpy import ndarray
 from scipy.cluster.hierarchy import fclusterdata, fcluster, linkage
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import DBSCAN, AffinityPropagation
+from sklearn.metrics.pairwise.cosine_similarity
 import nltk
+from nltk.util import ngrams
 nltk.data.path.append('nltk_data/')
 from nltk.stem.porter import PorterStemmer
+from nltk.corpus import stopwords
 import string
+import word_similarity
 
 
 
@@ -38,6 +42,25 @@ def preprocess(inputs):
         tokens.append(no_punctuation)
         i += 1
     return tokens
+
+# calculate the distance matrix based on bow, 2-3 grams, semantics
+def kitchen_sink(sentences):
+    distances = []
+    tokens = preprocess(inputs=sentences)
+    tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english',ngram_range=(1,3))
+    tdif_feat = tfidf.fit_transform(tokens)
+    no_stops = [w for w in tokens if not w in stopwords.words('english')]
+    for i in range(len(sentences)):
+        for j in range (len(sentences)):
+            if i == j: 
+                continue
+            distance = 0.0
+            # bow, ngrams
+            lex_sim = cosine_similarity(tdif_feat[i],tdif_feat[j])
+            # semantic similarities
+            sem_sim = 1.0 - similarity(vec_semantic_sim(no_stops[i], no_stops[j]))
+            distances.append((lex_sim + sem_sim)/2.0)
+            
 
 def feature_extraction(inputs,extraction_method="tfidf"):
     # preprocess- no punctuation, all lowercase
