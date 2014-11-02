@@ -44,7 +44,7 @@ def preprocess(inputs):
     return tokens
 
 # calculate the distance matrix based on bow, 2-3 grams, semantics
-def kitchen_sink(sentences):
+def kitchen_sink(sentences,thresh=0.5):
     distances = []
     tokens = preprocess(inputs=sentences)
     tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english',ngram_range=(1,3))
@@ -60,6 +60,7 @@ def kitchen_sink(sentences):
             # semantic similarities
             sem_sim = 1.0 - similarity(vec_semantic_sim(no_stops[i], no_stops[j]))
             distances.append((lex_sim + sem_sim)/2.0)
+   return fcluster(linkage(distances,t=0.5))
             
 
 def feature_extraction(inputs,extraction_method="tfidf"):
