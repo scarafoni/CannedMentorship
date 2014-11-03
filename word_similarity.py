@@ -11,7 +11,7 @@ import sys
 def vec_semantic_sim(v1,v2):
     sim_acc = 0.0
     compares = 0 
-    for (w1, w2) in itertoos.product(v1, v2):
+    for (w1, w2) in it.product(v1, v2):
         sim_acc += similarity(w1,w2)
         compares += 1
     return sim_acc/ float(compares)

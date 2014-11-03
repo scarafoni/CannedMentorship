@@ -1,17 +1,18 @@
 import pkg_resources
 # pkg_resources.require("numpy==1.7.0")
 from numpy import ndarray
+import numpy
 from scipy.cluster.hierarchy import fclusterdata, fcluster, linkage
+from scipy.spatial.distance import pdist
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import DBSCAN, AffinityPropagation
-from sklearn.metrics.pairwise.cosine_similarity
 import nltk
 from nltk.util import ngrams
 nltk.data.path.append('nltk_data/')
 from nltk.stem.porter import PorterStemmer
 from nltk.corpus import stopwords
 import string
-import word_similarity
+from word_similarity import similarity, vec_semantic_sim
 
 
 
@@ -49,18 +50,27 @@ def kitchen_sink(sentences,thresh=0.5):
     tokens = preprocess(inputs=sentences)
     tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english',ngram_range=(1,3))
     tdif_feat = tfidf.fit_transform(tokens)
+    print('tdif feat',tdif_feat.toarray())
     no_stops = [w for w in tokens if not w in stopwords.words('english')]
     for i in range(len(sentences)):
-        for j in range (len(sentences)):
+        for j in range (i,len(sentences)):
             if i == j: 
                 continue
             distance = 0.0
             # bow, ngrams
-            lex_sim = cosine_similarity(tdif_feat[i],tdif_feat[j])
+            # numpy.concatenate((tdif_feat[i].toarray(), tdif_feat[j].toarray())))
+            # print('two to compare', numpy.concatenate((tdif_feat[i].toarray(), tdif_feat[j].toarray())))
+            lex_sim = float(pdist(numpy.concatenate((tdif_feat[i].toarray(), tdif_feat[j].toarray()))))
+            # print('lex sim', lex_sim)
             # semantic similarities
-            sem_sim = 1.0 - similarity(vec_semantic_sim(no_stops[i], no_stops[j]))
+            sem_sim = 1.0 - vec_semantic_sim(no_stops[i], no_stops[j])
+            # print('sem sim', sem_sim)
             distances.append((lex_sim + sem_sim)/2.0)
-   return fcluster(linkage(distances,t=0.5))
+            
+    print('distances',distances)
+    linkd = linkage(y=numpy.array(distances))
+    # print('linkd', linkd)
+    return fcluster(Z=linkd,t=0.5)
             
 
 def feature_extraction(inputs,extraction_method="tfidf"):
@@ -127,11 +137,12 @@ if __name__== '__main__':
                 'spread the peanut butter',\
                 'get a knife.'\
               ]
-    fmat1 = feature_extraction(inputs=inputs1)
-    print(fmat1.toarray())
+    # fmat1 = feature_extraction(inputs=inputs1)
+    # print(fmat1.toarray())
     # groups = hac(f_mat=fmat1)
     # groups = DBSCAN(eps=0.7,min_samples=1).fit_predict(fmat1.toarray())
-    groups = AffinityPropagation().fit_predict(fmat1.toarray())
+    # groups = AffinityPropagation().fit_predict(fmat1.toarray())
+    groups = kitchen_sink(inputs2)
     print('groups',groups)
     # print(filter_inputs(inputs2))
     
