@@ -29,4 +29,7 @@ final
 ratings: 4 3 2
 the users were trolls
 
+problems
+    -not specific enough for new people
+    -
 
