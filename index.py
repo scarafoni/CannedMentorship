@@ -102,6 +102,7 @@ def logout():
 @app.route('/get_id')
 def get_id():
     redis.incr('total_players')
+    print('logging',redis.get('total_players'))
     redis.incr('next_id')
     '''
     ids = redis.lrange('registered_ids',0,-1)
