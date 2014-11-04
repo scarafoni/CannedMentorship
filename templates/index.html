@@ -117,14 +117,16 @@
                     }
                     break;
                 case 'write':
-                    curr_inst = 'write the instruction for this step';
+                    curr_inst = 'write the instruction for this step, '+data.inputs+'/'+data.total_players+' have proposed so far';
                     activateBtn('sendProp');
                     break;
                 case 'vote':
-                    curr_inst = 'vote on which step you think is best';
+                    curr_inst = 'vote on which step you think is best, '+data.inputs+'/'+data.total_players+' have proposed so far';
+;
                     break;
                 case 'vote_finish':
-                    curr_inst = 'someone believes the instructions are finished, do you agree?';
+                    curr_inst = 'someone believes the instructions are finished, do you agree?, '+data.inputs+'/'+data.total_players+' have proposed so far';
+
                     break;
                 case 'finish':
                     curr_inst = 'the instructions are finished, thank you for your input!';
