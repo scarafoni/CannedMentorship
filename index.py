@@ -242,6 +242,7 @@ def vote_finish():
 @app.route('/updates')
 def send_updates():
     #all updates require these
+    u_id = request.args.get('u_id',0)
     state = redis.get('state')
     instructions = redis.lrange('instructions',0,-1)
     leader  = redis.get('leader')
@@ -262,7 +263,10 @@ def send_updates():
 
     #write state
     elif state == "write":
+        got_my_input = u_id in redis.lrange('input_ids',0,-1)
+        print('got_my_input',got_my_input)
         return jsonify(inputs=str(len(redis.lrange('inputs',0,-1))),\
+                   got_my_input=got_my_input,\
                    total_players=redis.get('total_players'),\
                    instructions=instructions,\
                    leader=leader,\
@@ -272,7 +276,9 @@ def send_updates():
     elif state == "vote":
         # vote_list = '\n'.join(redis.lrange('choices',0,-1))
         vote_list = (redis.lrange('choices',0,-1))
+        got_my_input = u_id in redis.lrange('input_ids',0,-1)
         return jsonify(inputs=str(len(redis.lrange('inputs',0,-1))),\
+                       got_my_input=got_my_input,\
                        total_players=redis.get('total_players'),\
                        instructions=instructions,\
                        choices=vote_list,\
@@ -287,7 +293,9 @@ def send_updates():
         
 
     elif state == 'vote_finish':
+        got_my_input = u_id in redis.lrange('input_ids',0,-1)
         return jsonify(inputs=str(len(redis.lrange('inputs',0,-1))),\
+                       got_my_input=got_my_input,\
                        total_players=redis.get('total_players'),\
                        instructions=instructions,\
                        leader=leader,\
