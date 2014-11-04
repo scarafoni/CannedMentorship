@@ -262,7 +262,9 @@ def send_updates():
 
     #write state
     elif state == "write":
-        return jsonify(instructions=instructions,\
+        return jsonify(inputs=str(len(redis.lrange('inputs',0,-1)))\
+                   total_players=redis.get('total_players',0,-1)\
+                   instructions=instructions,\
                    leader=leader,\
                    state=state)
 
@@ -270,7 +272,9 @@ def send_updates():
     elif state == "vote":
         # vote_list = '\n'.join(redis.lrange('choices',0,-1))
         vote_list = (redis.lrange('choices',0,-1))
-        return jsonify(instructions=instructions,\
+        return jsonify(inputs=str(len(redis.lrange('inputs',0,-1)))\
+                       total_players=redis.get('total_players',0,-1)\
+                       instructions=instructions,\
                        choices=vote_list,\
                        leader=leader,\
                        state=state)
@@ -283,9 +287,11 @@ def send_updates():
         
 
     elif state == 'vote_finish':
-        return jsonify(instructions=instructions,\
-                           leader=leader,\
-                           state=state)
+        return jsonify(inputs=str(len(redis.lrange('inputs',0,-1)))\
+                       total_players=redis.get('total_players',0,-1)\
+                       instructions=instructions,\
+                       leader=leader,\
+                       state=state)
     else:
         print('ERROR')
         return jsonify(state="err")
