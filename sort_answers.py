@@ -83,14 +83,34 @@ def feature_extraction(inputs,extraction_method="tfidf"):
         tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
         x = tfidf.fit_transform(tokens)
         return x
+    elif extraction_method == 'tfidf-ngrams':
+        # tokenize
+        tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english',\
+                                ngram_range=(1,3))
+        x = tfidf.fit_transform(tokens)
+        return x
     return "error"
 
 
 # hierarchical agglomerative classification algorithm
-def hac(f_mat, dist_func='default', thresh=0.5):
+def hac(sentences, dist_func='default', thresh=0.5):
     distances = []
+
+    # bag of words and n-grams
+    # bag of words, n-grams, wn
+    # wordnet
+    #conceptnet
+    # affinity propagation
+    # dbscan
+
+    #bag of words, euclidean
     if dist_func == 'default':
+        f_mat = feature_extraction(inputs=sentences,\
+                                   extraction_methods='tfidf'
         return fclusterdata(X=f_mat.toarray(),t=thresh)
+    elif dist_func == 'ks':
+        # in this case the f_mat is just the sentences
+        distances = kitched_sink(f_mat
     else:
         distances = dist_func(f_mat)
         # print('distances',distances)
