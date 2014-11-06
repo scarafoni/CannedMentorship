@@ -33,6 +33,7 @@ def tokenize(text):
 
 
 # lower case, tokenize, stem, put into a feature matrix
+# each entries is a list of the abovified words in the sentence
 def preprocess(inputs):
     tokens = []
     # lower case sentences, remove punctuation
@@ -45,7 +46,7 @@ def preprocess(inputs):
     return tokens
 
 # calculate the distance matrix based on bow, 2-3 grams, semantics
-def kitchen_sink(sentences,thresh=0.5):
+def kitchen_sink(sentences):
     distances = []
     tokens = preprocess(inputs=sentences)
     tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english',ngram_range=(1,3))
@@ -74,9 +75,9 @@ def kitchen_sink(sentences,thresh=0.5):
             
 
 def feature_extraction(inputs,extraction_method="tfidf"):
-    # preprocess- no punctuation, all lowercase
+    # preprocess- no punctuation, all lowercase, listified
     tokens = preprocess(inputs=inputs)
-    # print('td',tokens)
+
     #create the feature matrix
     if extraction_method == 'tfidf':
         # tokenize
@@ -89,6 +90,10 @@ def feature_extraction(inputs,extraction_method="tfidf"):
                                 ngram_range=(1,3))
         x = tfidf.fit_transform(tokens)
         return x
+    elif extraction_method == 'ks':
+        distances = kitchen_sink(inputs) 
+        linkd = linkage(y=numpy.array(distnaces))
+        x =  
     return "error"
 
 
@@ -103,14 +108,20 @@ def hac(sentences, dist_func='default', thresh=0.5):
     # affinity propagation
     # dbscan
 
-    #bag of words, euclidean
-    if dist_func == 'default':
+    #bag of words and n-grams, euclidean
+    if dist_func == 'cn':
         f_mat = feature_extraction(inputs=sentences,\
                                    extraction_methods='tfidf'
         return fclusterdata(X=f_mat.toarray(),t=thresh)
     elif dist_func == 'ks':
         # in this case the f_mat is just the sentences
-        distances = kitched_sink(f_mat
+        distances = kitched_sink(sentences)
+        linkd = linkage(y=numpy.array(distances))
+        return fcluster(Z=linked,t=thresh)
+
+    elif dist_func = 'wn':
+
+    # standard distance function
     else:
         distances = dist_func(f_mat)
         # print('distances',distances)
