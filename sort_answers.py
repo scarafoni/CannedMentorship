@@ -145,7 +145,7 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
             return "error"
 
     #bag of words and n-grams, euclidean
-    elif dist_func == 'bow-ngram':
+    elif feat_dist == 'bow-ngram':
         f_mat = feature_extraction(inputs=sentences,\
                                    extraction_method='tfidf-ngrams')
 
@@ -158,7 +158,7 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
         else:
             return "error"
 
-    elif dist_func == 'ks':
+    elif feat_dist == 'ks':
         distances = kitchen_sink(sentences)
 
         if classfn == 'hac':
@@ -171,8 +171,8 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
         else:
             return "error"
 
-    elif dist_func in ['wn','cn']:
-        distances = semantic_distance_matrix(sentences, dist_func)
+    elif feat_dist in ['wn','cn']:
+        distances = semantic_distance_matrix(sentences, feat_dist)
 
         if classfn == 'hac':
             linkd = linkage(y=numpy.array(distances))
@@ -243,8 +243,8 @@ if __name__== '__main__':
     # groups = AffinityPropagation(affinity='precomputed').fit(numpy.asarray(distances)).labels_
     # groups = DBSCAN(metric='precomputed').fit(numpy.asarray(distances)).labels_
     
-    print('groups',group_up(inputs1, classfn='hac',feat_dist='bow'))
-    print('groups',group_up(inputs1, classfn='dbscan',feat_dist='bow'))
+    for (c,d) in itertools.product(['hac', 'dbscan', 'affprop'],['bow', 'bow-ngram', 'ks', 'wn', 'cn']):
+        print(c,d,group_up(inputs1, classfn=c,feat_dist=d))
     # print(filter_inputs(inputs2))
     
               
