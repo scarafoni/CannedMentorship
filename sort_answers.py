@@ -45,55 +45,68 @@ def preprocess(inputs):
     return tokens
 
 
-def semantic_distance_matrix(sentences,method='wn'):
+def semantic_distance_matrix(sentences,method='wn', format='array'):
     distances = []
     tokens = preprocess(inputs=sentences)
-    print('tokens', tokens)
-    '''
-    for (v1,v2) in itertools.combinations(tokens, 2):
-        dist = vec_semantic_sim(v1, v2, method)
-        print('v1, v2',v1, v2, dist)
-        distances.append(dist)
     
-    print('distances', distances)
-    '''
-    for v1 in tokens:
-        d= []
-        for v2 in tokens:
-            dist = vec_semantic_sim(v1, v2, method)
-            print('v1, v2',v1, v2, dist)
-            d.append(dist)
-        distances.append(d)
+    if format == 'array':
+        for i in range(len(tokens)):
+            for j in range(len(tokens)):
+                if i == j:
+                    continue
+                dist = vec_semantic_sim(tokens[i], tokens[j], method)
+                print('v1, v2',tokens[i], tokens[j], dist)
+                distances.append(d)
+         
+
+    else:
+        for v1 in tokens:
+            d= []
+            for v2 in tokens:
+                dist = vec_semantic_sim(v1, v2, method)
+                print('v1, v2',v1, v2, dist)
+                d.append(dist)
+            distances.append(d)
     print('distances', distances)
     return distances
 
 # calculate the distance matrix based on bow, 2-3 grams, semantics
-def kitchen_sink(sentences):
+def kitchen_sink(sentences,format='array'):
     distances = []
     tokens = preprocess(inputs=sentences)
     tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english',ngram_range=(1,3))
     tdif_feat = tfidf.fit_transform(tokens)
-    print('tdif feat',tdif_feat.toarray())
-    for i in range(len(sentences)):
-        for j in range (i,len(sentences)):
-            if i == j: 
-                continue
-            distance = 0.0
-            # bow, ngrams
-            # numpy.concatenate((tdif_feat[i].toarray(), tdif_feat[j].toarray())))
-            # print('two to compare', numpy.concatenate((tdif_feat[i].toarray(), tdif_feat[j].toarray())))
-            lex_sim = float(pdist(numpy.concatenate((tdif_feat[i].toarray(), tdif_feat[j].toarray()))))
-            # print('lex sim', lex_sim)
-            # semantic similarities
-            sem_sim = 1.0 - vec_semantic_sim(tokens[i], tokens[j])
-            # print('sem sim', sem_sim)
-            distances.append((lex_sim + sem_sim)/2.0)
+
+    if format == 'array':
+        for i in range(len(sentences)):
+            for j in range (i,len(sentences)):
+                if i == j: 
+                    continue
+                distance = 0.0
+                # bow, ngrams
+                lex_sim = float(pdist(numpy.concatenate((tdif_feat[i].toarray(), tdif_feat[j].toarray()))))
+                # print('lex sim', lex_sim)
+                # semantic similarities
+                sem_sim = 1.0 - vec_semantic_sim(tokens[i], tokens[j])
+                # print('sem sim', sem_sim)
+                distances.append((lex_sim + sem_sim)/2.0)
             
+    else:
+        for i in range(len(sentences)):
+            row = []
+            for j in range (0,len(sentences)):
+                distance = 0.0
+                # bow, ngrams
+                lex_sim = float(pdist(numpy.concatenate((tdif_feat[i].toarray(), tdif_feat[j].toarray()))))
+                # print('lex sim', lex_sim)
+                # semantic similarities
+                sem_sim = 1.0 - vec_semantic_sim(tokens[i], tokens[j])
+                # print('sem sim', sem_sim)
+                row.append((lex_sim + sem_sim)/2.0)
+            distances.append(row) 
+
     print('distances',distances)
-    linkd = linkage(y=numpy.array(distances))
-    # print('linkd', linkd)
-    return fcluster(Z=linkd,t=0.5)
-            
+    return distances
 
 def feature_extraction(inputs,extraction_method="tfidf"):
     # preprocess- no punctuation, all lowercase, listified
