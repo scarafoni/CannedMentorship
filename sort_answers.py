@@ -213,7 +213,8 @@ if __name__== '__main__':
     # groups = AffinityPropagation().fit(fmat1.toarray()).fit_predict(fmat1.toarray())
     # groups = kitchen_sink(inputs2)
     distances = semantic_distance_matrix(inputs2)
-    groups = AffinityPropagation(affinity='precomputed').fit(numpy.asarray(distances)).labels_
+    # groups = AffinityPropagation(affinity='precomputed').fit(numpy.asarray(distances)).labels_
+    # groups = DBSCAN(metric='precomputed').fit(numpy.asarray(distances)).labels_
     
     print('groups',groups)
     # print(filter_inputs(inputs2))

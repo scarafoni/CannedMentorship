@@ -3,6 +3,7 @@
 from __future__ import division
 import requests
 from nltk.corpus import wordnet as wn
+from nltk import word_tokenize, pos_tag
 import itertools as it
 import sys
 
@@ -10,15 +11,60 @@ import sys
 # similarity between two vectors as comparing
 # all non-stop words, normalized to be between 0 and 1
 # input is two vector tokens w/o stopwords
+# for each word takes most similar word in other sentence
+# only compares same part of speech
+# normalized for total comarisons
 def vec_semantic_sim(v1,v2,method='wn'):
+    print('sim v1, v2',v1,v2)
     sim_acc = 0.0
     compares = 0 
+    v1_pos = pos_tag(word_tokenize(v1))
+    v2_pos = pos_tag(word_tokenize(v2))
+
+    t_sim = 0.0
+    for w1 in v1_pos:
+        max_sim = 0.0
+        for w2 in v2_pos:
+            if method == 'wn':
+                if w1[1] == w2[1]:
+                    sim = wordnet_similarity(w1[0], w2[0])
+                    if sim > max_sim:
+                        max_sim = sim
+            
+            else:
+                if w1[1] == w2[1]:
+                    sim = cn_similarity(w1[0], w2[0])
+                    if sim > max_sim:
+                        max_sim = sim
+        t_sim += max_sim
+
+    for w1 in v1_pos:
+        max_sim = 0.0
+        for w2 in v2_pos:
+            if method == 'wn':
+                if w1[1] == w2[1]:
+                    sim = wordnet_similarity(w1[0], w2[0])
+                    if sim > max_sim:
+                        max_sim = sim
+            
+            else:
+                if w1[1] == w2[1]:
+                    sim = cn_similarity(w1[0], w2[0])
+                    if sim > max_sim:
+                        max_sim = sim
+        t_sim += max_sim
+    print('t_sim',t_sim / float(len(v1) + len(v2)))
+    return t_sim / float(len(v1) + len(v2))
+     
+    '''
     for (w1, w2) in it.product(v1, v2):
         if method == 'wn':
             sim_acc += wordnet_similarity(w1,w2)
         else:
             sim_acc += cn_similarity(w1,w2)
         compares += 1
+    print('raw sim',sim_acc)
+    '''
     return sim_acc/ float(compares)
          
     
