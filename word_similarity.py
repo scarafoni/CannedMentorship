@@ -19,26 +19,28 @@ def vec_semantic_sim(v1,v2,method='wn'):
     v1 = word_tokenize(v1)#pos_tag(word_tokenize(v1))
     v2 = word_tokenize(v2)#pos_tag(word_tokenize(v2))
 
-    '''
     v1 = pos_tag(v1)
     v2 = pos_tag(v2)
     v1 = [w for w in v1 if not w[0] in stopwords.words('english')]
     v2 = [w for w in v2 if not w[0] in stopwords.words('english')]
-    '''
-
-    v1 = [w for w in v1 if not w in stopwords.words('english')]
-    v2 = [w for w in v2 if not w in stopwords.words('english')]
 
     t_sim = 0.0
     comparer = wordnet_similarity if method == 'wn' else cn_similarity
+    print(comparer)
 
     for w1 in v1:
-        t_sim += max([comparer(w1,x) for x in v2])
+        same_pos = [x[0] for x in v2 if x[1] == w1[1]]
+        print('same pos',same_pos)
+        t_sim += max([comparer(w1[0],x) for x in same_pos]) if same_pos\
+                 else 0
 
     for w1 in v2:
-        t_sim += max([comparer(w1,x) for x in v1])
+        same_pos = [x[0] for x in v1 if x[1] == w1[1]]
+        print('same pos',same_pos)
+        t_sim += max([comparer(w1[0],x) for x in same_pos]) if same_pos\
+                 else 0
 
-    print('similarity',t_sim / float(len(v1)+len(v2)))
+    # print('similarity',t_sim / float(len(v1)+len(v2)))
     return t_sim / float(len(v1)+len(v2))
     
 def wordnet_similarity(w1, w2, sim=wn.path_similarity):

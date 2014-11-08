@@ -117,7 +117,7 @@ def feature_extraction(inputs,extraction_method="tfidf"):
 
 
 # hierarchical agglomerative classification algorithm
-def hac(sentences, class='hac', feat_dist='default', thresh=0.5):
+def hac(sentences, classification='hac', feat_dist='default', thresh=0.5):
     # bag of words
     # bag of words and n-grams
     # bag of words, n-grams, wn
