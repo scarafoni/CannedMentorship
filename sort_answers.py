@@ -144,15 +144,19 @@ def hac(sentences, feat_dist='default', thresh=0.5):
         linkd = linkage(y=numpy.array(distances))
         return fcluster(Z=linked,t=thresh)
 
-    # standard distance function
+    # error
     else:
         return "error"
 
 def dbscan(fmat,thresh=0.7):
+    f_mat = feature_extraction(inputs=sentences,\
+                               extraction_methods='tfidf')
     groups = DBSCAN(eps=thresh,min_samples=1).fit_predict(fmat.toarray())
     return groups
 
 def ap(fmat):
+    f_mat = feature_extraction(inputs=sentences,\
+                               extraction_methods='tfidf')
     groups = AffinityPropagation().fit_predict(fmat.toarray())
     return groups
 
