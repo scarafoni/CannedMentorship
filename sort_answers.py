@@ -49,7 +49,7 @@ def semantic_distance_matrix(sentences,method='wn'):
     distances = []
     tokens = preprocess(inputs=sentences)
     tokens = [w for w in tokens if not w in stopwords.words('english')] 
-    for (v1,v2) in itertools.product([tokens,tokens])
+    for (v1,v2) in itertools.product([tokens,tokens]):
         distances.append(vec_semantic_sim(v1, v2, method))
     return distances
 
@@ -98,10 +98,8 @@ def feature_extraction(inputs,extraction_method="tfidf"):
                                 ngram_range=(1,3))
         x = tfidf.fit_transform(tokens)
         return x
-    elif extraction_method == 'ks':
-        distances = kitchen_sink(inputs) 
-        linkd = linkage(y=numpy.array(distnaces))
-        x =  
+    else:
+        return "error"
     return "error"
 
 
@@ -198,7 +196,10 @@ if __name__== '__main__':
     # groups = hac(f_mat=fmat1)
     # groups = DBSCAN(eps=0.7,min_samples=1).fit_predict(fmat1.toarray())
     # groups = AffinityPropagation().fit_predict(fmat1.toarray())
-    groups = kitchen_sink(inputs2)
+    # groups = kitchen_sink(inputs2)
+    distances = semantic_distance_matrix(inputs2)
+    groups = AffinityPropagation(metric='precomputed').fit_predict(distances.toarray())
+    
     print('groups',groups)
     # print(filter_inputs(inputs2))
     
