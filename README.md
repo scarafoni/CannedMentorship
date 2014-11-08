@@ -77,11 +77,29 @@ vars
     -leader
     -instructions- list of instructions
 
-
         
                 
         
 AI part
+    hac
+        -bow
+        -bow,ngrams
+        -bow,ngrams,wn
+        -wn
+        -cn
+    -affinity propagation
+        -euclid
+    -dbscan
+        -euclid
+    
+    
+    
+
+
+
+
+
+
     -helper functions
         -preprocess
             -lower case
