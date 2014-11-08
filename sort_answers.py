@@ -51,12 +51,12 @@ def semantic_distance_matrix(sentences,method='wn', format='array'):
     
     if format == 'array':
         for i in range(len(tokens)):
-            for j in range(len(tokens)):
+            for j in range(i,len(tokens)):
                 if i == j:
                     continue
                 dist = vec_semantic_sim(tokens[i], tokens[j], method)
-                print('v1, v2',tokens[i], tokens[j], dist)
-                distances.append(d)
+                # print('v1, v2',tokens[i], tokens[j], dist)
+                distances.append(dist)
          
 
     else:
@@ -64,10 +64,10 @@ def semantic_distance_matrix(sentences,method='wn', format='array'):
             d= []
             for v2 in tokens:
                 dist = vec_semantic_sim(v1, v2, method)
-                print('v1, v2',v1, v2, dist)
+                # print('v1, v2',v1, v2, dist)
                 d.append(dist)
             distances.append(d)
-    print('distances', distances)
+    # print('distances', distances)
     return distances
 
 # calculate the distance matrix based on bow, 2-3 grams, semantics
@@ -105,7 +105,7 @@ def kitchen_sink(sentences,format='array'):
                 row.append((lex_sim + sem_sim)/2.0)
             distances.append(row) 
 
-    print('distances',distances)
+    # print('distances',distances)
     return distances
 
 def feature_extraction(inputs,extraction_method="tfidf"):
@@ -153,7 +153,7 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
         elif classfn == 'dbscan':
             return DBSCAN(min_samples=1, eps=eps).fit_predict(f_mat.toarray())
         elif classfn == 'affprop':
-            return AffinityPropagation(eps=0.7).fit_predict(g_mat.toarray())
+            return AffinityPropagation(damping=damping).fit_predict(f_mat.toarray())
         else:
             return "error"
 
@@ -167,7 +167,7 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
         elif classfn == 'dbscan':
             return DBSCAN(min_samples=1, eps=eps).fit_predict(f_mat.toarray())
         elif classfn == 'affprop':
-            return AffinityPropagation(eps=0.7).fit_predict(g_mat.toarray())
+            return AffinityPropagation(damping=damping).fit_predict(f_mat.toarray())
         else:
             return "error"
 
@@ -175,13 +175,13 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
         if classfn == 'hac':
             distances = kitchen_sink(sentences,format='array')
             linkd = linkage(y=numpy.array(distances))
-            return fcluster(Z=linked,t=thresh)
+            return fcluster(Z=linkd,t=thresh)
         elif classfn == 'dbscan':
             distances = kitchen_sink(sentences,format='matrix')
-            return DBSCAN(min_samples=1, eps=eps, metric='precomputed').fit(numpy.assarray(distances)).labels_
+            return DBSCAN(min_samples=1, eps=eps, metric='precomputed').fit(numpy.asarray(distances)).labels_
         elif classfn == 'affprop':
             distances = kitchen_sink(sentences,format='matrix')
-            return AffinityPropagation(eps=0.7, metric='precomputed').fit(numpy.assarray(distances)).labels_
+            return AffinityPropagation(damping=damping, affinity='precomputed').fit(numpy.asarray(distances)).labels_
         else:
             return "error"
 
@@ -189,13 +189,13 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
         if classfn == 'hac':
             distances = semantic_distance_matrix(sentences, feat_dist,format='array')
             linkd = linkage(y=numpy.array(distances))
-            return fcluster(Z=linked,t=thresh)
+            return fcluster(Z=linkd,t=thresh)
         elif classfn == 'dbscan':
             distances = semantic_distance_matrix(sentences, feat_dist,format='matrix')
-            return DBSCAN(min_samples=1, eps=eps, metric='precomputed').fit(numpy.assarray(distances)).labels_
+            return DBSCAN(min_samples=1, eps=eps, metric='precomputed').fit(numpy.asarray(distances)).labels_
         elif classfn == 'affprop':
             distances = semantic_distance_matrix(sentences, feat_dist,format='matrix')
-            return AffinityPropagation(eps=0.7, metric='precomputed').fit(numpy.assarray(distances)).labels_
+            return AffinityPropagation(damping=damping, affinity='precomputed').fit(numpy.asarray(distances)).labels_
         else:
             return "error"
         
@@ -247,8 +247,11 @@ if __name__== '__main__':
     # groups = AffinityPropagation(affinity='precomputed').fit(numpy.asarray(distances)).labels_
     # groups = DBSCAN(metric='precomputed').fit(numpy.asarray(distances)).labels_
     
+    '''
     for (c,d) in itertools.product(['hac', 'dbscan', 'affprop'],['bow', 'bow-ngram', 'ks', 'wn', 'cn']):
-        print(c,d,group_up(inputs1, classfn=c,feat_dist=d))
+        print(c,d,group_up(inputs2, classfn=c,feat_dist=d))
+    '''
+    print('ks test',group_up(inputs2, classfn='hac',feat_dist='ks'))
     # print(filter_inputs(inputs2))
     
               

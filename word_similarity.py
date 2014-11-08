@@ -15,7 +15,7 @@ import sys
 # only compares same part of speech
 # normalized for total comarisons
 def vec_semantic_sim(v1,v2,method='wn'):
-    print('sim v1, v2',v1,v2)
+    # print('sim v1, v2',v1,v2)
     v1 = word_tokenize(v1)#pos_tag(word_tokenize(v1))
     v2 = word_tokenize(v2)#pos_tag(word_tokenize(v2))
 
@@ -26,17 +26,17 @@ def vec_semantic_sim(v1,v2,method='wn'):
 
     t_sim = 0.0
     comparer = wordnet_similarity if method == 'wn' else cn_similarity
-    print(comparer)
+    # print(comparer)
 
     for w1 in v1:
         same_pos = [x[0] for x in v2 if x[1] == w1[1]]
-        print('same pos',same_pos)
+        # print('same pos',same_pos)
         t_sim += max([comparer(w1[0],x) for x in same_pos]) if same_pos\
                  else 0
 
     for w1 in v2:
         same_pos = [x[0] for x in v1 if x[1] == w1[1]]
-        print('same pos',same_pos)
+        # print('same pos',same_pos)
         t_sim += max([comparer(w1[0],x) for x in same_pos]) if same_pos\
                  else 0
 
@@ -57,7 +57,8 @@ def wordnet_similarity(w1, w2, sim=wn.path_similarity):
 
 def cn_similarity(w1, w2):
     req = requests.get('http://conceptnet5.media.mit.edu/data/5.2/assoc/c/en/'+w1+'?filter=/c/en/'+w2+'&limit=1')
-    return req.json()['similar'].split(',')[1]
+    # print('sim',w1,w2,float(req.json()['similar'][0][1]))
+    return float(req.json()['similar'][0][1])
 
 def main():
     (word1, word2) = ("large", "big")
