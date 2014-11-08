@@ -44,6 +44,14 @@ def preprocess(inputs):
         i += 1
     return tokens
 
+
+def semantic_distance_matrix(sentences,method='wn'):
+    distances = []
+    tokens = preprocess(inputs=sentences)
+    tokens = [w for w in tokens if not w in stopwords.words('english')] 
+    for (v1,v2) in itertools.product([tokens,tokens])
+        distances.append(vec_semantic_sim(v1, v2, method))
+
 # calculate the distance matrix based on bow, 2-3 grams, semantics
 def kitchen_sink(sentences):
     distances = []
@@ -114,17 +122,19 @@ def hac(sentences, feat_dist='default', thresh=0.5):
         return fclusterdata(X=f_mat.toarray(),t=thresh) 
 
     #bag of words and n-grams, euclidean
-    elif dist_func == 'cn':
+    elif dist_func == 'bow-ngram':
         f_mat = feature_extraction(inputs=sentences,\
-                                   extraction_methods='tfidf')
+                                   extraction_methods='tfidf-ngrams')
         return fclusterdata(X=f_mat.toarray(),t=thresh)
+
     elif dist_func == 'ks':
         # in this case the f_mat is just the sentences
-        distances = kitched_sink(sentences)
+        distances = kitchen_sink(sentences)
         linkd = linkage(y=numpy.array(distances))
         return fcluster(Z=linked,t=thresh)
 
     elif dist_func = 'wn':
+        distances = 
 
     # standard distance function
     else:
