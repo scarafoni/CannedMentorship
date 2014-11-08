@@ -85,10 +85,11 @@ def kitchen_sink(sentences,format='array'):
                 distance = 0.0
                 # bow, ngrams
                 lex_sim = float(pdist(numpy.concatenate((tdif_feat[i].toarray(), tdif_feat[j].toarray()))))
-                # print('lex sim', lex_sim)
+                print('sentences',tokens[i],tokens[j])
+                print('lex sim', lex_sim)
                 # semantic similarities
                 sem_sim = 1.0 - vec_semantic_sim(tokens[i], tokens[j])
-                # print('sem sim', sem_sim)
+                print('sem sim', sem_sim)
                 distances.append((lex_sim + sem_sim)/2.0)
             
     else:
@@ -105,7 +106,7 @@ def kitchen_sink(sentences,format='array'):
                 row.append((lex_sim + sem_sim)/2.0)
             distances.append(row) 
 
-    # print('distances',distances)
+    print('distances',distances)
     return distances
 
 def feature_extraction(inputs,extraction_method="tfidf"):
@@ -247,11 +248,17 @@ if __name__== '__main__':
     # groups = AffinityPropagation(affinity='precomputed').fit(numpy.asarray(distances)).labels_
     # groups = DBSCAN(metric='precomputed').fit(numpy.asarray(distances)).labels_
     
-    '''
-    for (c,d) in itertools.product(['hac', 'dbscan', 'affprop'],['bow', 'bow-ngram', 'ks', 'wn', 'cn']):
-        print(c,d,group_up(inputs2, classfn=c,feat_dist=d))
-    '''
-    print('ks test',group_up(inputs2, classfn='hac',feat_dist='ks'))
+    # open the file
+    with open('observations-formatted.txt','r') as r, open('filtered_votes.txt','w') as w:
+        # format the input tests into lists
+        r = r.read()
+        r = r.split('\n#\n')
+        r = [x.split('\n') for x in r]
+        for x in r:
+            print('line',x)
+        
+        for (c,d) in itertools.product(['hac', 'dbscan', 'affprop'],['bow', 'bow-ngram', 'ks', 'wn', 'cn']):
+            print(c,d,group_up(inputs2, classfn=c,feat_dist=d))
     # print(filter_inputs(inputs2))
     
               
