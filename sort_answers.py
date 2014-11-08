@@ -172,27 +172,29 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
             return "error"
 
     elif feat_dist == 'ks':
-        distances = kitchen_sink(sentences)
-
         if classfn == 'hac':
+            distances = kitchen_sink(sentences,format='array')
             linkd = linkage(y=numpy.array(distances))
             return fcluster(Z=linked,t=thresh)
         elif classfn == 'dbscan':
+            distances = kitchen_sink(sentences,format='matrix')
             return DBSCAN(min_samples=1, eps=eps, metric='precomputed').fit(numpy.assarray(distances)).labels_
         elif classfn == 'affprop':
+            distances = kitchen_sink(sentences,format='matrix')
             return AffinityPropagation(eps=0.7, metric='precomputed').fit(numpy.assarray(distances)).labels_
         else:
             return "error"
 
     elif feat_dist in ['wn','cn']:
-        distances = semantic_distance_matrix(sentences, feat_dist)
-
         if classfn == 'hac':
+            distances = semantic_distance_matrix(sentences, feat_dist,format='array')
             linkd = linkage(y=numpy.array(distances))
             return fcluster(Z=linked,t=thresh)
         elif classfn == 'dbscan':
+            distances = semantic_distance_matrix(sentences, feat_dist,format='matrix')
             return DBSCAN(min_samples=1, eps=eps, metric='precomputed').fit(numpy.assarray(distances)).labels_
         elif classfn == 'affprop':
+            distances = semantic_distance_matrix(sentences, feat_dist,format='matrix')
             return AffinityPropagation(eps=0.7, metric='precomputed').fit(numpy.assarray(distances)).labels_
         else:
             return "error"
@@ -201,17 +203,6 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
     else:
         return "error"
 
-def dbscan(fmat,thresh=0.7):
-    f_mat = feature_extraction(inputs=sentences,\
-                               extraction_method='tfidf')
-    groups = DBSCAN(eps=thresh,min_samples=1).fit_predict(fmat.toarray())
-    return groups
-
-def ap(fmat):
-    f_mat = feature_extraction(inputs=sentences,\
-                               extraction_method='tfidf')
-    groups = AffinityPropagation().fit_predict(fmat.toarray())
-    return groups
 
 def filter_inputs(inputs):
     feature_mat = feature_extraction(inputs=inputs)
