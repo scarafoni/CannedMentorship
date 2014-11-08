@@ -165,24 +165,25 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
             linkd = linkage(y=numpy.array(distances))
             return fcluster(Z=linked,t=thresh)
         elif classfn == 'dbscan':
-            return DBSCAN(min_samples=1, eps=eps, metric='precomputed')\
-                .fit(numpy.assarray(distances)).labels_
+            return DBSCAN(min_samples=1, eps=eps, metric='precomputed').fit(numpy.assarray(distances)).labels_
         elif classfn == 'affprop':
-            return AffinityPropagation(eps=0.7, metric='precomputed').\
-                   fit(numpy.assarray(distances)).labels_
+            return AffinityPropagation(eps=0.7, metric='precomputed').fit(numpy.assarray(distances)).labels_
         else:
             return "error"
 
-    elif dist_func == 'wn':
-        distances = semantic_distance_matrix(sentences, 'wn')
-        linkd = linkage(y=numpy.array(distances))
-        return fcluster(Z=linked,t=thresh)
-        
-    elif dist_func == 'cn':
-        distances = semantic_distance_matrix(sentences, 'cn')
-        linkd = linkage(y=numpy.array(distances))
-        return fcluster(Z=linked,t=thresh)
+    elif dist_func in ['wn','cn']:
+        distances = semantic_distance_matrix(sentences, dist_func)
 
+        if classfn == 'hac':
+            linkd = linkage(y=numpy.array(distances))
+            return fcluster(Z=linked,t=thresh)
+        elif classfn == 'dbscan':
+            return DBSCAN(min_samples=1, eps=eps, metric='precomputed').fit(numpy.assarray(distances)).labels_
+        elif classfn == 'affprop':
+            return AffinityPropagation(eps=0.7, metric='precomputed').fit(numpy.assarray(distances)).labels_
+        else:
+            return "error"
+        
     # error
     else:
         return "error"
