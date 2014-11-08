@@ -2,7 +2,7 @@
 # http://sujitpal.blogspot.com/2013/02/checking-for-word-equivalence-using.html
 from __future__ import division
 import requests
-from nltk.corpus import wordnet as wn
+from nltk.corpus import wordnet as wn, stopwords
 from nltk import word_tokenize, pos_tag
 import itertools as it
 import sys
@@ -16,57 +16,30 @@ import sys
 # normalized for total comarisons
 def vec_semantic_sim(v1,v2,method='wn'):
     print('sim v1, v2',v1,v2)
-    sim_acc = 0.0
-    compares = 0 
-    v1_pos = pos_tag(word_tokenize(v1))
-    v2_pos = pos_tag(word_tokenize(v2))
+    v1 = word_tokenize(v1)#pos_tag(word_tokenize(v1))
+    v2 = word_tokenize(v2)#pos_tag(word_tokenize(v2))
+
+    '''
+    v1 = pos_tag(v1)
+    v2 = pos_tag(v2)
+    v1 = [w for w in v1 if not w[0] in stopwords.words('english')]
+    v2 = [w for w in v2 if not w[0] in stopwords.words('english')]
+    '''
+
+    v1 = [w for w in v1 if not w in stopwords.words('english')]
+    v2 = [w for w in v2 if not w in stopwords.words('english')]
 
     t_sim = 0.0
-    for w1 in v1_pos:
-        max_sim = 0.0
-        for w2 in v2_pos:
-            if method == 'wn':
-                if w1[1] == w2[1]:
-                    sim = wordnet_similarity(w1[0], w2[0])
-                    if sim > max_sim:
-                        max_sim = sim
-            
-            else:
-                if w1[1] == w2[1]:
-                    sim = cn_similarity(w1[0], w2[0])
-                    if sim > max_sim:
-                        max_sim = sim
-        t_sim += max_sim
+    comparer = wordnet_similarity if method == 'wn' else cn_similarity
 
-    for w1 in v1_pos:
-        max_sim = 0.0
-        for w2 in v2_pos:
-            if method == 'wn':
-                if w1[1] == w2[1]:
-                    sim = wordnet_similarity(w1[0], w2[0])
-                    if sim > max_sim:
-                        max_sim = sim
-            
-            else:
-                if w1[1] == w2[1]:
-                    sim = cn_similarity(w1[0], w2[0])
-                    if sim > max_sim:
-                        max_sim = sim
-        t_sim += max_sim
-    print('t_sim',t_sim / float(len(v1) + len(v2)))
-    return t_sim / float(len(v1) + len(v2))
-     
-    '''
-    for (w1, w2) in it.product(v1, v2):
-        if method == 'wn':
-            sim_acc += wordnet_similarity(w1,w2)
-        else:
-            sim_acc += cn_similarity(w1,w2)
-        compares += 1
-    print('raw sim',sim_acc)
-    '''
-    return sim_acc/ float(compares)
-         
+    for w1 in v1:
+        t_sim += max([comparer(w1,x) for x in v2])
+
+    for w1 in v2:
+        t_sim += max([comparer(w1,x) for x in v1])
+
+    print('similarity',t_sim / float(len(v1)+len(v2)))
+    return t_sim / float(len(v1)+len(v2))
     
 def wordnet_similarity(w1, w2, sim=wn.path_similarity):
   synsets1 = wn.synsets(w1)

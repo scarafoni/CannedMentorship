@@ -48,7 +48,6 @@ def preprocess(inputs):
 def semantic_distance_matrix(sentences,method='wn'):
     distances = []
     tokens = preprocess(inputs=sentences)
-    tokens = [w for w in tokens if not w in stopwords.words('english')] 
     print('tokens', tokens)
     '''
     for (v1,v2) in itertools.combinations(tokens, 2):
@@ -75,7 +74,6 @@ def kitchen_sink(sentences):
     tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english',ngram_range=(1,3))
     tdif_feat = tfidf.fit_transform(tokens)
     print('tdif feat',tdif_feat.toarray())
-    no_stops = [w for w in tokens if not w in stopwords.words('english')]
     for i in range(len(sentences)):
         for j in range (i,len(sentences)):
             if i == j: 
@@ -87,7 +85,7 @@ def kitchen_sink(sentences):
             lex_sim = float(pdist(numpy.concatenate((tdif_feat[i].toarray(), tdif_feat[j].toarray()))))
             # print('lex sim', lex_sim)
             # semantic similarities
-            sem_sim = 1.0 - vec_semantic_sim(no_stops[i], no_stops[j])
+            sem_sim = 1.0 - vec_semantic_sim(tokens[i], tokens[j])
             # print('sem sim', sem_sim)
             distances.append((lex_sim + sem_sim)/2.0)
             
@@ -119,7 +117,7 @@ def feature_extraction(inputs,extraction_method="tfidf"):
 
 
 # hierarchical agglomerative classification algorithm
-def hac(sentences, feat_dist='default', thresh=0.5):
+def hac(sentences, class='hac', feat_dist='default', thresh=0.5):
     # bag of words
     # bag of words and n-grams
     # bag of words, n-grams, wn
@@ -212,8 +210,8 @@ if __name__== '__main__':
     # groups = DBSCAN(eps=0.7,min_samples=1).fit_predict(fmat1.toarray())
     # groups = AffinityPropagation().fit(fmat1.toarray()).fit_predict(fmat1.toarray())
     # groups = kitchen_sink(inputs2)
-    distances = semantic_distance_matrix(inputs2)
-    # groups = AffinityPropagation(affinity='precomputed').fit(numpy.asarray(distances)).labels_
+    distances = semantic_distance_matrix(inputs1)
+    groups = AffinityPropagation(affinity='precomputed').fit(numpy.asarray(distances)).labels_
     # groups = DBSCAN(metric='precomputed').fit(numpy.asarray(distances)).labels_
     
     print('groups',groups)
