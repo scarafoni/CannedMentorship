@@ -117,7 +117,10 @@ def feature_extraction(inputs,extraction_method="tfidf"):
 
 
 # hierarchical agglomerative classification algorithm
-def hac(sentences, classification='hac', feat_dist='default', thresh=0.5):
+def group_up(sentences, classfn='hac', feat_dist='bow'):
+    thresh = 0.5
+    eps = 0.7
+    damping = 0.5
     # bag of words
     # bag of words and n-grams
     # bag of words, n-grams, wn
@@ -128,16 +131,32 @@ def hac(sentences, classification='hac', feat_dist='default', thresh=0.5):
     # affinity propagation
     # dbscan
     
+    # figure out the classification
     if feat_dist == 'bow':
         f_mat = feature_extraction(inputs=sentences,\
-                                   extraction_methods='tfidf')
-        return fclusterdata(X=f_mat.toarray(),t=thresh) 
+                                   extraction_method='tfidf')
+        if classfn == 'hac':
+            return fclusterdata(X=f_mat.toarray(),t=thresh) 
+        elif classfn == 'dbscan':
+            return DBSCAN(min_samples=1, eps=eps).fit_predict(f_mat.toarray())
+        elif classfn == 'affprop':
+            return AffinityPropagation(eps=0.7).fit_predict(g_mat.toarray())
+        else:
+            return "error"
 
     #bag of words and n-grams, euclidean
     elif dist_func == 'bow-ngram':
         f_mat = feature_extraction(inputs=sentences,\
-                                   extraction_methods='tfidf-ngrams')
-        return fclusterdata(X=f_mat.toarray(),t=thresh)
+                                   extraction_method='tfidf-ngrams')
+
+        if classfn == 'hac':
+            return fclusterdata(X=f_mat.toarray(),t=thresh) 
+        elif classfn == 'dbscan':
+            return DBSCAN(min_samples=1, eps=eps).fit_predict(f_mat.toarray())
+        elif classfn == 'affprop':
+            return AffinityPropagation(eps=0.7).fit_predict(g_mat.toarray())
+        else:
+            return "error"
 
     elif dist_func == 'ks':
         # in this case the f_mat is just the sentences
@@ -161,20 +180,20 @@ def hac(sentences, classification='hac', feat_dist='default', thresh=0.5):
 
 def dbscan(fmat,thresh=0.7):
     f_mat = feature_extraction(inputs=sentences,\
-                               extraction_methods='tfidf')
+                               extraction_method='tfidf')
     groups = DBSCAN(eps=thresh,min_samples=1).fit_predict(fmat.toarray())
     return groups
 
 def ap(fmat):
     f_mat = feature_extraction(inputs=sentences,\
-                               extraction_methods='tfidf')
+                               extraction_method='tfidf')
     groups = AffinityPropagation().fit_predict(fmat.toarray())
     return groups
 
 def filter_inputs(inputs):
     feature_mat = feature_extraction(inputs=inputs)
     # print('feature matrix',feature_mat)
-    groupings = hac(f_mat=feature_mat)
+    groupings = group_up(f_mat=feature_mat)
     # print('groupings',groupings)
 
     final = []
@@ -210,11 +229,12 @@ if __name__== '__main__':
     # groups = DBSCAN(eps=0.7,min_samples=1).fit_predict(fmat1.toarray())
     # groups = AffinityPropagation().fit(fmat1.toarray()).fit_predict(fmat1.toarray())
     # groups = kitchen_sink(inputs2)
-    distances = semantic_distance_matrix(inputs1)
-    groups = AffinityPropagation(affinity='precomputed').fit(numpy.asarray(distances)).labels_
+    # distances = semantic_distance_matrix(inputs1)
+    # groups = AffinityPropagation(affinity='precomputed').fit(numpy.asarray(distances)).labels_
     # groups = DBSCAN(metric='precomputed').fit(numpy.asarray(distances)).labels_
     
-    print('groups',groups)
+    print('groups',group_up(inputs1, classfn='hac',feat_dist='bow'))
+    print('groups',group_up(inputs1, classfn='dbscan',feat_dist='bow'))
     # print(filter_inputs(inputs2))
     
               
