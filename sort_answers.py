@@ -12,8 +12,8 @@ nltk.data.path.append('nltk_data/')
 from nltk.stem.porter import PorterStemmer
 from nltk.corpus import stopwords
 import string
-from word_similarity import similarity, vec_semantic_sim
-
+from word_similarity import vec_semantic_sim
+import itertools
 
 
 # proprocessing inspired by duke university
@@ -49,8 +49,23 @@ def semantic_distance_matrix(sentences,method='wn'):
     distances = []
     tokens = preprocess(inputs=sentences)
     tokens = [w for w in tokens if not w in stopwords.words('english')] 
-    for (v1,v2) in itertools.product([tokens,tokens]):
-        distances.append(vec_semantic_sim(v1, v2, method))
+    print('tokens', tokens)
+    '''
+    for (v1,v2) in itertools.combinations(tokens, 2):
+        dist = vec_semantic_sim(v1, v2, method)
+        print('v1, v2',v1, v2, dist)
+        distances.append(dist)
+    
+    print('distances', distances)
+    '''
+    for v1 in tokens:
+        d= []
+        for v2 in tokens:
+            dist = vec_semantic_sim(v1, v2, method)
+            print('v1, v2',v1, v2, dist)
+            d.append(dist)
+        distances.append(d)
+    print('distances', distances)
     return distances
 
 # calculate the distance matrix based on bow, 2-3 grams, semantics
@@ -132,12 +147,12 @@ def hac(sentences, feat_dist='default', thresh=0.5):
         linkd = linkage(y=numpy.array(distances))
         return fcluster(Z=linked,t=thresh)
 
-    elif dist_func = 'wn':
+    elif dist_func == 'wn':
         distances = semantic_distance_matrix(sentences, 'wn')
         linkd = linkage(y=numpy.array(distances))
         return fcluster(Z=linked,t=thresh)
         
-    elif dist_func = 'cn':
+    elif dist_func == 'cn':
         distances = semantic_distance_matrix(sentences, 'cn')
         linkd = linkage(y=numpy.array(distances))
         return fcluster(Z=linked,t=thresh)
@@ -195,10 +210,10 @@ if __name__== '__main__':
     # print(fmat1.toarray())
     # groups = hac(f_mat=fmat1)
     # groups = DBSCAN(eps=0.7,min_samples=1).fit_predict(fmat1.toarray())
-    # groups = AffinityPropagation().fit_predict(fmat1.toarray())
+    # groups = AffinityPropagation().fit(fmat1.toarray()).fit_predict(fmat1.toarray())
     # groups = kitchen_sink(inputs2)
     distances = semantic_distance_matrix(inputs2)
-    groups = AffinityPropagation(metric='precomputed').fit_predict(distances.toarray())
+    groups = AffinityPropagation(affinity='precomputed').fit(numpy.asarray(distances)).labels_
     
     print('groups',groups)
     # print(filter_inputs(inputs2))

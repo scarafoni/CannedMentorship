@@ -16,7 +16,7 @@ def vec_semantic_sim(v1,v2,method='wn'):
     for (w1, w2) in it.product(v1, v2):
         if method == 'wn':
             sim_acc += wordnet_similarity(w1,w2)
-        else
+        else:
             sim_acc += cn_similarity(w1,w2)
         compares += 1
     return sim_acc/ float(compares)
