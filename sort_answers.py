@@ -31,7 +31,6 @@ def tokenize(text):
     return stems
 
 
-
 # lower case, tokenize, stem, put into a feature matrix
 # each entries is a list of the abovified words in the sentence
 def preprocess(inputs):
@@ -98,20 +97,26 @@ def feature_extraction(inputs,extraction_method="tfidf"):
 
 
 # hierarchical agglomerative classification algorithm
-def hac(sentences, dist_func='default', thresh=0.5):
-    distances = []
-
+def hac(sentences, feat_dist='default', thresh=0.5):
+    # bag of words
     # bag of words and n-grams
     # bag of words, n-grams, wn
     # wordnet
-    #conceptnet
+    # conceptnet
+    #
+    # -- not here
     # affinity propagation
     # dbscan
+    
+    if feat_dist == 'bow':
+        f_mat = feature_extraction(inputs=sentences,\
+                                   extraction_methods='tfidf')
+        return fclusterdata(X=f_mat.toarray(),t=thresh) 
 
     #bag of words and n-grams, euclidean
-    if dist_func == 'cn':
+    elif dist_func == 'cn':
         f_mat = feature_extraction(inputs=sentences,\
-                                   extraction_methods='tfidf'
+                                   extraction_methods='tfidf')
         return fclusterdata(X=f_mat.toarray(),t=thresh)
     elif dist_func == 'ks':
         # in this case the f_mat is just the sentences
@@ -127,12 +132,12 @@ def hac(sentences, dist_func='default', thresh=0.5):
         # print('distances',distances)
     return fcluster(linkage(distances,t=thresh)) 
 
-def dbscan(f_mat,thresh=0.7):
-    groups = DBSCAN(eps=thresh,min_samples=1).fit_predict(fmat1.toarray())
+def dbscan(fmat,thresh=0.7):
+    groups = DBSCAN(eps=thresh,min_samples=1).fit_predict(fmat.toarray())
     return groups
 
 def ap(fmat):
-    groups = AffinityPropagation().fit_predict(fmat1.toarray())
+    groups = AffinityPropagation().fit_predict(fmat.toarray())
     return groups
 
 def filter_inputs(inputs):
