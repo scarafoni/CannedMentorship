@@ -159,10 +159,19 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
             return "error"
 
     elif dist_func == 'ks':
-        # in this case the f_mat is just the sentences
         distances = kitchen_sink(sentences)
-        linkd = linkage(y=numpy.array(distances))
-        return fcluster(Z=linked,t=thresh)
+
+        if classfn == 'hac':
+            linkd = linkage(y=numpy.array(distances))
+            return fcluster(Z=linked,t=thresh)
+        elif classfn == 'dbscan':
+            return DBSCAN(min_samples=1, eps=eps, metric='precomputed')\
+                .fit(numpy.assarray(distances)).labels_
+        elif classfn == 'affprop':
+            return AffinityPropagation(eps=0.7, metric='precomputed').\
+                   fit(numpy.assarray(distances)).labels_
+        else:
+            return "error"
 
     elif dist_func == 'wn':
         distances = semantic_distance_matrix(sentences, 'wn')
