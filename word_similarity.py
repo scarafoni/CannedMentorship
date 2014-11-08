@@ -6,8 +6,6 @@ from nltk.corpus import wordnet as wn
 import itertools as it
 import sys
 
-# gets the distance matrix for feature matrix
-def semantic_distance_matrix(f_mat,method='wn'):
     
 # similarity between two vectors as comparing
 # all non-stop words, normalized to be between 0 and 1

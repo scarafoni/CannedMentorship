@@ -51,6 +51,7 @@ def semantic_distance_matrix(sentences,method='wn'):
     tokens = [w for w in tokens if not w in stopwords.words('english')] 
     for (v1,v2) in itertools.product([tokens,tokens])
         distances.append(vec_semantic_sim(v1, v2, method))
+    return distances
 
 # calculate the distance matrix based on bow, 2-3 grams, semantics
 def kitchen_sink(sentences):
@@ -134,13 +135,18 @@ def hac(sentences, feat_dist='default', thresh=0.5):
         return fcluster(Z=linked,t=thresh)
 
     elif dist_func = 'wn':
-        distances = 
+        distances = semantic_distance_matrix(sentences, 'wn')
+        linkd = linkage(y=numpy.array(distances))
+        return fcluster(Z=linked,t=thresh)
+        
+    elif dist_func = 'cn':
+        distances = semantic_distance_matrix(sentences, 'cn')
+        linkd = linkage(y=numpy.array(distances))
+        return fcluster(Z=linked,t=thresh)
 
     # standard distance function
     else:
-        distances = dist_func(f_mat)
-        # print('distances',distances)
-    return fcluster(linkage(distances,t=thresh)) 
+        return "error"
 
 def dbscan(fmat,thresh=0.7):
     groups = DBSCAN(eps=thresh,min_samples=1).fit_predict(fmat.toarray())
