@@ -136,17 +136,7 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
     thresh = 0.5
     eps = 0.7
     damping = 0.5
-    # bag of words
-    # bag of words and n-grams
-    # bag of words, n-grams, wn
-    # wordnet
-    # conceptnet
-    #
-    # -- not here
-    # affinity propagation
-    # dbscan
-    
-    # figure out the classification
+
     if feat_dist == 'bow':
         f_mat = feature_extraction(inputs=sentences,\
                                    extraction_method='tfidf')
