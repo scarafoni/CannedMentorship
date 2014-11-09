@@ -1,0 +1,16 @@
+write the document (the actual content varies based on the nature of the paper)
+write the document and save
+write down teh appropriate content taht you want to input, including beginning and conclusion
+#
+make sure to save your work by clicking the save button
+error check
+click on the file and save when you're done typing
+save the file by pressing ctrl+s (or command+s if you're on a mac)
+save your work
+#
+create a hashing function to store data
+write a constructor
+create a hashtag function to store data
+add hashvalue method
+make a constructor
+create another array for keys

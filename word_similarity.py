@@ -30,19 +30,19 @@ def vec_semantic_sim(v1,v2,method='wn'):
 
     for w1 in v1:
         same_pos = [x[0] for x in v2 if x[1] == w1[1]]
-        # print('same pos',same_pos)
-        t_sim += max([comparer(w1[0],x) for x in same_pos]) if same_pos\
-                 else 0
+        # print('same pos',same_pos,w1)
+        t_sim += max([comparer(w1[0],x) for x in same_pos]) if same_pos else 0.0
 
     for w1 in v2:
         same_pos = [x[0] for x in v1 if x[1] == w1[1]]
-        # print('same pos',same_pos)
-        t_sim += max([comparer(w1[0],x) for x in same_pos]) if same_pos\
-                 else 0
+        # print('same pos2',same_pos,w1)
+        t_sim += max([comparer(w1[0],x) for x in same_pos]) if same_pos else 0.0
 
     # print('similarity',t_sim / float(len(v1)+len(v2)))
-    return t_sim / float(len(v1)+len(v2))
-    
+    t = float(len(v1)+len(v2))
+    return t_sim / t if t > 0.0 else 0.0   
+
+
 def wordnet_similarity(w1, w2, sim=wn.path_similarity):
   synsets1 = wn.synsets(w1)
   synsets2 = wn.synsets(w2)
@@ -50,15 +50,20 @@ def wordnet_similarity(w1, w2, sim=wn.path_similarity):
   for synset1 in synsets1:
     for synset2 in synsets2:
       sim_scores.append(sim(synset1, synset2))
-  if len(sim_scores) == 0:
-    return 0
+  if len(sim_scores) == 0 or None in sim_scores:
+    return 0.0
   else:
     return max(sim_scores)
 
 def cn_similarity(w1, w2):
     req = requests.get('http://conceptnet5.media.mit.edu/data/5.2/assoc/c/en/'+w1+'?filter=/c/en/'+w2+'&limit=1')
-    # print('sim',w1,w2,float(req.json()['similar'][0][1]))
-    return float(req.json()['similar'][0][1])
+
+    print('sim',w1,w2,req.json()['similar'])
+    if req.json()['similar']:
+        print('sim',w1,w2,float(req.json()['similar'][0][1]))
+        return float(req.json()['similar'][0][1])
+    else:
+        return 0.0
 
 def main():
     (word1, word2) = ("large", "big")

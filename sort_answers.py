@@ -14,6 +14,7 @@ from nltk.corpus import stopwords
 import string
 from word_similarity import vec_semantic_sim
 import itertools
+import time
 
 
 # proprocessing inspired by duke university
@@ -85,11 +86,11 @@ def kitchen_sink(sentences,format='array'):
                 distance = 0.0
                 # bow, ngrams
                 lex_sim = float(pdist(numpy.concatenate((tdif_feat[i].toarray(), tdif_feat[j].toarray()))))
-                print('sentences',tokens[i],tokens[j])
-                print('lex sim', lex_sim)
+                # print('sentences',tokens[i],tokens[j])
+                # print('lex sim', lex_sim)
                 # semantic similarities
                 sem_sim = 1.0 - vec_semantic_sim(tokens[i], tokens[j])
-                print('sem sim', sem_sim)
+                # print('sem sim', sem_sim)
                 distances.append((lex_sim + sem_sim)/2.0)
             
     else:
@@ -106,7 +107,7 @@ def kitchen_sink(sentences,format='array'):
                 row.append((lex_sim + sem_sim)/2.0)
             distances.append(row) 
 
-    print('distances',distances)
+    # print('distances',distances)
     return distances
 
 def feature_extraction(inputs,extraction_method="tfidf"):
@@ -205,10 +206,10 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
         return "error"
 
 
-def filter_inputs(inputs):
+def filter_inputs(inputs,classfn,feat_dist):
     feature_mat = feature_extraction(inputs=inputs)
     # print('feature matrix',feature_mat)
-    groupings = group_up(f_mat=feature_mat)
+    groupings = group_up(inputs,classfn=classfn, feat_dist=feat_dist)
     # print('groupings',groupings)
 
     final = []
@@ -254,11 +255,18 @@ if __name__== '__main__':
         r = r.read()
         r = r.split('\n#\n')
         r = [x.split('\n') for x in r]
-        for x in r:
-            print('line',x)
         
-        for (c,d) in itertools.product(['hac', 'dbscan', 'affprop'],['bow', 'bow-ngram', 'ks', 'wn', 'cn']):
-            print(c,d,group_up(inputs2, classfn=c,feat_dist=d))
+        hold = ''
+        for (i,c,d) in itertools.product(r,\
+                                         ['hac', 'dbscan', 'affprop'],\
+                                         ['bow', 'bow-ngram','ks', 'wn','cn']):
+            start = time.time()
+            filtered = filter_inputs(i,classfn=c,feat_dist=d)
+            elapsed = time.time() - start
+            if i != hold:
+                w.write('\n###\n')
+                hold = i
+            w.write(c+','+d+','+str(elapsed)+'\n'+'\n'.join(filtered)+'\n\n')
     # print(filter_inputs(inputs2))
     
               

@@ -1,0 +1,187 @@
+
+###
+hac,bow,0.0389609336853
+write the document (the actual content varies based on the nature of the paper)
+write down teh appropriate content taht you want to input, including beginning and conclusion
+
+hac,bow-ngram,0.00578284263611
+write the document (the actual content varies based on the nature of the paper)
+write down teh appropriate content taht you want to input, including beginning and conclusion
+
+hac,ks,1.11830496788
+write the document (the actual content varies based on the nature of the paper)
+write down teh appropriate content taht you want to input, including beginning and conclusion
+
+hac,wn,0.25258898735
+write down teh appropriate content taht you want to input, including beginning and conclusion
+write the document and save
+
+dbscan,bow,0.0065929889679
+write down teh appropriate content taht you want to input, including beginning and conclusion
+write the document and save
+write the document (the actual content varies based on the nature of the paper)
+
+dbscan,bow-ngram,0.0062370300293
+write down teh appropriate content taht you want to input, including beginning and conclusion
+write the document and save
+write the document (the actual content varies based on the nature of the paper)
+
+dbscan,ks,1.09897303581
+write the document (the actual content varies based on the nature of the paper)
+write down teh appropriate content taht you want to input, including beginning and conclusion
+write the document and save
+
+dbscan,wn,0.851958036423
+write down teh appropriate content taht you want to input, including beginning and conclusion
+
+affprop,bow,0.00722479820251
+write the document (the actual content varies based on the nature of the paper)
+write down teh appropriate content taht you want to input, including beginning and conclusion
+
+affprop,bow-ngram,0.0069739818573
+write the document (the actual content varies based on the nature of the paper)
+write down teh appropriate content taht you want to input, including beginning and conclusion
+
+affprop,ks,0.858538866043
+write down teh appropriate content taht you want to input, including beginning and conclusion
+
+affprop,wn,0.847246170044
+write the document (the actual content varies based on the nature of the paper)
+write down teh appropriate content taht you want to input, including beginning and conclusion
+
+
+###
+hac,bow,0.00628709793091
+make sure to save your work by clicking the save button
+click on the file and save when you're done typing
+save the file by pressing ctrl+s (or command+s if you're on a mac)
+error check
+
+hac,bow-ngram,0.00616812705994
+make sure to save your work by clicking the save button
+click on the file and save when you're done typing
+save the file by pressing ctrl+s (or command+s if you're on a mac)
+error check
+
+hac,ks,1.77223992348
+make sure to save your work by clicking the save button
+click on the file and save when you're done typing
+error check
+save the file by pressing ctrl+s (or command+s if you're on a mac)
+
+hac,wn,1.38824915886
+click on the file and save when you're done typing
+save the file by pressing ctrl+s (or command+s if you're on a mac)
+make sure to save your work by clicking the save button
+error check
+
+dbscan,bow,0.00761795043945
+make sure to save your work by clicking the save button
+save your work
+click on the file and save when you're done typing
+error check
+save the file by pressing ctrl+s (or command+s if you're on a mac)
+
+dbscan,bow-ngram,0.00730490684509
+error check
+click on the file and save when you're done typing
+save the file by pressing ctrl+s (or command+s if you're on a mac)
+make sure to save your work by clicking the save button
+save your work
+
+dbscan,ks,4.24353504181
+error check
+save your work
+save the file by pressing ctrl+s (or command+s if you're on a mac)
+click on the file and save when you're done typing
+make sure to save your work by clicking the save button
+
+dbscan,wn,4.03312110901
+save the file by pressing ctrl+s (or command+s if you're on a mac)
+
+affprop,bow,0.00796890258789
+make sure to save your work by clicking the save button
+error check
+save the file by pressing ctrl+s (or command+s if you're on a mac)
+
+affprop,bow-ngram,0.00796794891357
+make sure to save your work by clicking the save button
+error check
+save the file by pressing ctrl+s (or command+s if you're on a mac)
+
+affprop,ks,4.04676818848
+save the file by pressing ctrl+s (or command+s if you're on a mac)
+save your work
+
+affprop,wn,4.02838301659
+save the file by pressing ctrl+s (or command+s if you're on a mac)
+make sure to save your work by clicking the save button
+
+
+###
+hac,bow,0.00707101821899
+create a hashing function to store data
+
+create another array for keys
+make a constructor
+add hashvalue method
+write a constructor
+
+hac,bow-ngram,0.00695991516113
+create a hashing function to store data
+
+hac,ks,0.375515937805
+create a hashing function to store data
+write a constructor
+
+create another array for keys
+add hashvalue method
+
+hac,wn,0.337795972824
+create a hashing function to store data
+
+dbscan,bow,0.00817608833313
+
+create another array for keys
+create a hashtag function to store data
+add hashvalue method
+make a constructor
+write a constructor
+create a hashing function to store data
+
+dbscan,bow-ngram,0.00818514823914
+create a hashtag function to store data
+make a constructor
+write a constructor
+create another array for keys
+add hashvalue method
+create a hashing function to store data
+
+
+dbscan,ks,1.13275909424
+create a hashing function to store data
+create a hashtag function to store data
+make a constructor
+create another array for keys
+
+add hashvalue method
+write a constructor
+
+dbscan,wn,1.03281807899
+create a hashing function to store data
+
+affprop,bow,0.00799512863159
+create a hashing function to store data
+
+affprop,bow-ngram,0.0078911781311
+create a hashing function to store data
+
+affprop,ks,1.06580901146
+create a hashing function to store data
+
+
+affprop,wn,1.03453993797
+create a hashing function to store data
+write a constructor
+
+
