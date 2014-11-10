@@ -1,22 +1,22 @@
 \contentsline {chapter}{Abstract}{ii}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
-\contentsline {chapter}{\numberline {2}Background}{3}
-\contentsline {section}{\numberline {2.1}Commonsense Problem Formulation}{4}
-\contentsline {section}{\numberline {2.2}Significance}{5}
-\contentsline {section}{\numberline {2.3}3D Simulations}{6}
-\contentsline {section}{\numberline {2.4}Specialist Programs}{7}
-\contentsline {section}{\numberline {2.5}Usage in the IMS\xspace and Connection to Epilog}{8}
-\contentsline {section}{\numberline {2.6}Object Construction and Placement}{10}
-\contentsline {chapter}{\numberline {3}Methodology}{12}
-\contentsline {section}{\numberline {3.1}High Level Overview}{13}
-\contentsline {section}{\numberline {3.2}Objects and Entities}{15}
-\contentsline {section}{\numberline {3.3}Predications}{17}
-\contentsline {subsection}{\numberline {3.3.1}Vision Predication}{17}
-\contentsline {subsection}{\numberline {3.3.2}Placement Methods}{23}
-\contentsline {chapter}{\numberline {4}Results}{27}
-\contentsline {section}{\numberline {4.1}Binary Query Tests}{28}
-\contentsline {section}{\numberline {4.2}Binary Placement Testing}{30}
-\contentsline {section}{\numberline {4.3}Full Scene Simulation}{32}
-\contentsline {chapter}{\numberline {5}Conclusion and Discussion}{37}
-\contentsline {chapter}{\numberline {6}Code Tables}{41}
-\contentsline {chapter}{Bibliography}{46}
+\contentsline {chapter}{\numberline {2}Background}{2}
+\contentsline {section}{\numberline {2.1}Commonsense Problem Formulation}{3}
+\contentsline {section}{\numberline {2.2}Significance}{4}
+\contentsline {section}{\numberline {2.3}3D Simulations}{5}
+\contentsline {section}{\numberline {2.4}Specialist Programs}{6}
+\contentsline {section}{\numberline {2.5}Usage in the IMS\xspace and Connection to Epilog}{7}
+\contentsline {section}{\numberline {2.6}Object Construction and Placement}{9}
+\contentsline {chapter}{\numberline {3}Methodology}{10}
+\contentsline {section}{\numberline {3.1}High Level Overview}{11}
+\contentsline {section}{\numberline {3.2}Objects and Entities}{13}
+\contentsline {section}{\numberline {3.3}Predications}{15}
+\contentsline {subsection}{\numberline {3.3.1}Vision Predication}{15}
+\contentsline {subsection}{\numberline {3.3.2}Placement Methods}{21}
+\contentsline {chapter}{\numberline {4}Results}{25}
+\contentsline {section}{\numberline {4.1}Binary Query Tests}{26}
+\contentsline {section}{\numberline {4.2}Binary Placement Testing}{28}
+\contentsline {section}{\numberline {4.3}Full Scene Simulation}{30}
+\contentsline {chapter}{\numberline {5}Conclusion and Discussion}{35}
+\contentsline {chapter}{\numberline {6}Code Tables}{39}
+\contentsline {chapter}{Bibliography}{44}

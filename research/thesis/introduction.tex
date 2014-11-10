@@ -1,16 +1,1 @@
 %Introduction
-Commonsense reasoning is the field of artificial intelligence dedicated to simulating and replicating high level intuition in human beings. 
-Because many higher level human reasoning processes involve knowledge (intuitive or otherwise) about three-dimensional objects, scenes, and situations, and because significant evidence exists indicating that human minds utilize simulations in three-dimensions when thinking, it follows that reasoning in spatial environments is an intuitive and important part of artificial intelligence \cite{selman1998analogical}. 
-
-Dr. Lenhart Schubert's Epilog project is a natural language processing system which is capable of symbolic reasoning of English utterances. 
-The system has shown success in a number of tests, however, does not have a system for reasoning in in three dimensions \cite{schubert2000episodic}. 
-Although the system could theoretically reason as such, the act of doing so would require an extensive library of ad-hoc information and costly computation. For example, consider the phrase,
-
-\begin{center} “it is unwise to play leap-frog with a unicorn.” \end{center}
-
-Reasoning about this phrase requires knowledge of the anatomy of both a human and unicorn, the basics of the game leap-frog (i.e. one entity moves from the anterior to posterior of the other, usually passing over the head), and that sharp object cause pain when in contact with certain body parts. 
-Rather than hand-code all of these (and more) properties into the system, it makes much more sense to utilize a 3D simulation, where many of these properties are ingrained into the framework.
-
-Luckily, Epilog has a built in framework for integrating so-called “specialists.” 
-These programs are additions to the Epilog framework which are able to quickly and efficiently solve logical lemmas over a subset of the overall domain of the larger system \cite{schubert1983determining,schubert1987accelerating,schubert2000episodic}. As a means of supplementing and improving the reasoning capabilities of the Epilog project, and to bring it closer to its goal of accurate simulation of human thought, our group chose to create a specialist for reasoning in three dimensions. 
-The project began over the summer and has continued into this year. We have been able to create and implement a system which can successfully place and query entities over a small library of objects and predications.
