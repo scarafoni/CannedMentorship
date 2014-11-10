@@ -264,7 +264,7 @@ def send_updates():
     #write state
     elif state == "write":
         got_my_input = u_id in redis.lrange('input_ids',0,-1)
-        print('got_my_input',got_my_input)
+        # print('got_my_input',got_my_input)
         return jsonify(inputs=str(len(redis.lrange('inputs',0,-1))),\
                    got_my_input=got_my_input,\
                    total_players=redis.get('total_players'),\
