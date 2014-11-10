@@ -1,0 +1,106 @@
+\documentclass[11pt,leqno]{report}
+
+% Feb 24, 2010 vandurme> I used a separate header.tex to capture personal
+% shortcuts, and included packages. This allowed my to create mini-documents
+% based on each chapter, by having a distinct top-level file around each of the
+% files "\include"-ed below, that could each then use the same header (so
+% changes would be kept in sync):
+%
+%\input{header}
+%
+% The first two things in that header:
+\usepackage{urcsbiblio}
+\usepackage{courier}
+\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage{urcsthesis}
+\usepackage{verbatim}
+\usepackage[pdftex]{graphicx}
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{multirow}
+\usepackage{setspace}
+\usepackage{enumitem}
+
+\pdfinfo{
+/Title (3D Reasoning in Natural Language Processing)
+/Author (Daniel J. Scarafoni)
+/Keywords (thesis, 3D modeling, commonsense reasoning)
+}
+\newcommand\todo[1]{\textcolor{red}{#1}}
+\newcommand\TDS[0]{IMS\xspace}
+
+\newenvironment{myfont}[6][1]
+  {\par\linespread{#1}\fontsize{#5}{#6}\changefont{#2}{#3}{#4}}
+  {\par}
+  
+\begin{document}
+\sloppy
+\title{3D Reasoning in Natural Language Processing}
+\thesisdegree{\sc Bachelor's of Science with Honors Research}
+\author{Daniel J. Scarafoni}
+\thesissupervisor{Professor Lenhart K. Schubert}
+\maketitle
+
+
+%%%dedication page
+\thispagestyle{empty}
+%\thispagestyle{plain}
+\newenvironment{dedication}
+{\cleardoublepage \thispagestyle{empty} \vspace*{\stretch{1}}
+  \begin{center} \em}
+  {\end{center} \vspace*{\stretch{3}} }
+
+
+\begin{abstract}
+	Commonsense reasoning is the field of artificial intelligence dedicated to simulating and replicating high level intuition in human beings. 
+	Because many higher level human reasoning processes involve knowledge (intuitive or otherwise) about three-dimensional objects, scenes, and situations, and because significant evidence exists indicating that human minds utilize simulations in three-dimensions when thinking, it follows that reasoning in spatial environments is an intuitive and important part of artificial intelligence.
+	
+	Dr. Lenhart Schubert's Epilog project is a natural language processing venture which is capable of symbolic reasoning of English utterances.
+	For spatially-related problems, it makes sense to utilize a 3D simulation.
+	
+	As a means of supplementing and improve the reasoning capabilities of the Epilog project, and to bring it closer to its goal of accurate simulation of human thought, we chose to create a specialist for reasoning in three dimensions (dubbed the Imagistic Modeling Specialist, \TDS).
+	Our project began over the summer and has continued into this year. 
+	We have been able to create and implement a system which can successfully place and query entities over a small library of objects and predications.
+\end{abstract}
+
+\tableofcontents
+\pagebreak\
+
+%my way of organizing
+\chapter{Introduction}
+\input{introduction}
+
+%TODO: more background
+\chapter{Background}
+\input{background}
+
+%todo: methodology
+\chapter{Methodology}
+\input{methodology}
+
+\chapter{Results}
+\input{results}
+
+\chapter{Conclusion and Discussion}
+\input{conclusion}
+
+\chapter{Code Tables}
+\input{codesection}
+
+
+%\chapter{Discussion}
+%\input{discussion}
+
+
+\bibliography{refs}
+\bibliographystyle{named}
+
+\appendix
+\end{document}
+
+
+

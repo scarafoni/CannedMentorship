@@ -1,0 +1,180 @@
+%
+% urcsmacros
+%
+% author: Lawrence A. Crowl
+% last updated: 28 April 1990
+%
+% BibTeX
+%
+\newcommand{\BibTeX}{{B\kern-.0833em{\sc ib}\kern-.1667em%
+T\kern-.1667em\lower.5ex\hbox{E}\kern-.125emX}}
+%
+% SLiTeX
+%
+\newcommand{\SliTeX}{{\rm S\kern-.06em{\sc l\kern-.035emi}\kern-.06em
+T\kern -.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%
+% UNIX
+%
+\newcommand{\UNIX}{{\sc Unix}}
+%
+% trademark
+%
+\newcommand{\trademark}{$^{\rm TM}$}
+%
+% singlespacing (for use in doublespaced documents)
+%
+\def\doublespacefactor#1#2{%
+\newenvironment{singlespace}{\baselineskip #2\baselineskip}%
+{\par \baselineskip #1\baselineskip}%
+\par \baselineskip #1\baselineskip}
+%
+% various latin abbreviations
+%
+\def\adhoc{{\em ad hoc}}
+\def\aposteriori{{\em a posteriori}}
+\def\apriori{{\em a priori}}
+\def\Cf{{\em Cf.}}
+\def\cf{{\em cf.}}
+\def\Eg{{\em E.g.}}
+\def\eg{{\em e.g.}}
+\def\etal{{\em et al.}}
+\def\etc{{\em etc.}}
+\def\Ibid{{\em Ibid.}}
+\def\ibid{{\em ibid.}}
+\def\Id{{\em Id.}}
+\def\id{{\em id.}}
+\def\Ie{{\em I.e.}}
+\def\ie{{\em i.e.}}
+\def\Loccit{{\em Loc.\ cit.}}
+\def\loccit{{\em loc.\ cit.}}
+\def\Opcit{{\em Op.\ cit.}}
+\def\opcit{{\em op.\ cit.}}
+\def\qv{{\em q.v.}}
+\def\Qv{{\em Q.v.}}
+\def\viz{{\em viz.}}
+%
+% andbreak  (for breaking author lists)
+%
+\def\andbreak{%% \begin{tabular}
+\end{tabular}\\\begin{tabular}[t]{c}%% \end{tabular}
+}
+%
+% titlequote
+%
+\def\titlequote#1{\hfill
+\parbox{4in}{\begin{flushright}{\small\it #1}\end{flushright}}}
+%
+% weekdaystring
+%
+% Dump the day of the week in string form.
+% This macro is only valid from 1901 A.D. through 2099 A.D.
+%
+\def\weekdaystring#1#2#3{{% extra brace saves enclosing register state
+%
+% days through the end of the year
+% days := current year * 365
+\count10=#3%
+\multiply\count10 by 365%
+% leap years := year / 4
+\count11=#3%
+\divide\count11 by 4%
+% days := days + leap years
+\advance\count10 by \count11
+%
+% find out if the current year is a leap year
+% last leap year := leap years * 4
+\count12=\count11%
+\multiply\count12 by 4
+% years since last leap year := current year - last leap year
+\count13=#3%
+\advance\count13 by -\count12%
+% years since last leap year equals zero when current year is a leap year
+%
+% subtract off those days in this month and the following months
+% days = days - following days [ is leap ] [ current month ]
+\ifcase#2%
+\or\ifcase\count13\advance\count10 by -366% leap January
+\else\advance\count10 by -365% normal January
+\fi%
+\or\ifcase\count13\advance\count10 by -335% leap February
+\else\advance\count10 by -334% normal February
+\fi%
+\or\advance\count10 by -306% March
+\or\advance\count10 by -275% April
+\or\advance\count10 by -245% May
+\or\advance\count10 by -214% June
+\or\advance\count10 by -184% July
+\or\advance\count10 by -153% August
+\or\advance\count10 by -122% September
+\or\advance\count10 by -92% October
+\or\advance\count10 by -61% November
+\or\advance\count10 by -31% December
+\fi%
+%
+% update days by day of month
+% days := days + current day
+\advance\count10 by #1%
+%
+% find weekday number
+% offset for initial day of the week
+\advance\count10 by 5
+% last monday := (current day / 7) * 7
+\count14=\count10%
+\divide\count14 by 7%
+\multiply\count14 by 7
+% weekday number := current day - last monday
+\count15=\count10%
+\advance\count15 by -\count14
+%
+% now dump out appropriate string
+\ifcase\count15 Monday\or Tuesday\or Wednesday%
+\or Thursday\or Friday\or Saturday\or Sunday\fi%
+}}
+%
+% monthstring
+%
+% Dump the month in string form.
+%
+\def\monthstring#1{\ifcase#1\or January\or February\or March\or April\or May%
+\or June\or July\or August\or September\or October\or November\or December\fi}
+%
+% dateWDMY
+%
+% Redefine \today as "weekdaystring daynumber monthstring yearnumber" format.
+%
+\def\dateWDMY{\def\today{\weekdaystring{\day}{\month}{\year}\space%
+\number\day\space\monthstring{\month}\space\number\year}}
+%
+% dateDMY
+%
+% Redefine \today as "daynumber monthstring yearnumber" format.
+%
+\def\dateDMY{\def\today{\number\day\space\monthstring{\month}%
+\space\number\year}}
+%
+% dateWMDY
+%
+% Redefine \today as "weekdaystring monthstring daynumber, yearnumber" format.
+%
+\def\dateWMDY{\def\today{\weekdaystring{\day}{\month}{\year}\space%
+\monthstring{\month}\space\number\day,\space\number\year}}
+%
+% dateMDY
+%
+% Redefine \today as "monthstring daynumber, yearnumber" format.
+%
+\def\dateMDY{\def\today{\monthstring{\month}\space\number\day,%
+\space\number\year}}
+%
+% dateMY
+%
+% Redefine \today as "monthstring yearnumber" format.
+%
+\def\dateMY{\def\today{\monthstring{\month}\space\number\year}}
+%
+% dateY
+%
+% Redefine \today as "yearnumber" format.
+%
+\def\dateY{\def\today{\number\year}}

@@ -1,0 +1,310 @@
+%
+% urcsthesis
+%
+% author: Lawrence A. Crowl
+%
+% Modified: Nathaniel G. Martin
+%           April 14, 1993
+%
+% Modified: Dan Gildea
+%           May 2, 2006
+%	    natbib compatibility
+%
+% Modified: Matt Post
+%           December 15, 2010
+%           Foreword environment, \mylistofalgorithms
+%
+\typeout{Document Style `urcsthesis' <15 December 2010> (modified).}
+%
+% margin settings
+%
+\input{urcsmargin.sty}
+\textwidth 5.75in
+%
+% These changes to the defaults set in urcsmargin.sty are necessary to
+% make the page number come out as requred by the UR thesis manual.
+% (NGM)
+%
+\topmargin -.5in
+\headheight 12pt
+\headsep 42pt
+%
+% get UR macros
+%
+\newlength{\chaptitlewidth}
+\newlength{\chapnowidth}
+\input{urcsmacros}
+%
+% Space and a half.  Required because the committee designing the
+% standards was confused.  Cannot be changed because it is a rule.
+% (NGM)
+%
+\renewcommand{\baselinestretch}{1.5}
+\newcommand{\singlespacethesis}{\def\baselinestretch{1}}
+%
+% year date format.  Required by new manual 1992 (NGM)
+%
+\dateY
+%
+% thesisby
+%
+\def\thesisby#1{\gdef\@thesisby{#1}}
+\def\@thesisby{\vskip 2ex by\vskip 2ex}
+%
+% thesissubmit
+%
+\def\thesissubmit#1{\gdef\@thesissubmit{#1}}
+\def\@thesissubmit{\vskip 6ex Submitted in Partial Fulfillment\\~\\of the\\~\\
+Requirements for the Degree\vskip 2ex}
+%
+% thesisproposal
+%
+\def\thesisproposal{\thesissubmit{\vskip 6ex
+Thesis Proposal\\~\\for the Degree\vskip 2ex}}
+%
+% thesisdegree
+%
+\def\thesisdegree#1{\gdef\@thesisdegree{#1}}
+% Changed from small caps in accord with new requirement from Dean
+% Beach May 1994 (NGM)
+\def\@thesisdegree{{Doctor of Philosophy}}
+%
+% thesissupervisor.  Changed 1992 (NGM)
+%
+\def\thesissupervisor#1{\gdef\@thesissupervisor{#1}}
+\def\@thesissupervisor{UNKNOWN}
+%
+% thesissupervise
+%
+\def\thesissupervise#1{\gdef\@thesissupervise{#1}} 
+\def\@thesissupervise{\vskip 6ex Supervised by\\~\\
+  \@thesissupervisor\vskip 2ex}
+%
+% thesisdepartment  Changed 1992 (NGM)
+%
+% Changed Fall 2009 - CS is now in engineering
+%
+\def\thesisdepartment#1{\gdef\@thesisdepartment{#1}}
+\def\@thesisdepartment{Department of Computer Science\\Arts, Science \& Engineering\\
+  Edmund A. Hajim School of Engineering \& Applied Sciences}
+%
+% thesisuniversity  Changed 1992 (NGM)
+%
+\def\thesisuniversity#1{\gdef\@thesisuniversity{#1}}
+\def\@thesisuniversity{\vskip 3ex
+University of Rochester\\Rochester, New York}
+%
+% redefine maketitle to use the empty page style
+%
+\def\maketitle{\par
+ \begingroup
+ \def\thefootnote{\fnsymbol{footnote}}
+ \def\@makefnmark{\hbox
+   to 0pt{$^{\@thefnmark}$\hss}}
+ \newpage
+   \global\@topnum\z@        % Prevents figures from going at top of page.
+   \@maketitle\thispagestyle{empty}\@thanks
+ \endgroup
+ \setcounter{footnote}{0}
+ \let\maketitle\relax
+ \let\@maketitle\relax
+ \gdef\@thanks{}\gdef\@author{}\gdef\@title{}\let\thanks\relax}
+%
+% redefine @maketitle to box the information appropriately
+%   added parbox and hskip before it
+%   added techrepdept and techrepnum
+%   changed vertical space after date
+%
+\def\@maketitle{
+  %
+  % Turn off space and a half for title page (NGM)
+  %
+  \renewcommand{\baselinestretch}{1}
+  \newpage
+  \thispagestyle{empty}        % So we get no page number on the title page
+  \null
+  \vspace{0.25in}              % Vertical space above title.
+  \begin{center}
+    {\huge \@title \par}        % Title set in \huge size.
+    {\large \@thesisby          % Author set in \large size
+      \@author \par}
+    {\large \@thesissubmit \@thesisdegree}
+    {\large \@thesissupervise}
+    {\large \@thesisdepartment}
+    {\large \@thesisuniversity \vskip 1.5em \@date}
+  \end{center}
+  \pagenumbering{roman}
+  \clearpage
+}
+%
+% curriculumvitaehead
+%
+\def\curriculumvitaehead#1{\gdef\@curriculumvitaehead{#1}}
+\def\@curriculumvitaehead{\thispagestyle{plain}
+\chapter*{Curriculum Vitae\@mkboth{CURRICULUM VITAE}{CURRICULUM VITAE}}
+\addcontentsline{toc}{chapter}{Curriculum Vitae}}
+%
+% curriculumvitae
+%
+\newenvironment{curriculumvitae}{\@curriculumvitaehead}{\clearpage}
+%
+% acknowledgmentshead
+%
+\def\acknowledgmentshead#1{\gdef\@acknowledgmentshead{#1}}
+\def\@acknowledgmentshead{\thispagestyle{plain}
+\chapter*{Acknowledgments\@mkboth{ACKNOWLEDGEMENTS}{ACKNOWLEDGEMENTS}}
+\addcontentsline{toc}{chapter}{Acknowledgments}}
+%
+% acknowledgments
+%
+\newenvironment{acknowledgments}{\@acknowledgmentshead}{\clearpage}
+%
+% abstracthead
+%
+\def\abstracthead#1{\gdef\@abstracthead{#1}}
+\def\@abstracthead{\thispagestyle{plain}
+\chapter*{Abstract\@mkboth{ABSTRACT}{ABSTRACT}}
+\addcontentsline{toc}{chapter}{Abstract}}
+%
+% use narrow text width for abstract to center under window
+% vfil before abstract
+%
+\renewenvironment{abstract}{\@abstracthead}{\clearpage}
+%
+% forewordhead
+%
+\gdef\firstchapter{0}% Used to control when Arabic-style page number starts
+\def\forewordhead{\@forewordhead}
+\def\@forewordhead{\thispagestyle{plain}
+  \clearpage % if you don't do this, the previous page will get roman numbers too
+  \ifcase\firstchapter % only start Arabic numbers once (checked in \chapter, too)
+    \pagenumbering{arabic}
+    \gdef\firstchapter{1}  % need to do \gdef or it won't be visible later
+  \fi
+  \chapter*{Foreword\@mkboth{FOREWORD}{FOREWORD}}
+  \addcontentsline{toc}{chapter}{Foreword}}
+\newenvironment{foreword}{\@forewordhead}{\clearpage}
+%
+% count chapters and sections two levels deep
+%
+\setcounter{secnumdepth}{2}
+%
+% enter only chapters and top sections are in the table of contents
+%
+\setcounter{tocdepth}{1}
+%
+% redefine plain page to put page numbers towards outside.
+% Changed 1992 to put numbers at top of page. (NGM)
+%
+\def\ps@plain{\let\@mkboth\@gobbletwo
+\def\@oddhead{\rm\hfil\thepage}\def\@oddfoot{}%
+\def\@evenhead{\rm\thepage\hfil}\def\@evenfoot{}}
+\pagestyle{plain}
+%
+% chapter redefinitions
+%
+\def\@chapapp{Chapter}
+\def\thechapter{\arabic{chapter}}
+%
+% \@makechapterhead {TEXT} : Makes the heading for the \chapter command.
+%
+\def\@makechapterhead#1{     % Heading for \chapter command
+  \cleardoublepage
+  \ifcase\firstchapter
+    \pagenumbering{arabic}
+    \def\firstchapter{1} % do not do this again
+  \fi
+  \vspace*{50pt}             % Space at top of text page.
+  { \parindent 0pt \raggedright
+    \par
+    % Print chapter number and title.
+    \huge\bf\thechapter\hspace{1em}%
+\settowidth{\chapnowidth}{\huge\bf\thechapter\hspace{1em}}%
+\setlength{\chaptitlewidth}{\textwidth}%
+\addtolength{\chaptitlewidth}{-\chapnowidth}%
+\parbox[t]{\chaptitlewidth}{\raggedright#1}
+  \nobreak                   % TeX penalty to prevent page break.
+  \vskip 40pt                % Space between title and text.
+  }
+}
+%
+% \tableofcontents gets the title changed
+%
+\def\tableofcontents{\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
+  \fi\chapter*{Table of Contents\@mkboth{TABLE OF CONTENTS}{TABLE OF CONTENTS}}
+  \@starttoc{toc}\if@restonecol\twocolumn\fi}
+%
+% \listoffigures gets table of contents entry
+%
+\def\listoffigures{\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
+  \fi\chapter*{List of Figures\@mkboth
+   {LIST OF FIGURES}{LIST OF FIGURES}}
+   \addcontentsline{toc}{chapter}{List of Figures}\@starttoc{lof}\if@restonecol
+    \twocolumn\fi}
+%
+% \listoffigures gets table of contents entry
+%
+\def\listoftables{\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
+  \fi\chapter*{List of Tables\@mkboth
+   {LIST OF TABLES}{LIST OF TABLES}}
+   \addcontentsline{toc}{chapter}{List of Tables}\@starttoc{lot}\if@restonecol
+  \twocolumn\fi}
+%
+% \mylistofalgorithms allows you to have add a list of algorithms to
+% the TOC, too
+\def\mylistofalgorithms{\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn\fi
+  %% \chapter*{List of Algorithms\@mkboth{LIST OF ALGORITHMS}{LIST OF ALGORITHMS}}
+  \addtocontents{loa}{\vskip 10pt }    %\addvspace {10\p@ }}
+  \listofalgorithms
+  \addcontentsline{toc}{chapter}{List of Algorithms}
+  \@starttoc{loa}\if@restonecol\twocolumn\fi
+}
+%
+%
+% \@makeschapterhead {TEXT} : Makes the heading for the \chapter* command.
+%
+\def\@makeschapterhead#1{    % Heading for \chapter* command
+  \vspace*{50pt}             % Space at top of page.
+  \begin{center}
+  {\huge #1} % Print title.
+  \end{center}
+  \nobreak                   % TeX penalty to prevent page break.
+  \vskip 40pt                % Space between title and text.
+  }
+%
+% place bibliography in table of contents
+%
+\def\thebibliography#1{\cleardoublepage\chapter*{Bibliography\@mkboth
+  {BIBLIOGRAPHY}{BIBLIOGRAPHY}}\addcontentsline{toc}{chapter}{Bibliography}
+%% HERE IS THE NATBIB style inserted, instead of the
+%% article.cls default
+%% \bibfont\bibsection\parindent \z@
+ \list{\@biblabel{\arabic{NAT@ctr}}}{\@bibsetup{#1}%
+    \setcounter{NAT@ctr}{0}}%
+    \ifNAT@openbib
+      \renewcommand\newblock{\par}
+    \else
+      \renewcommand\newblock{\hskip .11em \@plus.33em \@minus.07em}%
+    \fi
+    \sloppy\clubpenalty4000\widowpenalty4000
+    \sfcode`\.=1000\relax
+    \let\citeN\cite \let\shortcite\cite
+    \let\citeasnoun\cite
+ }
+%\list
+%  {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+%    \advance\leftmargin\labelsep
+%    \usecounter{enumi}}
+%    \def\newblock{\hskip .11em plus .33em minus .07em}
+%    \sloppy\clubpenalty4000\widowpenalty4000
+%    \sfcode`\.=1000\relax}
+
+%
+% \clearpage added to start of appendicies
+%
+\def\appendix{\par
+  \setcounter{chapter}{0}
+  \setcounter{section}{0}
+  \setcounter{subsection}{0}
+  \def\@chapapp{Appendix}
+  \def\thechapter{\Alph{chapter}}}

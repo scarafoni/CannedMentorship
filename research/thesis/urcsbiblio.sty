@@ -1,0 +1,28 @@
+%
+% urcsbiblio
+%
+% author: Daniel Gildea
+% last updated: April 28, 2006
+%
+% bibliography citation macros
+%
+
+% this file is a wrapper around the natbib package
+\RequirePackage[round]{natbib}
+
+% \cite{key}       ==>> (Jones et al., 1990)
+\def\cite{\citep}
+% for compatibility with std latex and fullname.sty
+
+% \namecite{key}   ==>>  Jones et al. (1990)  
+\def\namecite{\citet}
+% for compatibility with fullname.sty
+
+% \shortcite{key}  ==>> (1990)
+\def\shortcite{\citeyearpar}
+% for compatibility with old version of urcsbiblio.sty
+
+
+% makebibliography
+%
+\def\makebibliography#1{\bibliographystyle{urcsbiblio}\bibliography{#1}}

@@ -1,0 +1,160 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Barrett and Stone}{2012}]{barrett2012analysis}
+Barrett, S., and Stone, P.
+\newblock 2012.
+\newblock An analysis framework for ad hoc teamwork tasks.
+\newblock In {\em Proceedings of the 11th International Conference on
+  Autonomous Agents and Multiagent Systems-Volume 1},  357--364.
+\newblock International Foundation for Autonomous Agents and Multiagent
+  Systems.
+
+\bibitem[\protect\citeauthoryear{Barrett \bgroup et al\mbox.\egroup
+  }{2013}]{barrett2013teamwork}
+Barrett, S.; Stone, P.; Kraus, S.; and Rosenfeld, A.
+\newblock 2013.
+\newblock Teamwork with limited knowledge of teammates.
+
+\bibitem[\protect\citeauthoryear{Barrett, Stone, and
+  Kraus}{2011}]{barrett2011empirical}
+Barrett, S.; Stone, P.; and Kraus, S.
+\newblock 2011.
+\newblock Empirical evaluation of ad hoc teamwork in the pursuit domain.
+\newblock In {\em The 10th International Conference on Autonomous Agents and
+  Multiagent Systems-Volume 2},  567--574.
+\newblock International Foundation for Autonomous Agents and Multiagent
+  Systems.
+
+\bibitem[\protect\citeauthoryear{Benda, Jagannathan, and
+  Dodhiawala}{1986}]{Benda+JD:1986}
+Benda, M.; Jagannathan, V.; and Dodhiawala, R.
+\newblock 1986.
+\newblock On optimal cooperation of knowledge sources - an empirical
+  investigation.
+\newblock Technical Report BCS--G2010--28, Boeing Advanced Technology Center,
+  Boeing Computing Services, Seattle, WA, USA.
+
+\bibitem[\protect\citeauthoryear{Bernstein \bgroup et al\mbox.\egroup
+  }{2011}]{adrenaline}
+Bernstein, M.~S.; Brandt, J.~R.; Miller, R.~C.; and Karger, D.~R.
+\newblock 2011.
+\newblock Crowds in two seconds: Enabling realtime crowd-powered interfaces.
+\newblock In {\em Proceedings of the 24th annual ACM symposium on User
+  interface software and technology}, UIST '11,  33--42.
+\newblock New York, NY, USA: ACM.
+
+\bibitem[\protect\citeauthoryear{Bernstein \bgroup et al\mbox.\egroup
+  }{2012}]{queuingtheory}
+Bernstein, M.~S.; Karger, D.~R.; Miller, R.~C.; and Brandt, J.~R.
+\newblock 2012.
+\newblock Analytic methods for optimizing realtime crowdsourcing.
+\newblock In {\em Proceedings of Collective Intelligence}, CI 2012.
+
+\bibitem[\protect\citeauthoryear{Dai, Weld, and others}{2011}]{ai-for-aai}
+Dai, P.; Weld, D.~S.; et~al.
+\newblock 2011.
+\newblock Artificial intelligence for artificial artificial intelligence.
+\newblock In {\em Twenty-Fifth AAAI Conference on Artificial Intelligence}.
+
+\bibitem[\protect\citeauthoryear{Genter, Agmon, and
+  Stone}{2011}]{genter2011role}
+Genter, K.~L.; Agmon, N.; and Stone, P.
+\newblock 2011.
+\newblock Role-based ad hoc teamwork.
+\newblock In {\em Plan, Activity, and Intent Recognition}.
+
+\bibitem[\protect\citeauthoryear{Goldberg and Chen}{2001}]{goldberg}
+Goldberg, K., and Chen, B.
+\newblock 2001.
+\newblock Collaborative control of robot motion: Robustness to error.
+
+\bibitem[\protect\citeauthoryear{Koutra \bgroup et al\mbox.\egroup
+  }{2011}]{koutra-graphsimilarity}
+Koutra, D.; Parikh, A.; Ramdas, A.; and Xiang, J.
+\newblock 2011.
+\newblock Algorithms for graph similarity and subgraph matching.
+
+\bibitem[\protect\citeauthoryear{Lasecki and Bigham}{2013}]{interactive-crowds}
+Lasecki, W.~S., and Bigham, J.~P.
+\newblock 2013.
+\newblock {\em Handbook of Human Computation}.
+\newblock Springer.
+\newblock chapter Interactive Crowds: Real-Time Crowdsourcing and Crowd Agents.
+
+\bibitem[\protect\citeauthoryear{Lasecki \bgroup et al\mbox.\egroup
+  }{2011}]{legion}
+Lasecki, W.; Murray, K.; White, S.; Miller, R.~C.; and Bigham, J.~P.
+\newblock 2011.
+\newblock Real-time crowd control of existing interfaces.
+\newblock In {\em Proceedings of the 24th annual ACM symposium on User
+  interface software and technology}, UIST '11,  23--32.
+
+\bibitem[\protect\citeauthoryear{Lasecki \bgroup et al\mbox.\egroup
+  }{2012}]{collab-crowd-planning}
+Lasecki, W.~S.; Bigham, J.~P.; Allen, J.~F.; and Ferguson, G.
+\newblock 2012.
+\newblock Real-time collaborative planning with the crowd.
+\newblock In {\em Twenty-Sixth AAAI Conference on Artificial Intelligence}.
+
+\bibitem[\protect\citeauthoryear{Lasecki \bgroup et al\mbox.\egroup
+  }{2013}]{legion-ar}
+Lasecki, W.~S.; Song, Y.~C.; Kautz, H.; and Bigham, J.~P.
+\newblock 2013.
+\newblock Real-time crowd labeling for deployable activity recognition.
+\newblock In {\em Proceedings of the International ACM Conference on Computer
+  Supported Cooperative Work and Social Computing}, CSCW 2013.
+
+\bibitem[\protect\citeauthoryear{Naim \bgroup et al\mbox.\egroup
+  }{2013}]{astar-msa}
+Naim, I.; Gildea, D.; Lasecki, W.; and Bigham, J.~P.
+\newblock 2013.
+\newblock Text alignment for real-time crowd captioning.
+\newblock {\em Proceedings of NAACL-HLT}  201--210.
+
+\bibitem[\protect\citeauthoryear{Osentoski \bgroup et al\mbox.\egroup
+  }{2010}]{closed-loop-robot}
+Osentoski, S.; Crick, C.; Jay, G.; and Jenkins, O.~C.
+\newblock 2010.
+\newblock Crowdsourcing for closed loop control.
+
+\bibitem[\protect\citeauthoryear{Song and Goldberg}{2003}]{sharecam}
+Song, D., and Goldberg, K.
+\newblock 2003.
+\newblock Sharecam part i: Interface, system architecture, and implementation
+  of a collaboratively controlled robotic webcam.
+
+\bibitem[\protect\citeauthoryear{Stone \bgroup et al\mbox.\egroup
+  }{2010}]{stone2010ad}
+Stone, P.; Kaminka, G.~A.; Kraus, S.; Rosenschein, J.~S.; et~al.
+\newblock 2010.
+\newblock Ad hoc autonomous agent teams: Collaboration without
+  pre-coordination.
+\newblock In {\em AAAI}.
+
+\bibitem[\protect\citeauthoryear{Talamadupula \bgroup et al\mbox.\egroup
+  }{2013}]{herding-the-crowd}
+Talamadupula, K.; Kambhampati, S.; Hu, Y.; Nguyen, T.~A.; and Zhuo, H.~H.
+\newblock 2013.
+\newblock Herding the crowd: Automated planning for crowdsourced planning.
+\newblock In {\em First AAAI Conference on Human Computation and
+  Crowdsourcing}.
+
+\bibitem[\protect\citeauthoryear{Undeger and Polat}{2010}]{undeger2010multi}
+Undeger, C., and Polat, F.
+\newblock 2010.
+\newblock Multi-agent real-time pursuit.
+\newblock {\em Autonomous Agents and Multi-Agent Systems} 21(1):69--107.
+
+\bibitem[\protect\citeauthoryear{von Ahn}{2005}]{humancomputation}
+von Ahn, L.
+\newblock 2005.
+\newblock {\em Human Computation}.
+\newblock Ph.D. Dissertation, Carnegie Mellon University, Pittsburgh, PA.
+
+\bibitem[\protect\citeauthoryear{Weld}{2010}]{weld2010decision}
+Weld, P. D. M. D.~S.
+\newblock 2010.
+\newblock Decision-theoretic control of crowd-sourced workflows.
+\newblock In {\em Twenty-Fourth AAAI Conference on Artificial Intelligence}.
+
+\end{thebibliography}

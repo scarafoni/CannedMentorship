@@ -1,0 +1,44 @@
+%
+%	Little production for making a URCS logo
+%	Requires the PostScript fonts
+%
+% gf:  Changed PS-Bookman-Light to pbkl for use with dvips, 14 Sep 1993.
+%
+\font\biglogofont=pbkl at 48pt
+\font\medlogofont=pbkl at 30pt
+\font\smalllogofont=pbkl at 24pt
+%
+\def\back{\kern-0.07em}
+\def\backmore{\kern-0.10em}
+\def\backless{\kern-0.05em}
+\def\thin{\kern+0.12em}
+\def\thinner{\kern+0.10em}
+\def\tiny{\kern+0.05em}
+\def\tinier{\kern+0.04em}
+%
+\def\UNIVERSITYOF{\medlogofont U\thinner N\thin I\thin V\thin E\thin R\thin S\thin I\thin T\thin Y O\thinner F}
+\def\ROCHESTER{\biglogofont R\kern-0.11em O\back C\backmore H\backless E\back S\back T\backless E\backmore R\tiny}
+\def\COMPUTERSCIENCE{\smalllogofont C\tinier O\tiny M\tiny P\tiny U\tiny T\tiny E\tiny R S\tinier C\tiny I\tiny E\tiny N\tiny C\tiny E}
+%
+\newbox\logo
+\newdimen\logowidth
+\setbox\logo=\hbox{\ROCHESTER}
+\logowidth=\wd\logo
+%
+%
+%
+%	The logo
+%
+\def\urcslogo{\vbox{
+	\hbox to\logowidth{\UNIVERSITYOF}
+	\vskip 6pt
+	\hrule
+	\vskip 6pt
+	\hbox{\ROCHESTER}
+	\vskip 6pt
+	\hrule
+	\vskip 6pt
+	\hbox to\logowidth{\COMPUTERSCIENCE}
+	\vskip 6pt
+	}
+}

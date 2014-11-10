@@ -1,0 +1,74 @@
+
+\begin{longtable}{|p{5cm}|p{10cm}|}
+	\cline{0-0}
+	\small
+	\texttt{obutily.py}  \\\hline
+	Method & Description \\\hline
+	
+	\texttt{cast\_thru(Object start\_obj,Vector endpt, Object end\_obj)}
+	&Casts repeated rays from \texttt{start\_obj} to \texttt{endpt}, noting the degradation due to occlusion that occurs along the way stopping when \texttt{end\_obj} is hit. Returns a value 0-1 indicating the occlusion encountered on the way \\\hline
+	
+	\texttt{nudge(Object a, Vector pt)} & Returns a points several thousandths closer to a from pt, used in repeated ray casting experiments \\\hline
+	
+	\texttt{rayCast(Object a, Vector b)} & Shoots a ray from the center of a to b, returns the same as \texttt{Scene.ray\_cast(start,end)} \\\hline
+	
+	\texttt{alignMeasure(a, b, top=float(inf), right=float(inf),
+	bottom=float(-inf), left=float(-inf))} & Creates a rectangular prism mesh on top of b that can be used for intersection testing. If no maximum top/bottom/etc... points are specified it will use the most outward points on b's bounding box \\\hline	
+	
+	\texttt{highest(Object obj, char dim)} & Returns the highest vertex in the object (in the dimension (x,y,z) specified) \\\hline
+	
+	\texttt{lowestPt(Object obj,char dim)} & Returns the lowest vertex in the object (in the dimension (x,y,z) specified) \\\hline
+	
+	\texttt{getIntersection} & Returns the part of m's mesh that is intersecting with a \\\hline
+	
+	\texttt{getDiff(Object m, Object a)} & Returns the part of m's mesh that is not intersecting with a \\\hline
+	
+	\texttt{closest\_points(Scene scene, Object a, Object b)} & Returns a tuple containing the closest point on the mesh of a to b, and the closest point to a on b's mesh, in that order \\\hline
+	
+	\texttt{maxDim(Object [] ary)} & Returns the largest dimension (x,y,z) among all objects in ary \\\hline
+	
+	\texttt{distance(Vector a, Vector b)} & Returns the distance between a and b (will not work if an object is in the way). Measured without pathfinding. \\\hline
+	
+	\texttt{glob2Loc(Vector pt, Object obj)} & Returns point pt in \texttt{obj}'s local space \\\hline
+	
+	\texttt{vertsGlob(Object obj)} & Returns an array of \texttt{obj}'s vertices in global coordinates \\\hline
+	
+	\texttt{locs2Glob(Vector[] pts, Object obj)} & Returns the location of the coordinates in \texttt{pts} in global coordinates (assuming \texttt{pts} are originally in \texttt{obj}'s local space) \\\hline
+	
+	\texttt{loc2Glob(Vecotr pts, Object obj)} & Same as \texttt{locs2Glob}, but for only one point \\\hline
+	
+	\texttt{aInBSpace(Vector pt, Object a, Object b)} & Returns pt (which is in \texttt{a}'s local space at the start) in \texttt{b}'s local space; works through matrix multiplication \\\hline
+	
+	\texttt{getVolume(Object obj)} & Returns the volume in $BV^3$ of the object; underneath this wrapper method are numerous helper methods \\\hline
+	\caption{Obutils Methods}\tabularnewline
+%\end{spacing}
+\end{longtable}
+
+
+\newpage
+
+\begin{longtable}{| p{3cm} | p{2.5cm} | p{5cm} | p{4cm} |}
+	\cline{0-0}
+	\small
+	\texttt{predMethods.py}  \\\hline
+	Predicate & Description & \texttt{Query} & \texttt{Place()} \\\hline
+	
+	\texttt{near(A,B)} & determines whether A is close to B & Iterates through the children of a and b and selects the two with the shortest distance between the two meshes. the value returned is the distance relativized to the sizes of the two entities. The result is not proportional to distance, and returns true up to a certain distance and then a result from a steeply graded exponential function thereafter. & Returns a box bounded by the x and y location of the focal object plus and minus the largest dimensions of the two objects.
+	\\\hline
+	
+	\texttt{under(A,B)} & determines to what extent A is underneath B & draws a temporary object directly under B; the percent volume of A that intersects with this is the return value & If B is the focal object, it returns a bounding area spanning from the bottom of B to 5 BU under B. If A is the focal object, the z boundary is from the top of A to 5 BU above A. In either case, the x any y boundaries are the maximum of the two objects in the respective dimensions.
+	\\\hline
+	
+	\texttt{in(A,B)} & determines whether A is inside B's bounding box & draws a temporary object around B's bounding box and returns the percent volume of A, or true if more than half of A's volume is in B. & The boundaries in all dimensions are A's location plus or minus B's size in the given dimension. \\\hline
+	
+	\texttt{inside(A,B)} & determines the extent to which A is inside B & same as in(A,B), but the temporary object is drawn around B's mesh rather than bounding box & The boundaries in all dimensions are A's location plus or minus B's size in the given dimension. \\\hline
+	
+	\texttt{above(A,B)} & determines the extent to which A is above B & Draws a temporary object in the space above B and returns the percent of A's volume that intersects. & If A is the focal object, it returns a bounding area spanning from the bottom of A to 5 BU under A. If B is the focal object, the z boundary is from the top of B to 5 BU above B. In either case, the x any y boundaries are the maximum of the two objects in the respective dimensions. \\\hline
+	
+	\texttt{isTouching(A,B)} & determines the extent to which A is touching B & This function works the same as near(A,B), but does not adjust with relative object size and requires objects to be much closer. & Returns a box bounded by the x and y location of the focal object plus and minus the largest dimensions of the two objects divided by ten. \\\hline
+	
+	\texttt{canSee(A,B)} & determines whether A can “see” B & (this assumes an ``eye'' object on A). Ray casting is done from A's eye to points on the meshes of B's children. The percent of successful casts (that reach B) is the value returned. If the cast hits a translucent object, it will continue but will return a reduced value
+	 & returns a bounding box surrounding the focal object's position plus or minus 10 BU in all dimensions \\\hline
+	
+	\caption{predMethods Methods}\tabularnewline
+\end{longtable}

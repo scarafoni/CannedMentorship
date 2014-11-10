@@ -1,0 +1,72 @@
+%
+% urcsmanual
+%
+% author: Lawrence A. Crowl
+\typeout{Document Style `urcsmanual' <28 April 1988>.}
+%
+% set margins 
+% 
+\input{urcsmargin.sty}
+%
+% get UR macros
+%
+\input{urcsmacros}
+% 
+% title page macros
+% 
+\input{urcstitlepage.sty} 
+%
+% month year date format
+%
+\dateMY
+%
+% define end of page handling
+%
+\def\@finishtitlepage{\pagenumbering{roman}\newpage\setcounter{page}{1}}
+%
+% only count three sections deep
+%
+\setcounter{secnumdepth}{3}
+%
+% chapter redefinitions
+%
+\def\@chapapp{Chapter}
+\def\thechapter{\arabic{chapter}}
+\def\firstchapter{0} % for starting page numbers in arabic
+%
+% \@makechapterhead {TEXT} : Makes the heading for the \chapter command.
+%
+\def\@makechapterhead#1{     % Heading for \chapter command
+  \ifcase\firstchapter
+    \pagenumbering{arabic}
+    \def\firstchapter{1} % do not do this again
+  \fi
+  \vspace*{50pt}             % Space at top of text page.
+  { \parindent 0pt \raggedright
+    \ifnum \c@secnumdepth >\m@ne     % IF secnumdepth > -1 THEN
+      \huge\bf \@chapapp{} \thechapter % Print 'Chapter' and number.
+    \par
+    \vskip 20pt \fi                    % Space between number and title.
+    \Huge \bf                        % Title.
+    #1\par
+    \nobreak                         % TeX penalty to prevent page break.
+    \vskip 40pt                      % Space between title and text.
+  } }
+%
+% \@makeschapterhead {TEXT} : Makes the heading for the \chapter* command.
+%
+\def\@makeschapterhead#1{             % Heading for \chapter* command
+  \vspace*{50pt}                     % Space at top of page.
+  { \parindent 0pt \raggedright
+    \Huge \bf                        % Title.
+    #1\par
+    \nobreak                         % TeX penalty to prevent page break.
+    \vskip 40pt                      % Space between title and text.
+  } }
+%
+\def\chapter{
+\cleardoublepage % Starts new odd-numbered page.
+\thispagestyle{plain}     % Page style of chapter page is 'plain'
+\global\@topnum\z@        % Prevents figures from going at top of page.
+\@afterindentfalse        % Suppresses indent in first paragraph.  Change
+\secdef\@chapter\@schapter}   % to \@afterindenttrue to have indent.

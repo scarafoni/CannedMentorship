@@ -1,0 +1,164 @@
+% 	Benjamin Van Durme, vandurme@cs.rochester.edu, 24 Aug 2009
+%
+% Purpose: an example .tex file for the thesis.
+%
+% This file was derived from those used by Ashwin Lall and Piotr Faliszewski in
+% their respective thesis works.
+
+\documentclass[11pt,leqno]{report}
+
+% Feb 24, 2010 vandurme> I used a separate header.tex to capture personal
+% shortcuts, and included packages. This allowed my to create mini-documents
+% based on each chapter, by having a distinct top-level file around each of the
+% files "\include"-ed below, that could each then use the same header (so
+% changes would be kept in sync):
+%
+%\input{header}
+%
+% The first two things in that header:
+%\usepackage{urcsbiblio}
+%\usepackage{urcsthesis}
+
+\pdfinfo{
+/Title (Extracting Implicit Knowledge from Text)
+/Author (Benjamin D. Van Durme)
+/Keywords (thesis, knowledge acquisition, information extraction)
+}
+
+\begin{document}
+
+\sloppy
+\title{Extracting Implicit Knowledge from Text}
+\author{Benjamin D. Van Durme}
+%\thesissupervisor{Professor Lenhart K. Schubert}
+\maketitle
+
+% Feb 24, 2010 vandurme> the graduate office wanted a "ii" on the top right
+% corner of the dedication page (lowercase Roman numeral page numbering), which
+% explains the slightly messy tex code for this page:
+
+%%%dedication page
+\thispagestyle{empty}
+%\thispagestyle{plain}
+\newenvironment{dedication}
+{\cleardoublepage \thispagestyle{empty} \vspace*{\stretch{1}}
+  \begin{center} \em}
+  {\end{center} \vspace*{\stretch{3}} }
+\begin{dedication}
+
+  %% To ... 
+
+\end{dedication}
+
+%%% CV page
+%\begin{curriculumvitae}
+
+  Benjamin David Van Durme was born in Dansville, New York on November~13th,
+  1979. He began studies at the University of Rochester in 1997, graduating in
+  2001 with a Bachelor of Arts degree in the area of Cognitive Science and a
+  Bachelor of Science degree in the area of Computer Science. From 2002 to 2004,
+  he attended Carnegie Mellon University, and graduated with a Master of Science
+  degree in Language Technologies. Benjamin returned to the University of
+  Rochester in the Fall of 2004, pursuing research in the subjects of Computer
+  Science and Linguistics, under the direction of Professor Lenhart K. Schubert.
+  He received the Master of Science degree in Computer Science from the
+  University of Rochester in 2006. During the Summer of 2006, as well as 2007,
+  Benjamin performed research at Google Inc., under the direction of Marius
+  Pa\c{s}ca.
+
+\end{curriculumvitae}
+
+\begin{acknowledgments}
+
+  To my committee as a whole, William Cohen, Gregory Carlson, Daniel Gildea, and
+  Lenhart K. Schubert: thank you for your advice and guidance.
+
+  %% Additional personal acknowledgments ...
+
+  Chapter~\ref{ch:Framework} is the result of extensive discussions with Len
+  Schubert on a variety of semantic phenomena. Chapter~\ref{ch:Methodology}
+  derives from joint work with Len Schubert \cite{vandurmeSTEP08}.
+  Chapter~\ref{ch:UsingClasses} is the result of joint work with Ting Qian and
+  Len Schubert \cite{vandurmeCOLING08}. Material from
+  Chapter~\ref{ch:LearningClasses} is based on collaboration with Marius
+  Pa\c{s}ca while at Google Inc. \cite{vandurmeAAAI08}.
+  Chapter~\ref{ch:UsingOntology} is based on joint work with Phillip Michalak
+  and Len Schubert \cite{vandurmeEACL09}. Chapter~\ref{ch:TopicModels} is based
+  on work performed with Dan Gildea \cite{vandurmeTR09}.
+
+  This material is based upon research supported by National Science Foundations
+  awards, IIS-0328849 entitled ``Deriving General World Knowledge from Texts by
+  Abstraction of Logical Forms'', IIS-0535105 entitled ``Knowledge
+  Representation and Reasoning Mechanisms for Explicitly Self-Aware
+  Communicative Agents'' and CCF--0910415 entitled ``RI: Small: General
+  Knowledge Bootstrapping from Text'', in addition to a University of Rochester
+  Provost's Multidisciplinary Award (2008), entitled ``Computational
+  Psycholinguistics: Integrating Computational and Behavioral Methods to Study
+  Human Language Processing''. Any opinions, findings, and conclusions or
+  recommendations expressed in this material are those of the author and do not
+  necessarily reflect the views of above named organizations.
+
+\end{acknowledgments}
+
+\begin{abstract}
+
+  The everyday intelligence of both humans and machines relies on a large store
+  of background, or common-sense, knowledge. That such a knowledge base is not
+  yet available to machines helps partially explain the community's inability to
+  provide society with the sort of synthetic intelligence described by futurists
+  such as Turing, or Asimov.
+
+  In response, there have emerged a variety of methods for automated
+  \emph{Knowledge Acquisition (KA)} that are now being actively explored. Here I
+  consider the extraction of knowledge that is conveyed \emph{implicitly}, both
+  within everyday texts and queries posed to internet search engines. Through
+  recognizing certain forms of existential predicative patterns, and abstracting
+  from these to more strongly quantifiable statements, I show that a significant
+  amount of general knowledge can be gleaned based on how we talk about the
+  world. I provide experimental results both for the direct extraction and
+  strengthening of such knowledge, and for the automatic acquisition of
+  supporting resources for this task.
+
+  In addition, I draw attention to the relationship between automatically
+  acquired background knowledge and natural language \emph{generic} sentences.
+  Humans use generics when they wish to directly assert the same sorts of
+  ``rules of the world'' that are of concern to the KA community. And yet, there
+  has been little recognition in applied circles that decades of work from
+  formal linguistic semantics may have a role to play in the representation, and
+  perhaps even the acquisition, of common knowledge.
+  
+\end{abstract}
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\include{introduction}
+
+\include{background}       
+                         
+\include{framework}        
+
+\include{methodology}      
+
+\include{using-classes}    
+
+\include{learning-classes} 
+
+\include{using-ontology}   
+
+\include{topic-models}     
+
+\include{conclusion}
+
+\bibliographystyle{named}
+\bibliography{references}
+
+\appendix
+\include{generics}
+
+
+\end{document}
+
+
+

@@ -1,0 +1,31 @@
+%
+% urcsmargin
+%
+% author: Lawrence A. Crowl
+% last updated: 28 April 1988
+%
+% margin settings
+%
+\oddsidemargin 0.5in       %   Left margin on right-hand pages.
+\evensidemargin 0in        %   Left margin on left-hand pages.
+\textwidth 6in
+\textheight 8.5in
+\topmargin 0.25in
+\headheight 0pt
+\headsep 0pt
+% gf: 11 Sep 1997: footheight doesn't exist in LaTeX2e or compatibility mode
+%\footheight 12pt
+\footskip 30pt
+%
+% paragraph settings
+%
+\parskip 4pt plus 1.5pt minus 1.5pt
+\clubpenalty 500
+\widowpenalty 500
+\displaywidowpenalty=500
+%
+% more spacing between text and footnote
+%
+\def\footnoterule{\kern 2pt% extra space
+\kern-3\p@\hrule width .4\columnwidth\kern 2.6\p@}
+\footnotesep 10pt % more space between footnotes
