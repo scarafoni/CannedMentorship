@@ -1,24 +1,17 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.2.3)  15 APR 2014 17:31
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.11.10)  10 NOV 2014 13:41
 entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
 **thesis.tex
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\thesis.tex
+(./thesis.tex
 LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
-abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
-croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
-lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
-ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
- lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
-german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
-ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
-an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
-ishmax, welsh, loaded.
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\report.cls"
+Babel <3.9h> and hyphenation patterns for 78 languages loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\leqno.clo"
+(/usr/share/texlive/texmf-dist/tex/latex/base/leqno.clo
 File: leqno.clo 1998/08/17 v1.1c Standard LaTeX option (left equation numbers)
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size11.clo"
+(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
 File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -33,33 +26,32 @@ File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-)
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\urcsbiblio.sty
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\natbib\natbib.sty"
+) (./urcsbiblio.sty
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip43
 \bibsep=\skip44
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count88
 ))
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\courier.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/courier.sty
 Package: courier 2005/04/12 PSNFSS-v9.2a (WaS) 
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
+(/usr/share/texmf/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count89
@@ -74,44 +66,42 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\xspace.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
-)
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\urcsthesis.sty
+) (./urcsthesis.sty
 Document Style `urcsthesis' <15 December 2010> (modified).
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\urcsmargin.sty)
+(./urcsmargin.sty)
 \chaptitlewidth=\skip45
 \chapnowidth=\skip46
-
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\urcsmacros.tex))
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\verbatim.sty"
+ (./urcsmacros.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks14
 \verbatim@line=\toks15
 \verbatim@in@stream=\read1
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks16
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
-File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 )
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\wrapfig\wrapfig.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen105
 \WF@size=\dimen106
 \c@WF@wrappedlines=\count90
@@ -119,10 +109,10 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 \WF@everypar=\toks17
 Package: wrapfig 2003/01/31  v 3.6
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\caption.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\caption3.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
 \captionmargin=\dimen107
@@ -136,12 +126,12 @@ Package caption3 Info: TeX engine: e-TeX on input line 57.
 \c@ContinuedFloat=\count91
 Package caption Info: wrapfig package is loaded.
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\subcaption.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
 \c@subfigure=\count92
 \c@subtable=\count93
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\longtable.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
 \LTleft=\skip47
 \LTright=\skip48
@@ -159,10 +149,10 @@ Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
 \c@LT@chunks=\count98
 \LT@p@ftn=\toks18
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tabu\tabu.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/tabu/tabu.sty
 Package: tabu 2011/02/26 v2.8 - flexible LaTeX tabulars (FC)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\array.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \col@sep=\dimen115
 \extrarowheight=\dimen116
@@ -170,7 +160,7 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \extratabsurround=\skip51
 \backup@length=\skip52
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ltxmisc\varwidth.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box31
 \sift@deathcycles=\count99
@@ -200,21 +190,22 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \tabu@vleads=\box35
 \tabu@cellskip=\skip53
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\multirow\multirow.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 \bigstrutjot=\dimen128
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\setspace\setspace.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty"
+(/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip54
 \enit@outerparindent=\dimen129
 \enit@toks=\toks22
 \enit@inbox=\box36
 \enitdp@description=\count106
-)
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\thesis.aux)
+) (./thesis.aux)
+\openout1 = `thesis.aux'.
+
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
 LaTeX Font Info:    ... okay on input line 40.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
@@ -228,7 +219,7 @@ LaTeX Font Info:    ... okay on input line 40.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
 LaTeX Font Info:    ... okay on input line 40.
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count107
 \scratchdimen=\dimen130
@@ -241,21 +232,67 @@ LaTeX Font Info:    ... okay on input line 40.
 \MPnumerator=\count111
 \makeMPintoPDFobject=\count112
 \everyMPtoPDFconversion=\toks24
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: longtable package is loaded.
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\ltcaption.sty"
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
 Package: ltcaption 2013/02/03 v1.3-62 longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
+ [1
 
-[1
-
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
 
 
-]
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\thesis.toc
+] (./thesis.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -267,10 +304,11 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ])
 \tf@toc=\write3
+\openout3 = `thesis.toc'.
 
-[4] [5]
+ [4] [5]
 Chapter 1.
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\introduction.tex
+(./introduction.tex
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ú in font cmr10!
@@ -283,19 +321,18 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
-)
-[1
+) [1
 
 
 ] [2]
 Chapter 2.
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\background.tex
-[3
+(./background.tex [3
 
 
 ] [4]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 33.
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
@@ -307,27 +344,27 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
-
-[6] [7] [8] [9]) [10] [11]
+ [6] [7] [8]
+[9]) [10] [11]
 Chapter 3.
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\methodology.tex
-[12
+(./methodology.tex [12
 
 
 ]
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 16.
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [13]
-[14]
+) [13] [14]
 LaTeX Font Info:    Try loading font information for OML+cmr on input line 68.
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omlcmr.fd"
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 68.
 
-<figures/mirs_flow.png, id=71, 1264.725pt x 983.675pt>
+<figures/mirs_flow.png, id=72, 1264.725pt x 983.675pt>
 File: figures/mirs_flow.png Graphic file (type png)
 
 <use figures/mirs_flow.png>
@@ -338,7 +375,7 @@ Package pdftex.def Info: figures/mirs_flow.png used on input line 72.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Font Info:    Try loading font information for OML+pcr on input line 78.
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omlpcr.fd"
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlpcr.fd
 File: omlpcr.fd 
 )
 LaTeX Font Info:    Font shape `OML/pcr/m/n' in size <10.95> not available
@@ -349,34 +386,31 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
- [15] [16 <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis/figures/mi
-rs_flow.png (PNG copy)>] [17] <figures/vision1.png, id=82, 963.6pt x 722.7pt>
+ [15] [16 <./figures/mirs_flow.png (PNG copy)>] [17]
+<figures/vision1.png, id=83, 963.6pt x 722.7pt>
 File: figures/vision1.png Graphic file (type png)
-
-<use figures/vision1.png>
+ <use figures/vision1.png>
 Package pdftex.def Info: figures/vision1.png used on input line 117.
 (pdftex.def)             Requested size: 199.46341pt x 149.58803pt.
- <figures/vision2.png, id=83, 963.6pt x 722.7pt>
-File: figures/vision2.png Graphic file (type png)
 
-<use figures/vision2.png>
+<figures/vision2.png, id=84, 963.6pt x 722.7pt>
+File: figures/vision2.png Graphic file (type png)
+ <use figures/vision2.png>
 Package pdftex.def Info: figures/vision2.png used on input line 127.
 (pdftex.def)             Requested size: 199.46341pt x 149.58803pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[18 <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis/figures/vision1.
-png (PNG copy)>] <figures/vision3.png, id=87, 963.6pt x 722.7pt>
+[18 <./figures/vision1.png (PNG copy)>]
+<figures/vision3.png, id=88, 963.6pt x 722.7pt>
 File: figures/vision3.png Graphic file (type png)
-
-<use figures/vision3.png>
+ <use figures/vision3.png>
 Package pdftex.def Info: figures/vision3.png used on input line 137.
 (pdftex.def)             Requested size: 199.46341pt x 149.58803pt.
- [19 <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis/figures/vision2
-.png (PNG copy)> <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis/fig
-ures/vision3.png (PNG copy)>]
-<figures/vision4.png, id=91, 963.6pt x 722.7pt>
+
+[19 <./figures/vision2.png (PNG copy)> <./figures/vision3.png (PNG copy)>]
+<figures/vision4.png, id=92, 963.6pt x 722.7pt>
 File: figures/vision4.png Graphic file (type png)
  <use figures/vision4.png>
 Package pdftex.def Info: figures/vision4.png used on input line 147.
@@ -388,7 +422,7 @@ Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
 
-<figures/vision5.png, id=92, 963.6pt x 722.7pt>
+<figures/vision5.png, id=93, 963.6pt x 722.7pt>
 File: figures/vision5.png Graphic file (type png)
  <use figures/vision5.png>
 Package pdftex.def Info: figures/vision5.png used on input line 158.
@@ -397,7 +431,7 @@ Package pdftex.def Info: figures/vision5.png used on input line 158.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/vision6.png, id=93, 963.6pt x 722.7pt>
+<figures/vision6.png, id=94, 963.6pt x 722.7pt>
 File: figures/vision6.png Graphic file (type png)
  <use figures/vision6.png>
 Package pdftex.def Info: figures/vision6.png used on input line 168.
@@ -412,11 +446,9 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
-[20 <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis/figures/vision4.
-png (PNG copy)>] [21 <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis
-/figures/vision5.png (PNG copy)> <C:/Users/DanScarafoni/Documents/spring2014/cs
-c395H/thesis/figures/vision6.png (PNG copy)>]
-<figures/vision7.png, id=101, 963.6pt x 722.7pt>
+[20 <./figures/vision4.png (PNG copy)>] [21 <./figures/vision5.png (PNG copy)> 
+<./figures/vision6.png (PNG copy)>]
+<figures/vision7.png, id=102, 963.6pt x 722.7pt>
 File: figures/vision7.png Graphic file (type png)
  <use figures/vision7.png>
 Package pdftex.def Info: figures/vision7.png used on input line 180.
@@ -434,8 +466,8 @@ Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
 
-[22 <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis/figures/vision7.
-png (PNG copy)>] <figures/square_placement.png, id=105, 963.6pt x 722.7pt>
+[22 <./figures/vision7.png (PNG copy)>]
+<figures/square_placement.png, id=106, 963.6pt x 722.7pt>
 File: figures/square_placement.png Graphic file (type png)
 
 <use figures/square_placement.png>
@@ -446,36 +478,32 @@ Package pdftex.def Info: figures/square_placement.png used on input line 208.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [23]
-<figures/vision_placement_theoretical.png, id=109, 956.57375pt x 455.7025pt>
+<figures/vision_placement_theoretical.png, id=110, 956.57375pt x 455.7025pt>
 File: figures/vision_placement_theoretical.png Graphic file (type png)
 
 <use figures/vision_placement_theoretical.png>
 Package pdftex.def Info: figures/vision_placement_theoretical.png used on input
  line 221.
 (pdftex.def)             Requested size: 199.46341pt x 95.0189pt.
- [24 <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis/figures/square_
-placement.png (PNG copy)> <C:/Users/DanScarafoni/Documents/spring2014/csc395H/t
-hesis/figures/vision_placement_theoretical.png (PNG copy)>]
-<figures/grid_placement.png, id=113, 956.57375pt x 455.7025pt>
+ [24 <./figures/square_placement.png (PNG copy)> <./figures/vision_placement_th
+eoretical.png (PNG copy)>]
+<figures/grid_placement.png, id=114, 956.57375pt x 455.7025pt>
 File: figures/grid_placement.png Graphic file (type png)
 
 <use figures/grid_placement.png>
 Package pdftex.def Info: figures/grid_placement.png used on input line 240.
 (pdftex.def)             Requested size: 199.46341pt x 95.0189pt.
- [25 <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis/figures/grid_pl
-acement.png>]
-<figures/rejection_sampling_placement.png, id=119, 956.57375pt x 455.7025pt>
+ [25 <./figures/grid_placement.png>]
+<figures/rejection_sampling_placement.png, id=120, 956.57375pt x 455.7025pt>
 File: figures/rejection_sampling_placement.png Graphic file (type png)
 
 <use figures/rejection_sampling_placement.png>
 Package pdftex.def Info: figures/rejection_sampling_placement.png used on input
  line 257.
 (pdftex.def)             Requested size: 199.46341pt x 95.0189pt.
-) [26 <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis/figures/reject
-ion_sampling_placement.png>]
+) [26 <./figures/rejection_sampling_placement.png>]
 Chapter 4.
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\results.tex
-<figures/models_used.pdf, id=125, 597.23125pt x 845.1575pt>
+(./results.tex <figures/models_used.pdf, id=126, 597.23125pt x 845.1575pt>
 File: figures/models_used.pdf Graphic file (type pdf)
 
 <use figures/models_used.pdf>
@@ -485,7 +513,7 @@ Package pdftex.def Info: figures/models_used.pdf used on input line 19.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/scene_demo.png, id=126, 963.6pt x 722.7pt>
+<figures/scene_demo.png, id=127, 963.6pt x 722.7pt>
 File: figures/scene_demo.png Graphic file (type png)
 
 <use figures/scene_demo.png>
@@ -498,24 +526,22 @@ Package pdftex.def Info: figures/scene_demo.png used on input line 30.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[28 <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis/figures/models_u
-sed.pdf>]
+[28 <./figures/models_used.pdf>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/see_query.png, id=135, 614.295pt x 794.97pt>
+<figures/see_query.png, id=136, 614.295pt x 794.97pt>
 File: figures/see_query.png Graphic file (type png)
 
 <use figures/see_query.png>
 Package pdftex.def Info: figures/see_query.png used on input line 96.
 (pdftex.def)             Requested size: 311.66437pt x 403.33081pt.
- [29 <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis/figures/scene_d
-emo.png>]
+ [29 <./figures/scene_demo.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [30]
-<figures/binary_place_ballAndPerson_noThresh.png, id=143, 612.03656pt x 256.709
+<figures/binary_place_ballAndPerson_noThresh.png, id=144, 612.03656pt x 256.709
 06pt>
 File: figures/binary_place_ballAndPerson_noThresh.png Graphic file (type png)
  <use figures/binary_place_ballAndPerson_noThresh.png>
@@ -527,7 +553,7 @@ n input line 117.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-<figures/binary_place_ballAndPerson_lowThresh.png, id=144, 524.71031pt x 250.68
+<figures/binary_place_ballAndPerson_lowThresh.png, id=145, 524.71031pt x 250.68
 657pt>
 File: figures/binary_place_ballAndPerson_lowThresh.png Graphic file (type png)
  <use figures/binary_place_ballAndPerson_lowThresh.png>
@@ -539,7 +565,7 @@ on input line 129.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-<figures/binary_place_ballAndPerson_highThresh.png, id=145, 490.08093pt x 276.2
+<figures/binary_place_ballAndPerson_highThresh.png, id=146, 490.08093pt x 276.2
 8218pt>
 File: figures/binary_place_ballAndPerson_highThresh.png Graphic file (type png)
 
@@ -551,27 +577,23 @@ Package pdftex.def Info: figures/binary_place_ballAndPerson_highThresh.png used
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[31] [32]) [33] [34 <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis/
-figures/see_query.png>] [35 <C:/Users/DanScarafoni/Documents/spring2014/csc395H
-/thesis/figures/binary_place_ballAndPerson_noThresh.png (PNG copy)> <C:/Users/D
-anScarafoni/Documents/spring2014/csc395H/thesis/figures/binary_place_ballAndPer
-son_lowThresh.png (PNG copy)>] [36 <C:/Users/DanScarafoni/Documents/spring2014/
-csc395H/thesis/figures/binary_place_ballAndPerson_highThresh.png (PNG copy)>]
+[31] [32]) [33] [34 <./figures/see_query.png>] [35 <./figures/binary_place_ball
+AndPerson_noThresh.png (PNG copy)> <./figures/binary_place_ballAndPerson_lowThr
+esh.png (PNG copy)>] [36 <./figures/binary_place_ballAndPerson_highThresh.png (
+PNG copy)>]
 Chapter 5.
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\conclusion.tex
-[37
+(./conclusion.tex [37
 
 
-] <figures/3D_Print.jpg, id=169, 3131.7pt x 4175.6pt>
+] <figures/3D_Print.jpg, id=170, 3131.7pt x 4175.6pt>
 File: figures/3D_Print.jpg Graphic file (type jpg)
 
 <use figures/3D_Print.jpg>
 Package pdftex.def Info: figures/3D_Print.jpg used on input line 19.
 (pdftex.def)             Requested size: 186.99734pt x 249.31462pt.
- [38 <C:/Users/DanScarafoni/Documents/spring2014/csc395H/thesis/figures/3D_Prin
-t.jpg>] [39]) [40]
+ [38 <./figures/3D_Print.jpg>] [39]) [40]
 Chapter 6.
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\codesection.tex
+(./codesection.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
 []|\OT1/pcr/m/n/10.95 cast[]thru(Object
  []
@@ -808,37 +830,34 @@ Overfull \hbox (47.01242pt too wide) in alignment at lines 50--74
 Underfull \vbox (badness 10000) detected at line 74
  []
 
-[43] [44])
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\thesis.bbl [45]
-[46
+[43] [44]) (./thesis.bbl [45] [46
 
 
-]) [47]
-(C:\Users\DanScarafoni\Documents\spring2014\csc395H\thesis\thesis.aux) ) 
+]) [47] (./thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 4728 strings out of 493921
- 72944 string characters out of 3144856
- 151019 words of memory out of 3000000
- 7927 multiletter control sequences out of 15000+200000
- 10180 words of font info for 36 fonts, out of 3000000 for 9000
- 841 hyphenation exceptions out of 8191
- 36i,11n,44p,1291b,341s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Pro
-gram Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (
-x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files (x8
-6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files (x86)
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files (x86)/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files (x86)/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
-pe1/urw/courier/ucrr8a.pfb>
-Output written on thesis.pdf (52 pages, 3787757 bytes).
+ 5084 strings out of 493304
+ 77373 string characters out of 6139870
+ 164392 words of memory out of 5000000
+ 8417 multiletter control sequences out of 15000+600000
+ 10180 words of font info for 36 fonts, out of 8000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 38i,11n,44p,1290b,341s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.
+enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8
+a.pfb>
+Output written on thesis.pdf (52 pages, 3766097 bytes).
 PDF statistics:
- 241 PDF objects out of 1000 (max. 8388607)
+ 244 PDF objects out of 1000 (max. 8388607)
+ 153 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  96 words of extra memory for PDF output out of 10000 (max. 10000000)
 
