@@ -6,7 +6,16 @@ from nltk.corpus import wordnet as wn, stopwords
 from nltk import word_tokenize, pos_tag
 import itertools as it
 import sys
+import math
+import textblob as tb
+from __future__ import division, unicode_literals
 
+# code for idf
+def n_containing(word, bloblist):
+    return sum(1 for blob in bloblist if word in blob)
+
+def idf(word, bloblist):
+    return math.log(len(bloblist) / (1 + n_containing(word, bloblist)))
     
 # similarity between two vectors as comparing
 # all non-stop words, normalized to be between 0 and 1
