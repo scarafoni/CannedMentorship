@@ -7,5 +7,45 @@ For this reason, the merging of human and AI is necessary for the completion of 
 
 Consider, for example, the task of building an instruction manual for a common profession. 
 If a restaurant wanted to create a manual for a number of everyday tasks in the restaurant in order to train new employees quickly.
-It would use crowdsourced data from existing employees to solve this task, as the ambiguous and qualitative data of procedural tasks such as making food and setting tables is far beyond the current capabilities of artificial intelligence.
-However, there are many tasks which different employees do differently, and the abi
+
+ADD SOMETHING ABOUT THIS BEING ABOUT SKILLED USERS
+
+It would use data gathered from existing employees to solve this task, as the ambiguous and qualitative data of procedural tasks such making food and settling tables is far beyond the current capabilities of artificial intelligence.
+One experienced employee could be delegated to the task-instruction creation, but there are a number of issues with this method.
+First, an over-reliance on one individual leaves the system vulnerable to error.
+An individual may make mistakes when writing instructions.
+The only solution to this problem would be to have other users check the first users work, which automatically means that multiple users will be needed regardless.
+Second, many task, especially the qualitative, ambiguous ones previously mentioned, can be done in multiple ways.
+While the differences may not necessarily be erroneous in nature, they can pose problems.
+Certain delis, for example, have managers with different policies on the quality of meat used for sandwiches.
+If a trainee is taught the preference of one manager and not the other, issues can arise if the employee switches managers.
+Third, there are many instances where individuals have been shown to be slower than crowds \cite{lasecki2013interactive,}.
+It it likely that crowd-sourced users will also be more efficient than single users in this domain.
+
+One major issue with gathering instructions from users is dealing with redundancy.
+Because many people have similar notions of instructions for various tasks, users tend to give similar instructions for a given step.
+This leads to redundancy. For example, if a group of 3 users were asked to write the first step for making a peanut-butter and jelly sandwich, the users might respond with
+\begin{enumerate}
+\item get two slices of bread
+\item get two slices of bread, a knife, peanut butter, and some jelly
+\item get the ingredients.
+\end{enumerate}
+It is obvious in this situation that because suggestion 3 is described completely (and more thoroughly) by suggestion 2, that it is redundant and thus can be removed.
+
+Failure to do so can impede the crowd-sourcing process.
+First, it introduces a form of noise into the system.
+With multiple identical sentences, if users are asked to vote on the suggestions, the voting process may be subverted.
+Consider the same situation as the last example, but the three inputs are
+\begin{enumerate}
+\item get two slices of bread
+\item get the ingredients
+\item get the ingredients.
+\end{enumerate}
+If two users believe that option 2 (or equivalently, option 3) is correct, they could vote for either. 
+If the third user votes for option 1, then there is no clear majority from voting, even though the consensus is clear.
+
+This problem ultimately is an issue of natural language processing, and is unique in that it deals with very short documents in a very small corpus. 
+A quick and efficient method of removing and/or minimizing redundancies in the context of this problem is essential to the completion of the task
+
+In total, the task of building a set of instructions (or a ``how-to'' manual) efficiently from a group of users requires efficient crowd-sourcing techniques as well as sufficiently sophisticated AI to augment this process.
+Although there has been much research on using crowds to answer single questions, there has not been much work done in the next level of abstraction: having users answer lists of questions (i.e. instructions) \cite{lasecki2013chorus,bigham2010vizwiz}.

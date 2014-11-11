@@ -11,52 +11,41 @@ write the document (the actual content varies based on the nature of the paper)
 write down teh appropriate content taht you want to input, including beginning and conclusion
 
 Algorithm 4, hac, wn, Rating: _______
-write down teh appropriate content taht you want to input, including beginning and conclusion
-write the document and save
-
-Algorithm 5, hac, cn, Rating: _______
-write down teh appropriate content taht you want to input, including beginning and conclusion
-write the document (the actual content varies based on the nature of the paper)
-
-Algorithm 6, dbscan, bow, Rating: _______
 write the document (the actual content varies based on the nature of the paper)
 write down teh appropriate content taht you want to input, including beginning and conclusion
-write the document and save
 
-Algorithm 7, dbscan, bow-ngram, Rating: _______
+Algorithm 5, dbscan, bow, Rating: _______
 write the document (the actual content varies based on the nature of the paper)
-write down teh appropriate content taht you want to input, including beginning and conclusion
 write the document and save
+write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 8, dbscan, ks, Rating: _______
+Algorithm 6, dbscan, bow-ngram, Rating: _______
 write down teh appropriate content taht you want to input, including beginning and conclusion
 write the document and save
 write the document (the actual content varies based on the nature of the paper)
 
-Algorithm 9, dbscan, wn, Rating: _______
+Algorithm 7, dbscan, ks, Rating: _______
+write the document (the actual content varies based on the nature of the paper)
+write the document and save
 write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 10, dbscan, cn, Rating: _______
+Algorithm 8, dbscan, wn, Rating: _______
 write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 11, affprop, bow, Rating: _______
+Algorithm 9, affprop, bow, Rating: _______
 write the document (the actual content varies based on the nature of the paper)
 write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 12, affprop, bow-ngram, Rating: _______
+Algorithm 10, affprop, bow-ngram, Rating: _______
 write the document (the actual content varies based on the nature of the paper)
 write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 13, affprop, ks, Rating: _______
+Algorithm 11, affprop, ks, Rating: _______
 write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 14, affprop, wn, Rating: _______
-write the document (the actual content varies based on the nature of the paper)
+Algorithm 12, affprop, wn, Rating: _______
 write down teh appropriate content taht you want to input, including beginning and conclusion
-
-Algorithm 15, affprop, cn, Rating: _______
-write the document (the actual content varies based on the nature of the paper)
-write down teh appropriate content taht you want to input, including beginning and conclusion
+write the document and save
 
 Algorithm 1, hac, bow, Rating: _______
 make sure to save your work by clicking the save button
@@ -79,63 +68,50 @@ save the file by pressing ctrl+s (or command+s if you're on a mac)
 Algorithm 4, hac, wn, Rating: _______
 click on the file and save when you're done typing
 save the file by pressing ctrl+s (or command+s if you're on a mac)
-make sure to save your work by clicking the save button
 error check
+make sure to save your work by clicking the save button
 
-Algorithm 5, hac, cn, Rating: _______
-click on the file and save when you're done typing
+Algorithm 5, dbscan, bow, Rating: _______
 save the file by pressing ctrl+s (or command+s if you're on a mac)
+click on the file and save when you're done typing
+error check
 make sure to save your work by clicking the save button
 save your work
 
-Algorithm 6, dbscan, bow, Rating: _______
+Algorithm 6, dbscan, bow-ngram, Rating: _______
 save the file by pressing ctrl+s (or command+s if you're on a mac)
-make sure to save your work by clicking the save button
 save your work
-click on the file and save when you're done typing
-error check
-
-Algorithm 7, dbscan, bow-ngram, Rating: _______
 make sure to save your work by clicking the save button
 error check
 click on the file and save when you're done typing
-save the file by pressing ctrl+s (or command+s if you're on a mac)
-save your work
 
-Algorithm 8, dbscan, ks, Rating: _______
-save your work
-make sure to save your work by clicking the save button
+Algorithm 7, dbscan, ks, Rating: _______
 error check
-save the file by pressing ctrl+s (or command+s if you're on a mac)
 click on the file and save when you're done typing
-
-Algorithm 9, dbscan, wn, Rating: _______
+save your work
+make sure to save your work by clicking the save button
 save the file by pressing ctrl+s (or command+s if you're on a mac)
 
-Algorithm 10, dbscan, cn, Rating: _______
+Algorithm 8, dbscan, wn, Rating: _______
 save the file by pressing ctrl+s (or command+s if you're on a mac)
 
-Algorithm 11, affprop, bow, Rating: _______
+Algorithm 9, affprop, bow, Rating: _______
 make sure to save your work by clicking the save button
 error check
 save the file by pressing ctrl+s (or command+s if you're on a mac)
 
-Algorithm 12, affprop, bow-ngram, Rating: _______
+Algorithm 10, affprop, bow-ngram, Rating: _______
 make sure to save your work by clicking the save button
 error check
 save the file by pressing ctrl+s (or command+s if you're on a mac)
 
-Algorithm 13, affprop, ks, Rating: _______
+Algorithm 11, affprop, ks, Rating: _______
 save the file by pressing ctrl+s (or command+s if you're on a mac)
 save your work
 
-Algorithm 14, affprop, wn, Rating: _______
+Algorithm 12, affprop, wn, Rating: _______
 save the file by pressing ctrl+s (or command+s if you're on a mac)
-make sure to save your work by clicking the save button
-
-Algorithm 15, affprop, cn, Rating: _______
-save the file by pressing ctrl+s (or command+s if you're on a mac)
-error check
+save your work
 
 Algorithm 1, hac, bow, Rating: _______
 create a hashing function to store data
@@ -158,59 +134,48 @@ add hashvalue method
 Algorithm 4, hac, wn, Rating: _______
 create a hashing function to store data
 
-Algorithm 5, hac, cn, Rating: _______
-create a hashing function to store data
-
-Algorithm 6, dbscan, bow, Rating: _______
-create another array for keys
-write a constructor
-create a hashtag function to store data
-
-add hashvalue method
-create a hashing function to store data
-make a constructor
-
-Algorithm 7, dbscan, bow-ngram, Rating: _______
-create a hashtag function to store data
-
-create a hashing function to store data
-write a constructor
-add hashvalue method
-create another array for keys
-make a constructor
-
-Algorithm 8, dbscan, ks, Rating: _______
-
-add hashvalue method
-create another array for keys
-write a constructor
-create a hashing function to store data
+Algorithm 5, dbscan, bow, Rating: _______
 create a hashtag function to store data
 make a constructor
-
-Algorithm 9, dbscan, wn, Rating: _______
-create a hashing function to store data
-
-Algorithm 10, dbscan, cn, Rating: _______
-create a hashing function to store data
-
-Algorithm 11, affprop, bow, Rating: _______
-create a hashing function to store data
-
-Algorithm 12, affprop, bow-ngram, Rating: _______
-create a hashing function to store data
-
-Algorithm 13, affprop, ks, Rating: _______
-create a hashing function to store data
-
-
-Algorithm 14, affprop, wn, Rating: _______
-create a hashing function to store data
-write a constructor
-
-
-Algorithm 15, affprop, cn, Rating: _______
 add hashvalue method
 create a hashing function to store data
+create another array for keys
+
+write a constructor
+
+Algorithm 6, dbscan, bow-ngram, Rating: _______
+
+create a hashing function to store data
+create another array for keys
+write a constructor
+make a constructor
+create a hashtag function to store data
+add hashvalue method
+
+Algorithm 7, dbscan, ks, Rating: _______
+write a constructor
+create another array for keys
+
+add hashvalue method
+create a hashtag function to store data
+make a constructor
+create a hashing function to store data
+
+Algorithm 8, dbscan, wn, Rating: _______
+create a hashing function to store data
+
+Algorithm 9, affprop, bow, Rating: _______
+create a hashing function to store data
+
+Algorithm 10, affprop, bow-ngram, Rating: _______
+create a hashing function to store data
+
+Algorithm 11, affprop, ks, Rating: _______
+create a hashtag function to store data
+create a hashing function to store data
+
+Algorithm 12, affprop, wn, Rating: _______
+create a hashing function to store data
+write a constructor
 
 

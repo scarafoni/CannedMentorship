@@ -249,7 +249,7 @@ if __name__== '__main__':
         hold = ''
         for (i,c,d) in itertools.product(r,\
                                          ['hac', 'dbscan', 'affprop'],\
-                                         #['bow', 'bow-ngram','ks', 'wn','cn']):
+                                         ['bow', 'bow-ngram','ks', 'wn']):
             start = time.time()
             filtered = filter_inputs(i,classfn=c,feat_dist=d)
             elapsed = time.time() - start

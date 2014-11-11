@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.11.10)  10 NOV 2014 23:43
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.11.10)  11 NOV 2014 15:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -317,63 +317,64 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 Chapter 1.
 (./introduction.tex
 
-Package natbib Warning: Citation `h' on page 1 undefined on input line 2.
+Package natbib Warning: Citation `howie2006rise' on page 1 undefined on input l
+ine 2.
 
-) [1
+[1
 
 
-]
+]) [2]
 Chapter 2.
 (./background.tex
 
-Package natbib Warning: Citation `mccarthy1963programs' on page 2 undefined on 
+Package natbib Warning: Citation `mccarthy1963programs' on page 3 undefined on 
 input line 4.
 
 
-Package natbib Warning: Citation `johnston2008comirit' on page 2 undefined on i
+Package natbib Warning: Citation `johnston2008comirit' on page 3 undefined on i
 nput line 7.
 
 
-Package natbib Warning: Citation `johnston2008comirit' on page 2 undefined on i
+Package natbib Warning: Citation `johnston2008comirit' on page 3 undefined on i
 nput line 22.
 
 
-Package natbib Warning: Citation `johnston2009practical' on page 2 undefined on
+Package natbib Warning: Citation `johnston2009practical' on page 3 undefined on
  input line 22.
 
 
-Package natbib Warning: Citation `wintermute2009overview' on page 2 undefined o
+Package natbib Warning: Citation `wintermute2009overview' on page 3 undefined o
 n input line 22.
 
 
-Package natbib Warning: Citation `mccarthy1963programs' on page 2 undefined on 
+Package natbib Warning: Citation `mccarthy1963programs' on page 3 undefined on 
 input line 22.
 
-[2
+[3
 
 
 ]
 
-Package natbib Warning: Citation `johnston2008comirit' on page 3 undefined on i
+Package natbib Warning: Citation `johnston2008comirit' on page 4 undefined on i
 nput line 26.
 
 
-Package natbib Warning: Citation `johnston2009practical' on page 3 undefined on
+Package natbib Warning: Citation `johnston2009practical' on page 4 undefined on
  input line 26.
 
 
-Package natbib Warning: Citation `johnston2008comirit' on page 3 undefined on i
+Package natbib Warning: Citation `johnston2008comirit' on page 4 undefined on i
 nput line 28.
 
 
-Package natbib Warning: Citation `egg-cracking' on page 3 undefined on input li
+Package natbib Warning: Citation `egg-cracking' on page 4 undefined on input li
 ne 28.
 
 
-Package natbib Warning: Citation `egg-cracking' on page 3 undefined on input li
+Package natbib Warning: Citation `egg-cracking' on page 4 undefined on input li
 ne 30.
 
-[3]
+[4]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 33.
  (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
@@ -382,46 +383,46 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 33.
 
 
-Package natbib Warning: Citation `johnston2009practical' on page 4 undefined on
+Package natbib Warning: Citation `johnston2009practical' on page 5 undefined on
  input line 41.
 
 
-Package natbib Warning: Citation `johnston2008comirit' on page 4 undefined on i
+Package natbib Warning: Citation `johnston2008comirit' on page 5 undefined on i
 nput line 41.
 
 
-Package natbib Warning: Citation `johnston2008comirit' on page 4 undefined on i
+Package natbib Warning: Citation `johnston2008comirit' on page 5 undefined on i
 nput line 42.
 
 
-Package natbib Warning: Citation `johnston2011collection' on page 4 undefined o
+Package natbib Warning: Citation `johnston2011collection' on page 5 undefined o
 n input line 42.
 
 
-Package natbib Warning: Citation `egg-cracking' on page 4 undefined on input li
+Package natbib Warning: Citation `egg-cracking' on page 5 undefined on input li
 ne 44.
 
 
-Package natbib Warning: Citation `johnston2009practical' on page 4 undefined on
+Package natbib Warning: Citation `johnston2009practical' on page 5 undefined on
  input line 44.
 
 
-Package natbib Warning: Citation `johnston2008comirit' on page 4 undefined on i
+Package natbib Warning: Citation `johnston2008comirit' on page 5 undefined on i
 nput line 44.
 
 
-Package natbib Warning: Citation `schubert2000episodic' on page 4 undefined on 
+Package natbib Warning: Citation `schubert2000episodic' on page 5 undefined on 
 input line 44.
 
 
-Package natbib Warning: Citation `mccarthy1963programs' on page 4 undefined on 
+Package natbib Warning: Citation `mccarthy1963programs' on page 5 undefined on 
 input line 44.
 
 
-Package natbib Warning: Citation `gardin1989analogical' on page 4 undefined on 
+Package natbib Warning: Citation `gardin1989analogical' on page 5 undefined on 
 input line 49.
 
-[4]
+[5]
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ú in font cmr10!
@@ -430,104 +431,104 @@ Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
 
 
-Package natbib Warning: Citation `gardin1989analogical' on page 5 undefined on 
+Package natbib Warning: Citation `gardin1989analogical' on page 6 undefined on 
 input line 51.
 
 
-Package natbib Warning: Citation `johnston2008comirit' on page 5 undefined on i
+Package natbib Warning: Citation `johnston2008comirit' on page 6 undefined on i
 nput line 51.
 
 
-Package natbib Warning: Citation `wintermute2009overview' on page 5 undefined o
+Package natbib Warning: Citation `wintermute2009overview' on page 6 undefined o
 n input line 51.
 
 
-Package natbib Warning: Citation `johnston2008comirit' on page 5 undefined on i
+Package natbib Warning: Citation `johnston2008comirit' on page 6 undefined on i
 nput line 53.
 
 
-Package natbib Warning: Citation `johnston2009practical' on page 5 undefined on
+Package natbib Warning: Citation `johnston2009practical' on page 6 undefined on
  input line 53.
 
 
-Package natbib Warning: Citation `gardin1989analogical' on page 5 undefined on 
+Package natbib Warning: Citation `gardin1989analogical' on page 6 undefined on 
 input line 55.
-
-[5]
-
-Package natbib Warning: Citation `johnston2008comirit' on page 6 undefined on i
-nput line 63.
-
-
-Package natbib Warning: Citation `johnston2009practical' on page 6 undefined on
- input line 63.
-
-
-Package natbib Warning: Citation `schubert1983determining' on page 6 undefined 
-on input line 65.
-
-
-Package natbib Warning: Citation `schubert1987accelerating' on page 6 undefined
- on input line 65.
-
-
-Package natbib Warning: Citation `schubert2000episodic' on page 6 undefined on 
-input line 65.
-
-
-Package natbib Warning: Citation `schubert2000episodic' on page 6 undefined on 
-input line 70.
 
 [6]
 
-Package natbib Warning: Citation `selman1998analogical' on page 7 undefined on 
-input line 72.
+Package natbib Warning: Citation `johnston2008comirit' on page 7 undefined on i
+nput line 63.
+
+
+Package natbib Warning: Citation `johnston2009practical' on page 7 undefined on
+ input line 63.
+
+
+Package natbib Warning: Citation `schubert1983determining' on page 7 undefined 
+on input line 65.
+
+
+Package natbib Warning: Citation `schubert1987accelerating' on page 7 undefined
+ on input line 65.
 
 
 Package natbib Warning: Citation `schubert2000episodic' on page 7 undefined on 
-input line 72.
+input line 65.
 
 
 Package natbib Warning: Citation `schubert2000episodic' on page 7 undefined on 
-input line 74.
+input line 70.
 
 [7]
 
-Package natbib Warning: Citation `egg-cracking' on page 8 undefined on input li
-ne 101.
-
-
-Package natbib Warning: Citation `johnston2008comirit' on page 8 undefined on i
-nput line 101.
+Package natbib Warning: Citation `selman1998analogical' on page 8 undefined on 
+input line 72.
 
 
 Package natbib Warning: Citation `schubert2000episodic' on page 8 undefined on 
-input line 101.
+input line 72.
+
+
+Package natbib Warning: Citation `schubert2000episodic' on page 8 undefined on 
+input line 74.
 
 [8]
 
-Package natbib Warning: Citation `xu2002constraint' on page 9 undefined on inpu
-t line 122.
+Package natbib Warning: Citation `egg-cracking' on page 9 undefined on input li
+ne 101.
 
 
-Package natbib Warning: Citation `wintermute2009overview' on page 9 undefined o
-n input line 122.
+Package natbib Warning: Citation `johnston2008comirit' on page 9 undefined on i
+nput line 101.
 
 
-Package natbib Warning: Citation `wordseye' on page 9 undefined on input line 1
-22.
+Package natbib Warning: Citation `schubert2000episodic' on page 9 undefined on 
+input line 101.
+
+[9]
+
+Package natbib Warning: Citation `xu2002constraint' on page 10 undefined on inp
+ut line 122.
 
 
-Package natbib Warning: Citation `wintermute2009overview' on page 9 undefined o
-n input line 124.
+Package natbib Warning: Citation `wintermute2009overview' on page 10 undefined 
+on input line 122.
 
 
-Package natbib Warning: Citation `xu2002constraint' on page 9 undefined on inpu
-t line 124.
+Package natbib Warning: Citation `wordseye' on page 10 undefined on input line 
+122.
 
-) [9]
+
+Package natbib Warning: Citation `wintermute2009overview' on page 10 undefined 
+on input line 124.
+
+
+Package natbib Warning: Citation `xu2002constraint' on page 10 undefined on inp
+ut line 124.
+
+) [10]
 Chapter 3.
-(./methodology.tex [10
+(./methodology.tex [11
 
 
 ]
@@ -535,12 +536,12 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 16.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [11]
+) [12]
 
-Package natbib Warning: Citation `schubert2000episodic' on page 12 undefined on
+Package natbib Warning: Citation `schubert2000episodic' on page 13 undefined on
  input line 54.
 
-[12]
+[13]
 LaTeX Font Info:    Try loading font information for OML+cmr on input line 68.
  (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
@@ -548,7 +549,7 @@ File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 68.
 
-<figures/mirs_flow.png, id=64, 1264.725pt x 983.675pt>
+<figures/mirs_flow.png, id=67, 1264.725pt x 983.675pt>
 File: figures/mirs_flow.png Graphic file (type png)
 
 <use figures/mirs_flow.png>
@@ -570,14 +571,14 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
- [13] [14 <./figures/mirs_flow.png (PNG copy)>] [15]
-<figures/vision1.png, id=77, 963.6pt x 722.7pt>
+ [14] [15 <./figures/mirs_flow.png (PNG copy)>] [16]
+<figures/vision1.png, id=80, 963.6pt x 722.7pt>
 File: figures/vision1.png Graphic file (type png)
  <use figures/vision1.png>
 Package pdftex.def Info: figures/vision1.png used on input line 117.
 (pdftex.def)             Requested size: 199.46341pt x 149.58803pt.
 
-<figures/vision2.png, id=78, 963.6pt x 722.7pt>
+<figures/vision2.png, id=81, 963.6pt x 722.7pt>
 File: figures/vision2.png Graphic file (type png)
  <use figures/vision2.png>
 Package pdftex.def Info: figures/vision2.png used on input line 127.
@@ -586,15 +587,15 @@ Package pdftex.def Info: figures/vision2.png used on input line 127.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[16 <./figures/vision1.png (PNG copy)>]
-<figures/vision3.png, id=82, 963.6pt x 722.7pt>
+[17 <./figures/vision1.png (PNG copy)>]
+<figures/vision3.png, id=85, 963.6pt x 722.7pt>
 File: figures/vision3.png Graphic file (type png)
  <use figures/vision3.png>
 Package pdftex.def Info: figures/vision3.png used on input line 137.
 (pdftex.def)             Requested size: 199.46341pt x 149.58803pt.
 
-[17 <./figures/vision2.png (PNG copy)> <./figures/vision3.png (PNG copy)>]
-<figures/vision4.png, id=86, 963.6pt x 722.7pt>
+[18 <./figures/vision2.png (PNG copy)> <./figures/vision3.png (PNG copy)>]
+<figures/vision4.png, id=89, 963.6pt x 722.7pt>
 File: figures/vision4.png Graphic file (type png)
  <use figures/vision4.png>
 Package pdftex.def Info: figures/vision4.png used on input line 147.
@@ -606,7 +607,7 @@ Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
 
-<figures/vision5.png, id=87, 963.6pt x 722.7pt>
+<figures/vision5.png, id=90, 963.6pt x 722.7pt>
 File: figures/vision5.png Graphic file (type png)
  <use figures/vision5.png>
 Package pdftex.def Info: figures/vision5.png used on input line 158.
@@ -615,7 +616,7 @@ Package pdftex.def Info: figures/vision5.png used on input line 158.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/vision6.png, id=88, 963.6pt x 722.7pt>
+<figures/vision6.png, id=91, 963.6pt x 722.7pt>
 File: figures/vision6.png Graphic file (type png)
  <use figures/vision6.png>
 Package pdftex.def Info: figures/vision6.png used on input line 168.
@@ -630,9 +631,9 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
-[18 <./figures/vision4.png (PNG copy)>] [19 <./figures/vision5.png (PNG copy)> 
+[19 <./figures/vision4.png (PNG copy)>] [20 <./figures/vision5.png (PNG copy)> 
 <./figures/vision6.png (PNG copy)>]
-<figures/vision7.png, id=95, 963.6pt x 722.7pt>
+<figures/vision7.png, id=99, 963.6pt x 722.7pt>
 File: figures/vision7.png Graphic file (type png)
  <use figures/vision7.png>
 Package pdftex.def Info: figures/vision7.png used on input line 180.
@@ -650,16 +651,16 @@ Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
 
-[20 <./figures/vision7.png (PNG copy)>]
+[21 <./figures/vision7.png (PNG copy)>]
 
-Package natbib Warning: Citation `wordseye' on page 21 undefined on input line 
+Package natbib Warning: Citation `wordseye' on page 22 undefined on input line 
 202.
 
 
-Package natbib Warning: Citation `wintermute2009overview' on page 21 undefined 
+Package natbib Warning: Citation `wintermute2009overview' on page 22 undefined 
 on input line 202.
 
-<figures/square_placement.png, id=100, 963.6pt x 722.7pt>
+<figures/square_placement.png, id=103, 963.6pt x 722.7pt>
 File: figures/square_placement.png Graphic file (type png)
 
 <use figures/square_placement.png>
@@ -669,8 +670,8 @@ Package pdftex.def Info: figures/square_placement.png used on input line 208.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[21]
-<figures/vision_placement_theoretical.png, id=104, 956.57375pt x 455.7025pt>
+[22]
+<figures/vision_placement_theoretical.png, id=107, 956.57375pt x 455.7025pt>
 File: figures/vision_placement_theoretical.png Graphic file (type png)
 
 <use figures/vision_placement_theoretical.png>
@@ -679,32 +680,32 @@ Package pdftex.def Info: figures/vision_placement_theoretical.png used on input
 (pdftex.def)             Requested size: 199.46341pt x 95.0189pt.
 
 
-Package natbib Warning: Citation `wordseye' on page 22 undefined on input line 
+Package natbib Warning: Citation `wordseye' on page 23 undefined on input line 
 228.
 
 
-Package natbib Warning: Citation `xu2002constraint' on page 22 undefined on inp
+Package natbib Warning: Citation `xu2002constraint' on page 23 undefined on inp
 ut line 229.
 
-[22 <./figures/square_placement.png (PNG copy)> <./figures/vision_placement_the
+[23 <./figures/square_placement.png (PNG copy)> <./figures/vision_placement_the
 oretical.png (PNG copy)>]
-<figures/grid_placement.png, id=108, 956.57375pt x 455.7025pt>
+<figures/grid_placement.png, id=111, 956.57375pt x 455.7025pt>
 File: figures/grid_placement.png Graphic file (type png)
 
 <use figures/grid_placement.png>
 Package pdftex.def Info: figures/grid_placement.png used on input line 240.
 (pdftex.def)             Requested size: 199.46341pt x 95.0189pt.
- [23 <./figures/grid_placement.png>]
-<figures/rejection_sampling_placement.png, id=114, 956.57375pt x 455.7025pt>
+ [24 <./figures/grid_placement.png>]
+<figures/rejection_sampling_placement.png, id=117, 956.57375pt x 455.7025pt>
 File: figures/rejection_sampling_placement.png Graphic file (type png)
 
 <use figures/rejection_sampling_placement.png>
 Package pdftex.def Info: figures/rejection_sampling_placement.png used on input
  line 257.
 (pdftex.def)             Requested size: 199.46341pt x 95.0189pt.
-) [24 <./figures/rejection_sampling_placement.png>]
+) [25 <./figures/rejection_sampling_placement.png>]
 Chapter 4.
-(./results.tex <figures/models_used.pdf, id=119, 597.23125pt x 845.1575pt>
+(./results.tex <figures/models_used.pdf, id=122, 597.23125pt x 845.1575pt>
 File: figures/models_used.pdf Graphic file (type pdf)
 
 <use figures/models_used.pdf>
@@ -714,35 +715,35 @@ Package pdftex.def Info: figures/models_used.pdf used on input line 19.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/scene_demo.png, id=120, 963.6pt x 722.7pt>
+<figures/scene_demo.png, id=123, 963.6pt x 722.7pt>
 File: figures/scene_demo.png Graphic file (type png)
 
 <use figures/scene_demo.png>
 Package pdftex.def Info: figures/scene_demo.png used on input line 30.
 (pdftex.def)             Requested size: 415.55249pt x 311.6592pt.
- [25
+ [26
 
 
 ]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[26 <./figures/models_used.pdf>]
+[27 <./figures/models_used.pdf>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/see_query.png, id=130, 614.295pt x 794.97pt>
+<figures/see_query.png, id=133, 614.295pt x 794.97pt>
 File: figures/see_query.png Graphic file (type png)
 
 <use figures/see_query.png>
 Package pdftex.def Info: figures/see_query.png used on input line 96.
 (pdftex.def)             Requested size: 311.66437pt x 403.33081pt.
- [27 <./figures/scene_demo.png>]
+ [28 <./figures/scene_demo.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[28]
-<figures/binary_place_ballAndPerson_noThresh.png, id=138, 612.03656pt x 256.709
+[29]
+<figures/binary_place_ballAndPerson_noThresh.png, id=141, 612.03656pt x 256.709
 06pt>
 File: figures/binary_place_ballAndPerson_noThresh.png Graphic file (type png)
  <use figures/binary_place_ballAndPerson_noThresh.png>
@@ -754,7 +755,7 @@ n input line 117.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-<figures/binary_place_ballAndPerson_lowThresh.png, id=139, 524.71031pt x 250.68
+<figures/binary_place_ballAndPerson_lowThresh.png, id=142, 524.71031pt x 250.68
 657pt>
 File: figures/binary_place_ballAndPerson_lowThresh.png Graphic file (type png)
  <use figures/binary_place_ballAndPerson_lowThresh.png>
@@ -766,7 +767,7 @@ on input line 129.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-<figures/binary_place_ballAndPerson_highThresh.png, id=140, 490.08093pt x 276.2
+<figures/binary_place_ballAndPerson_highThresh.png, id=143, 490.08093pt x 276.2
 8218pt>
 File: figures/binary_place_ballAndPerson_highThresh.png Graphic file (type png)
 
@@ -778,21 +779,21 @@ Package pdftex.def Info: figures/binary_place_ballAndPerson_highThresh.png used
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[29] [30]) [31] [32 <./figures/see_query.png>] [33 <./figures/binary_place_ball
+[30] [31]) [32] [33 <./figures/see_query.png>] [34 <./figures/binary_place_ball
 AndPerson_noThresh.png (PNG copy)> <./figures/binary_place_ballAndPerson_lowThr
-esh.png (PNG copy)>] [34 <./figures/binary_place_ballAndPerson_highThresh.png (
+esh.png (PNG copy)>] [35 <./figures/binary_place_ballAndPerson_highThresh.png (
 PNG copy)>]
 Chapter 5.
-(./conclusion.tex [35
+(./conclusion.tex [36
 
 
-] <figures/3D_Print.jpg, id=164, 3131.7pt x 4175.6pt>
+] <figures/3D_Print.jpg, id=167, 3131.7pt x 4175.6pt>
 File: figures/3D_Print.jpg Graphic file (type jpg)
 
 <use figures/3D_Print.jpg>
 Package pdftex.def Info: figures/3D_Print.jpg used on input line 19.
 (pdftex.def)             Requested size: 186.99734pt x 249.31462pt.
- [36 <./figures/3D_Print.jpg>] [37]) [38]
+ [37 <./figures/3D_Print.jpg>] [38]) [39]
 Chapter 6.
 (./codesection.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
@@ -903,10 +904,10 @@ Overfull \hbox (36.43883pt too wide) in alignment at lines 45--45
  [] [] 
  []
 
-[39
+[40
 
 
-] [40]
+] [41]
 Underfull \hbox (badness 10000) in paragraph at lines 56--56
 []|\OT1/cmr/m/n/10.95 determines
  []
@@ -1031,7 +1032,7 @@ Overfull \hbox (47.01242pt too wide) in alignment at lines 50--74
 Underfull \vbox (badness 10000) detected at line 74
  []
 
-[41] [42]) (./thesis.bbl [43]
+[42] [43]) (./thesis.bbl [44]
 
 Package natbib Warning: Empty `thebibliography' environment on input line 3.
 
@@ -1039,14 +1040,14 @@ Package natbib Warning: Empty `thebibliography' environment on input line 3.
 
 Package natbib Warning: There were undefined citations.
 
-[44
+[45
 
 
 ] (./thesis.aux) ) 
 Here is how much of TeX's memory you used:
  5059 strings out of 493304
- 76596 string characters out of 6139870
- 163969 words of memory out of 5000000
+ 76608 string characters out of 6139870
+ 164969 words of memory out of 5000000
  8392 multiletter control sequences out of 15000+600000
  10180 words of font info for 36 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -1063,10 +1064,10 @@ lic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
 
-Output written on thesis.pdf (49 pages, 3752435 bytes).
+Output written on thesis.pdf (50 pages, 3755624 bytes).
 PDF statistics:
- 235 PDF objects out of 1000 (max. 8388607)
- 147 compressed objects within 2 object streams
+ 238 PDF objects out of 1000 (max. 8388607)
+ 149 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  96 words of extra memory for PDF output out of 10000 (max. 10000000)
 
