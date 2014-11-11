@@ -23,7 +23,7 @@ def idf(word, bloblist):
 # for each word takes most similar word in other sentence
 # only compares same part of speech
 # normalized for total comarisons
-def vec_semantic_sim(v1,v2,method='wn'):
+def vec_semantic_sim(v1,v2,method='wn', corpus):
     # print('sim v1, v2',v1,v2)
     v1 = word_tokenize(v1)#pos_tag(word_tokenize(v1))
     v2 = word_tokenize(v2)#pos_tag(word_tokenize(v2))
@@ -33,23 +33,29 @@ def vec_semantic_sim(v1,v2,method='wn'):
     v1 = [w for w in v1 if not w[0] in stopwords.words('english')]
     v2 = [w for w in v2 if not w[0] in stopwords.words('english')]
 
-    t_sim = 0.0
     comparer = wordnet_similarity if method == 'wn' else cn_similarity
     # print(comparer)
 
+    t_sim1 = 0.0
     for w1 in v1:
         same_pos = [x[0] for x in v2 if x[1] == w1[1]]
         # print('same pos',same_pos,w1)
-        t_sim += max([comparer(w1[0],x) for x in same_pos]) if same_pos else 0.0
+        t_sim1 += max([comparer(w1[0],x) for x in same_pos]) * idf(w1[0],corpus) if same_pos else 0.0
+    t_sim1 /= sum([idf(w) for w in v1])
 
+    t_sim2 = 0.0
     for w1 in v2:
         same_pos = [x[0] for x in v1 if x[1] == w1[1]]
         # print('same pos2',same_pos,w1)
-        t_sim += max([comparer(w1[0],x) for x in same_pos]) if same_pos else 0.0
+        t_sim2 += max([comparer(w1[0],x) for x in same_pos]) * idf(w1[0],corpus) if same_pos else 0.0
+    t_sim2 /= sum([idf(w) for w in v2])
 
     # print('similarity',t_sim / float(len(v1)+len(v2)))
+    '''
     t = float(len(v1)+len(v2))
     return t_sim / t if t > 0.0 else 0.0   
+    '''
+    return (t_sim2 + t_sim1)/2.0
 
 
 def wordnet_similarity(w1, w2, sim=wn.path_similarity):
