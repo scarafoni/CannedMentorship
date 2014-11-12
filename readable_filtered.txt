@@ -1,51 +1,51 @@
-Algorithm 1, hac, bow, Rating: _______
-write the document (the actual content varies based on the nature of the paper)
-write down teh appropriate content taht you want to input, including beginning and conclusion
+	Algorithm 1, hac, bow, Rating: _______
+	write the document (the actual content varies based on the nature of the paper)
+	write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 2, hac, bow-ngram, Rating: _______
-write the document (the actual content varies based on the nature of the paper)
-write down teh appropriate content taht you want to input, including beginning and conclusion
+	Algorithm 2, hac, bow-ngram, Rating: _______
+	write the document (the actual content varies based on the nature of the paper)
+	write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 3, hac, ks, Rating: _______
-write the document (the actual content varies based on the nature of the paper)
-write down teh appropriate content taht you want to input, including beginning and conclusion
+	Algorithm 3, hac, ks, Rating: _______
+	write the document (the actual content varies based on the nature of the paper)
+	write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 4, hac, wn, Rating: _______
-write the document (the actual content varies based on the nature of the paper)
-write down teh appropriate content taht you want to input, including beginning and conclusion
+	Algorithm 4, hac, wn, Rating: _______
+	write the document (the actual content varies based on the nature of the paper)
+	write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 5, dbscan, bow, Rating: _______
-write the document (the actual content varies based on the nature of the paper)
-write the document and save
-write down teh appropriate content taht you want to input, including beginning and conclusion
+	Algorithm 5, dbscan, bow, Rating: _______
+	write the document (the actual content varies based on the nature of the paper)
+	write the document and save
+	write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 6, dbscan, bow-ngram, Rating: _______
-write down teh appropriate content taht you want to input, including beginning and conclusion
-write the document and save
-write the document (the actual content varies based on the nature of the paper)
+	Algorithm 6, dbscan, bow-ngram, Rating: _______
+	write down teh appropriate content taht you want to input, including beginning and conclusion
+	write the document and save
+	write the document (the actual content varies based on the nature of the paper)
 
-Algorithm 7, dbscan, ks, Rating: _______
-write the document (the actual content varies based on the nature of the paper)
-write the document and save
-write down teh appropriate content taht you want to input, including beginning and conclusion
+	Algorithm 7, dbscan, ks, Rating: _______
+	write the document (the actual content varies based on the nature of the paper)
+	write the document and save
+	write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 8, dbscan, wn, Rating: _______
-write down teh appropriate content taht you want to input, including beginning and conclusion
+	Algorithm 8, dbscan, wn, Rating: _______
+	write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 9, affprop, bow, Rating: _______
-write the document (the actual content varies based on the nature of the paper)
-write down teh appropriate content taht you want to input, including beginning and conclusion
+	Algorithm 9, affprop, bow, Rating: _______
+	write the document (the actual content varies based on the nature of the paper)
+	write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 10, affprop, bow-ngram, Rating: _______
-write the document (the actual content varies based on the nature of the paper)
-write down teh appropriate content taht you want to input, including beginning and conclusion
+	Algorithm 10, affprop, bow-ngram, Rating: _______
+	write the document (the actual content varies based on the nature of the paper)
+	write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 11, affprop, ks, Rating: _______
-write down teh appropriate content taht you want to input, including beginning and conclusion
+	Algorithm 11, affprop, ks, Rating: _______
+	write down teh appropriate content taht you want to input, including beginning and conclusion
 
-Algorithm 12, affprop, wn, Rating: _______
-write down teh appropriate content taht you want to input, including beginning and conclusion
-write the document and save
+	Algorithm 12, affprop, wn, Rating: _______
+	write down teh appropriate content taht you want to input, including beginning and conclusion
+	write the document and save
 
 Algorithm 1, hac, bow, Rating: _______
 make sure to save your work by clicking the save button

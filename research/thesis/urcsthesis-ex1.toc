@@ -1,4 +1,0 @@
-\contentsline {subsection}{\numberline {0.0.1}High Level Software}{7}
-\contentsline {subsection}{\numberline {0.0.2}Objects and Entities}{8}
-\contentsline {subsection}{\numberline {0.0.3}Predications}{10}
-\contentsline {subsection}{\numberline {0.0.4}Placement methods}{16}
