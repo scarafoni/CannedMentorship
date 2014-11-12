@@ -1,0 +1,59 @@
+observations real
+
+test 1- hash table in java
+solo time- 3 min 8 sec
+rating- 3 2 2 3 3 4
+inst
+	make array to hold data
+	make hash function 
+	make insert, delete, etc methods
+	use
+
+obs- trouble remembering how to do task
+need to be able to finish at all times
+need a few instructions to get people on the same page
+revision stage for instruction dev.
+
+tony doesn't liek there's b/c too much detail
+
+group
+time- 14 mins
+rating- 4 3 4 4 4 4
+final instructions
+Create an array whose size is a prime number.
+Create a hash function to determine the index of a given object
+If the index of an object is already in use by another object, determine a new index using linear probing, quadratic probing, or a secondary hash function.
+If the array is out of room, create a larger array (also of prime size) and rehash all entries into the new array.
+Continue hashing until all elements are in the table. Lookup can then be used with the same hash function.
+
+
+test2- same
+solo
+	time- 3:20
+final-
+	create a skeleton of a hashtable class in java
+	choose how to deal with collisions (separate chaining, linear proping, etc)
+	create a hash function (if seperate chaining use array of linked lists)
+	create a large instance array in class
+approval- 4 3 2 4 3
+group
+time- 7:01
+
+votes
+('raw votes', ["use Java's hashtable constructor", 'Make it like an object', 'write a class with an array member variable', 'make a new class with an array field'])
+
+('raw votes', ['make a hash function ', 'write a constructor that initializes the array to a prime length', 'make a constructor which initializes the array', 'Put stuff in it'])
+
+('raw votes', ['make a hash function ', 'make a get function which returns the object at position hash value mod the prime', 'No clue what to do after that!', 'use a prime number in the array length'])
+
+('raw votes', ['create methods to insert, delete, and search for a value', 'make a get function which gets the element at the hashvalue modulo the prime', 'write mutators and accessors', 'use the mod operation and maps it to an index in a array. Make sure that is a way to have multiple values for the same index'])
+
+'raw votes', ['create insert and delete methods', 'No clue after that', 'implement some way to deal with hash collisions (e.g. chaining)', 'get the calculated index and get it from the array.'])
+
+approval- 4 4 3 3 5
+final
+('final instructions', ['write a class with an array member variable', 'write a constructor that initializes the array to a prime length', 'make a hash function ', 'make a get function which gets the element at the hashvalue modulo the prime', 'create insert and delete methods'])
+
+
+
+	

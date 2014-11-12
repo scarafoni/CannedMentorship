@@ -1,0 +1,15 @@
+observations real
+
+test 1- hash table in java
+solo time- 3 min 8 sec
+inst
+	make array to hold data
+	make hash function 
+	make insert, delete, etc methods
+	use
+
+obs- trouble remembering how to do task
+need to be able to finish at all times
+
+final instructions
+'Create an array whose size is a prime number.', 'Create a hash function to determine the index of a given object', 'If the index of an object is already in use by another object, determine a new index using linear probing, quadratic probing, or a secondary hash function.', 'If the array is out of room, create a larger array (also of prime size) and rehash all entries into the new array.', 'Continue hashing until all elements are in the table. Lookup can then be used with the same hash function.'])
