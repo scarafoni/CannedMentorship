@@ -36,9 +36,9 @@ app = Flask(__name__)
 
 app.config.update(
     DEBUG=True,
-    MAIL_SERVER='smtp.gmail.com'
+    MAIL_SERVER='smtp.gmail.com',
     MAIL_PORT=465,
-    MAIL_USE_SSL=True
+    MAIL_USE_SSL=True,
     MAIL_USERNAME='cannedMentorship@gmail.com',
     MAIL_PASSWORD='AsdWsx!1')
 mail = Mail(app)
