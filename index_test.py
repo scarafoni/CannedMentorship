@@ -34,12 +34,22 @@ redis = redis.from_url(redis_url)
 @sockets.route('/submit')
 def sub_ws(ws):
     '''get incoming websocket messages'''
+    print('connect subws')
     while ws.socket is not None:
+        print('subws loop')
         gevent.sleep()
         message = ws.receive()
 
         if message:
+            print('message',message)
             
+'''
+@sockets.route('/wsupdate')
+def wsupdate(ws):
+    print('connect update')
+    while ws.socket is not None:
+        gevent.sleep()
+'''
 
 @app.before_first_request
 def startup():
