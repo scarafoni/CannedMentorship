@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+  </head>
+  <script>
+    //get my id
+    var id = -1;
+    var leader = false;
+    var state = 'vote_finish';
+    var finished = false;
+    $.ajax({
+        url: '/get_id', 
+        async: false,
+        success: function(data) {
+                id = data.result;
+        }
+    });
+    console.log(id);
+
+    $(window).unload(function() {
+            $.ajax({
+                url: '/leave', 
+                async: false,
+                u_id: String(id),
+            })
+            return false;
+        });
+
+    //send an instruction
+    $(function() {
+      $('#sendProp').bind('click', function() {
+        $.getJSON('/send_my_inst', {
+          u_instruct: $('input[name="input"]').val(),
+          u_id: String(id),
+        }, function(data) {
+          $('#uInstruct').val('');
+          alert(data.result);
+          //$("#uInstruct").text(data.result);
+        });
+        return false;
+      });
+    });
+    
+    //propose new instruction
+    $(function() {
+      $('#proposeInstruct').bind('click', function() {
+        $.getJSON('/propose_instruct', {
+          u_id: String(id),
+        }, function(data) {
+          alert(data.result);
+          //$("#uInstruct").text(data.result);
+        });
+        return false;
+      });
+    });
+   
+
+
+    //finish the session
+    $(function() {
+        $('#finishButton').bind('click', function() {
+            $.getJSON('/finish', {
+                u_id : String(id),
+            }, function(data) {
+                finished = Boolean(data.result);
+                if(data.msg) {
+                    alert(data.msg);
+                }
+            });
+            return false;
+        });
+    });
+
+    function activateBtn(btn) {
+        $('#'+btn).removeClass('btn-default');
+        $('#'+btn).addClass('btn-primary');
+    }
+    function deactivateBtn(btn) {
+        $('#'+btn).addClass('btn-default');
+        $('#'+btn).removeClass('btn-primary');
+    }
+
+    //get updates
+    setInterval(function() {
+        $.getJSON('/updates', {
+            u_id : String(id),
+        },
+        function(data) {
+            //leader
+            if(data.leader == id) {
+                leader = true;
+                $('#amILead').html('You are leader'); 
+            }
+            else {
+                leader = false;
+                $('#amILead').html('You are not leader (don\'t worry about what this means, it\'s not important'); 
+            }
+            
+            //buttons only needs to be active in certain states
+            deactivateBtn('proposeInstruct');
+            deactivateBtn('finishButton');
+            deactivateBtn('sendProp');
+
+            state = data.state
+            curr_inst = '';
+            console.log(state);
+            switch(state) {
+                case 'find':
+                    activateBtn('finishButton');
+                    if(leader) {
+                        curr_inst = 'propose a new instruction!';
+                        activateBtn('proposeInstruct');
+                    }
+                    else {
+                        curr_inst = 'wait for the leader to propose a new instruction!';
+                    }
+                    break;
+                case 'write':
+                    curr_inst = '';
+                    if(!data.got_my_input)
+                        curr_inst = 'write the instruction for this step';
+                    else
+                        curr_inst = "your input received! please wait for the others";
+                    curr_inst += " "+data.inputs+'/'+data.total_players+' have proposed so far';
+
+                    activateBtn('sendProp');
+                    break;
+                case 'vote':
+                    curr_inst = '';
+                    if(!data.got_my_input)
+                        curr_inst = 'vote on which step you think is best';
+                    else
+                        curr_inst = "your input received! please wait for the others";
+                    curr_inst += " "+data.inputs+'/'+data.total_players+' have voted so far';
+;
+                    break;
+                case 'vote_finish':
+                    curr_inst = '';
+                    if(!data.got_my_input)
+                        curr_inst = 'someone believes the instructions are finished, do you agree?';
+                    else
+                        curr_inst = "your vote is received! please wait for the others";
+                    curr_inst += " "+data.inputs+'/'+data.total_players+' have voted so far';
+
+                    break;
+                case 'finish':
+                    curr_inst = 'the instructions are finished, thank you for your input!';
+                    break;
+                default:
+                    curr_inst = 'error';
+                    break;
+            }
+            $("#currStep").html(curr_inst);
+
+            //the area for voting on whethe we're finished
+            if(state == 'vote_finish') {
+              $('#voteFinish').html('<button id="yesfinish" type="button" class="btn btn-primary">finish</button><button id="nofinish" type="button" class="btn btn-primary">don\'t finish</button>');
+                //vote yes or no to finish
+                $(function() {
+                    $('#yesfinish').bind('click', function() {
+                        $.getJSON('/vote_finish', {
+                            u_id: String(id),
+                            u_vote: 'yes'
+                    }, function(data) {
+                        alert('thank you, vote received');
+                       });
+                    return false;
+                    });
+                });
+
+                $(function() {
+                    $('#nofinish').bind('click', function() {
+                        $.getJSON('/vote_finish', {
+                            u_id: String(id),
+                            u_vote: 'no'
+                    }, function(data) {
+                        alert('thank you, vote received');
+                       });
+                    return false;
+                    });
+                });
+                
+
+            } else {
+
+                $('#voteFinish').html('');
+            }
+            //the voting area
+            if(data.choices) {
+                var d = data.choices;
+                console.log(data.choices);
+                var votes = '';
+                for(var i in d) { 
+                    votes += '<tr ><td id='+i+'><a href="#" class="list-group-item active" >'+d[i]+'</a></td></tr>';
+                }
+                $('#voteTable tbody').html(votes); 
+
+                //send vote 
+                $(function() { 
+                    $('#voteTable td').bind('click', function() {
+                    $.getJSON('/send_my_vote', {
+                        u_choice: $(this).attr('id'),
+                        u_id: String(id)
+                        }, function(data) {
+                            alert(data.result);
+                        });
+                    });
+                });
+            } else {
+                $('#voteTable tbody').html(''); 
+            }
+//the current instructions
+            if(data.instructions) {
+                d = data.instructions;
+                console.log(data.instructions);
+                var instructions = '';
+                for(var i in d) { 
+                    x = parseInt(i) + 1
+                    instructions += '<tr><td>'+x+'. '+d[i]+'</td></tr>';
+                }
+                $('#instructTable tbody').html(instructions); 
+            }
+        });
+    },3000);
+  </script>
+  </head>
+  <body>
+    <div id="header" class="jumbotron">
+      <div class="container">
+        <h1>Canned Mentorship</h1>
+        <p>Work with others to write a how-to instruction list for-</br> <strong>How to get from Wilson Commons to the CS minor's lab</strong></p>
+      </div>
+    </div>
+    <div id="content" class="container">
+      <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-md-8">
+          <table id="instructTable" class="table table-bordered">
+            <thead>
+              <tr class="info">
+                <th>How-to list so far</th>
+              </tr>
+            </thead>
+            <tbody >
+            </tbody>
+          </table>
+          <div class="input-group">
+            <input id="uInstruct" type="text" name="input" class="form-control"> 
+            <span class="input-group-btn">
+                <button id="sendProp" type="button" class="btn btn-primary">
+                  Send
+                </button>
+            </span>
+          </div>
+          <div id="propFinishDiv">
+              <button id="proposeInstruct" type="button" class="btn btn-primary">
+              Propose Next Step
+              </button>
+              <button id="finishButton" type="button" class="btn btn-primary">
+                Think the how-to is complete? Click here to finish
+              </button>
+        </div>
+        </div>       
+        <div class="col-sm-4 sidebar-offcanvas">
+          <h5 id="amILead">stuff</h5>
+          <div class="alert alert-info" role="alert">
+            <h4><strong>What to do:</strong></h4>
+            <h4 id="currStep">stuff</h4>
+          </div>
+          <div id="voteFinish" class="input-group">
+          </div>
+          <div class="input-group">
+          <table id="voteTable" class="table table-striped">
+            <thead>
+              <tr><th>suggested answers:</th></tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

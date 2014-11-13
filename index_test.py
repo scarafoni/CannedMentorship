@@ -31,6 +31,16 @@ sockets = Sockets(app)
 redis_url = os.getenv('REDISTOGO_URL','redis://redistogo:5e00cfed335a73ab9a5a515cef203d3d@greeneye.redistogo.com:10505/' )
 redis = redis.from_url(redis_url)
 
+@sockets.route('/submit')
+def sub_ws(ws):
+    '''get incoming websocket messages'''
+    while ws.socket is not None:
+        gevent.sleep()
+        message = ws.receive()
+
+        if message:
+            
+
 @app.before_first_request
 def startup():
     redis.flushdb()
@@ -42,7 +52,7 @@ def startup():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index_test.html')
 
 @app.route('/leave')
 def logout():
