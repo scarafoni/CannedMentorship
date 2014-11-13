@@ -4,7 +4,9 @@ from collections import Counter
 import os
 import logging
 import sort_answers
+# change this!!!!!
 from flask.ext.mail import Mail, Message
+import time
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
@@ -30,7 +32,9 @@ def run_ai(props):
     mail.send(msg)
 
     print('raw votes',props)
-    return props # sort_answers.filter_inputs(props)
+    x = sort_answers.filter_inputs(props, classfn='hac', feat_dist='ks')
+    print(x)
+    return x
 
 app = Flask(__name__)
 app.config.update(
@@ -53,6 +57,7 @@ def startup():
     redis.set('total_players', '0')
     redis.set('leader', '1')
     redis.set('next_id',0)
+    redis.set('init_time',time.time())
     redis.set('state', 'find')
 
 
