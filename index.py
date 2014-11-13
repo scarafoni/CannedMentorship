@@ -111,11 +111,12 @@ def logout():
             if redis.get('state') == 'finish':
                 print('final instructions',redis.lrange('instructions',0,-1))
                 msg = Message(
-                    'raw votes',
+                    'final instructions',
                     sender = 'cannedMentorship@gmail.com',
                     recipients= ['dan@scarafoni.com'])
-                msg.body = '\n'.join(props)
+                msg.body = '\n'.join(redis.lrange('instructions',0,-1))
                 mail.send(msg)
+
             redis.delete('inputs')
             redis.delete('input_ids')
         
@@ -255,6 +256,13 @@ def vote_finish():
             redis.set('state','find' if winner == 'no' else 'finish')
             if redis.get('state') == 'finish':
                 print('final instructions',redis.lrange('instructions',0,-1))
+                msg = Message(
+                    'final instructions',
+                    sender = 'cannedMentorship@gmail.com',
+                    recipients= ['dan@scarafoni.com'])
+                msg.body = '\n'.join(redis.lrange('instructions',0,-1))
+                mail.send(msg)
+
             redis.delete('inputs')
             redis.delete('input_ids')
 
