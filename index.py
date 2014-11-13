@@ -4,7 +4,7 @@ from collections import Counter
 import os
 import logging
 import sort_answers
-from flask_mail import Mail, Message
+from flask.ext.mail import Mail, Message
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
