@@ -229,6 +229,8 @@ if __name__== '__main__':
                 'spread the peanut butter',\
                 'get a knife.'\
               ]
+    x = sort_answers.filter_inputs(props, classfn='hac', feat_dist='ks')
+    print('test',x)
     # fmat1 = feature_extraction(inputs=inputs1)
     # print(fmat1.toarray())
     # groups = hac(f_mat=fmat1)
@@ -240,6 +242,8 @@ if __name__== '__main__':
     # groups = DBSCAN(metric='precomputed').fit(numpy.asarray(distances)).labels_
     
     # open the file
+
+    '''
     with open('observations-formatted.txt','r') as r, open('filtered_votes.txt','w') as w:
         # format the input tests into lists
         r = r.read()
@@ -258,5 +262,6 @@ if __name__== '__main__':
                 hold = i
             w.write(c+','+d+','+str(elapsed)+'\n'+'\n'.join(filtered)+'\n\n')
     # print(filter_inputs(inputs2))
+    '''
     
               

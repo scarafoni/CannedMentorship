@@ -1,1 +1,1 @@
-web: gunicorn index:app --log-file=-
+web: python sort_answers.py --log-file=-
