@@ -2,6 +2,7 @@
 # http://sujitpal.blogspot.com/2013/02/checking-for-word-equivalence-using.html
 from __future__ import division, unicode_literals
 import requests
+nltk.data.path.append('nltk_data/')
 from nltk.corpus import wordnet as wn, stopwords
 from nltk import word_tokenize, pos_tag
 import itertools as it
