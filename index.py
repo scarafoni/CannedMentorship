@@ -33,14 +33,15 @@ def run_ai(props):
     return props # sort_answers.filter_inputs(props)
 
 app = Flask(__name__)
-
 app.config.update(
-    DEBUG=True,
-    MAIL_SERVER='smtp.gmail.com',
-    MAIL_PORT=465,
-    MAIL_USE_SSL=True,
-    MAIL_USERNAME='cannedMentorship@gmail.com',
-    MAIL_PASSWORD='AsdWsx!1')
+	DEBUG=True,
+	#EMAIL SETTINGS
+	MAIL_SERVER='smtp.gmail.com',
+	MAIL_PORT=465,
+	MAIL_USE_SSL=True,
+	MAIL_USERNAME = 'cannedMentorship@gmail.com',
+	MAIL_PASSWORD = 'AsdWsx!1')
+
 mail = Mail(app)
 
 redis_url = os.getenv('REDISTOGO_URL','redis://redistogo:5e00cfed335a73ab9a5a515cef203d3d@greeneye.redistogo.com:10505/' )
