@@ -28,30 +28,91 @@ def run_ai(props):
     print('raw votes',props)
     return props # sort_answers.filter_inputs(props)
 
+
 app = Flask(__name__)
 sockets = Sockets(app)
 
 redis_url = os.getenv('REDISTOGO_URL','redis://redistogo:5e00cfed335a73ab9a5a515cef203d3d@greeneye.redistogo.com:10505/' )
 redis = redis.from_url(redis_url)
 
+
+class cmBackend(object):
+    def __init__(self):
+        self.clients = list()
+        self.db = redis
+        self.state = 'find'
+        self.inputs = []
+        
+    def register(self, client):
+        '''registers a user'''
+        print('client registered:',client)
+        self.clients.append(client)
+
+    def add_input(self, input):
+        '''adds user input to the database'''
+        print('add_input')
+        self.inputs.append(input)
+
+    def send(self, client, data):
+        '''send data to a client'''
+        try:
+            client.send(data)
+        except Exception:
+            self.clients.remove(client)
+            print('client logged out:',client)
+
+    def update_backend(self):
+        '''updates the backend state as needed'''
+        self.state = 'find' 
+
+    def run(self):
+        '''send updates to the clients'''
+        self.update_backend()
+        while not self.state == 'finish':
+            for client in self.clients:
+                to_send = {}
+
+
+                if self.state == 'find':
+                    to_send = {
+                        'inputs' : '\n'.join(self.inputs)
+                    }
+
+                else:
+                    print('ERROR')
+
+                to_send = json.dumps(to_send)
+                gevent.spawn(self.send, client, to_send)
+            gevent.sleep(seconds=1)
+
+    def start(self):
+        print('start')
+        gevent.spawn(self.run)
+
+cmbe = cmBackend()
+cmbe.start()
+
 @sockets.route('/submit')
 def sub_ws(ws):
     '''get incoming websocket messages'''
     print('connect subws')
     while not ws.closed:
-        print('subws loop')
         gevent.sleep()
 
         message = ws.receive()
         if message:
+            cmbe.add_input(message)
             print('message',message)
+
             
 @sockets.route('/wsupdate')
 def wsupdate(ws):
     print('connect update')
+    cmbe.register(ws)
+
     while not ws.closed:
-        ws.send(json.dumps(dict(data="1")))
-        # gevent.sleep()
+        # ws.send(json.dumps(dict(data="1")))
+        gevent.sleep()
 
 @app.before_first_request
 def startup():
