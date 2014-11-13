@@ -4,6 +4,7 @@ from collections import Counter
 import os
 import logging
 import sort_answers
+from flask_sockets import Sockets
 # import sys
 
 log = logging.getLogger('werkzeug')
@@ -25,7 +26,7 @@ def run_ai(props):
     return props # sort_answers.filter_inputs(props)
 
 app = Flask(__name__)
-
+sockets = Sockets(app)
 
 redis_url = os.getenv('REDISTOGO_URL','redis://redistogo:5e00cfed335a73ab9a5a515cef203d3d@greeneye.redistogo.com:10505/' )
 redis = redis.from_url(redis_url)
