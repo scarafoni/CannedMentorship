@@ -7,6 +7,7 @@ import sort_answers
 import gevent
 from flask_sockets import Sockets
 import random
+import json
 # import sys
 
 log = logging.getLogger('werkzeug')
@@ -49,7 +50,7 @@ def sub_ws(ws):
 def wsupdate(ws):
     print('connect update')
     while not ws.closed:
-        ws.send(jsonify(data="1"))
+        ws.send(json.dumps(dict(data="1")))
         # gevent.sleep()
 
 @app.before_first_request
