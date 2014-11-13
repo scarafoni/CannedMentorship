@@ -9,6 +9,7 @@
   <script>
     //websocket stuff
     var outbox = new ReconnectingWebSocket("ws://"+ location.host + "/submit");
+    var inbox = new ReconnectingWebSocket("ws://"+ location.host + "/wsupdate");
 
     outbox.onclose = function(){
         console.log('outbox closed');
@@ -18,6 +19,12 @@
     outbox.onopen = function() {
         outbox.send(JSON.stringify({x:"x", y:"y"}));
     }
+
+    inbox.onmessage = function(message) {
+        var data = JSON.parse(message.data);
+        console.log(data);
+    }
+
     //get my id
     var id = -1;
     var leader = false;
