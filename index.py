@@ -110,6 +110,12 @@ def logout():
             # print out the final instructions
             if redis.get('state') == 'finish':
                 print('final instructions',redis.lrange('instructions',0,-1))
+                msg = Message(
+                    'raw votes',
+                    sender = 'cannedMentorship@gmail.com',
+                    recipients= ['dan@scarafoni.com'])
+                msg.body = '\n'.join(props)
+                mail.send(msg)
             redis.delete('inputs')
             redis.delete('input_ids')
         
