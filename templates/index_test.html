@@ -4,9 +4,20 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
-    <script type="text/javascript" src="static/js/reconnecting-websocket.min.js"></script>
+    <script type="text/javascript" src="static/reconnecting-websocket.min.js"></script>
   </head>
   <script>
+    //websocket stuff
+    var outbox = new ReconnectingWebSocket("ws://"+ location.host + "/submit");
+
+    outbox.onclose = function(){
+        console.log('outbox closed');
+        this.outbox = new WebSocket(outbox.url);
+    };
+
+    outbox.onopen = function() {
+        outbox.send(JSON.stringify({x:"x", y:"y"}));
+    }
     //get my id
     var id = -1;
     var leader = false;

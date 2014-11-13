@@ -4,6 +4,7 @@ from collections import Counter
 import os
 import logging
 import sort_answers
+import gevent
 from flask_sockets import Sockets
 # import sys
 
@@ -35,11 +36,11 @@ redis = redis.from_url(redis_url)
 def sub_ws(ws):
     '''get incoming websocket messages'''
     print('connect subws')
-    while ws.socket is not None:
+    while not ws.closed:
         print('subws loop')
         gevent.sleep()
-        message = ws.receive()
 
+        message = ws.receive()
         if message:
             print('message',message)
             
