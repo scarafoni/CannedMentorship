@@ -4,7 +4,7 @@ from collections import Counter
 import os
 import logging
 import sort_answers
-# import sys
+from flaskext.mail import Mail, Message
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
@@ -21,11 +21,27 @@ def count_votes(votes, vote_list):
 
 # placeholder for the ai program
 def run_ai(props):
+    # mail the results to myself
+    msg = Message(
+        'raw votes',
+        sender = 'cannedMentorship@gmail.com',
+        recipients= ['dan@scarafoni.com'])
+    msg.body = '\n'.join(props)
+    mail.send(msg)
+
     print('raw votes',props)
     return props # sort_answers.filter_inputs(props)
 
 app = Flask(__name__)
 
+app.config.update(
+    DEBUG=True,
+    MAIL_SERVER='smtp.gmail.com'
+    MAIL_PORT=465,
+    MAIL_USE_SSL=True
+    MAIL_USERNAME='cannedMentorship@gmail.com',
+    MAIL_PASSWORD='AsdWsx!1')
+mail = Mail(app)
 
 redis_url = os.getenv('REDISTOGO_URL','redis://redistogo:5e00cfed335a73ab9a5a515cef203d3d@greeneye.redistogo.com:10505/' )
 redis = redis.from_url(redis_url)
