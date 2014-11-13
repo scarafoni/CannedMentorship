@@ -55,7 +55,7 @@ def semantic_distance_matrix(sentences,method='wn', format='array'):
             for j in range(i,len(tokens)):
                 if i == j:
                     continue
-                dist = vec_semantic_sim(tokens[i], tokens[j], method)
+                dist = vec_semantic_sim(v1=tokens[i], v2=tokens[j], method=method, corpus=tokens)
                 # print('v1, v2',tokens[i], tokens[j], dist)
                 distances.append(dist)
          
@@ -64,7 +64,7 @@ def semantic_distance_matrix(sentences,method='wn', format='array'):
         for v1 in tokens:
             d= []
             for v2 in tokens:
-                dist = vec_semantic_sim(v1, v2, method)
+                dist = vec_semantic_sim(v1=v1, v2=v2, method=method, corpus=tokens)
                 # print('v1, v2',v1, v2, dist)
                 d.append(dist)
             distances.append(d)
@@ -89,7 +89,7 @@ def kitchen_sink(sentences,format='array'):
                 # print('sentences',tokens[i],tokens[j])
                 # print('lex sim', lex_sim)
                 # semantic similarities
-                sem_sim = 1.0 - vec_semantic_sim(tokens[i], tokens[j])
+                sem_sim = 1.0 - vec_semantic_sim(v1=tokens[i], v2=tokens[j], corpus=tokens)
                 # print('sem sim', sem_sim)
                 distances.append((lex_sim + sem_sim)/2.0)
             
@@ -102,7 +102,7 @@ def kitchen_sink(sentences,format='array'):
                 lex_sim = float(pdist(numpy.concatenate((tdif_feat[i].toarray(), tdif_feat[j].toarray()))))
                 # print('lex sim', lex_sim)
                 # semantic similarities
-                sem_sim = 1.0 - vec_semantic_sim(tokens[i], tokens[j])
+                sem_sim = 1.0 - vec_semantic_sim(v1=tokens[i], v2=tokens[j],corpus=tokens)
                 # print('sem sim', sem_sim)
                 row.append((lex_sim + sem_sim)/2.0)
             distances.append(row) 
@@ -249,7 +249,7 @@ if __name__== '__main__':
         hold = ''
         for (i,c,d) in itertools.product(r,\
                                          ['hac', 'dbscan', 'affprop'],\
-                                         ['bow', 'bow-ngram','ks', 'wn','cn']):
+                                         ['bow', 'bow-ngram','ks', 'wn']):
             start = time.time()
             filtered = filter_inputs(i,classfn=c,feat_dist=d)
             elapsed = time.time() - start
