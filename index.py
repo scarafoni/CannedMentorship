@@ -31,10 +31,10 @@ def run_ai(props):
     msg.body = '\n'.join(props)
     mail.send(msg)
 
-    print('raw votes',props)
-    # x = sort_answers.filter_inputs(props, classfn='hac', feat_dist='ks')
-    # print(x)
-    return props
+    # print('raw votes',props)
+    x = sort_answers.filter_inputs(props, classfn='hac', feat_dist='ks')
+    print(x)
+    return x
 
 app = Flask(__name__)
 app.config.update(
