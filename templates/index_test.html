@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
     <script type="text/javascript" src="static/reconnecting-websocket.min.js"></script>
-  </head>
-  <script>
+<script>
     //websocket stuff
     var outbox = new ReconnectingWebSocket("ws://"+ location.host + "/submit");
     var inbox = new ReconnectingWebSocket("ws://"+ location.host + "/wsupdate");
@@ -55,5 +54,14 @@
 </script>
 </head>
 <body>
+    <div id="header" class="jumbotron">
+        <div class="container">
+            <h1>Canned Mentorship</h1>
+            <p>Work with others to write a how-to instruction list for-</br> <strong>How to get from Wilson Commons to the CS minor's lab</strong></p>
+        </div>
+    </div>
+    <div id="content" class="container">
+        <h2>your id goes here</h2>    
+    </div>
 </body>
 </html>
