@@ -10,6 +10,7 @@
     var send = new ReconnectingWebSocket("ws://"+ location.host + "/send");
     var receive = new ReconnectingWebSocket("ws://"+ location.host + "/receive");
 
+    send.onopen
     
     /*
     outbox.onclose = function(){
@@ -61,6 +62,7 @@
     </div>
     <div id="content" class="container">
         <h2>your id goes here</h2>    
+        <h2>connection status goes here</h2>
     </div>
 </body>
 </html>
