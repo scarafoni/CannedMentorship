@@ -103,7 +103,7 @@ class cmBackend(object):
 cmbe = cmBackend()
 cmbe.start()
 
-@sockets.route('/submit')
+@sockets.route('/send')
 def sub_ws(ws):
     '''get incoming websocket messages'''
     print('connect subws')
@@ -116,7 +116,7 @@ def sub_ws(ws):
             print('message',message)
 
             
-@sockets.route('/wsupdate')
+@sockets.route('/receive')
 def wsupdate(ws):
     print('connect update')
     cmbe.register(ws)

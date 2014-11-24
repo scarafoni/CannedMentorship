@@ -7,11 +7,10 @@
     <script type="text/javascript" src="static/reconnecting-websocket.min.js"></script>
 <script>
     //websocket stuff
-    var outbox = new ReconnectingWebSocket("ws://"+ location.host + "/submit");
-    var inbox = new ReconnectingWebSocket("ws://"+ location.host + "/wsupdate");
+    var send = new ReconnectingWebSocket("ws://"+ location.host + "/send");
+    var receive = new ReconnectingWebSocket("ws://"+ location.host + "/receive");
 
-
-
+    
     /*
     outbox.onclose = function(){
         console.log('outbox closed');
