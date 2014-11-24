@@ -35,21 +35,6 @@
         });
     });
 
-    /*
-    $(function() {
-      $('#sendProp').bind('click', function() {
-        $.getJSON('/send_my_inst', {
-          u_instruct: $('input[name="input"]').val(),
-          u_id: String(id),
-        }, function(data) {
-          $('#uInstruct').val('');
-          alert(data.result);
-          //$("#uInstruct").text(data.result);
-        });
-        return false;
-      });
-    });
-    */
 
 </script>
 </head>
@@ -61,8 +46,8 @@
         </div>
     </div>
     <div id="content" class="container">
-        <h2>your id goes here</h2>    
-        <h2>connection status goes here</h2>
+        <h2 id="idstatus">your id goes here</h2>    
+        <h2 id="connectionstatus">connection status goes here</h2>
     </div>
 </body>
 </html>
