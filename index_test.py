@@ -107,6 +107,8 @@ cmbe.start()
 def sub_ws(ws):
     '''websocket interface'''
     print('connect ws')
+    ws.send(json.dumps({'id' : '0'}))
+    print('send id')
     while not ws.closed:
         gevent.sleep()
 

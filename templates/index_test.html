@@ -11,13 +11,14 @@
 
     ws.onopen = function() {
         //initially, we need to ask for an id
-        alert('open from client side');
+        console.log('open from client side');
     }
 
-    inbox.onmessage = function(message) {
+    ws.onmessage = function(message) {
         console.log('got it');
         var data = JSON.parse(message.data);
-        console.log(data);
+        console.log(data.id);
+        $("#idstatus").html("your id is: "+data.id);
     }
 
 </script>
