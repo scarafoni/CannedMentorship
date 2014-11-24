@@ -47,6 +47,7 @@ class Input(object):
 
 
 class cmBackend(object):
+
     def __init__(self):
         self.clients = list()
         self.db = redis
