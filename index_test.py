@@ -103,10 +103,10 @@ class cmBackend(object):
 cmbe = cmBackend()
 cmbe.start()
 
-@sockets.route('/send')
+@sockets.route('/ws')
 def sub_ws(ws):
-    '''get incoming websocket messages'''
-    print('connect subws')
+    '''websocket interface'''
+    print('connect ws')
     while not ws.closed:
         gevent.sleep()
 
@@ -116,14 +116,6 @@ def sub_ws(ws):
             print('message',message)
 
             
-@sockets.route('/receive')
-def wsupdate(ws):
-    print('connect update')
-    cmbe.register(ws)
-
-    while not ws.closed:
-        # ws.send(json.dumps(dict(data="1")))
-        gevent.sleep()
 
 @app.before_first_request
 def startup():

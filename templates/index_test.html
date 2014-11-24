@@ -7,34 +7,18 @@
     <script type="text/javascript" src="static/reconnecting-websocket.min.js"></script>
 <script>
     //websocket stuff
-    var send = new ReconnectingWebSocket("ws://"+ location.host + "/send");
-    var receive = new ReconnectingWebSocket("ws://"+ location.host + "/receive");
+    var ws = new ReconnectingWebSocket("ws://"+ location.host + "/ws");
 
-    send.onopen
-    
-    /*
-    outbox.onclose = function(){
-        console.log('outbox closed');
-        this.outbox = new WebSocket(outbox.url);
-    };
-    */
+    ws.onopen = function() {
+        //initially, we need to ask for an id
+        alert('open from client side');
+    }
 
     inbox.onmessage = function(message) {
         console.log('got it');
         var data = JSON.parse(message.data);
         console.log(data);
     }
-
-    //send an instruction
-    $(function() {
-        $('#sendProp').on('click', function(event) {
-            console.log('click');
-            var instruct = $('input[name="input"]').val();
-            var u_id = '1';
-            outbox.send(JSON.stringify({instruct : instruct, u_id : u_id}));
-        });
-    });
-
 
 </script>
 </head>
