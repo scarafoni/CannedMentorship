@@ -13,6 +13,78 @@ Dependencies
 
 flow
 ========
+****** new website *****
+server
+    io part (routes in flask)
+        only recieves
+        all data passed to backent object
+    
+    vote class
+        id, vote_choice tuple
+    backend object
+        votes- vote list
+        suggestions- list
+        finishvotes -vote list
+        suggestionvotes - vote class
+        state -string
+        previousstate - string
+        
+        update function 
+            sends updates to specific parts as needed
+            switch state
+                wait
+                    send nothing
+                write
+                    send:
+                        # sugs in
+                    if all votes in
+                        state = vote
+                        send suggestions, state
+                vote
+                    send
+                        # votes in
+                    if all votes in
+                        state = wait
+                        send instructions, state
+
+                vote_finish
+                    send
+                        # votes in
+                    if all votes in
+                        state = previousstate
+                                            
+        process input
+            from io part with recieve sleep loop
+            if input is finish vote:
+                previousstate = state
+                go to vote_finish state
+            does stuff or not depending on state
+                wait
+                    if leader
+                        go to write
+                    else 
+                        go to write
+                write-
+                    if input not in list
+                        add sug to suggestions
+                    else 
+                        return error 
+                vote- 
+                    if input not in votelist
+                        add
+                    else
+                        return error
+                votefinish
+                    if vote not in list add
+                    else return error
+                finish
+                    do nothing
+
+                
+
+
+
+*************************
   -login
     -increment totaly players
     -for i form 0 to tp
@@ -122,3 +194,4 @@ AI part
             -distance=something with semantic distance
         -affinity propagation
             -scikitlearn
+

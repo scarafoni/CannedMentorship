@@ -58,6 +58,14 @@ class cmBackend(object):
         '''registers a user'''
         print('client registered:',client)
         self.clients.append(client)
+        id = json.dumps({"id" : len(self.clients)})  
+        gevent.spawn(self.send,client,id)
+
+    def unregister(self, client):
+        '''unregisters a user'''
+        print('unregistered',client)
+        self.clients.remove(client)
+        return len(self.clients)
 
     def add_input(self, input):
         '''adds user input to the database'''
@@ -66,11 +74,7 @@ class cmBackend(object):
 
     def send(self, client, data):
         '''send data to a client'''
-        try:
-            client.send(data)
-        except Exception:
-            self.clients.remove(client)
-            print('client logged out:',client)
+        client.send(data)
 
     def update_backend(self):
         '''updates the backend state as needed'''
@@ -82,7 +86,6 @@ class cmBackend(object):
         while not self.state == 'finish':
             for client in self.clients:
                 to_send = {}
-
 
                 if self.state == 'find':
                     to_send = {
@@ -107,15 +110,12 @@ cmbe.start()
 def sub_ws(ws):
     '''websocket interface'''
     print('connect ws')
-    ws.send(json.dumps({'id' : '0'}))
-    print('send id')
+    cmbe.register(ws)
     while not ws.closed:
         gevent.sleep()
 
-        message = ws.receive()
-        if message:
-            cmbe.add_input(message)
-            print('message',message)
+    print('unregistering')
+    # cmbe.unregister(ws)
 
             
 
@@ -135,7 +135,6 @@ def index():
 @app.route('/leave')
 def logout():
     redis.decr('total_players')
-
     '''
     u_id = request.args.get('u_id',0)
     print('id to remove',u_id)

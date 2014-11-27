@@ -9,11 +9,6 @@
     //websocket stuff
     var ws = new ReconnectingWebSocket("ws://"+ location.host + "/ws");
 
-    ws.onopen = function() {
-        //initially, we need to ask for an id
-        console.log('open from client side');
-    }
-
     ws.onmessage = function(message) {
         console.log('got it');
         var data = JSON.parse(message.data);
@@ -27,7 +22,8 @@
     <div id="header" class="jumbotron">
         <div class="container">
             <h1>Canned Mentorship</h1>
-            <p>Work with others to write a how-to instruction list for-</br> <strong>How to get from Wilson Commons to the CS minor's lab</strong></p>
+            <p>Work with others to write a how-to instruction list for-</br> 
+                <strong>How to get from Wilson Commons to the CS minor's lab</strong></p>
         </div>
     </div>
     <div id="content" class="container">
