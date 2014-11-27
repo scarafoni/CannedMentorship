@@ -16,6 +16,12 @@
         $("#idstatus").html("your id is: "+data.id);
     }
 
+    $(window).unload(function() {
+        alert('goodbye');
+        ws.sent('close');
+        ws.close();
+    });
+
 </script>
 </head>
 <body>

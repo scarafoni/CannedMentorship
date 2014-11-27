@@ -58,14 +58,17 @@ class cmBackend(object):
         '''registers a user'''
         print('client registered:',client)
         self.clients.append(client)
-        id = json.dumps({"id" : len(self.clients)})  
+        id = json.dumps({
+            "id" : len(self.clients)
+        })  
+        print('new clients',self.clients)
         gevent.spawn(self.send,client,id)
 
     def unregister(self, client):
         '''unregisters a user'''
         print('unregistered',client)
         self.clients.remove(client)
-        return len(self.clients)
+        print('new clients',self.clients)
 
     def add_input(self, input):
         '''adds user input to the database'''
@@ -101,7 +104,7 @@ class cmBackend(object):
 
     def start(self):
         print('start')
-        gevent.spawn(self.run)
+        # gevent.spawn(self.run)
 
 cmbe = cmBackend()
 cmbe.start()
@@ -109,13 +112,15 @@ cmbe.start()
 @sockets.route('/ws')
 def sub_ws(ws):
     '''websocket interface'''
-    print('connect ws')
     cmbe.register(ws)
     while not ws.closed:
+        input = ws.receive()
+        if input == 'close':
+            ws.close()
         gevent.sleep()
 
-    print('unregistering')
-    # cmbe.unregister(ws)
+    print('unregister')
+    cmbe.unregister(ws)
 
             
 
