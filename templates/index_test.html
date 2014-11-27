@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Canned Mentorship</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
@@ -17,7 +18,6 @@
     }
 
     $(window).unload(function() {
-        alert('goodbye');
         ws.sent('close');
         ws.close();
     });
@@ -28,13 +28,57 @@
     <div id="header" class="jumbotron">
         <div class="container">
             <h1>Canned Mentorship</h1>
-            <p>Work with others to write a how-to instruction list for-</br> 
-                <strong>How to get from Wilson Commons to the CS minor's lab</strong></p>
+            <p>Work with others to write a how-to instruction list for-<br> <strong>How to write a hash table in Java</strong></p>
         </div>
     </div>
     <div id="content" class="container">
-        <h2 id="idstatus">your id goes here</h2>    
-        <h2 id="connectionstatus">connection status goes here</h2>
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-md-8">
+                <table id="instructTable" class="table table-bordered">
+                    <thead>
+                        <tr class="info">
+                            <th>How-to list so far</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                    </tbody>
+                </table>
+                <div class="input-group">
+                    <input id="uInstruct" type="text" name="input" class="form-control"> 
+                    <span class="input-group-btn">
+                        <button id="sendProp" type="button" class="btn btn-primary">
+                            Send
+                        </button>
+                    </span>
+                </div>
+                <div id="propFinishDiv">
+                    <button id="proposeInstruct" type="button" class="btn btn-primary">
+                        Propose Next Step
+                    </button>
+                    <button id="finishButton" type="button" class="btn btn-primary">
+                        Think the how-to is complete? Click here to finish
+                    </button>
+                </div>
+            </div>       
+            <div class="col-sm-4 sidebar-offcanvas">
+                <h5 id="amILead">stuff</h5>
+                <div class="alert alert-info" role="alert">
+                    <h4><strong>What to do:</strong></h4>
+                    <h4 id="currStep">stuff</h4>
+                </div>
+                <div id="voteFinish" class="input-group">
+                </div>
+                <div class="input-group">
+                    <table id="voteTable" class="table table-striped">
+                        <thead>
+                            <tr><th>suggested answers:</th></tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
