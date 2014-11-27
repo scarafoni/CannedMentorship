@@ -12,8 +12,8 @@
     ws.onmessage = function(message) {
         console.log('got it');
         var data = JSON.parse(message.data);
-        console.log(data.id);
-        $("#idstatus").html("your id is: "+data.id);
+        console.log(data.numPlayers);
+        $("#idstatus").html("players online: "+data.numPlayers);
     }
 
     $(window).unload(function() {

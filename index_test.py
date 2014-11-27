@@ -58,11 +58,6 @@ class cmBackend(object):
         '''registers a user'''
         print('client registered:',client)
         self.clients.append(client)
-        id = json.dumps({
-            "id" : len(self.clients)
-        })  
-        print('new clients',self.clients)
-        gevent.spawn(self.send,client,id)
 
     def unregister(self, client):
         '''unregisters a user'''
@@ -98,7 +93,9 @@ class cmBackend(object):
                 else:
                     print('ERROR')
 
-                to_send = json.dumps(to_send)
+                to_send = json.dumps({
+                    'numPlayers' : len(self.clients)
+                })
                 gevent.spawn(self.send, client, to_send)
             gevent.sleep(seconds=1)
 
