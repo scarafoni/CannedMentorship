@@ -49,9 +49,16 @@ class Input(object):
 class cmBackend(object):
 
     def __init__(self):
-        self.clients = list()
+        self.clients = []
         self.state = 'find'
-        self.inputs = []
+        self.previous_state = 'find'
+        self.instructions = []
+        # proposed instructions this round
+        self.proposals = []
+        # voting on propositions info
+        self.proposal_votes = []
+        # votes on whether to stop
+        self.finishvotes = []
         self.start_time = time.time()
         
     def register(self, client):
@@ -76,7 +83,22 @@ class cmBackend(object):
 
     def update_backend(self):
         '''updates the backend state as needed'''
-        self.state = 'find' 
+        
+        # change write -> vote if the votes are in
+        if self.state == 'write' and \
+          len(self.proposals) == len(self.clients):
+            self.proposals = run_ai(self.proposals)
+            self.state = 'vote'
+        
+        elif self.state == 'vote' and \
+          len(self.proposal_votes) == len(self.clients)
+            self.instructions.append(count_votes(self.proposals\
+                                                 self.proposal_votes))
+            self.proposals = []
+            self.proposals_votes = []
+            self.state = 'find'
+            
+
 
     def run(self):
         '''send updates to the clients'''

@@ -22,7 +22,6 @@ server
     vote class
         id, vote_choice tuple
     backend object
-        votes- vote list
         suggestions- list
         finishvotes -vote list
         suggestionvotes - vote class
