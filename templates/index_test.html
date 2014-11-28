@@ -10,9 +10,13 @@
     //websocket stuff
     var ws = new ReconnectingWebSocket("ws://"+ location.host + "/ws");
 
+    //the update function
     ws.onmessage = function(message) {
-        console.log('got it');
         var data = JSON.parse(message.data);
+        updateUserDirections(data);
+        updateState(data);
+        updateInstructionList(data);
+        console.log('got it');
         console.log(data.numPlayers);
         $("#idstatus").html("players online: "+data.numPlayers);
     }
