@@ -13,11 +13,14 @@
     //the update function
     ws.onmessage = function(message) {
         var data = JSON.parse(message.data);
-        updateUserDirections(data);
         updateState(data);
+        updateLeader(data);
+        updateUserDirections(data);
+        if(state == 'vote")
+            makeVotingArea();
+        if(state == 'vote_finish')
+            makeVoteFinishArea();
         updateInstructionList(data);
-        console.log('got it');
-        console.log(data.numPlayers);
         $("#idstatus").html("players online: "+data.numPlayers);
     }
 
