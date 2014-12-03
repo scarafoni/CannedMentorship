@@ -73,6 +73,7 @@ def semantic_distance_matrix(sentences,method='wn', format='array'):
 
 # calculate the distance matrix based on bow, 2-3 grams, semantics
 def kitchen_sink(sentences,format='array'):
+    alpha = 0.8
     distances = []
     tokens = preprocess(inputs=sentences)
     tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english',ngram_range=(1,3))
@@ -104,7 +105,7 @@ def kitchen_sink(sentences,format='array'):
                 # semantic similarities
                 sem_sim = 1.0 - vec_semantic_sim(v1=tokens[i], v2=tokens[j],corpus=tokens)
                 # print('sem sim', sem_sim)
-                row.append((lex_sim + sem_sim)/2.0)
+                row.append((1-alpha*lex_sim) + ((alpha)*sem_sim))
             distances.append(row) 
 
     # print('distances',distances)
@@ -134,7 +135,7 @@ def feature_extraction(inputs,extraction_method="tfidf"):
 # hierarchical agglomerative classification algorithm
 def group_up(sentences, classfn='hac', feat_dist='bow'):
     thresh = 0.5
-    eps = 0.7
+    eps = 0.9
     damping = 0.5
 
     if feat_dist == 'bow':
@@ -229,8 +230,8 @@ if __name__== '__main__':
                 'spread the peanut butter',\
                 'get a knife.'\
               ]
-    x = sort_answers.filter_inputs(props, classfn='hac', feat_dist='ks')
-    print('test',x)
+    # x = sort_answers.filter_inputs(props, classfn='hac', feat_dist='ks')
+    # print('test',x)
     # fmat1 = feature_extraction(inputs=inputs1)
     # print(fmat1.toarray())
     # groups = hac(f_mat=fmat1)
@@ -243,8 +244,7 @@ if __name__== '__main__':
     
     # open the file
 
-    '''
-    with open('observations-formatted.txt','r') as r, open('filtered_votes.txt','w') as w:
+    with open('observations-formatted-shuffle.txt','r') as r, open('filtered_votes.txt','w') as w:
         # format the input tests into lists
         r = r.read()
         r = r.split('\n#\n')
@@ -253,7 +253,7 @@ if __name__== '__main__':
         hold = ''
         for (i,c,d) in itertools.product(r,\
                                          ['hac', 'dbscan', 'affprop'],\
-                                         ['bow', 'bow-ngram','ks', 'wn']):
+                                         ['bow', 'bow-ngram','ks', 'wn','cn']):
             start = time.time()
             filtered = filter_inputs(i,classfn=c,feat_dist=d)
             elapsed = time.time() - start
@@ -262,6 +262,5 @@ if __name__== '__main__':
                 hold = i
             w.write(c+','+d+','+str(elapsed)+'\n'+'\n'.join(filtered)+'\n\n')
     # print(filter_inputs(inputs2))
-    '''
     
               
