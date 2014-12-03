@@ -13,11 +13,10 @@ function updateLeader(amILead) {
 
 function updateState(data) {
     updateInstruction(data.state, data.gotMyInput);
-
 }
 
-function 
-
+//update the instruction for the player
+function updateInstruction(state) {
         if(state == 'vote_finish') {
           $('#voteFinish').html('<button id="yesfinish" type="button" class="btn btn-primary">finish</button><button id="nofinish" type="button" class="btn btn-primary">don\'t finish</button>');
             //vote yes or no to finish
