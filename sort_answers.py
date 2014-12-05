@@ -135,7 +135,7 @@ def feature_extraction(inputs,extraction_method="tfidf"):
 # hierarchical agglomerative classification algorithm
 def group_up(sentences, classfn='hac', feat_dist='bow'):
     thresh = 0.5
-    eps = 0.9
+    eps = 0.7
     damping = 0.5
 
     if feat_dist == 'bow':
@@ -251,9 +251,14 @@ if __name__== '__main__':
         r = [x.split('\n') for x in r]
         
         hold = ''
+        '''
         for (i,c,d) in itertools.product(r,\
                                          ['hac', 'dbscan', 'affprop'],\
                                          ['bow', 'bow-ngram','ks', 'wn','cn']):
+        '''
+        for (i,c,d) in itertools.product(r,\
+                                         ['hac'],\
+                                         ['ks']):
             start = time.time()
             filtered = filter_inputs(i,classfn=c,feat_dist=d)
             elapsed = time.time() - start
