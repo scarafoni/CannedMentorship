@@ -9,6 +9,7 @@ from sklearn.cluster import DBSCAN, AffinityPropagation
 import nltk
 from nltk.util import ngrams
 nltk.data.path.append('nltk_data/')
+from nltk.corpus import webtext
 from nltk.stem.porter import PorterStemmer
 from nltk.corpus import stopwords
 import string
@@ -230,20 +231,21 @@ if __name__== '__main__':
                 'spread the peanut butter',\
                 'get a knife.'\
               ]
-    # x = sort_answers.filter_inputs(props, classfn='hac', feat_dist='ks')
-    # print('test',x)
-    # fmat1 = feature_extraction(inputs=inputs1)
-    # print(fmat1.toarray())
-    # groups = hac(f_mat=fmat1)
-    # groups = DBSCAN(eps=0.7,min_samples=1).fit_predict(fmat1.toarray())
-    # groups = AffinityPropagation().fit(fmat1.toarray()).fit_predict(fmat1.toarray())
-    # groups = kitchen_sink(inputs2)
-    # distances = semantic_distance_matrix(inputs1)
-    # groups = AffinityPropagation(affinity='precomputed').fit(numpy.asarray(distances)).labels_
-    # groups = DBSCAN(metric='precomputed').fit(numpy.asarray(distances)).labels_
-    
-    # open the file
 
+    # runtime tests
+    ff = webtext.fileids()[0]
+    #the sentences we want to sample from
+    ffs = webtext.raw(ff).split('.')
+    for size in[5,10,50,100]:
+        for method in ['bow','ks']:
+            start = time.time()
+            inputs = random.sample(ffs,size)
+            filtered = filter_inputs(inputs,classfn=method,feat_dist='hac')
+            elapsed = time.time() - start 
+            print(size,method,elapsed)
+    
+
+    ''' for testing
     with open('observations-formatted-shuffle.txt','r') as r, open('filtered_votes.txt','w') as w:
         # format the input tests into lists
         r = r.read()
@@ -267,5 +269,6 @@ if __name__== '__main__':
                 hold = i
             w.write(c+','+d+','+str(elapsed)+'\n'+'\n'.join(filtered)+'\n\n')
     # print(filter_inputs(inputs2))
+    '''
     
               
