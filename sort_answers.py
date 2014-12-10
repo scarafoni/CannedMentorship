@@ -2,6 +2,7 @@ import pkg_resources
 # pkg_resources.require("numpy==1.7.0")
 from numpy import ndarray
 import numpy
+import unicodedata
 from scipy.cluster.hierarchy import fclusterdata, fcluster, linkage
 from scipy.spatial.distance import pdist
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -235,17 +236,36 @@ if __name__== '__main__':
     # runtime tests
     ff = webtext.fileids()[0]
     #the sentences we want to sample from
-    ffs = webtext.raw(ff).split('.')
-    for size in[5,10,50,100]:
-        for method in ['bow','ks']:
-            start = time.time()
-            inputs = random.sample(ffs,size)
-            filtered = filter_inputs(inputs,classfn=method,feat_dist='hac')
-            elapsed = time.time() - start 
-            print(size,method,elapsed)
+    ffs = webtext.raw(ff)
+    ffs = unicodedata.normalize('NFKD', ffs).encode('ascii','ignore').split('.')
+    final = []
+    for i in range(5):
+        this_round = [[]]
+        for size in[5,10,50,100,1000,10000]:
+            inputs = numpy.random.choice(ffs, size=size)
+            cur = []
+            for method in ['bow','ks']:
+                start = time.time()
+                # print('inputs',inputs[0])
+                filtered = filter_inputs(inputs,classfn=method,feat_dist='hac')
+                elapsed = time.time() - start
+                cur.append(elapsed)
+                print(size,method,elapsed)
+            if not this_round == [[]]:
+                this_round = numpy.append(this_round, [cur],axis=0)
+            else:
+                this_round = numpy.array([cur])
+            #print('this round', this_round)
+        if final == []:
+            final = this_round
+        else:
+            final += this_round   
+        print('final', final)
+    final /= 5
+    print('final final',final)
     
 
-    ''' for testing
+    """ for testing
     with open('observations-formatted-shuffle.txt','r') as r, open('filtered_votes.txt','w') as w:
         # format the input tests into lists
         r = r.read()
@@ -269,6 +289,6 @@ if __name__== '__main__':
                 hold = i
             w.write(c+','+d+','+str(elapsed)+'\n'+'\n'.join(filtered)+'\n\n')
     # print(filter_inputs(inputs2))
-    '''
+    """
     
               
