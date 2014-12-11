@@ -94,7 +94,7 @@ def kitchen_sink(sentences,format='array'):
                 # semantic similarities
                 sem_sim = 1.0 - vec_semantic_sim(v1=tokens[i], v2=tokens[j], corpus=tokens)
                 # print('sem sim', sem_sim)
-                distances.append((lex_sim + sem_sim)/2.0)
+                distances.append(((1-alpha*lex_sim) + (alpha*sem_sim)))
             
     else:
         for i in range(len(sentences)):
