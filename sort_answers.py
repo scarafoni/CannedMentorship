@@ -94,7 +94,7 @@ def kitchen_sink(sentences,format='array'):
                 # semantic similarities
                 sem_sim = 1.0 - vec_semantic_sim(v1=tokens[i], v2=tokens[j], corpus=tokens)
                 # print('sem sim', sem_sim)
-                distances.append(((1-alpha*lex_sim) + (alpha*sem_sim)))
+                distances.append((1-alpha)*lex_sim + alpha*sem_sim)
             
     else:
         for i in range(len(sentences)):
@@ -144,7 +144,22 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
         f_mat = feature_extraction(inputs=sentences,\
                                    extraction_method='tfidf')
         if classfn == 'hac':
-            return fclusterdata(X=f_mat.toarray(),t=thresh) 
+            #print(numpy.double(f_mat))
+            distances = pdist(f_mat.todense())
+            '''
+            distances = []
+            for i in range(len(f_mat)):
+                for j in range (i,len(f_mat)):
+                    if i == j: 
+                        continue
+                    distance = 0.0
+                    # bow, ngrams
+                    distances.append(float(pdist(numpy.concatenate((tdif_feat[i].toarray(), tdif_feat[j].toarray())))))
+            '''
+            
+            linkd = linkage(y=numpy.array(distances))
+            return fcluster(Z=linkd,t=thresh)
+            # return fclusterdata(X=f_mat.toarray(),t=thresh) 
         elif classfn == 'dbscan':
             return DBSCAN(min_samples=1, eps=eps).fit_predict(f_mat.toarray())
         elif classfn == 'affprop':
@@ -232,22 +247,28 @@ if __name__== '__main__':
                 'spread the peanut butter',\
                 'get a knife.'\
               ]
-
+    
     # runtime tests
     ff = webtext.fileids()[0]
     #the sentences we want to sample from
     ffs = webtext.raw(ff)
-    ffs = unicodedata.normalize('NFKD', ffs).encode('ascii','ignore').split('.')
+    ffx = unicodedata.normalize('NFKD', ffs).encode('ascii','ignore').split('.')
+    ffs = [] 
+    for entry in ffx:
+        if len(entry) < 10:
+            ffs.append(entry)
+        
+    ffs = [x for x in ffs if x != '']
     final = []
-    for i in range(5):
+    for i in range(1):
         this_round = [[]]
-        for size in[5,10,50,100,1000,10000]:
+        for size in[5,50,75,100,200,500]:
             inputs = numpy.random.choice(ffs, size=size)
             cur = []
-            for method in ['bow','ks']:
+            for method in ['bow-ngram','ks']:
                 start = time.time()
-                # print('inputs',inputs[0])
-                filtered = filter_inputs(inputs,classfn=method,feat_dist='hac')
+                # print('inputs',inputs)
+                filtered = filter_inputs(inputs,classfn='hac',feat_dist=method)
                 elapsed = time.time() - start
                 cur.append(elapsed)
                 print(size,method,elapsed)
@@ -265,7 +286,7 @@ if __name__== '__main__':
     print('final final',final)
     
 
-    """ for testing
+    """
     with open('observations-formatted-shuffle.txt','r') as r, open('filtered_votes.txt','w') as w:
         # format the input tests into lists
         r = r.read()
@@ -280,10 +301,12 @@ if __name__== '__main__':
         '''
         for (i,c,d) in itertools.product(r,\
                                          ['hac'],\
-                                         ['ks']):
+                                         ['bow','ks']):
             start = time.time()
+            print('input2',i)
             filtered = filter_inputs(i,classfn=c,feat_dist=d)
             elapsed = time.time() - start
+            print('elapsed',elapsed)
             if i != hold:
                 w.write('\n###\n')
                 hold = i
