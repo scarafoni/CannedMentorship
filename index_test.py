@@ -8,7 +8,6 @@ import gevent
 from flask_sockets import Sockets
 import random
 import json
-# import sys
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
