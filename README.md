@@ -79,6 +79,14 @@ server
                 finish
                     do nothing
 
+
+Client
+    info to update
+        -manual list
+        -current instruction
+        -vote list
+        -leader
+        -state
                 
 
 
