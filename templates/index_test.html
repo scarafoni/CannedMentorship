@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <title>Canned Mentorship</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
-    <script type="text/javascript" src="static/reconnecting-websocket.min.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='reconnecting-websocket.min.js') }}">
+    <script src="{{ url_for('static', filename='updateApp.js') }}">
 <script>
     //websocket stuff
     var ws = new ReconnectingWebSocket("ws://"+ location.host + "/ws");
@@ -13,15 +15,14 @@
     //the update function
     ws.onmessage = function(message) {
         var data = JSON.parse(message.data);
-        updateState(data);
-        updateLeader(data);
-        updateUserDirections(data);
-        if(state == 'vote")
-            makeVotingArea();
-        if(state == 'vote_finish')
-            makeVoteFinishArea();
-        updateInstructionList(data);
-        $("#idstatus").html("players online: "+data.numPlayers);
+        if(data.state)
+            updateState(data);
+        if(data.leader)
+            updateLeader(data);
+        if(data.directions)
+            updateUserDirections(data);
+        if(data.numPlayers)
+            $("#idstatus").html("players online: "+data.numPlayers);
     }
 
     $(window).unload(function() {
