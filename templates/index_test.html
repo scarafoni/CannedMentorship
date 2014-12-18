@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <title>Canned Mentorship</title>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='style/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='style/style.css') }}" rel="stylesheet">
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='reconnecting-websocket.min.js') }}">
-    <script src="{{ url_for('static', filename='updateApp.js') }}">
+    <script src="{{ url_for('static', filename='script/jquery-1.11.1.min.js') }}">
+    <script src="{{ url_for('static', filename='script/reconnecting-websocket.min.js') }}">
+    <script src="{{ url_for('static', filename='script/updateApp.js') }}">
 <script>
     //websocket stuff
     var ws = new ReconnectingWebSocket("ws://"+ location.host + "/ws");
