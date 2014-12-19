@@ -24,7 +24,7 @@ server
     backend object
         suggestions- list
         finishvotes -vote list
-        suggestionvotes - vote class
+        suggestion votes - vote class
         state -string
         previousstate - string
         
