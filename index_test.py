@@ -24,7 +24,7 @@ def count_votes(votes, vote_list):
 
 # placeholder for the ai program
 def run_ai(props):
-    print('raw votes',props)
+    print('raw votes', props)
     return props # sort_answers.filter_inputs(props)
 
 

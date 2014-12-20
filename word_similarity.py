@@ -31,8 +31,6 @@ def idf(word, bloblist):
 # only compares same part of speech
 # normalized for total comarisons
 def vec_semantic_sim(v1,v2,method='wn', corpus=''):
-    return random.random()
-    # print('sim v1, v2',v1,v2)
     v1 = word_tokenize(v1)#pos_tag(word_tokenize(v1))
     v2 = word_tokenize(v2)#pos_tag(word_tokenize(v2))
 
@@ -74,8 +72,6 @@ def vec_semantic_sim(v1,v2,method='wn', corpus=''):
 
 
 def wordnet_similarity(w1, w2, sim=wn.path_similarity):
-  return random.random()
-'''
   synsets1 = wn.synsets(w1)
   synsets2 = wn.synsets(w2)
   sim_scores = []
@@ -86,7 +82,6 @@ def wordnet_similarity(w1, w2, sim=wn.path_similarity):
     return 0.0
   else:
     return max(sim_scores)
-'''
 
 def cn_similarity(w1, w2):
     req = requests.get('http://conceptnet5.media.mit.edu/data/5.2/assoc/c/en/'+w1+'?filter=/c/en/'+w2+'&limit=1')

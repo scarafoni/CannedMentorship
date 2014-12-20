@@ -207,10 +207,12 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
             distances = semantic_distance_matrix(sentences, feat_dist,format='matrix')
             return AffinityPropagation(damping=damping, affinity='precomputed').fit(numpy.asarray(distances)).labels_
         else:
+            print('error')
             return "error"
         
     # error
     else:
+        print('error')
         return "error"
 
 
@@ -262,10 +264,10 @@ if __name__== '__main__':
     final = []
     for i in range(1):
         this_round = [[]]
-        for size in[5,50,75,100,200,500]:
+        for size in[1000]:
             inputs = numpy.random.choice(ffs, size=size)
             cur = []
-            for method in ['bow-ngram','ks']:
+            for method in ['bow-ngram','wn']:
                 start = time.time()
                 # print('inputs',inputs)
                 filtered = filter_inputs(inputs,classfn='hac',feat_dist=method)
