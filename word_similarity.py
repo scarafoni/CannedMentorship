@@ -1,5 +1,3 @@
-# code from
-# http://sujitpal.blogspot.com/2013/02/checking-for-word-equivalence-using.html
 from __future__ import division, unicode_literals
 import requests
 import nltk
