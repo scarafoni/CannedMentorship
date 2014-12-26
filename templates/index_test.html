@@ -5,9 +5,9 @@
     <link href="{{ url_for('static', filename='style/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='style/style.css') }}" rel="stylesheet">
 
-    <script src="{{ url_for('static', filename='script/jquery-1.11.1.min.js') }}">
-    <script src="{{ url_for('static', filename='script/reconnecting-websocket.min.js') }}">
-    <script src="{{ url_for('static', filename='script/updateApp.js') }}">
+    <script src="{{ url_for('static', filename='script/jquery-1.11.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/reconnecting-websocket.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/updateApp.js') }}"></script>
 <script>
     //websocket stuff
     var ws = new ReconnectingWebSocket("ws://"+ location.host + "/ws");
