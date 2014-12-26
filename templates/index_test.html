@@ -10,7 +10,7 @@
     <script src="{{ url_for('static', filename='script/updateApp.js') }}"></script>
 <script>
     //websocket stuff
-    var ws = new ReconnectingWebSocket("ws://"+ location.host + "/ws");
+    var ws = new WebSocket("ws://"+ location.host + "/ws");
 
     //the update function
     ws.onmessage = function(message) {
