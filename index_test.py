@@ -39,13 +39,14 @@ class Input(object):
             
     __slots__ = 'user', 'val', 'time'
 
-    def __init__(user, val, time):
+    def __init__(self, user, val, time):
         self.user = user
         self.val = val
         self.time = time
 
 
 class cmBackend(object):
+    """the backend for cm: coordinates all the info"""
 
     def __init__(self):
         self.clients = []
@@ -85,13 +86,13 @@ class cmBackend(object):
         
         # change write -> vote if the votes are in
         if self.state == 'write' and \
-          len(self.proposals) == len(self.clients):
+                len(self.proposals) == len(self.clients):
             self.proposals = run_ai(self.proposals)
             self.state = 'vote'
         
         elif self.state == 'vote' and \
-          len(self.proposal_votes) == len(self.clients)
-            self.instructions.append(count_votes(self.proposals\
+                len(self.proposal_votes) == len(self.clients):
+            self.instructions.append(count_votes(self.proposals,\
                                                  self.proposal_votes))
             self.proposals = []
             self.proposals_votes = []
