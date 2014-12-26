@@ -98,7 +98,6 @@ class cmBackend(object):
             self.state = 'find'
             
 
-
     def run(self):
         '''send updates to the clients'''
         self.update_backend()
