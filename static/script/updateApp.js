@@ -1,3 +1,7 @@
+/* 
+ * contains all the code for updating the app as the game goes on
+ */
+
 //am i leader?
 function updateLeader(amILead) {
     if(leadJSON == id) {
@@ -11,12 +15,15 @@ function updateLeader(amILead) {
     }
 }
 
+//updates the state and the interface accordingly
 function updateState(data) {
+    //updates the instruction
     updateInstruction(data.state, data.gotMyInput);
+    updateVoteFinishArea(data.state);
 }
 
-//update the instruction for the player
-function updateInstruction(state) {
+//update the voteFinish area if it's the right part of the game
+function updateVoteFinishArea(state) {
         if(state == 'vote_finish') {
           $('#voteFinish').html('<button id="yesfinish" type="button" class="btn btn-primary">finish</button><button id="nofinish" type="button" class="btn btn-primary">don\'t finish</button>');
             //vote yes or no to finish
@@ -43,8 +50,6 @@ function updateInstruction(state) {
                 return false;
                 });
             });
-            
-
         } else {
             $('#voteFinish').html('');
         }
