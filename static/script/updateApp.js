@@ -18,42 +18,42 @@ function updateLeader(amILead) {
 //updates the state and the interface accordingly
 function updateState(data) {
     //updates the instruction
-    updateInstruction(data.state, data.gotMyInput);
+    updateDirections(data.state, data.gotMyInput);
     updateVoteFinishArea(data.state);
 }
 
 //update the voteFinish area if it's the right part of the game
 function updateVoteFinishArea(state) {
-        if(state == 'vote_finish') {
-          $('#voteFinish').html('<button id="yesfinish" type="button" class="btn btn-primary">finish</button><button id="nofinish" type="button" class="btn btn-primary">don\'t finish</button>');
-            //vote yes or no to finish
-            $(function() {
-                $('#yesfinish').bind('click', function() {
-                    $.getJSON('/vote_finish', {
-                        u_id: String(id),
-                        u_vote: 'yes'
-                }, function(data) {
-                    alert('thank you, vote received');
-                   });
-                return false;
-                });
-            });
+	if(state == 'vote_finish') {
+	  $('#voteFinish').html('<button id="yesfinish" type="button" class="btn btn-primary">finish</button><button id="nofinish" type="button" class="btn btn-primary">don\'t finish</button>');
+		//vote yes or no to finish
+		$(function() {
+			$('#yesfinish').bind('click', function() {
+				$.getJSON('/vote_finish', {
+					u_id: String(id),
+					u_vote: 'yes'
+			}, function(data) {
+				alert('thank you, vote received');
+			   });
+			return false;
+			});
+		});
 
-            $(function() {
-                $('#nofinish').bind('click', function() {
-                    $.getJSON('/vote_finish', {
-                        u_id: String(id),
-                        u_vote: 'no'
-                }, function(data) {
-                    alert('thank you, vote received');
-                   });
-                return false;
-                });
-            });
-        } else {
-            $('#voteFinish').html('');
-        }
-    }
+		$(function() {
+			$('#nofinish').bind('click', function() {
+				$.getJSON('/vote_finish', {
+					u_id: String(id),
+					u_vote: 'no'
+			}, function(data) {
+				alert('thank you, vote received');
+			   });
+			return false;
+			});
+		});
+	} else {
+		$('#voteFinish').html('');
+	}
+}
 
 // update the directions for the player
 function updateDirections(state, gotMyInput) {
