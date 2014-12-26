@@ -26,7 +26,7 @@
     }
 
     $(window).unload(function() {
-        ws.sent('close');
+        ws.send('close');
         ws.close();
     });
 

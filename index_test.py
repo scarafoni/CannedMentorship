@@ -1,12 +1,11 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template
 import redis
-from collections import Counter
 import os
 import logging
 import sort_answers
 import gevent
 from flask_sockets import Sockets
-import random
+import time
 import json
 
 log = logging.getLogger('werkzeug')
@@ -109,7 +108,7 @@ class cmBackend(object):
 
                 if self.state == 'find':
                     to_send = {
-                        'inputs' : '\n'.join(self.inputs)
+                        'inputs' : '\n'.join(self.proposals)
                     }
 
                 else:
