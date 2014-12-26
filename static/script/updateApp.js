@@ -17,8 +17,6 @@ function updateLeader(amILead) {
 
 //updates the state and the interface accordingly
 function updateState(data) {
-    //updates the instruction
-    updateDirections(data.state, data.gotMyInput);
     updateVoteFinishArea(data.state);
 }
 
@@ -56,7 +54,7 @@ function updateVoteFinishArea(state) {
 }
 
 // update the directions for the player
-function updateDirections(state, gotMyInput) {
+function updateUserDirections(state, gotMyInput) {
     switch(state) {
         case 'find':
             activateBtn('finishButton');

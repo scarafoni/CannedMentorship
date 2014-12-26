@@ -22,7 +22,7 @@
         if(data.directions)
             updateUserDirections(data);
         if(data.numPlayers)
-            $("#idstatus").html("players online: "+data.numPlayers);
+            $("#numPlayersDiv").html("players online: "+data.numPlayers);
     }
 
     $(window).unload(function() {
@@ -70,6 +70,7 @@
             </div>       
             <div class="col-sm-4 sidebar-offcanvas">
                 <h5 id="amILeadDiv">stuff</h5>
+				<h5 id="numPlayersDiv"></h5>
                 <div class="alert alert-info" role="alert">
                     <h4><strong>What to do:</strong></h4>
                     <h4 id="currDirections">stuff</h4>
