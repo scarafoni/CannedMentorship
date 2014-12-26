@@ -30,6 +30,15 @@
         ws.close();
     });
 
+    $(function() {
+        $('#sendInstructButton').click(function() {
+            ws.send("{'u_instruct' : "+$('input[name="input"]').val()+"}",
+                //'u_id' : String(id) //might not need this
+            });
+            return false;
+        });
+    });
+  
 </script>
 </head>
 <body>
@@ -52,15 +61,15 @@
                     </tbody>
                 </table>
                 <div class="input-group">
-                    <input id="propText" type="text" name="input" class="form-control"> 
+                    <input id="sendInstructText" type="text" name="input" class="form-control"> 
                     <span class="input-group-btn">
-                        <button id="propButton" type="button" class="btn btn-primary">
+                        <button id="sendInstructButton" type="button" class="btn btn-primary">
                             Send
                         </button>
                     </span>
                 </div>
                 <div id="propFinishDiv">
-                    <button id="proposeInstruct" type="button" class="btn btn-primary">
+                    <button id="propInstructButton" type="button" class="btn btn-primary">
                         Propose Next Step
                     </button>
                     <button id="finishButton" type="button" class="btn btn-primary">

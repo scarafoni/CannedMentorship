@@ -2,6 +2,7 @@
  * contains all the code for updating the app as the game goes on
  */
 
+
 //am i leader?
 function updateLeader(amILead) {
     if(leadJSON == id) {

@@ -126,14 +126,18 @@ class cmBackend(object):
 cmbe = cmBackend()
 cmbe.start()
 
+# receive messages from the websocket
 @sockets.route('/ws')
 def sub_ws(ws):
     '''websocket interface'''
+    
     cmbe.register(ws)
     while not ws.closed:
         input = ws.receive()
         if input == 'close':
             ws.close()
+        else:
+            print('error')
         gevent.sleep()
 
     print('unregister')
