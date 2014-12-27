@@ -12,10 +12,6 @@ log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
 
-# placeholder for the ai program
-def run_ai(props):
-    print('raw votes', props)
-    return props # sort_answers.filter_inputs(props)
 
 
 app = Flask(__name__)
@@ -58,6 +54,11 @@ class cmBackend(object):
     def unregister(self, client):
         '''unregisters a user'''
         self.clients.remove(client)
+
+    def run_ai(props):
+        '''run the ai sorter on the propositions'''
+        print('raw votes', props)
+        return props # sort_answers.filter_inputs(props)
     
     def count_votes(votes, vote_list):
         '''count a list of votes, return the most popular'''
