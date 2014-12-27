@@ -67,6 +67,16 @@ class cmBackend(object):
     def unregister(self, client):
         '''unregisters a user'''
         self.clients.remove(client)
+    
+    def count_votes(votes, vote_list):
+        '''count a list of votes, return the most popular'''
+        # print('count_votes',votes,vote_list)
+        counts = [0] * len(votes)
+        for choice in votes:
+            counts[int(choice)] += 1
+        i = counts.index(max(counts))
+        most_popular = vote_list[i] 
+        return most_popular
 
     def add_input(self, input, list):
         '''adds user input to the database'''
@@ -108,6 +118,12 @@ class cmBackend(object):
             self.proposals = []
             self.proposals_votes = []
             self.state = 'find'
+        
+        # change vote_finish -> finish / write if votes are in
+        elif self.state == 'vote_finish' and \
+                len(self.finish_votes) == len(self.clients):
+            
+            
             
 
     def run(self):

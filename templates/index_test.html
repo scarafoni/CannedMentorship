@@ -32,7 +32,7 @@
     });
 
     $(function() {
-        $('#sendInstructButton').click(function() {
+        $('#sendPropButton').click(function() {
             ws.send("{'u_instruct' : "+$('input[name="input"]').val()+"}");
             return false;
         });
@@ -60,9 +60,9 @@
                     </tbody>
                 </table>
                 <div class="input-group">
-                    <input id="sendInstructText" type="text" name="input" class="form-control"> 
+                    <input id="sendPropText" type="text" name="input" class="form-control"> 
                     <span class="input-group-btn">
-                        <button id="sendInstructButton" type="button" class="btn btn-primary">
+                        <button id="sendPropButton" type="button" class="btn btn-primary">
                             Send
                         </button>
                     </span>
