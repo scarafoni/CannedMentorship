@@ -135,7 +135,7 @@ def sub_ws(ws):
     while not ws.closed:
         input = ws.receive()
         print(input)
-        if input == 'close':
+        if 'close' in input:
             ws.close()
         else:
             print('error')
