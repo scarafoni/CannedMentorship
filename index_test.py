@@ -57,7 +57,7 @@ class cmBackend(object):
         # voting on propositions info
         self.proposal_votes = []
         # votes on whether to stop
-        self.finishvotes = []
+        self.finish_votes = []
         self.start_time = time.time()
         
     def register(self, client):
@@ -68,9 +68,21 @@ class cmBackend(object):
         '''unregisters a user'''
         self.clients.remove(client)
 
-    def add_input(self, input):
+    def add_input(self, input, list):
         '''adds user input to the database'''
-        self.inputs.append(input)
+        
+        # add to the list of proposals
+        if self.state == 'write' and list == 'proposals':
+            self.proposals.append(input)
+
+        # add to the list of votes for proposals
+        elif self.state == 'vote' and list == 'proposal_votes':
+            self.proposal_votes.append(input)
+        
+        # add to the list of votes to finish
+        elif self.state == 'vote_finish' and list == 'finish_votes
+            
+        
 
     def send(self, client, data):
         '''send data to a client'''
@@ -136,7 +148,7 @@ def sub_ws(ws):
         if 'close' in data:
             ws.close()
         elif 'u_instruct' in data:
-            # do something with the suggestion
+            cmbe.add_input(data['u_instruct']) 
         gevent.sleep()
 
     cmbe.unregister(ws)
