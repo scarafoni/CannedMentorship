@@ -85,7 +85,6 @@ class cmBackend(object):
         
         else:
             print 'cant add to list {} in state {}'.format(list, self.state)
-            
         
 
     def send(self, client, data):
@@ -95,12 +94,13 @@ class cmBackend(object):
     def update_backend(self):
         '''updates the backend state as needed'''
         
-        # change write -> vote if the votes are in
+        # change write -> vote if the props are in
         if self.state == 'write' and \
                 len(self.proposals) == len(self.clients):
             self.proposals = run_ai(self.proposals)
             self.state = 'vote'
         
+        # change vote -> find if all the votes are in
         elif self.state == 'vote' and \
                 len(self.proposal_votes) == len(self.clients):
             self.instructions.append(count_votes(self.proposals,\
