@@ -82,6 +82,9 @@ class cmBackend(object):
         # add to the list of votes to finish
         elif self.state == 'vote_finish' and list == 'finish_votes':
             self.finish_votes.append(input)
+        
+        else:
+            print 'cant add to list {} in state {}'.format(list, self.state)
             
         
 
