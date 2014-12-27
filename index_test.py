@@ -3,6 +3,7 @@ import redis
 import os
 import logging
 import sort_answers
+from collections import Counter
 import gevent
 from flask_sockets import Sockets
 import time
@@ -99,13 +100,13 @@ class cmBackend(object):
         # change write -> vote if the props are in
         if self.state == 'write' and \
                 len(self.proposals) == len(self.clients):
-            self.proposals = run_ai(self.proposals)
+            self.proposals = self.run_ai(self.proposals)
             self.state = 'vote'
         
         # change vote -> find if all the votes are in
         elif self.state == 'vote' and \
                 len(self.proposal_votes) == len(self.clients):
-            self.instructions.append(count_votes(self.proposals,\
+            self.instructions.append(self.count_votes(self.proposals,\
                                                  self.proposal_votes))
             self.proposals = []
             self.proposals_votes = []
@@ -114,6 +115,11 @@ class cmBackend(object):
         # change vote_finish -> finish / write if votes are in
         elif self.state == 'vote_finish' and \
                 len(self.finish_votes) == len(self.clients):
+
+            counter = Counter(self.finish_votes)
+            winner = counter.most_common()[0][0]
+            self.state = 'find' if winner == 'no' else 'finish'
+            self.finish_votes = []
                  
             
             
