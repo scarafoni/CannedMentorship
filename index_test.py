@@ -80,7 +80,8 @@ class cmBackend(object):
             self.proposal_votes.append(input)
         
         # add to the list of votes to finish
-        elif self.state == 'vote_finish' and list == 'finish_votes
+        elif self.state == 'vote_finish' and list == 'finish_votes':
+            self.finish_votes.append(input)
             
         
 
