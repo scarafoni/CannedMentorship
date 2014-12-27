@@ -131,10 +131,12 @@ def sub_ws(ws):
     while not ws.closed:
         input = ws.receive()
         print('input',input)
-        data = [] if input is None else json.loads(input)
 
+        data = [] if input is None else json.loads(input)
         if 'close' in data:
             ws.close()
+        elif 'u_instruct' in data:
+            # do something with the suggestion
         gevent.sleep()
 
     cmbe.unregister(ws)
