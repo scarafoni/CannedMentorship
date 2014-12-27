@@ -26,7 +26,8 @@
     }
 
     $(window).unload(function() {
-        ws.send("{ 'close' : 'close' }");
+        //apparantly this doesn't work
+        //ws.send('{ "close" : "close" }');
         ws.close();
     });
 

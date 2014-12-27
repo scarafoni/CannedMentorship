@@ -62,18 +62,14 @@ class cmBackend(object):
         
     def register(self, client):
         '''registers a user'''
-        print('client registered:',client)
         self.clients.append(client)
 
     def unregister(self, client):
         '''unregisters a user'''
-        print('unregistered',client)
         self.clients.remove(client)
-        print('new clients',self.clients)
 
     def add_input(self, input):
         '''adds user input to the database'''
-        print('add_input')
         self.inputs.append(input)
 
     def send(self, client, data):
@@ -120,7 +116,7 @@ class cmBackend(object):
             gevent.sleep(seconds=1)
 
     def start(self):
-        print('start')
+        print('starting server')
         gevent.spawn(self.run)
 
 cmbe = cmBackend()
@@ -134,14 +130,17 @@ def sub_ws(ws):
     cmbe.register(ws)
     while not ws.closed:
         input = ws.receive()
-        print(input)
-        if 'close' in input:
+        print('input',input)
+        data = json.loads(input)
+        print('data', data)
+        '''
+        if 'close' in data:
             ws.close()
         else:
             print('error')
+        '''
         gevent.sleep()
 
-    print('unregister')
     cmbe.unregister(ws)
 
             
