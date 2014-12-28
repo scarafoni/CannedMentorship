@@ -59,7 +59,7 @@ class cmBackend(object):
         
     def register(self, client):
         '''registers a user'''
-        if len(self.client) == 0:
+        if len(self.clients) == 0:
             self.leader = client
         self.clients.append(client)
 
