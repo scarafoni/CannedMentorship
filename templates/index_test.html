@@ -16,14 +16,16 @@
     ws.onmessage = function(message) {
         console.log(message.data);
         var data = JSON.parse(message.data);
-        if(data.state)
+        if(data.state) {
             updateState(data);
+            updateUserDirections(data);
+        }
+        /*
         if(data.leader)
             updateLeader(data);
-        if(data.directions)
-            updateUserDirections(data);
-        if(data.numPlayers)
-            $("#numPlayersDiv").html("players online: "+data.numPlayers);
+        */
+        if(data.total_players)
+            $("#numPlayersDiv").html("players online: "+data.total_players);
     }
 
     $(window).unload(function() {

@@ -5,16 +5,15 @@
 
 //am i leader?
 function updateLeader(amILead) {
-    /*
     if(amILead == id) {
         leader = true;
         $('#amILead').html('You are leader'); 
     }
 
     else {
-    */
         leader = false;
         $('#amILeadDiv').html('You are not leader (don\'t worry about what this means, it\'s not important'); 
+    }
 }
 
 //updates the state and the interface accordingly
@@ -56,11 +55,11 @@ function updateVoteFinishArea(state) {
 }
 
 // update the directions for the player
-function updateUserDirections(state, gotMyInput) {
-    switch(state) {
+function updateUserDirections(data) {
+    switch(data.state) {
         case 'find':
             activateBtn('finishButton');
-            if(leader) {
+            if(data.leader) {
                 curr_inst = 'propose a new instruction!';
                 activateBtn('proposeInstruct');
             }
@@ -103,5 +102,6 @@ function updateUserDirections(state, gotMyInput) {
             curr_inst = 'error';
             break;
     }
+    console.log(curr_inst);
     $("#currDirections").html(curr_inst);
 }

@@ -40,6 +40,7 @@ class cmBackend(object):
         self.state = 'find'
         self.previous_state = 'find'
         self.instructions = []
+        self.leader = None
         # proposed instructions this round
         self.proposals = []
         # voting on propositions info
@@ -48,14 +49,13 @@ class cmBackend(object):
         self.finish_votes = []
         self.start_time = time.time()
 
-    def curr_time():
+    def curr_time(self,):
         '''gets the current time (difference from start)'''
         return time.time() - self.start_time
 
-    def client_in_input(client, input_list):
+    def client_in_input(self, client, input_list):
         '''returns if the client is in the input list'''
         return client in [x.user for x in input_list]
-        
         
     def register(self, client):
         '''registers a user'''
