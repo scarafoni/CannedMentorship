@@ -35,7 +35,7 @@
     //being writing phase button
     $(function() {
         $('#propInstructButton').click(function() {
-            ws.send("{ 'prop_instruct' : 'True' }");
+            ws.send('{ "prop_instruct" : "prop" }');
             return false;
         });
     });
@@ -43,7 +43,7 @@
     //send proposition text button
     $(function() {
         $('#sendPropButton').click(function() {
-            ws.send("{'u_instruct' : "+$('input[name="input"]').val()+"}");
+            ws.send('{"u_instruct" : "'+$("input[name='input']").val()+'"}');
             return false;
         });
     });
