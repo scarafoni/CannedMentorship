@@ -51,6 +51,11 @@ class cmBackend(object):
     def curr_time():
         '''gets the current time (difference from start)'''
         return time.time() - self.start_time
+
+    def client_in_input(client, input_list):
+        '''returns if the client is in the input list'''
+        return client in [x.user for x in input_list]
+        
         
     def register(self, client):
         '''registers a user'''
@@ -87,15 +92,15 @@ class cmBackend(object):
         
         # add to the list of proposals
         if self.state == 'write' and list == 'proposals':
-            self.proposals.append(Input(user, input, time.time() - self.start_time)
+            self.proposals.append(Input(user, input, curr_time()))
 
         # add to the list of votes for proposals
         elif self.state == 'vote' and list == 'proposal_votes':
-            self.proposal_votes.append(input)
+            self.proposal_votes.append(Input(user, input, curr_time()))
         
         # add to the list of votes to finish
         elif self.state == 'vote_finish' and list == 'finish_votes':
-            self.finish_votes.append(input)
+            self.finish_votes.append(Input(user, input, curr_time()))
         
         else:
             print 'cant add to list {} in state {}'.format(list, self.state)
