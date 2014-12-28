@@ -14,10 +14,9 @@ log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
 
-
-
 app = Flask(__name__)
 sockets = Sockets(app)
+mail = Mail(app)
 
 redis_url = os.getenv('REDISTOGO_URL','redis://redistogo:5e00cfed335a73ab9a5a515cef203d3d@greeneye.redistogo.com:10505/' )
 redis = redis.from_url(redis_url)
@@ -60,6 +59,13 @@ class cmBackend(object):
     def run_ai(props):
         '''run the ai sorter on the propositions'''
         print('raw votes', props)
+        # mail the results to myself
+        msg = Message(
+            'raw votes',
+            sender = 'cannedMentorship@gmail.com',
+            recipients= ['dan@scarafoni.com'])
+        msg.body = '\n'.join(props)
+        mail.send(msg)
         return props # sort_answers.filter_inputs(props)
     
     def count_votes(votes, vote_list):
@@ -122,6 +128,13 @@ class cmBackend(object):
             self.state = 'find' if winner == 'no' else 'finish'
             self.finish_votes = []
                  
+            # send the message as a mail
+            msg = Message(
+                'final instructions',
+                sender = 'cannedMentorship@gmail.com',
+                recipients= ['dan@scarafoni.com'])
+            msg.body = '\n'.join(redis.lrange('instructions',0,-1))
+            mail.send(msg)
             
             
 
