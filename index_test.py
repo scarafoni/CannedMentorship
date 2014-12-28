@@ -170,6 +170,8 @@ class cmBackend(object):
                 to_send['total_Players'] = len(self.clients)
                 to_send['state'] = self.state
                 to_send['leader'] = '0'
+                # convert to_send to json
+                to_send = json.dumps(to_send)
 
                 gevent.spawn(self.send, client, to_send)
             gevent.sleep(seconds=1)

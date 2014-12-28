@@ -5,15 +5,16 @@
 
 //am i leader?
 function updateLeader(amILead) {
-    if(leadJSON == id) {
+    /*
+    if(amILead == id) {
         leader = true;
         $('#amILead').html('You are leader'); 
     }
 
     else {
+    */
         leader = false;
-        $('#amILead').html('You are not leader (don\'t worry about what this means, it\'s not important'); 
-    }
+        $('#amILeadDiv').html('You are not leader (don\'t worry about what this means, it\'s not important'); 
 }
 
 //updates the state and the interface accordingly
