@@ -198,6 +198,8 @@ def sub_ws(ws):
         data = [] if input is None else json.loads(input)
         if 'close' in data:
             ws.close()
+        elif 'prop_instruct' in data and cmbe.state == 'find':
+           cmbe.state = 'write' 
         elif 'u_instruct' in data:
             cmbe.add_input(ws, data['u_instruct']) 
         gevent.sleep()
