@@ -162,11 +162,8 @@ class cmBackend(object):
                 elif self.state == 'vote':
                     to_send['got_my_input'] = \
                             self.client_in_input(client, self.proposal_votes)
-                    to_send['proposals'] = \
+                    to_send['choices'] = \
                             [x.val for x in self.proposals]
-
-                else:
-                    print('ERROR')
 
                 to_send['instructions'] =  '\n'.join(\
                         [x.val for x in self.instructions])
