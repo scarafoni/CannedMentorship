@@ -171,7 +171,7 @@ class cmBackend(object):
                         [x.val for x in self.instructions])
                 to_send['total_Players'] = len(self.clients)
                 to_send['state'] = self.state
-                to_send['leader'] = '0'
+                to_send['leader'] = client == self.leader
                 # convert to_send to json
                 to_send = json.dumps(to_send)
 
