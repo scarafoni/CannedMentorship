@@ -2,6 +2,16 @@
  * contains all the code for updating the app as the game goes on
  */
 
+//activate, deactivate button color
+function activateBtn(btn) {
+    $('#'+btn).removeClass('btn-default');
+    $('#'+btn).addClass('btn-primary');
+}
+
+function deactivateBtn(btn) {
+    $('#'+btn).addClass('btn-default');
+    $('#'+btn).removeClass('btn-primary');
+}
 
 //am i leader?
 function updateLeader(amILead) {
