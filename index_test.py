@@ -92,15 +92,15 @@ class cmBackend(object):
         
         # add to the list of proposals
         if self.state == 'write' and list == 'proposals':
-            self.proposals.append(Input(user, input, curr_time()))
+            self.proposals.append(Input(user, input, self.curr_time()))
 
         # add to the list of votes for proposals
         elif self.state == 'vote' and list == 'proposal_votes':
-            self.proposal_votes.append(Input(user, input, curr_time()))
+            self.proposal_votes.append(Input(user, input, self.curr_time()))
         
         # add to the list of votes to finish
         elif self.state == 'vote_finish' and list == 'finish_votes':
-            self.finish_votes.append(Input(user, input, curr_time()))
+            self.finish_votes.append(Input(user, input, self.curr_time()))
         
         else:
             print 'cant add to list {} in state {}'.format(list, self.state)
@@ -154,16 +154,23 @@ class cmBackend(object):
             for client in self.clients:
                 to_send = {}
 
-                if self.state == 'find':
-                    to_send['inputs'] =  '\n'.join(self.instructions)
+                if self.state == 'write':
+                    to_send['got_my_input'] = \
+                            self.client_in_input(client, self.proposals)
+                    
 
-                elif self.state == 'write':
-                    to_send['got_my_input'] = 
+                elif self.state == 'vote':
+                    to_send['got_my_input'] = \
+                            self.client_in_input(client, self.proposal_votes)
+                    to_send['proposals'] = \
+                            [x.val for x in self.proposals]
 
                 else:
                     print('ERROR')
 
-                to_send['numPlayers'] = len(self.clients)
+                to_send['instructions'] =  '\n'.join(\
+                        [x.val for x in self.instructions])
+                to_send['total_Players'] = len(self.clients)
                 to_send['state'] = self.state
                 to_send['leader'] = '0'
 
