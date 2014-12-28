@@ -6,6 +6,7 @@ import sort_answers
 from collections import Counter
 import gevent
 from flask_sockets import Sockets
+from flask.ext.mail import Mail, Message
 import time
 import json
 
