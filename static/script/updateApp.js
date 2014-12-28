@@ -14,13 +14,11 @@ function deactivateBtn(btn) {
 }
 
 //am i leader?
-function updateLeader(amILead) {
-    if(amILead == id) {
+function updateLeader(data) {
+    if(data.leader) {
         leader = true;
-        $('#amILead').html('You are leader'); 
-    }
-
-    else {
+        $('#amILeadDiv').html('You are leader'); 
+    } else {
         leader = false;
         $('#amILeadDiv').html('You are not leader (don\'t worry about what this means, it\'s not important'); 
     }
@@ -71,7 +69,7 @@ function updateUserDirections(data) {
             activateBtn('finishButton');
             if(data.leader) {
                 curr_inst = 'propose a new instruction!';
-                activateBtn('proposeInstruct');
+                activateBtn('proposeInstructButton');
             }
             else {
                 curr_inst = 'wait for the leader to propose a new instruction!';

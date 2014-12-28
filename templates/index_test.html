@@ -14,7 +14,7 @@
 
     //the update function
     ws.onmessage = function(message) {
-        console.log(message.data);
+        //console.log(message.data);
         var data = JSON.parse(message.data);
         if(data.state) {
             updateState(data);
@@ -78,11 +78,11 @@
                 </div>
             </div>       
             <div class="col-sm-4 sidebar-offcanvas">
-                <h5 id="amILeadDiv">stuff</h5>
-				<h5 id="numPlayersDiv">things</h5>
+                <h5 id="amILeadDiv">am I leader?</h5>
+				<h5 id="numPlayersDiv">how many players?</h5>
                 <div class="alert alert-info" role="alert">
                     <h4><strong>What to do:</strong></h4>
-                    <h4 id="currDirections">stuff</h4>
+                    <h4 id="currDirections">directions?</h4>
                 </div>
                 <div id="voteFinish" class="input-group">
                 </div>
