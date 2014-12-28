@@ -103,5 +103,5 @@ function updateUserDirections(state, gotMyInput) {
             curr_inst = 'error';
             break;
     }
-    $("#currStep").html(curr_inst);
+    $("#currDirections").html(curr_inst);
 }
