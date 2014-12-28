@@ -32,13 +32,22 @@
         ws.close();
     });
 
+    //being writing phase button
+    $(function() {
+        $('#propInstructButton').click(function() {
+            ws.send("{ 'prop_instruct' : 'True' }");
+            return false;
+        });
+    });
+
+    //send proposition text button
     $(function() {
         $('#sendPropButton').click(function() {
             ws.send("{'u_instruct' : "+$('input[name="input"]').val()+"}");
             return false;
         });
     });
-  
+
 </script>
 </head>
 <body>
