@@ -47,6 +47,10 @@ class cmBackend(object):
         # votes on whether to stop
         self.finish_votes = []
         self.start_time = time.time()
+
+    def curr_time():
+        '''gets the current time (difference from start)'''
+        return time.time() - self.start_time
         
     def register(self, client):
         '''registers a user'''
@@ -78,12 +82,12 @@ class cmBackend(object):
         most_popular = vote_list[i] 
         return most_popular
 
-    def add_input(self, input, list):
+    def add_input(self, user, input, list):
         '''adds user input to the database'''
         
         # add to the list of proposals
         if self.state == 'write' and list == 'proposals':
-            self.proposals.append(input)
+            self.proposals.append(Input(user, input, time.time() - self.start_time)
 
         # add to the list of votes for proposals
         elif self.state == 'vote' and list == 'proposal_votes':
@@ -146,16 +150,18 @@ class cmBackend(object):
                 to_send = {}
 
                 if self.state == 'find':
-                    to_send = {
-                        'inputs' : '\n'.join(self.proposals)
-                    }
+                    to_send['inputs'] =  '\n'.join(self.instructions)
+
+                elif self.state == 'write':
+                    to_send['got_my_input'] = 
 
                 else:
                     print('ERROR')
 
-                to_send = json.dumps({
-                    'numPlayers' : len(self.clients)
-                })
+                to_send['numPlayers'] = len(self.clients)
+                to_send['state'] = self.state
+                to_send['leader'] = '0'
+
                 gevent.spawn(self.send, client, to_send)
             gevent.sleep(seconds=1)
 
@@ -180,7 +186,7 @@ def sub_ws(ws):
         if 'close' in data:
             ws.close()
         elif 'u_instruct' in data:
-            cmbe.add_input(data['u_instruct']) 
+            cmbe.add_input(ws, data['u_instruct']) 
         gevent.sleep()
 
     cmbe.unregister(ws)
