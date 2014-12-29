@@ -15,7 +15,7 @@ flow
 ========
 ****** new website *****
 server
-    io part (routes in flask)
+    io part  (routes in flask)
         only recieves
         all data passed to backent object
     
