@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import redis
 import os
 import logging
-import sort_answers
+# import sort_answers
 from collections import Counter
 import gevent
 from flask_sockets import Sockets
@@ -196,7 +196,6 @@ def sub_ws(ws):
         print('input',input)
 
         data = [] if input is None else json.loads(input)
-        print('data',data)
         if 'close' in data:
             ws.close()
 
