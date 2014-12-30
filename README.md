@@ -13,7 +13,6 @@ Dependencies
 
 flow
 ========
-****** new website *****
 server
     io part  (routes in flask)
         only recieves
@@ -91,7 +90,6 @@ Client
 
 
 
-*************************
   -login
     -increment totaly players
     -for i form 0 to tp
