@@ -110,6 +110,7 @@ class cmBackend(object):
 
     def send(self, client, data):
         '''send data to a client'''
+
         client.send(data)
 
     def update_backend(self):
