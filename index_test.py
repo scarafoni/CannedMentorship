@@ -89,11 +89,14 @@ class cmBackend(object):
             mail.send(msg)
         return props # sort_answers.filter_inputs(props)
     
-    def count_votes(votes, vote_list):
+    def count_votes(self, vote_list, votes):
         '''count a list of votes, return the most popular'''
         # print('count_votes',votes,vote_list)
-        counts = [0] * len(votes)
-        for choice in votes:
+        votes_v = [x.val for x in votes]
+        vote_list_v = [x.val for x in vote_list]
+        print "votes: {}, vote_list: {}".format(votes_v, vote_list_v)
+        counts = [0] * len(votes_v)
+        for choice in votes_v:
             counts[int(choice)] += 1
         i = counts.index(max(counts))
         most_popular = vote_list[i] 
@@ -140,7 +143,7 @@ class cmBackend(object):
             self.instructions.append(self.count_votes(self.proposals,\
                                                  self.proposal_votes))
             self.proposals = []
-            self.proposals_votes = []
+            self.proposal_votes = []
             self.state = 'find'
         
         # change vote_finish -> finish / write if votes are in
