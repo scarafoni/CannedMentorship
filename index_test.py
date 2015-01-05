@@ -160,6 +160,7 @@ class cmBackend(object):
                 if self.state == 'write':
                     to_send['got_my_input'] = \
                             self.client_in_input(client, self.proposals)
+                    to_send['inputs_so_far'] = len(self.proposals)
                     
 
                 elif self.state == 'vote':
@@ -167,6 +168,7 @@ class cmBackend(object):
                             self.client_in_input(client, self.proposal_votes)
                     to_send['choices'] = \
                             [x.val for x in self.proposals]
+                    to_send['inputs_so_far'] = len(self.proposal_votes)
 
                 to_send['instructions'] =  '\n'.join(\
                         [x.val for x in self.instructions])
@@ -205,7 +207,7 @@ def sub_ws(ws):
             print('changing from find to write') 
 
         elif 'u_instruct' in data:
-            cmbe.add_input(ws, data['u_instruct']) 
+            cmbe.add_input(ws, data['u_instruct'], data['u_instruct']) 
         gevent.sleep()
 
     cmbe.unregister(ws)

@@ -81,7 +81,7 @@ function updateUserDirections(data) {
                 curr_inst = 'write the instruction for this step';
             else
                 curr_inst = "your input received! please wait for the others";
-            curr_inst += " "+data.inputs+'/'+data.total_players+' have proposed so far';
+            curr_inst += " "+data.inputs_so_far+'/'+data.total_players+' have proposed so far';
 
             activateBtn('sendProp');
             break;
@@ -91,7 +91,7 @@ function updateUserDirections(data) {
                 curr_inst = 'vote on which step you think is best';
             else
                 curr_inst = "your input received! please wait for the others";
-            curr_inst += " "+data.inputs+'/'+data.total_players+' have voted so far';
+            curr_inst += " "+data.inputs_so_far+'/'+data.total_players+' have voted so far';
     ;
             break;
         case 'vote_finish':
@@ -100,7 +100,7 @@ function updateUserDirections(data) {
                 curr_inst = 'someone believes the instructions are finished, do you agree?';
             else
                 curr_inst = "your vote is received! please wait for the others";
-            curr_inst += " "+data.inputs+'/'+data.total_players+' have voted so far';
+            curr_inst += " "+data.inputs_so_far+'/'+data.total_players+' have voted so far';
 
             break;
         case 'finish':
