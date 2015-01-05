@@ -179,6 +179,7 @@ class cmBackend(object):
                 elif self.state == 'vote':
                     to_send['got_my_input'] = \
                             self.client_in_input(client, self.proposal_votes)
+                    to_send['inputs_so_far'] = len(self.proposals)
                     to_send['choices'] = \
                             [x.val for x in self.proposals]
                     to_send['inputs_so_far'] = len(self.proposal_votes)

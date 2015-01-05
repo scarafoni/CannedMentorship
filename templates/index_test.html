@@ -20,6 +20,9 @@
             updateState(data);
             updateUserDirections(data);
         }
+        if(data.choices) {
+            updateChoices(data);
+        }
         if(data.leader)
             updateLeader(data);
         if(data.total_players)
