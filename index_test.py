@@ -127,7 +127,7 @@ class cmBackend(object):
     def update_backend(self):
         '''updates the backend state as needed'''
         
-        print "update state: {} #props: {}".format(self.state, len(self.proposals))
+        print "update state: {} #props: {}".format(self.state, len(self.proposal_votes))
         # change write -> vote if the props are in
         if self.state == 'write' and \
                 len(self.proposals) == len(self.clients):
@@ -222,6 +222,10 @@ def sub_ws(ws):
 
         elif 'u_instruct' in data:
             cmbe.add_input(ws, data['u_instruct'], 'proposals')
+        
+        elif 'u_choice' in data:
+            cmbe.add_input(ws, data['u_choice'], 'proposal_votes')
+
         gevent.sleep()
 
     cmbe.unregister(ws)
