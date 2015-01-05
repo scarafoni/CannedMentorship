@@ -20,8 +20,13 @@
             updateState(data);
             updateUserDirections(data);
         }
+        if(data.instructions) {
+            updateInstructions(data);
+        }
         if(data.choices) {
             updateChoices(data, ws);
+        } else {
+            $('#voteTable tbody').html(''); 
         }
         if(data.leader)
             updateLeader(data);

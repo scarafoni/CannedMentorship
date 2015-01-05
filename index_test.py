@@ -187,8 +187,8 @@ class cmBackend(object):
                             [x.val for x in self.proposals]
                     to_send['inputs_so_far'] = len(self.proposal_votes)
 
-                to_send['instructions'] =  '\n'.join(\
-                        [x.val for x in self.instructions])
+                to_send['instructions'] = \
+                        [x.val for x in self.instructions]
                 to_send['total_players'] = len(self.clients)
                 to_send['state'] = self.state
                 to_send['leader'] = client == self.leader

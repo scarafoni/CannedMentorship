@@ -15,25 +15,21 @@ function deactivateBtn(btn) {
 
 //update the voting choices
 function updateChoices(data, ws) {
-    if(data.choices) {
-        var d = data.choices;
-        console.log(data.choices);
-        var votes = '';
-        for(var i in d) { 
-            votes += '<tr ><td id='+i+'><a href="#" class="list-group-item active" >'+d[i]+'</a></td></tr>';
-        }
-        $('#voteTable tbody').html(votes); 
-
-        //send vote 
-        $(function() { 
-            $('#voteTable td').bind('click', function() {
-                var u_choice = $(this).attr('id');
-                ws.send('{ "u_choice" : "'+u_choice+'"}');
-            });
-        });
-    } else {
-        $('#voteTable tbody').html(''); 
+    var d = data.choices;
+    console.log(data.choices);
+    var votes = '';
+    for(var i in d) { 
+        votes += '<tr ><td id='+i+'><a href="#" class="list-group-item active" >'+d[i]+'</a></td></tr>';
     }
+    $('#voteTable tbody').html(votes); 
+
+    //send vote 
+    $(function() { 
+        $('#voteTable td').bind('click', function() {
+            var u_choice = $(this).attr('id');
+            ws.send('{ "u_choice" : "'+u_choice+'"}');
+        });
+    });
 }
 
 //am i leader?
@@ -135,4 +131,15 @@ function updateUserDirections(data) {
     }
     console.log(curr_inst);
     $("#currDirections").html(curr_inst);
+}
+
+function updateInstructions(data) {
+    d = data.instructions;
+    console.log(data.instructions);
+    var instructions = '';
+    for(var i in d) { 
+        x = parseInt(i) + 1
+        instructions += '<tr><td>'+x+'. '+d[i]+'</td></tr>';
+    }
+    $('#instructTable tbody').html(instructions); 
 }
