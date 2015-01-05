@@ -27,9 +27,9 @@ function updateChoices(data) {
         //send vote 
         $(function() { 
             $('#voteTable td').bind('click', function() {
-            $.getJSON('/send_my_vote', {
                 u_choice: $(this).attr('id'),
                 u_id: String(id)
+                ws.send('{ "u_choice" : "'+u_choice+'", "u_id" : "'+u_id+'"}')
                 }, function(data) {
                     alert(data.result);
                 });
