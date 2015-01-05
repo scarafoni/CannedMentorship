@@ -14,7 +14,7 @@ function deactivateBtn(btn) {
 }
 
 //update the voting choices
-function updateChoices(data) {
+function updateChoices(data, ws) {
     if(data.choices) {
         var d = data.choices;
         console.log(data.choices);
@@ -28,11 +28,7 @@ function updateChoices(data) {
         $(function() { 
             $('#voteTable td').bind('click', function() {
                 u_choice: $(this).attr('id'),
-                u_id: String(id)
-                ws.send('{ "u_choice" : "'+u_choice+'", "u_id" : "'+u_id+'"}')
-                }, function(data) {
-                    alert(data.result);
-                });
+                ws.send('{ "u_choice" : "'+u_choice+'"}')
             });
         });
     } else {
