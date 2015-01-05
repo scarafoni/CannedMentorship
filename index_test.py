@@ -67,17 +67,18 @@ class cmBackend(object):
         '''unregisters a user'''
         self.clients.remove(client)
 
-    def run_ai(props):
+    def run_ai(self, props):
         '''run the ai sorter on the propositions'''
-        print('raw votes', props)
+        vals = [x.val for x in props]
+        print('raw votes', vals[0])
         # mail the results to myself
         msg = Message(
             'raw votes',
             sender = 'cannedMentorship@gmail.com',
             recipients= ['dan@scarafoni.com'])
-        msg.body = '\n'.join(props)
+        msg.body = '\n'.join(vals)
         mail.send(msg)
-        return props # sort_answers.filter_inputs(props)
+        return vals # sort_answers.filter_inputs(props)
     
     def count_votes(votes, vote_list):
         '''count a list of votes, return the most popular'''
@@ -117,6 +118,7 @@ class cmBackend(object):
     def update_backend(self):
         '''updates the backend state as needed'''
         
+        print "update state: {} #props: {}".format(self.state, len(self.proposals))
         # change write -> vote if the props are in
         if self.state == 'write' and \
                 len(self.proposals) == len(self.clients):
@@ -153,8 +155,8 @@ class cmBackend(object):
 
     def run(self):
         '''send updates to the clients'''
-        self.update_backend()
         while not self.state == 'finish':
+            self.update_backend()
             for client in self.clients:
                 to_send = {}
 
