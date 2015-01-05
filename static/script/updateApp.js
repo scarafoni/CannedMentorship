@@ -13,6 +13,33 @@ function deactivateBtn(btn) {
     $('#'+btn).removeClass('btn-primary');
 }
 
+//update the voting choices
+function updateChoices(data) {
+    if(data.choices) {
+        var d = data.choices;
+        console.log(data.choices);
+        var votes = '';
+        for(var i in d) { 
+            votes += '<tr ><td id='+i+'><a href="#" class="list-group-item active" >'+d[i]+'</a></td></tr>';
+        }
+        $('#voteTable tbody').html(votes); 
+
+        //send vote 
+        $(function() { 
+            $('#voteTable td').bind('click', function() {
+            $.getJSON('/send_my_vote', {
+                u_choice: $(this).attr('id'),
+                u_id: String(id)
+                }, function(data) {
+                    alert(data.result);
+                });
+            });
+        });
+    } else {
+        $('#voteTable tbody').html(''); 
+    }
+}
+
 //am i leader?
 function updateLeader(data) {
     if(data.leader) {
