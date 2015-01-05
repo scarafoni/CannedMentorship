@@ -49,6 +49,14 @@
         });
     });
 
+    //propose to finish instructions
+    $(function() {
+        $('#finishButton').click(function() {
+            ws.send('{ "prop_finish" : "prop" }');
+            return false;
+        });
+    });
+
     //send proposition text button
     $(function() {
         $('#sendPropButton').click(function() {

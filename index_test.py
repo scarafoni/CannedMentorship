@@ -149,26 +149,28 @@ class cmBackend(object):
         # change vote_finish -> finish / write if votes are in
         elif self.state == 'vote_finish' and \
                 len(self.finish_votes) == len(self.clients):
-
-            counter = Counter(self.finish_votes)
+            finish_vals = [x.val for x in self.finish_votes]
+            counter = Counter(finish_vals)
             winner = counter.most_common()[0][0]
+            print 'and the winner is: {}'.format(winner)
             self.state = 'find' if winner == 'no' else 'finish'
             self.finish_votes = []
                  
             # send the message as a mail
-            msg = Message(
-                'final instructions',
-                sender = 'cannedMentorship@gmail.com',
-                recipients= ['dan@scarafoni.com'])
-            msg.body = '\n'.join(redis.lrange('instructions',0,-1))
-            with app.app_context():
-                mail.send(msg)
+            if self.state == 'finish':
+                msg = Message(
+                    'final instructions',
+                    sender = 'cannedMentorship@gmail.com',
+                    recipients= ['dan@scarafoni.com'])
+                msg.body = '\n'.join(redis.lrange('instructions',0,-1))
+                with app.app_context():
+                    mail.send(msg)
             
             
 
     def run(self):
         '''send updates to the clients'''
-        while not self.state == 'finish':
+        while True:
             self.update_backend()
             for client in self.clients:
                 to_send = {}
@@ -231,6 +233,10 @@ def sub_ws(ws):
         
         elif 'u_choice' in data:
             cmbe.add_input(ws, data['u_choice'], 'proposal_votes')
+    
+        elif 'prop_finish' in data and cmbe.state == 'find':
+            print "right place"
+            cmbe.state = 'vote_finish'
 
         elif 'u_vote' in data:
             cmbe.add_input(ws,data['u_vote'], 'finish_votes')
