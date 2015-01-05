@@ -186,6 +186,9 @@ class cmBackend(object):
                     to_send['choices'] = \
                             [x.val for x in self.proposals]
                     to_send['inputs_so_far'] = len(self.proposal_votes)
+        
+                elif self.state == 'vote_finish':
+                    to_send['inputs_so_far'] = len(self.finish_votes)
 
                 to_send['instructions'] = \
                         [x.val for x in self.instructions]
@@ -228,6 +231,9 @@ def sub_ws(ws):
         
         elif 'u_choice' in data:
             cmbe.add_input(ws, data['u_choice'], 'proposal_votes')
+
+        elif 'u_vote' in data:
+            cmbe.add_input(ws,data['u_vote'], 'finish_votes')
 
         gevent.sleep()
 

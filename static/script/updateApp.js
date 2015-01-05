@@ -49,7 +49,7 @@ function updateState(data) {
 }
 
 //update the voteFinish area if it's the right part of the game
-function updateVoteFinishArea(data) {
+function updateVoteFinishArea(data, ws) {
 	if(data.state == 'vote_finish') {
 	  $('#voteFinish').html('<button id="yesfinish" type="button" class="btn btn-primary">finish</button><button id="nofinish" type="button" class="btn btn-primary">don\'t finish</button>');
 		//vote yes or no to finish
