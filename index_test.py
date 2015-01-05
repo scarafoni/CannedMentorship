@@ -91,6 +91,7 @@ class cmBackend(object):
 
     def add_input(self, user, input, list):
         '''adds user input to the database'''
+        print "try to add {} to list {}".format(input, list)
         
         # add to the list of proposals
         if self.state == 'write' and list == 'proposals':
@@ -207,7 +208,7 @@ def sub_ws(ws):
             print('changing from find to write') 
 
         elif 'u_instruct' in data:
-            cmbe.add_input(ws, data['u_instruct'], data['u_instruct']) 
+            cmbe.add_input(ws, data['u_instruct'], 'proposals')
         gevent.sleep()
 
     cmbe.unregister(ws)
