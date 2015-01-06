@@ -191,6 +191,8 @@ class cmBackend(object):
         
                 elif self.state == 'vote_finish':
                     to_send['inputs_so_far'] = len(self.finish_votes)
+                    to_send['got_my_input'] = \
+                            self.client_in_input(client, self.finish_votes)
 
                 to_send['instructions'] = \
                         [x.val for x in self.instructions]

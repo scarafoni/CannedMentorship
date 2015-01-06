@@ -84,7 +84,7 @@ function updateUserDirections(data) {
             break;
         case 'write':
             curr_inst = '';
-            if(!data.gotMyInput)
+            if(!data.got_my_input)
                 curr_inst = 'write the instruction for this step';
             else
                 curr_inst = "your input received! please wait for the others";
@@ -94,7 +94,7 @@ function updateUserDirections(data) {
             break;
         case 'vote':
             curr_inst = '';
-            if(!data.gotMyInput)
+            if(!data.got_my_input)
                 curr_inst = 'vote on which step you think is best';
             else
                 curr_inst = "your input received! please wait for the others";
@@ -103,7 +103,7 @@ function updateUserDirections(data) {
             break;
         case 'vote_finish':
             curr_inst = '';
-            if(!data.gotMyInput)
+            if(!data.got_my_input)
                 curr_inst = 'someone believes the instructions are finished, do you agree?';
             else
                 curr_inst = "your vote is received! please wait for the others";
