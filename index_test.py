@@ -226,7 +226,8 @@ def sub_ws(ws):
         if 'close' in data:
             ws.close()
 
-        elif 'prop_instruct' in data and cmbe.state == 'find':
+        elif 'prop_instruct' in data and cmbe.state == 'find' \
+                and cmbe.leader == ws:
             cmbe.state = 'write' 
             print('changing from find to write') 
 
