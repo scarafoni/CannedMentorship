@@ -71,6 +71,10 @@ function updateVoteFinishArea(data, ws) {
 
 // update the directions for the player
 function updateUserDirections(data) {
+    deactivateBtn('proposeInstruct');
+    deactivateBtn('finishButton');
+    deactivateBtn('sendProp');
+
     switch(data.state) {
         case 'find':
             activateBtn('finishButton');
@@ -80,6 +84,7 @@ function updateUserDirections(data) {
             }
             else {
                 curr_inst = 'wait for the leader to propose a new instruction!';
+                deactivateBtn('finishButton');
             }
             break;
         case 'write':
