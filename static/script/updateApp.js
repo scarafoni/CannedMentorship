@@ -80,7 +80,7 @@ function updateUserDirections(data) {
             activateBtn('finishButton');
             if(data.leader) {
                 curr_inst = 'propose a new instruction!';
-                activateBtn('proposeInstructButton');
+                activateBtn('propInstructButton');
             }
             else {
                 curr_inst = 'wait for the leader to propose a new instruction!';
