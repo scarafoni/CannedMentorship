@@ -9,6 +9,7 @@ from flask_sockets import Sockets
 from flask.ext.mail import Mail, Message
 import time
 import json
+import unicodedata
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
@@ -78,7 +79,7 @@ class cmBackend(object):
     def run_ai(self, props):
         '''run the ai sorter on the propositions'''
         vals = [x.val for x in props]
-        print('raw votes', vals[0])
+        print('raw votes', vals)
         # mail the results to myself
         msg = Message(
             'raw votes',
@@ -86,8 +87,22 @@ class cmBackend(object):
             recipients= ['dan@scarafoni.com'])
         msg.body = '\n'.join(vals)
         with app.app_context():
-            mail.send(msg)
-        return sort_answers.filter_inputs(props) # props
+            mail.send(msg) 
+        sorted = sort_answers.filter_inputs([ \
+            unicodedata.normalize('NFKD', x).encode('ascii','ignore') \
+            for x in vals ])
+        uni_sorted = [unicode(x) for x in sorted]
+        print('uni sorted', uni_sorted)
+        toret = []
+        added = []
+        for i in props:
+            if i.val in uni_sorted and i.val not in added:
+                added.append(i.val)
+                toret.append(i)
+                print 'toret is now {}'.format(toret)
+        return toret
+                
+        
     
     def count_votes(self, vote_list, votes):
         '''count a list of votes, return the most popular'''
@@ -104,7 +119,7 @@ class cmBackend(object):
 
     def add_input(self, user, input, list):
         '''adds user input to the database'''
-        print "try to add {} to list {}".format(input, list)
+        # print "try to add {} to list {}".format(input, list)
         
         # add to the list of proposals
         if self.state == 'write' and list == 'proposals':
@@ -130,7 +145,7 @@ class cmBackend(object):
     def update_backend(self):
         '''updates the backend state as needed'''
         
-        print "update state: {} #props: {}".format(self.state, len(self.proposal_votes))
+        # print "update state: {} #props: {}".format(self.state, len(self.proposal_votes))
         # change write -> vote if the props are in
         if self.state == 'write' and \
                 len(self.proposals) == len(self.clients):
