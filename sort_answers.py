@@ -216,7 +216,7 @@ def group_up(sentences, classfn='hac', feat_dist='bow'):
         return "error"
 
 
-def filter_inputs(inputs,classfn,feat_dist):
+def filter_inputs(inputs,classfn='hac',feat_dist='ks'):
     feature_mat = feature_extraction(inputs=inputs)
     # print('feature matrix',feature_mat)
     groupings = group_up(inputs,classfn=classfn, feat_dist=feat_dist)

@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import redis
 import os
 import logging
-# import sort_answers
+import sort_answers
 from collections import Counter
 import gevent
 from flask_sockets import Sockets
@@ -87,7 +87,7 @@ class cmBackend(object):
         msg.body = '\n'.join(vals)
         with app.app_context():
             mail.send(msg)
-        return props # sort_answers.filter_inputs(props)
+        return sort_answers.filter_inputs(props) # props
     
     def count_votes(self, vote_list, votes):
         '''count a list of votes, return the most popular'''
