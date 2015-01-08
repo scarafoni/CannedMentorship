@@ -71,9 +71,9 @@ function updateVoteFinishArea(data, ws) {
 
 // update the directions for the player
 function updateUserDirections(data) {
-    deactivateBtn('proposeInstruct');
+    deactivateBtn('propInstructButton');
     deactivateBtn('finishButton');
-    deactivateBtn('sendProp');
+    deactivateBtn('sendPropButton');
 
     switch(data.state) {
         case 'find':
@@ -84,7 +84,6 @@ function updateUserDirections(data) {
             }
             else {
                 curr_inst = 'wait for the leader to propose a new instruction!';
-                deactivateBtn('finishButton');
             }
             break;
         case 'write':
@@ -95,7 +94,7 @@ function updateUserDirections(data) {
                 curr_inst = "your input received! please wait for the others";
             curr_inst += " "+data.inputs_so_far+'/'+data.total_players+' have proposed so far';
 
-            activateBtn('sendProp');
+            activateBtn('sendPropButton');
             break;
         case 'vote':
             curr_inst = '';
