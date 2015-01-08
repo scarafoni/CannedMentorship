@@ -88,6 +88,8 @@ class cmBackend(object):
         msg.body = '\n'.join(vals)
         with app.app_context():
             mail.send(msg) 
+        return props
+        '''
         sorted = sort_answers.filter_inputs([ \
             unicodedata.normalize('NFKD', x).encode('ascii','ignore') \
             for x in vals ])
@@ -101,6 +103,7 @@ class cmBackend(object):
                 toret.append(i)
                 print 'toret is now {}'.format(toret)
         return toret
+        '''
                 
         
     
