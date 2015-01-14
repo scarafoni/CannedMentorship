@@ -3,7 +3,7 @@ import redis
 from collections import Counter
 import os
 import logging
-import sort_answers
+# import sort_answers
 # change this!!!!!
 from flask.ext.mail import Mail, Message
 import time
