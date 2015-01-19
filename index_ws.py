@@ -47,8 +47,7 @@ class cmBackend(object):
     def __init__(self):
         self.clients = []
         self.state = 'find'
-        self.previous_state = 'find'
-        self.instructions = []
+        self.previous_state = 'find' self.instructions = []
         self.leader = None
         # proposed instructions this round
         self.proposals = []
