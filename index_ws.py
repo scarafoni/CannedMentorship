@@ -47,7 +47,8 @@ class cmBackend(object):
     def __init__(self):
         self.clients = []
         self.state = 'find'
-        self.previous_state = 'find' self.instructions = []
+        self.previous_state = 'find' 
+        self.instructions = []
         self.leader = None
         # proposed instructions this round
         self.proposals = []
@@ -278,7 +279,7 @@ def startup():
 
 @app.route('/')
 def index():
-    return render_template('index_test.html')
+    return render_template('index_ws.html')
 
 
 if __name__ == '__main__':
