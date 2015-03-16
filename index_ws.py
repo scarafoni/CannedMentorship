@@ -80,16 +80,8 @@ class cmBackend(object):
         '''run the ai sorter on the propositions'''
         vals = [x.val for x in props]
         print('raw votes', vals)
-        # mail the results to myself
-        msg = Message(
-            'raw votes',
-            sender = 'cannedMentorship@gmail.com',
-            recipients= ['dan@scarafoni.com'])
-        msg.body = '\n'.join(vals)
-        with app.app_context():
-            mail.send(msg) 
-        return props
-        '''
+
+        # sort them
         sorted = sort_answers.filter_inputs([ \
             unicodedata.normalize('NFKD', x).encode('ascii','ignore') \
             for x in vals ])
@@ -102,9 +94,16 @@ class cmBackend(object):
                 added.append(i.val)
                 toret.append(i)
                 print 'toret is now {}'.format(toret)
+
+        # mail the results to myself
+        msg = Message(
+            'raw votes',
+            sender = 'cannedMentorship@gmail.com',
+            recipients= ['dan@scarafoni.com'])
+        msg.body = '\n'.join(vals)
+        with app.app_context():
+            mail.send(msg) 
         return toret
-        '''
-                
         
     
     def count_votes(self, vote_list, votes):
