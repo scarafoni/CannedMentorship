@@ -124,15 +124,15 @@ class cmBackend(object):
         # print "try to add {} to list {}".format(input, list)
         
         # add to the list of proposals
-        if self.state == 'write' and list == 'proposals':
+        if self.state == 'write' and list == 'proposals' and not self.client_in_input(client=user,list=list):
             self.proposals.append(Input(user, input, self.curr_time()))
 
         # add to the list of votes for proposals
-        elif self.state == 'vote' and list == 'proposal_votes':
+        elif self.state == 'vote' and list == 'proposal_votes' and not self.client_in_input(client=user,list=list):
             self.proposal_votes.append(Input(user, input, self.curr_time()))
         
         # add to the list of votes to finish
-        elif self.state == 'vote_finish' and list == 'finish_votes':
+        elif self.state == 'vote_finish' and list == 'finish_votes' and not self.client_in_input(client=user,list=list):
             self.finish_votes.append(Input(user, input, self.curr_time()))
         
         else:
