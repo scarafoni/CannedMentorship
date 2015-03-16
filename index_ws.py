@@ -58,6 +58,17 @@ class cmBackend(object):
         self.finish_votes = []
         self.start_time = time.time()
 
+    def list_from_str(self, str):
+        """gets the specified list from the string"""
+        if str == 'proposals':
+            return self.proposals
+        elif str == 'proposal_votes':
+            return self.proposal_votes
+        elif str == 'finish_votes':
+            return self.finish_votes
+        else:
+            return 'error'
+
     def curr_time(self,):
         '''gets the current time (difference from start)'''
         return time.time() - self.start_time
@@ -121,18 +132,20 @@ class cmBackend(object):
 
     def add_input(self, user, input, list):
         '''adds user input to the database'''
+        list_input = self.list_from_str(list)
+        print('listinput', list_input)
         # print "try to add {} to list {}".format(input, list)
         
         # add to the list of proposals
-        if self.state == 'write' and list == 'proposals' and not self.client_in_input(client=user,list=list):
+        if self.state == 'write' and list == 'proposals' and not self.client_in_input(client=user,input_list=list_input):
             self.proposals.append(Input(user, input, self.curr_time()))
 
         # add to the list of votes for proposals
-        elif self.state == 'vote' and list == 'proposal_votes' and not self.client_in_input(client=user,list=list):
+        elif self.state == 'vote' and list == 'proposal_votes' and not self.client_in_input(client=user,input_list=list_input):
             self.proposal_votes.append(Input(user, input, self.curr_time()))
         
         # add to the list of votes to finish
-        elif self.state == 'vote_finish' and list == 'finish_votes' and not self.client_in_input(client=user,list=list):
+        elif self.state == 'vote_finish' and list == 'finish_votes' and not self.client_in_input(client=user,input_list=list_input):
             self.finish_votes.append(Input(user, input, self.curr_time()))
         
         else:
