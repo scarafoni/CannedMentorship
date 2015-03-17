@@ -192,7 +192,8 @@ class cmBackend(object):
                     'final instructions',
                     sender = 'cannedMentorship@gmail.com',
                     recipients= ['dan@scarafoni.com'])
-                msg.body = '\n'.join(cmbe.instructions)
+                inst = [x.val for x in cmbe.instructions]
+                msg.body = '\n'.join(inst)
                 with app.app_context():
                     mail.send(msg)
             
