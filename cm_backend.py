@@ -1,4 +1,3 @@
-import cm_backend
 import sort_answers
 from collections import Counter
 import gevent
@@ -7,10 +6,22 @@ import time
 import json
 import unicodedata
 
+class Input(object):
+    '''store user inputs'''
+
+    __slots__ = 'user', 'val', 'time'
+
+    def __init__(self, user, val, time):
+        self.user = user
+        self.val = val
+        self.time = time
+
 class cmBackend(object):
     """the backend for cm: coordinates all the info"""
 
-    def __init__(self):
+    def __init__(self, app, mail):
+        self.app = app
+        self.mail = mail
         self.clients = []
         self.state = 'find'
         self.previous_state = 'find'
@@ -78,8 +89,8 @@ class cmBackend(object):
                 sender = 'cannedMentorship@gmail.com',
                 recipients= ['dan@scarafoni.com'])
         msg.body = '\n'.join(vals)
-        with app.app_context():
-            mail.send(msg)
+        with self.app.app_context():
+            self.mail.send(msg)
         return toret
 
 
@@ -159,10 +170,10 @@ class cmBackend(object):
                         'final instructions',
                         sender = 'cannedMentorship@gmail.com',
                         recipients= ['dan@scarafoni.com'])
-                inst = [x.val for x in cmbe.instructions]
+                inst = [x.val for x in self.instructions]
                 msg.body = '\n'.join(inst)
-                with app.app_context():
-                    mail.send(msg)
+                with self.app.app_context():
+                    self.mail.send(msg)
 
 
 

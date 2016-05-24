@@ -5,6 +5,7 @@ import logging
 import gevent
 from flask_sockets import Sockets
 from flask.ext.mail import Mail, Message
+from cm_backend import cmBackend
 import json
 
 log = logging.getLogger('werkzeug')
@@ -26,19 +27,7 @@ mail = Mail(app)
 redis_url = os.getenv('REDISTOGO_URL','redis://redistogo:5e00cfed335a73ab9a5a515cef203d3d@greeneye.redistogo.com:10505/' )
 redis = redis.from_url(redis_url)
 
-class Input(object):
-    '''store user inputs'''
-            
-    __slots__ = 'user', 'val', 'time'
-
-    def __init__(self, user, val, time):
-        self.user = user
-        self.val = val
-        self.time = time
-
-
-
-cmbe = cmBackend()
+cmbe = cmBackend(app, mail)
 cmbe.start()
 
 # receive messages from the websocket
